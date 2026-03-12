@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import { ChevronDown, Menu, X } from "lucide-react";
-import logoSuina from "@/assets/logo-suina.png";
+import logoSuina from "@/assets/logo-suina-full.png";
 
 const navItems = [
   {
@@ -51,8 +51,7 @@ const Header = () => {
     <header className="sticky top-0 z-40 bg-background/95 backdrop-blur-sm border-b border-border">
       <div className="container mx-auto flex items-center justify-between py-3 px-4">
         <Link to="/" className="flex items-center gap-3">
-          <img src={logoSuina} alt="Instituto Suinã" className="h-12 w-auto" />
-          <span className="font-display text-xl font-bold text-secondary hidden sm:block">Suinã</span>
+          <img src={logoSuina} alt="Instituto Suinã" className="h-14 w-auto" />
         </Link>
 
         {/* Desktop nav */}
