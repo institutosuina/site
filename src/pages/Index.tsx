@@ -4,6 +4,7 @@ import logoSuina from "@/assets/logo-suina.png";
 import teamPhoto from "@/assets/team-photo.jpg";
 import wheatDecoration from "@/assets/wheat-decoration.png";
 import sketchCircle from "@/assets/sketch-circle.png";
+import brushTop from "@/assets/brush-top.png";
 import { Plus, Eye, Target, Heart, ChevronLeft, ChevronRight } from "lucide-react";
 import { useState, useRef } from "react";
 
@@ -143,7 +144,8 @@ const Index = () => {
       </section>
 
       {/* 82% mulheres */}
-      <section className="py-16 px-4" style={{ backgroundColor: "hsl(var(--suina-green-sage))" }}>
+      <section className="relative pt-24 pb-16 px-4" style={{ backgroundColor: "hsl(var(--suina-green-sage))" }}>
+        <img src={brushTop} alt="" className="absolute top-0 left-0 w-full h-24 object-cover pointer-events-none" style={{ marginTop: "-2px" }} />
         <div className="container mx-auto max-w-4xl">
           <div className="flex flex-col md:flex-row items-center gap-4 mb-10">
             <span className="font-display text-7xl md:text-8xl font-bold text-card">82%</span>
