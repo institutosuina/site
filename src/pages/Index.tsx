@@ -62,9 +62,7 @@ const Index = () => {
         <img src={heroForest} alt="Floresta" className="absolute inset-0 w-full h-full object-cover" />
         <div className="absolute inset-0 bg-gradient-to-b from-black/40 to-black/20" />
         <div className="relative z-10 h-full flex flex-col items-center justify-center text-center px-4">
-          <img src={logoSuina} alt="Suinã" className="h-20 md:h-28 mb-4" />
-          <h1 className="font-display text-4xl md:text-6xl font-bold text-card mb-2">Suinã</h1>
-          <p className="font-body text-lg text-card/90 tracking-widest uppercase">Instituto Socioambiental</p>
+          <img src={logoSuinaFull} alt="Suinã - Instituto Socioambiental" className="h-32 md:h-48 w-auto" />
         </div>
       </section>
 
