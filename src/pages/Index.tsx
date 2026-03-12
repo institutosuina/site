@@ -7,9 +7,9 @@ import { Plus, Eye, Target, Heart, ChevronLeft, ChevronRight } from "lucide-reac
 import { useState, useRef } from "react";
 
 const timelineData = [
-  { year: "2013", text: "Conteúdo a definir." },
-  { year: "2014", text: "Conteúdo a definir." },
-  { year: "2015", text: "Conteúdo a definir." },
+  { year: "2013", text: "Concepção do Instituto Suinã e início da estruturação institucional." },
+  { year: "2014", text: "Formalização da instituição e primeiras ações públicas de educação ambiental." },
+  { year: "2015", text: "Primeira parceria com poder público (Prefeitura de Mogi das Cruzes) e ingresso no Conselho Municipal de Meio Ambiente de Guararema-SP." },
   { year: "2016", text: "Conteúdo a definir." },
   { year: "2017", text: "Conteúdo a definir." },
   { year: "2018", text: "Conteúdo a definir." },
