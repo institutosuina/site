@@ -1,95 +1,61 @@
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700&family=Source+Sans+3:wght@300;400;500;600;700&display=swap');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-/* Definition of the design system. All colors, gradients, fonts, etc should be defined here. 
-All colors MUST be HSL.
-*/
-
 @layer base {
   :root {
-    --background: 0 0% 100%;
-    --foreground: 222.2 84% 4.9%;
+    --background: 40 33% 98%;
+    --foreground: 30 10% 20%;
 
     --card: 0 0% 100%;
-    --card-foreground: 222.2 84% 4.9%;
+    --card-foreground: 30 10% 20%;
 
     --popover: 0 0% 100%;
-    --popover-foreground: 222.2 84% 4.9%;
+    --popover-foreground: 30 10% 20%;
 
-    --primary: 222.2 47.4% 11.2%;
-    --primary-foreground: 210 40% 98%;
+    --primary: 150 30% 28%;
+    --primary-foreground: 40 33% 98%;
 
-    --secondary: 210 40% 96.1%;
-    --secondary-foreground: 222.2 47.4% 11.2%;
+    --secondary: 30 50% 40%;
+    --secondary-foreground: 40 33% 98%;
 
-    --muted: 210 40% 96.1%;
-    --muted-foreground: 215.4 16.3% 46.9%;
+    --muted: 40 20% 93%;
+    --muted-foreground: 30 10% 45%;
 
-    --accent: 210 40% 96.1%;
-    --accent-foreground: 222.2 47.4% 11.2%;
+    --accent: 15 60% 50%;
+    --accent-foreground: 40 33% 98%;
 
     --destructive: 0 84.2% 60.2%;
     --destructive-foreground: 210 40% 98%;
 
-    --border: 214.3 31.8% 91.4%;
-    --input: 214.3 31.8% 91.4%;
-    --ring: 222.2 84% 4.9%;
+    --border: 30 15% 85%;
+    --input: 35 25% 88%;
+    --ring: 150 30% 28%;
 
-    --radius: 0.5rem;
+    --radius: 0.75rem;
+
+    /* Suinã brand colors */
+    --suina-green-dark: 150 30% 28%;
+    --suina-green-sage: 150 15% 55%;
+    --suina-brown: 30 50% 35%;
+    --suina-brown-light: 30 40% 45%;
+    --suina-terra: 15 55% 42%;
+    --suina-orange: 25 80% 55%;
+    --suina-cream: 40 40% 95%;
+    --suina-cream-dark: 35 30% 85%;
+    --suina-red: 5 55% 45%;
+    --suina-gold: 40 60% 50%;
+    --suina-olive: 80 20% 40%;
 
     --sidebar-background: 0 0% 98%;
-
     --sidebar-foreground: 240 5.3% 26.1%;
-
     --sidebar-primary: 240 5.9% 10%;
-
     --sidebar-primary-foreground: 0 0% 98%;
-
     --sidebar-accent: 240 4.8% 95.9%;
-
     --sidebar-accent-foreground: 240 5.9% 10%;
-
     --sidebar-border: 220 13% 91%;
-
-    --sidebar-ring: 217.2 91.2% 59.8%;
-  }
-
-  .dark {
-    --background: 222.2 84% 4.9%;
-    --foreground: 210 40% 98%;
-
-    --card: 222.2 84% 4.9%;
-    --card-foreground: 210 40% 98%;
-
-    --popover: 222.2 84% 4.9%;
-    --popover-foreground: 210 40% 98%;
-
-    --primary: 210 40% 98%;
-    --primary-foreground: 222.2 47.4% 11.2%;
-
-    --secondary: 217.2 32.6% 17.5%;
-    --secondary-foreground: 210 40% 98%;
-
-    --muted: 217.2 32.6% 17.5%;
-    --muted-foreground: 215 20.2% 65.1%;
-
-    --accent: 217.2 32.6% 17.5%;
-    --accent-foreground: 210 40% 98%;
-
-    --destructive: 0 62.8% 30.6%;
-    --destructive-foreground: 210 40% 98%;
-
-    --border: 217.2 32.6% 17.5%;
-    --input: 217.2 32.6% 17.5%;
-    --ring: 212.7 26.8% 83.9%;
-    --sidebar-background: 240 5.9% 10%;
-    --sidebar-foreground: 240 4.8% 95.9%;
-    --sidebar-primary: 224.3 76.3% 48%;
-    --sidebar-primary-foreground: 0 0% 100%;
-    --sidebar-accent: 240 3.7% 15.9%;
-    --sidebar-accent-foreground: 240 4.8% 95.9%;
-    --sidebar-border: 240 3.7% 15.9%;
     --sidebar-ring: 217.2 91.2% 59.8%;
   }
 }
@@ -100,6 +66,89 @@ All colors MUST be HSL.
   }
 
   body {
-    @apply bg-background text-foreground;
+    @apply bg-background text-foreground font-body;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-display;
+  }
+}
+
+@layer components {
+  .section-title {
+    @apply font-display text-3xl md:text-4xl font-bold text-foreground tracking-tight;
+  }
+
+  .section-subtitle {
+    @apply font-display text-xl md:text-2xl font-semibold text-foreground;
+  }
+
+  .btn-donate {
+    @apply fixed right-6 bottom-6 z-50 w-20 h-20 rounded-full bg-accent flex flex-col items-center justify-center text-accent-foreground font-display font-bold text-xs leading-tight shadow-lg hover:scale-105 transition-transform cursor-pointer;
+  }
+
+  .nav-link {
+    @apply font-body text-sm font-medium text-secondary hover:text-accent transition-colors cursor-pointer;
+  }
+
+  .card-green {
+    @apply bg-primary text-primary-foreground rounded-2xl p-8 flex flex-col items-center justify-center gap-4;
+  }
+
+  .card-brown {
+    @apply rounded-2xl p-8 flex flex-col items-center justify-center gap-4;
+    background-color: hsl(var(--suina-brown));
+    color: hsl(var(--primary-foreground));
+  }
+
+  .card-terra {
+    @apply rounded-2xl p-8 flex flex-col items-center justify-center gap-4;
+    background-color: hsl(var(--suina-terra));
+    color: hsl(var(--primary-foreground));
+  }
+
+  .card-orange {
+    @apply rounded-2xl p-8 flex flex-col items-center justify-center gap-4;
+    background-color: hsl(var(--suina-orange));
+    color: hsl(var(--primary-foreground));
+  }
+
+  .card-red {
+    @apply rounded-2xl p-8 flex flex-col items-center justify-center gap-4;
+    background-color: hsl(var(--suina-red));
+    color: hsl(var(--primary-foreground));
+  }
+
+  .card-sage {
+    @apply rounded-2xl p-8 flex flex-col items-center justify-center gap-4;
+    background-color: hsl(var(--suina-green-sage));
+    color: hsl(var(--primary-foreground));
+  }
+
+  .footer-bg {
+    background-color: hsl(var(--suina-green-dark));
+    color: hsl(var(--primary-foreground));
+  }
+
+  .contact-bg {
+    background-color: hsl(var(--suina-green-sage));
+  }
+
+  .timeline-line {
+    background-color: hsl(var(--suina-brown));
+  }
+
+  .news-card {
+    @apply rounded-2xl overflow-hidden shadow-md hover:shadow-xl transition-shadow bg-card;
+  }
+
+  .input-cream {
+    @apply rounded-xl px-6 py-4 text-lg font-body border-0 outline-none;
+    background-color: hsl(var(--suina-cream));
+    color: hsl(var(--foreground));
+  }
+
+  .input-cream::placeholder {
+    color: hsl(var(--suina-brown-light));
   }
 }
