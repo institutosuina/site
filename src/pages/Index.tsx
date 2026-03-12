@@ -3,6 +3,7 @@ import heroForest from "@/assets/hero-forest.jpg";
 import logoSuina from "@/assets/logo-suina.png";
 import teamPhoto from "@/assets/team-photo.jpg";
 import wheatDecoration from "@/assets/wheat-decoration.png";
+import sketchCircle from "@/assets/sketch-circle.png";
 import { Plus, Eye, Target, Heart, ChevronLeft, ChevronRight } from "lucide-react";
 import { useState, useRef } from "react";
 
