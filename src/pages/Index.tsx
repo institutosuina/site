@@ -1,6 +1,6 @@
 import Layout from "@/components/Layout";
 import heroForest from "@/assets/hero-forest.jpg";
-import logoSuinaFull from "@/assets/logo-suina-full.png";
+import logoSuinaWhite from "@/assets/logo-suina-white.png";
 import teamPhoto from "@/assets/team-photo.jpg";
 import equipeCompleta from "@/assets/equipe-completa.jpg";
 import wheatDecoration from "@/assets/wheat-decoration.png";
@@ -62,7 +62,7 @@ const Index = () => {
         <img src={heroForest} alt="Floresta" className="absolute inset-0 w-full h-full object-cover" />
         <div className="absolute inset-0 bg-gradient-to-b from-black/40 to-black/20" />
         <div className="relative z-10 h-full flex flex-col items-center justify-center text-center px-4">
-          <img src={logoSuinaFull} alt="Suinã - Instituto Socioambiental" className="h-32 md:h-48 w-auto" />
+          <img src={logoSuinaWhite} alt="Suinã - Instituto Socioambiental" className="h-32 md:h-48 w-auto" />
         </div>
       </section>
 
