@@ -61,12 +61,12 @@ const Index = () => {
               { icon: Eye, label: "Visão", color: "card-brown" },
               { icon: Heart, label: "Valores", color: "card-terra" },
             ].map(({ icon: Icon, label, color }) => (
-              <div key={label} className={`${color} min-h-[180px] cursor-pointer hover:scale-[1.02] transition-transform`}>
+              <div key={label} className={`${color} min-h-[220px] cursor-pointer hover:scale-[1.02] transition-transform pb-16`}>
                 <div className="w-14 h-14 rounded-full border-2 border-current/30 flex items-center justify-center">
                   <Icon className="w-7 h-7" />
                 </div>
                 <span className="font-display text-xl font-bold">{label}</span>
-                <div className="absolute bottom-4 left-1/2 -translate-x-1/2 w-9 h-9 rounded-full border-2 border-current/50 flex items-center justify-center">
+                <div className="absolute bottom-5 left-1/2 -translate-x-1/2 w-9 h-9 rounded-full border-2 border-current/50 flex items-center justify-center">
                   <Plus className="w-5 h-5" />
                 </div>
               </div>
