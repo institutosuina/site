@@ -146,6 +146,10 @@ const Index = () => {
         </div>
       </section>
 
+      {/* Banner */}
+      <section className="w-full">
+        <img src={bannerTop} alt="Banner Instituto Suinã" className="w-full h-auto" />
+      </section>
 
       {/* 82% mulheres */}
       <section className="py-16 px-4" style={{ backgroundColor: "hsl(var(--suina-green-sage))" }}>
