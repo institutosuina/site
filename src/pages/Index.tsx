@@ -59,15 +59,12 @@ const Index = () => {
     <Layout>
       {/* Hero */}
       <section className="relative h-[60vh] md:h-[70vh] overflow-hidden">
-        <video
-          autoPlay
-          loop
-          muted
-          playsInline
-          className="absolute inset-0 w-full h-full object-cover"
-        >
-          <source src="https://cdn-cf-east.streamable.com/video/mp4/kdzkhl.mp4" type="video/mp4" />
-        </video>
+        <iframe
+          src="https://streamable.com/e/kdzkhl?autoplay=1&muted=1&loop=1&nocontrols=1"
+          allow="autoplay; fullscreen"
+          className="absolute inset-0 w-full h-full border-0 pointer-events-none scale-[1.5] origin-center"
+          style={{ objectFit: "cover" }}
+        />
         <div className="absolute inset-0 bg-gradient-to-b from-black/40 to-black/20" />
         <div className="relative z-10 h-full flex flex-col items-center justify-center text-center px-4">
           <img src={logoSuinaWhite} alt="Suinã - Instituto Socioambiental" className="h-32 md:h-48 w-auto" />
