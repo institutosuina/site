@@ -1,0 +1,61 @@
+import Layout from "@/components/Layout";
+import wheatDecoration from "@/assets/wheat-decoration.png";
+import { Plus } from "lucide-react";
+
+const cards = [
+  { label: "Política e\nManual de\nBoas práticas\n(LGPD)", color: "card-green" },
+  { label: "Estatuto\nsocial", color: "card-sage" },
+  { label: "Relatórios\nde Resultados", color: "card-red" },
+  { label: "Demonstrativos\nContábeis", color: "card-brown" },
+  { label: "Prestação\nde contas", color: "card-sage" },
+];
+
+const Transparencia = () => {
+  return (
+    <Layout>
+      <section className="py-16 px-4 relative">
+        <img src={wheatDecoration} alt="" className="absolute right-0 top-0 w-40 opacity-20 pointer-events-none" />
+        <img src={wheatDecoration} alt="" className="absolute left-0 bottom-20 w-40 opacity-20 pointer-events-none rotate-180" />
+        <div className="container mx-auto max-w-4xl relative z-10">
+          <h1 className="section-title text-center mb-6 uppercase tracking-wide underline underline-offset-4 text-secondary">
+            Transparência
+          </h1>
+          <h2 className="section-subtitle text-center mb-6 italic underline underline-offset-4 text-foreground">
+            Resultados e compromissos:
+          </h2>
+          <div className="max-w-3xl mx-auto text-center mb-12">
+            <p className="font-display text-lg italic leading-relaxed text-foreground/80 mb-4">
+              O Instituto Suinã é uma organização da sociedade civil, sem fins lucrativos, dedicada à promoção de boas práticas de governança e à gestão transparente de suas ações. Trabalhamos de forma comprometida com nossos valores, acompanhando de perto a execução dos projetos e iniciativas, fortalecendo vínculos com comunidades e parceiros e definindo estratégias que garantem a realização de nossa missão.
+            </p>
+            <p className="font-display text-lg italic leading-relaxed text-foreground/80">
+              Acreditamos que transparência e responsabilidade são essenciais para gerar confiança e impacto positivo. Por isso, disponibilizamos nesta página informações atualizadas sobre nossas atividades, resultados e compromissos, reafirmando nosso compromisso com a vida e com o futuro das próximas gerações.
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 mb-6">
+            {cards.slice(0, 3).map((card, i) => (
+              <div key={i} className={`${card.color} min-h-[200px] cursor-pointer hover:scale-[1.02] transition-transform`}>
+                <span className="font-display text-xl font-bold text-center whitespace-pre-line">{card.label}</span>
+                <div className="w-10 h-10 rounded-full bg-current/20 flex items-center justify-center mt-4">
+                  <Plus className="w-5 h-5" />
+                </div>
+              </div>
+            ))}
+          </div>
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 max-w-lg mx-auto">
+            {cards.slice(3).map((card, i) => (
+              <div key={i} className={`${card.color} min-h-[200px] cursor-pointer hover:scale-[1.02] transition-transform`}>
+                <span className="font-display text-xl font-bold text-center whitespace-pre-line">{card.label}</span>
+                <div className="w-10 h-10 rounded-full bg-current/20 flex items-center justify-center mt-4">
+                  <Plus className="w-5 h-5" />
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+    </Layout>
+  );
+};
+
+export default Transparencia;
