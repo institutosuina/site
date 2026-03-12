@@ -3,6 +3,7 @@ import heroForest from "@/assets/hero-forest.jpg";
 import logoSuina from "@/assets/logo-suina.png";
 import teamPhoto from "@/assets/team-photo.jpg";
 import wheatDecoration from "@/assets/wheat-decoration.png";
+import sketchCircle from "@/assets/sketch-circle.png";
 import { Plus, Eye, Target, Heart, ChevronLeft, ChevronRight } from "lucide-react";
 import { useState, useRef } from "react";
 
@@ -162,23 +163,11 @@ const Index = () => {
 
           {/* Team grid */}
           <div className="grid grid-cols-2 md:grid-cols-4 gap-8 mb-12">
-            {teamMembers.map((m, i) => (
+            {teamMembers.map((m) => (
               <div key={m.name} className="text-center">
-                <div className="relative w-28 h-28 mx-auto mb-3">
-                  {/* Sketchy circle layers */}
-                  <div
-                    className="absolute inset-0 rounded-full border-[3px] border-card/50"
-                    style={{ transform: `rotate(${i * 15 + 5}deg) scale(1.02)` }}
-                  />
-                  <div
-                    className="absolute inset-0 rounded-full border-[2px] border-card/30"
-                    style={{ transform: `rotate(${-i * 10 - 8}deg) scale(1.05)` }}
-                  />
-                  <div
-                    className="absolute inset-0 rounded-full border-[2px] border-card/20"
-                    style={{ transform: `rotate(${i * 20 + 12}deg) scale(1.08)` }}
-                  />
-                  <div className="absolute inset-0 rounded-full bg-card" />
+                <div className="relative w-32 h-32 mx-auto mb-3">
+                  <img src={sketchCircle} alt="" className="absolute inset-[-8%] w-[116%] h-[116%] pointer-events-none" />
+                  <div className="absolute inset-[6%] rounded-full bg-card" />
                 </div>
                 <p className="font-display text-base font-semibold text-card">{m.name}</p>
                 <p className="font-body text-[11px] text-card/70 uppercase tracking-widest">{m.role}</p>
