@@ -142,40 +142,31 @@ const Index = () => {
       </section>
 
       {/* 82% mulheres */}
-      <section className="py-16 px-4 bg-muted">
+      <section className="py-16 px-4" style={{ backgroundColor: "hsl(var(--suina-green-sage))" }}>
         <div className="container mx-auto max-w-4xl">
-          <div className="flex flex-col md:flex-row items-center gap-8 mb-8">
-            <span className="font-display text-7xl md:text-8xl font-bold text-accent">82%</span>
-            <div>
-              <p className="font-display text-2xl md:text-3xl font-bold italic text-foreground">
-                da equipe do Suinã<br />é composta por mulheres
-              </p>
-            </div>
+          <div className="flex flex-col md:flex-row items-center gap-4 mb-10">
+            <span className="font-display text-7xl md:text-8xl font-bold text-card">82%</span>
+            <p className="font-display text-2xl md:text-3xl font-bold italic text-card">
+              da equipe do Suinã<br />é composta por mulheres
+            </p>
           </div>
-          <p className="font-body text-base text-foreground/70 mb-4 text-center">
+          <p className="font-body text-base text-card/90 mb-4 text-center">
             Nos orgulhamos de ter um time diverso, forte e atuante, contribuindo diariamente para a transformação que buscamos.
           </p>
-          <p className="font-body text-base text-foreground/70 mb-8 text-center">
+          <p className="font-body text-base text-card/90 mb-6 text-center">
             O Instituto Suinã conta com uma rede de parceiros, prestadores de serviço, empresas e instituições que caminham conosco para fortalecer nossas ações e ampliar nosso impacto.
           </p>
-          <p className="font-display text-xl font-semibold italic text-foreground text-center mb-8">
+          <p className="font-display text-xl font-semibold italic text-card text-center mb-12">
             Aqui você conhece as pessoas que fazem parte dessa jornada.
           </p>
 
-          {/* Team photo */}
-          <div className="rounded-2xl overflow-hidden mb-12">
-            <img src={teamPhoto} alt="Equipe Suinã" className="w-full h-64 md:h-80 object-cover" />
-          </div>
-
           {/* Team grid */}
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-12">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-8 mb-12">
             {teamMembers.map((m) => (
               <div key={m.name} className="text-center">
-                <div className="w-20 h-20 rounded-full bg-suina-green-sage/30 mx-auto mb-2 flex items-center justify-center">
-                  <span className="font-display text-2xl font-bold text-primary">{m.name[0]}</span>
-                </div>
-                <p className="font-display text-base font-semibold text-foreground">{m.name}</p>
-                <p className="font-body text-xs text-muted-foreground uppercase tracking-wide">{m.role}</p>
+                <div className="w-24 h-24 rounded-full border-2 border-card/40 mx-auto mb-3 bg-card/10" />
+                <p className="font-display text-base font-semibold text-card">{m.name}</p>
+                <p className="font-body text-[11px] text-card/70 uppercase tracking-widest">{m.role}</p>
               </div>
             ))}
           </div>
