@@ -143,11 +143,15 @@ const Index = () => {
         </div>
       </section>
 
+      {/* Brush transition */}
+      <div className="w-full h-32 md:h-48 -mb-1">
+        <img src={brushTransition} alt="" className="w-full h-full object-cover object-bottom pointer-events-none" />
+      </div>
+
       {/* 82% mulheres */}
-      <section className="relative pt-24 pb-16 px-4" style={{ backgroundColor: "hsl(var(--suina-green-sage))" }}>
-        <img src={brushTop} alt="" className="absolute top-0 left-0 w-full h-24 object-cover pointer-events-none" style={{ marginTop: "-2px" }} />
+      <section className="pb-16 px-4" style={{ backgroundColor: "hsl(var(--suina-green-sage))" }}>
         <div className="container mx-auto max-w-4xl">
-          <div className="flex flex-col md:flex-row items-center gap-4 mb-10">
+          <div className="flex flex-col md:flex-row items-center justify-center gap-4 mb-10 text-center">
             <span className="font-display text-7xl md:text-8xl font-bold text-card">82%</span>
             <p className="font-display text-2xl md:text-3xl font-bold italic text-card">
               da equipe do Suinã<br />é composta por mulheres
