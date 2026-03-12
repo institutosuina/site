@@ -2,6 +2,7 @@ import Layout from "@/components/Layout";
 import heroForest from "@/assets/hero-forest.jpg";
 import logoSuina from "@/assets/logo-suina.png";
 import teamPhoto from "@/assets/team-photo.jpg";
+import equipeCompleta from "@/assets/equipe-completa.jpg";
 import wheatDecoration from "@/assets/wheat-decoration.png";
 import sketchCircle from "@/assets/sketch-circle.png";
 
