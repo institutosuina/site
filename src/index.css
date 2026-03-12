@@ -92,35 +92,35 @@
   }
 
   .card-green {
-    @apply bg-primary text-primary-foreground rounded-2xl p-8 flex flex-col items-center justify-center gap-4;
+    @apply bg-primary text-primary-foreground rounded-2xl p-8 flex flex-col items-center justify-center gap-4 relative;
   }
 
   .card-brown {
-    @apply rounded-2xl p-8 flex flex-col items-center justify-center gap-4;
+    @apply rounded-2xl p-8 flex flex-col items-center justify-center gap-4 relative;
     background-color: hsl(var(--suina-brown));
     color: hsl(var(--primary-foreground));
   }
 
   .card-terra {
-    @apply rounded-2xl p-8 flex flex-col items-center justify-center gap-4;
+    @apply rounded-2xl p-8 flex flex-col items-center justify-center gap-4 relative;
     background-color: hsl(var(--suina-terra));
     color: hsl(var(--primary-foreground));
   }
 
   .card-orange {
-    @apply rounded-2xl p-8 flex flex-col items-center justify-center gap-4;
+    @apply rounded-2xl p-8 flex flex-col items-center justify-center gap-4 relative;
     background-color: hsl(var(--suina-orange));
     color: hsl(var(--primary-foreground));
   }
 
   .card-red {
-    @apply rounded-2xl p-8 flex flex-col items-center justify-center gap-4;
+    @apply rounded-2xl p-8 flex flex-col items-center justify-center gap-4 relative;
     background-color: hsl(var(--suina-red));
     color: hsl(var(--primary-foreground));
   }
 
   .card-sage {
-    @apply rounded-2xl p-8 flex flex-col items-center justify-center gap-4;
+    @apply rounded-2xl p-8 flex flex-col items-center justify-center gap-4 relative;
     background-color: hsl(var(--suina-green-sage));
     color: hsl(var(--primary-foreground));
   }
