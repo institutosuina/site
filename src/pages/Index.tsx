@@ -4,6 +4,7 @@ import logoSuina from "@/assets/logo-suina.png";
 import teamPhoto from "@/assets/team-photo.jpg";
 import equipeCompleta from "@/assets/equipe-completa.jpg";
 import wheatDecoration from "@/assets/wheat-decoration.png";
+import logosParceiros from "@/assets/logos-parceiros.png";
 import sketchCircle from "@/assets/sketch-circle.png";
 
 import { Plus, Eye, Target, Heart, ChevronLeft, ChevronRight } from "lucide-react";
