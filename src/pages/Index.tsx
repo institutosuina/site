@@ -3,12 +3,24 @@ import heroForest from "@/assets/hero-forest.jpg";
 import logoSuina from "@/assets/logo-suina.png";
 import teamPhoto from "@/assets/team-photo.jpg";
 import wheatDecoration from "@/assets/wheat-decoration.png";
-import { Plus, Eye, Target, Heart } from "lucide-react";
+import { Plus, Eye, Target, Heart, ChevronLeft, ChevronRight } from "lucide-react";
+import { useState, useRef } from "react";
 
 const timelineData = [
-  { year: "2013", text: "Concepção do Instituto Suinã e início da estruturação institucional." },
-  { year: "2014", text: "Formalização da instituição e primeiras ações públicas de educação ambiental." },
-  { year: "2015", text: "Primeira parceria com poder público (Prefeitura de Mogi das Cruzes) e ingresso no Conselho Municipal de Meio Ambiente de Guararema-SP." },
+  { year: "2013", text: "Conteúdo a definir." },
+  { year: "2014", text: "Conteúdo a definir." },
+  { year: "2015", text: "Conteúdo a definir." },
+  { year: "2016", text: "Conteúdo a definir." },
+  { year: "2017", text: "Conteúdo a definir." },
+  { year: "2018", text: "Conteúdo a definir." },
+  { year: "2019", text: "Conteúdo a definir." },
+  { year: "2020", text: "Conteúdo a definir." },
+  { year: "2021", text: "Conteúdo a definir." },
+  { year: "2022", text: "Conteúdo a definir." },
+  { year: "2023", text: "Conteúdo a definir." },
+  { year: "2024", text: "Conteúdo a definir." },
+  { year: "2025", text: "Conteúdo a definir." },
+  { year: "2026", text: "Conteúdo a definir." },
 ];
 
 const teamMembers = [
