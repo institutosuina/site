@@ -186,20 +186,20 @@ const Index = () => {
       </section>
 
       {/* Conselho */}
-      <section className="py-16 px-4 relative">
-        <img src={wheatDecoration} alt="" className="absolute left-0 top-0 w-32 opacity-30 pointer-events-none" />
-        <img src={wheatDecoration} alt="" className="absolute right-0 bottom-0 w-32 opacity-30 pointer-events-none rotate-180" />
+      <section className="py-16 px-4 relative overflow-hidden" style={{ backgroundColor: "hsl(var(--suina-orange))" }}>
+        <img src={wheatDecoration} alt="" className="absolute left-4 top-8 w-36 md:w-48 opacity-40 pointer-events-none" />
+        <img src={wheatDecoration} alt="" className="absolute right-4 bottom-8 w-36 md:w-48 opacity-40 pointer-events-none rotate-180" />
         <div className="container mx-auto max-w-2xl text-center relative z-10">
-          <h2 className="section-title mb-8 italic text-secondary underline underline-offset-4">Conselho</h2>
-          <div className="space-y-4">
+          <h2 className="font-display text-3xl md:text-4xl font-bold text-card mb-10">Conselho</h2>
+          <div className="space-y-8">
             {conselho.map((c, i) => (
               <div key={i}>
-                {c.role && <p className="font-body text-xs uppercase tracking-widest text-muted-foreground">{c.role}</p>}
-                <p className="font-display text-lg font-semibold text-foreground">{c.name}</p>
+                {c.role && <p className="font-body text-xs uppercase tracking-[0.2em] text-card/70 mb-1">{c.role}</p>}
+                <p className="font-display text-lg font-semibold text-card">{c.name}</p>
               </div>
             ))}
           </div>
-          <p className="font-body text-xs text-muted-foreground mt-6 uppercase tracking-wider">
+          <p className="font-body text-xs text-card/60 mt-10 uppercase tracking-wider">
             MANDATO: 08/03/2023 A 08/03/2026
           </p>
         </div>
