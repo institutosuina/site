@@ -177,6 +177,11 @@ const Index = () => {
               </div>
             ))}
           </div>
+
+          {/* Foto da equipe completa */}
+          <div className="rounded-2xl overflow-hidden">
+            <img src={equipeCompleta} alt="Equipe completa do Instituto Suinã" className="w-full h-64 md:h-96 object-cover" />
+          </div>
         </div>
       </section>
 
