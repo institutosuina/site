@@ -3,12 +3,24 @@ import heroForest from "@/assets/hero-forest.jpg";
 import logoSuina from "@/assets/logo-suina.png";
 import teamPhoto from "@/assets/team-photo.jpg";
 import wheatDecoration from "@/assets/wheat-decoration.png";
-import { Plus, Eye, Target, Heart } from "lucide-react";
+import { Plus, Eye, Target, Heart, ChevronLeft, ChevronRight } from "lucide-react";
+import { useState, useRef } from "react";
 
 const timelineData = [
-  { year: "2013", text: "Concepção do Instituto Suinã e início da estruturação institucional." },
-  { year: "2014", text: "Formalização da instituição e primeiras ações públicas de educação ambiental." },
-  { year: "2015", text: "Primeira parceria com poder público (Prefeitura de Mogi das Cruzes) e ingresso no Conselho Municipal de Meio Ambiente de Guararema-SP." },
+  { year: "2013", text: "Conteúdo a definir." },
+  { year: "2014", text: "Conteúdo a definir." },
+  { year: "2015", text: "Conteúdo a definir." },
+  { year: "2016", text: "Conteúdo a definir." },
+  { year: "2017", text: "Conteúdo a definir." },
+  { year: "2018", text: "Conteúdo a definir." },
+  { year: "2019", text: "Conteúdo a definir." },
+  { year: "2020", text: "Conteúdo a definir." },
+  { year: "2021", text: "Conteúdo a definir." },
+  { year: "2022", text: "Conteúdo a definir." },
+  { year: "2023", text: "Conteúdo a definir." },
+  { year: "2024", text: "Conteúdo a definir." },
+  { year: "2025", text: "Conteúdo a definir." },
+  { year: "2026", text: "Conteúdo a definir." },
 ];
 
 const teamMembers = [
@@ -29,6 +41,15 @@ const conselho = [
 ];
 
 const Index = () => {
+  const scrollRef = useRef<HTMLDivElement>(null);
+
+  const scroll = (direction: "left" | "right") => {
+    if (scrollRef.current) {
+      const amount = 300;
+      scrollRef.current.scrollBy({ left: direction === "left" ? -amount : amount, behavior: "smooth" });
+    }
+  };
+
   return (
     <Layout>
       {/* Hero */}
@@ -77,17 +98,44 @@ const Index = () => {
 
       {/* Linha do tempo */}
       <section className="py-16 px-4">
-        <div className="container mx-auto max-w-4xl">
+        <div className="container mx-auto max-w-5xl">
           <h2 className="section-title text-center mb-10 italic text-secondary">Linha do tempo do Suinã</h2>
           <div className="relative">
-            <div className="timeline-line h-1 w-full rounded-full mb-8" />
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-              {timelineData.map((item) => (
-                <div key={item.year} className="text-center">
-                  <span className="font-display text-2xl font-bold text-accent">{item.year}</span>
-                  <p className="font-body text-sm text-foreground/70 mt-3 leading-relaxed">{item.text}</p>
+            {/* Navigation arrows */}
+            <button
+              onClick={() => scroll("left")}
+              className="absolute -left-4 top-1/2 -translate-y-1/2 z-10 w-10 h-10 rounded-full bg-secondary text-secondary-foreground flex items-center justify-center shadow-md hover:scale-110 transition-transform"
+            >
+              <ChevronLeft className="w-5 h-5" />
+            </button>
+            <button
+              onClick={() => scroll("right")}
+              className="absolute -right-4 top-1/2 -translate-y-1/2 z-10 w-10 h-10 rounded-full bg-secondary text-secondary-foreground flex items-center justify-center shadow-md hover:scale-110 transition-transform"
+            >
+              <ChevronRight className="w-5 h-5" />
+            </button>
+
+            {/* Scrollable timeline */}
+            <div
+              ref={scrollRef}
+              className="overflow-x-auto scrollbar-hide px-8"
+              style={{ scrollbarWidth: "none", msOverflowStyle: "none" }}
+            >
+              <div className="relative min-w-max py-8">
+                {/* Timeline line */}
+                <div className="timeline-line h-1 w-full rounded-full absolute top-8 left-0" />
+                {/* Items */}
+                <div className="flex gap-12">
+                  {timelineData.map((item) => (
+                    <div key={item.year} className="text-center w-40 flex-shrink-0 pt-12 relative">
+                      {/* Dot on line */}
+                      <div className="absolute top-[26px] left-1/2 -translate-x-1/2 w-4 h-4 rounded-full bg-accent border-2 border-card" />
+                      <span className="font-display text-2xl font-bold text-accent">{item.year}</span>
+                      <p className="font-body text-sm text-foreground/70 mt-3 leading-relaxed">{item.text}</p>
+                    </div>
+                  ))}
                 </div>
-              ))}
+              </div>
             </div>
           </div>
         </div>
