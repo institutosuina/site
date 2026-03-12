@@ -144,7 +144,7 @@
 
   .input-cream {
     @apply rounded-xl px-6 py-4 text-lg font-body border-0 outline-none;
-    background-color: hsl(var(--suina-cream));
+    background-color: hsl(35 35% 82%);
     color: hsl(var(--card));
   }
 
