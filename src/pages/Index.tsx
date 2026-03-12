@@ -1,6 +1,6 @@
 import Layout from "@/components/Layout";
 import heroForest from "@/assets/hero-forest.jpg";
-import logoSuinaFull from "@/assets/logo-suina-full.png";
+import logoSuinaWhite from "@/assets/logo-suina-white.png";
 import teamPhoto from "@/assets/team-photo.jpg";
 import equipeCompleta from "@/assets/equipe-completa.jpg";
 import wheatDecoration from "@/assets/wheat-decoration.png";
