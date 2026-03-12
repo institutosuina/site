@@ -74,8 +74,8 @@ const Index = () => {
 
       {/* Quem somos */}
       <section className="py-16 px-4 relative overflow-hidden">
-        <img src={folhaSvg} alt="" className="absolute left-0 top-1/2 -translate-y-1/2 w-32 md:w-48 opacity-20 pointer-events-none" />
-        <img src={folhaSvg} alt="" className="absolute right-0 top-1/2 -translate-y-1/2 w-32 md:w-48 opacity-20 pointer-events-none -scale-x-100" />
+        <img src={folhaSvg} alt="" className="absolute -left-16 top-1/4 w-40 md:w-56 opacity-25 pointer-events-none rotate-[30deg]" style={{ filter: "hue-rotate(340deg) saturate(2) brightness(0.7)" }} />
+        <img src={folhaSvg} alt="" className="absolute -right-10 -bottom-10 w-40 md:w-56 opacity-25 pointer-events-none -scale-x-100" style={{ filter: "hue-rotate(340deg) saturate(2) brightness(0.7)" }} />
         <div className="container mx-auto max-w-3xl text-center relative z-10">
           <h2 className="section-title mb-6 italic text-secondary">Quem somos</h2>
           <p className="font-body text-base leading-relaxed text-foreground/80">
