@@ -20,33 +20,30 @@ const Contato = () => {
             Precisa de alguma informação? Preencha o formulário e entraremos<br className="hidden md:block" /> em contato o mais breve possível.
           </p>
 
-          {/* Green rectangle behind form */}
-          <div className="rounded-2xl p-5 md:p-6" style={{ backgroundColor: "hsl(var(--suina-green-dark) / 0.3)" }}>
-            <div className="space-y-3">
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
-                <input
-                  type="text"
-                  placeholder="Nome"
-                  className="input-cream"
-                  value={form.nome}
-                  onChange={(e) => setForm({ ...form, nome: e.target.value })}
-                />
-                <input
-                  type="email"
-                  placeholder="E-mail"
-                  className="input-cream"
-                  value={form.email}
-                  onChange={(e) => setForm({ ...form, email: e.target.value })}
-                />
-              </div>
-              <textarea
-                placeholder="Sua mensagem"
-                rows={5}
-                className="input-cream w-full resize-none"
-                value={form.mensagem}
-                onChange={(e) => setForm({ ...form, mensagem: e.target.value })}
+          <div className="space-y-3">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+              <input
+                type="text"
+                placeholder="Nome"
+                className="input-cream"
+                value={form.nome}
+                onChange={(e) => setForm({ ...form, nome: e.target.value })}
+              />
+              <input
+                type="email"
+                placeholder="E-mail"
+                className="input-cream"
+                value={form.email}
+                onChange={(e) => setForm({ ...form, email: e.target.value })}
               />
             </div>
+            <textarea
+              placeholder="Sua mensagem"
+              rows={5}
+              className="input-cream w-full resize-none"
+              value={form.mensagem}
+              onChange={(e) => setForm({ ...form, mensagem: e.target.value })}
+            />
           </div>
 
           <div className="text-center pt-5">
