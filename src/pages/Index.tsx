@@ -2,6 +2,7 @@ import Layout from "@/components/Layout";
 import heroForest from "@/assets/hero-forest.jpg";
 import logoSuina from "@/assets/logo-suina.png";
 import teamPhoto from "@/assets/team-photo.jpg";
+import equipeCompleta from "@/assets/equipe-completa.jpg";
 import wheatDecoration from "@/assets/wheat-decoration.png";
 import sketchCircle from "@/assets/sketch-circle.png";
 
@@ -175,6 +176,11 @@ const Index = () => {
                 <p className="font-body text-[11px] text-card/70 uppercase tracking-widest">{m.role}</p>
               </div>
             ))}
+          </div>
+
+          {/* Foto da equipe completa */}
+          <div className="rounded-2xl overflow-hidden">
+            <img src={equipeCompleta} alt="Equipe completa do Instituto Suinã" className="w-full h-64 md:h-96 object-cover" />
           </div>
         </div>
       </section>
