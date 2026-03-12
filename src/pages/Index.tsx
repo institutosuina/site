@@ -66,7 +66,7 @@ const Index = () => {
                   <Icon className="w-7 h-7" />
                 </div>
                 <span className="font-display text-xl font-bold">{label}</span>
-                <div className="absolute bottom-4 right-4 w-9 h-9 rounded-full border-2 border-current/50 flex items-center justify-center">
+                <div className="absolute bottom-4 left-1/2 -translate-x-1/2 w-9 h-9 rounded-full border-2 border-current/50 flex items-center justify-center">
                   <Plus className="w-5 h-5" />
                 </div>
               </div>
