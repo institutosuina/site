@@ -48,31 +48,27 @@ const Noticias = () => {
           <h1 className="section-title text-center mb-12 uppercase tracking-wide text-secondary">Notícias</h1>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             {newsItems.map((item, i) => (
-              <div key={i} className="group cursor-pointer">
-                {/* Card with image */}
-                <div className="relative overflow-hidden rounded-2xl h-64 md:h-72">
+              <div key={i} className="group cursor-pointer rounded-2xl overflow-hidden border border-border bg-card shadow-sm">
+                {/* Image */}
+                <div className="relative overflow-hidden h-52 md:h-60">
                   <img
                     src={item.image}
                     alt={item.title}
                     className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                   />
-                  {/* Gradient overlay */}
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent" />
-                  {/* Title overlay */}
-                  <div className="absolute bottom-12 left-0 right-16 px-5">
-                    <h3 className="font-display text-base md:text-lg font-bold text-white leading-snug drop-shadow-lg">
-                      {item.title}
-                    </h3>
-                  </div>
-                  {/* LEIA MAIS button */}
-                  <button className="absolute bottom-3 right-3 flex items-center gap-1 bg-secondary text-secondary-foreground px-4 py-1.5 rounded font-body text-xs font-semibold uppercase hover:bg-secondary/90 transition-colors shadow-md">
-                    LEIA MAIS <ArrowRight className="w-3 h-3" />
-                  </button>
                 </div>
-                {/* Date below */}
-                <p className="mt-2 ml-1 font-body text-xs text-secondary italic">
-                  Publicação: {item.date}
-                </p>
+                {/* Content below image */}
+                <div className="px-5 py-4">
+                  <h3 className="font-display text-base md:text-lg font-bold text-foreground leading-snug mb-3">
+                    {item.title}
+                  </h3>
+                  <div className="flex items-center justify-between">
+                    <span className="font-body text-xs text-secondary italic">Publicação: {item.date}</span>
+                    <button className="flex items-center gap-1 bg-secondary text-secondary-foreground px-4 py-1.5 rounded font-body text-xs font-semibold uppercase hover:bg-secondary/90 transition-colors">
+                      LEIA MAIS <ArrowRight className="w-3 h-3" />
+                    </button>
+                  </div>
+                </div>
               </div>
             ))}
           </div>
