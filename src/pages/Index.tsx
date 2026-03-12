@@ -41,6 +41,15 @@ const conselho = [
 ];
 
 const Index = () => {
+  const scrollRef = useRef<HTMLDivElement>(null);
+
+  const scroll = (direction: "left" | "right") => {
+    if (scrollRef.current) {
+      const amount = 300;
+      scrollRef.current.scrollBy({ left: direction === "left" ? -amount : amount, behavior: "smooth" });
+    }
+  };
+
   return (
     <Layout>
       {/* Hero */}
