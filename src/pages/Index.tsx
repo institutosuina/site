@@ -4,6 +4,7 @@ import logoSuina from "@/assets/logo-suina.png";
 import teamPhoto from "@/assets/team-photo.jpg";
 import equipeCompleta from "@/assets/equipe-completa.jpg";
 import wheatDecoration from "@/assets/wheat-decoration.png";
+import logosParceiros from "@/assets/logos-parceiros.png";
 import sketchCircle from "@/assets/sketch-circle.png";
 
 import { Plus, Eye, Target, Heart, ChevronLeft, ChevronRight } from "lucide-react";
@@ -207,9 +208,9 @@ const Index = () => {
 
       {/* Parceiros */}
       <section className="py-16 px-4">
-        <div className="container mx-auto max-w-4xl text-center">
-          <h2 className="section-title mb-8 italic text-secondary underline underline-offset-4">Parceiros e apoiadores</h2>
-          <p className="font-body text-muted-foreground">Logos dos parceiros e apoiadores do Instituto Suinã.</p>
+        <div className="container mx-auto max-w-5xl text-center">
+          <h2 className="font-display text-3xl md:text-4xl font-bold italic text-secondary mb-12">Parceiros e apoiadores</h2>
+          <img src={logosParceiros} alt="Logos dos parceiros e apoiadores do Instituto Suinã" className="w-full" />
         </div>
       </section>
     </Layout>
