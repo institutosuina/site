@@ -5,7 +5,7 @@ import teamPhoto from "@/assets/team-photo.jpg";
 import equipeCompleta from "@/assets/equipe-completa.jpg";
 import wheatDecoration from "@/assets/wheat-decoration.png";
 import logosParceiros from "@/assets/logos-parceiros.png";
-import bannerTop from "@/assets/banner-top.png";
+
 import sketchCircle from "@/assets/sketch-circle.png";
 
 import { Plus, Eye, Target, Heart, ChevronLeft, ChevronRight } from "lucide-react";
@@ -146,10 +146,6 @@ const Index = () => {
         </div>
       </section>
 
-      {/* Banner */}
-      <section className="w-full">
-        <img src={bannerTop} alt="Banner Instituto Suinã" className="w-full h-auto" />
-      </section>
 
       {/* 82% mulheres */}
       <section className="py-16 px-4" style={{ backgroundColor: "hsl(var(--suina-green-sage))" }}>
