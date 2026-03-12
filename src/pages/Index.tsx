@@ -4,6 +4,7 @@ import logoSuina from "@/assets/logo-suina.png";
 import teamPhoto from "@/assets/team-photo.jpg";
 import wheatDecoration from "@/assets/wheat-decoration.png";
 import sketchCircle from "@/assets/sketch-circle.png";
+import brushTop from "@/assets/brush-top.png";
 import { Plus, Eye, Target, Heart, ChevronLeft, ChevronRight } from "lucide-react";
 import { useState, useRef } from "react";
 
