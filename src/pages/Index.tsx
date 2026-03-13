@@ -13,6 +13,7 @@ import backgroundFlores from "@/assets/backgroundflores.svg";
 import iconeMissao from "@/assets/missão.svg";
 import iconeVisao from "@/assets/visão.svg";
 import iconeValores from "@/assets/valores.svg";
+import brushTop from "@/assets/brush-top.png";
 
 import { Plus, Eye, Target, Heart, ChevronLeft, ChevronRight } from "lucide-react";
 import { useState, useRef } from "react";
@@ -169,23 +170,39 @@ const Index = () => {
       </section>
 
       {/* 82% mulheres */}
-      <section className="py-16 px-4" style={{ backgroundColor: "hsl(var(--suina-green-sage))" }}>
-        <div className="container mx-auto max-w-4xl">
+      <section className="py-16 px-4 relative overflow-hidden" style={{ backgroundColor: "hsl(var(--suina-green-sage))" }}>
+        {/* Brush decorations */}
+        <img 
+          src={brushTop} 
+          alt="" 
+          className="absolute -top-1 -left-1 w-32 md:w-64 opacity-90 pointer-events-none" 
+        />
+        <img 
+          src={brushTop} 
+          alt="" 
+          className="absolute -top-1 -right-1 w-32 md:w-64 opacity-90 pointer-events-none scale-x-[-1]" 
+        />
+        
+        <div className="container mx-auto max-w-4xl relative z-10">
           <div className="flex flex-col md:flex-row items-center justify-center gap-4 mb-10 text-center">
-            <span className="font-display text-7xl md:text-8xl font-bold text-card">82%</span>
-            <p className="font-display text-2xl md:text-3xl font-bold italic text-card">
+            <span className="font-display text-7xl md:text-8xl font-bold text-white">82%</span>
+            <p className="font-display text-2xl md:text-4xl font-bold text-white leading-tight">
               da equipe do Suinã<br />é composta por mulheres
             </p>
           </div>
-          <p className="font-body text-base text-card/90 mb-4 text-center">
-            Nos orgulhamos de ter um time diverso, forte e atuante, contribuindo diariamente para a transformação que buscamos.
-          </p>
-          <p className="font-body text-base text-card/90 mb-6 text-center">
-            O Instituto Suinã conta com uma rede de parceiros, prestadores de serviço, empresas e instituições que caminham conosco para fortalecer nossas ações e ampliar nosso impacto.
-          </p>
-          <p className="font-display text-xl font-semibold italic text-card text-center mb-12">
-            Aqui você conhece as pessoas que fazem parte dessa jornada.
-          </p>
+          <div className="space-y-6 text-center max-w-3xl mx-auto">
+            <p className="font-display text-lg md:text-xl text-white font-medium">
+              Nos orgulhamos de ter um time diverso, forte e atuante, contribuindo diariamente para a transformação que buscamos.
+            </p>
+            <p className="font-display text-lg md:text-xl text-white font-medium">
+              O Instituto Suinã conta com uma rede de parceiros, prestadores de serviço, empresas e instituições que caminham conosco para fortalecer nossas ações e ampliar nosso impacto.
+            </p>
+            <p className="font-display text-xl md:text-2xl font-bold text-white pt-4">
+              Aqui você conhece as pessoas que fazem parte dessa jornada.
+            </p>
+          </div>
+        </div>
+      </section>
 
           {/* Team grid */}
           <div className="grid grid-cols-2 md:grid-cols-4 gap-8 mb-12">
