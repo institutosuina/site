@@ -1,13 +1,14 @@
 import Layout from "@/components/Layout";
 import wheatDecoration from "@/assets/wheat-decoration.png";
 import { Plus } from "lucide-react";
+import { Link } from "react-router-dom";
 
 const cards = [
-  { label: "Política e\nManual de\nBoas práticas\n(LGPD)", color: "card-green" },
-  { label: "Estatuto\nsocial", color: "card-sage" },
-  { label: "Relatórios\nde Resultados", color: "card-red" },
-  { label: "Demonstrativos\nContábeis", color: "card-brown" },
-  { label: "Prestação\nde contas", color: "card-sage" },
+  { label: "Política e\nManual de\nBoas práticas\n(LGPD)", color: "card-green", href: "/transparencia" },
+  { label: "Estatuto\nsocial", color: "card-sage", href: "/transparencia" },
+  { label: "Relatórios\nde Resultados", color: "card-red", href: "/transparencia" },
+  { label: "Demonstrativos\nContábeis", color: "card-brown", href: "/transparencia" },
+  { label: "Prestação\nde contas", color: "card-sage", href: "/prestacao-de-contas" },
 ];
 
 const Transparencia = () => {
@@ -34,22 +35,22 @@ const Transparencia = () => {
 
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 mb-6">
             {cards.slice(0, 3).map((card, i) => (
-              <div key={i} className={`${card.color} min-h-[200px] cursor-pointer hover:scale-[1.02] transition-transform flex flex-col items-center justify-center p-6 text-center`}>
+              <Link key={i} to={card.href} className={`${card.color} min-h-[200px] cursor-pointer hover:scale-[1.02] transition-transform flex flex-col items-center justify-center p-6 text-center shadow-lg rounded-2xl`}>
                 <span className="font-display text-xl font-bold text-white whitespace-pre-line leading-tight">{card.label}</span>
                 <div className="w-10 h-10 rounded-full border-2 border-white flex items-center justify-center mt-4 shrink-0">
                   <Plus className="w-5 h-5 text-white" />
                 </div>
-              </div>
+              </Link>
             ))}
           </div>
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 max-w-lg mx-auto">
             {cards.slice(3).map((card, i) => (
-              <div key={i} className={`${card.color} min-h-[200px] cursor-pointer hover:scale-[1.02] transition-transform flex flex-col items-center justify-center p-6`}>
+              <Link key={i} to={card.href} className={`${card.color} min-h-[200px] cursor-pointer hover:scale-[1.02] transition-transform flex flex-col items-center justify-center p-6 shadow-lg rounded-2xl`}>
                 <span className="font-display text-xl font-bold text-center whitespace-pre-line text-white">{card.label}</span>
                 <div className="w-10 h-10 rounded-full border-2 border-white flex items-center justify-center mt-4">
                   <Plus className="w-5 h-5 text-white" />
                 </div>
-              </div>
+              </Link>
             ))}
           </div>
         </div>

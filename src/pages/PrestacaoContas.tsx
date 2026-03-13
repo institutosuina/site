@@ -1,34 +1,124 @@
+import { useState, useEffect } from "react";
 import Layout from "@/components/Layout";
 import leafDecoration from "@/assets/leaf-decoration.png";
 import paperTexture from "@/assets/paper-texture.png";
-import { Plus } from "lucide-react";
+import { Plus, ShieldCheck, Mail, User, ArrowRight } from "lucide-react";
 
 const PrestacaoContas = () => {
+  const [isAuthorized, setIsAuthorized] = useState(false);
+  const [showModal, setShowModal] = useState(false);
+  const [formData, setFormData] = useState({ name: "", email: "" });
+
+  useEffect(() => {
+    const authorized = localStorage.getItem("suina_accountability_auth");
+    if (authorized) {
+      setIsAuthorized(true);
+    } else {
+      setShowModal(true);
+    }
+  }, []);
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (formData.name && formData.email) {
+      localStorage.setItem("suina_accountability_auth", "true");
+      setIsAuthorized(true);
+      setShowModal(false);
+    }
+  };
+
   return (
     <Layout>
-      <section className="py-16 px-4 min-h-[50vh] relative">
+      <section className={`py-16 px-4 min-h-[70vh] relative transition-all duration-500 ${!isAuthorized ? 'blur-md pointer-events-none grayscale-[0.5]' : ''}`}>
         <img src={leafDecoration} alt="" className="absolute right-0 bottom-0 w-48 opacity-10 pointer-events-none" />
         <div className="container mx-auto max-w-4xl relative z-10">
           <h1 className="section-title text-center mb-12 uppercase tracking-wide underline underline-offset-4 text-secondary">
             Prestação de Contas
           </h1>
-          <div className="max-w-xs">
-            <div 
-              className="flex items-center gap-3 bg-suina-brown rounded-full px-6 py-3 cursor-pointer hover:bg-suina-brown/90 transition-colors shadow-md"
-              style={{ 
-                backgroundImage: `url(${paperTexture})`,
-                backgroundSize: 'cover',
-                backgroundBlendMode: 'multiply'
-              }}
-            >
-              <span className="font-display text-base font-bold text-white flex-1">Viver o Viveiro</span>
-              <div className="w-9 h-9 rounded-full border-2 border-white flex items-center justify-center shrink-0">
-                <Plus className="w-5 h-5 text-white" />
+          
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+            {[
+              { title: "Viver o Viveiro", date: "2023-2024" },
+              { title: "Restauração Rio Paraíba", date: "2022-2023" },
+            ].map((projeto, i) => (
+              <div 
+                key={i}
+                className="flex items-center gap-4 bg-[#7d5127] rounded-[24px] px-8 py-5 cursor-pointer hover:scale-[1.02] transition-all shadow-xl group"
+                style={{ 
+                  backgroundImage: `url(${paperTexture})`,
+                  backgroundSize: 'cover',
+                  backgroundBlendMode: 'multiply'
+                }}
+              >
+                <div className="flex-1">
+                  <h3 className="font-display text-xl font-bold text-white mb-1">{projeto.title}</h3>
+                  <p className="font-body text-xs text-white/70 uppercase tracking-widest">{projeto.date}</p>
+                </div>
+                <div className="w-12 h-12 rounded-full border-2 border-white/30 flex items-center justify-center shrink-0 group-hover:border-white transition-colors">
+                  <Plus className="w-6 h-6 text-white" />
+                </div>
               </div>
-            </div>
+            ))}
           </div>
         </div>
       </section>
+
+      {/* Restricted Access Modal */}
+      {showModal && (
+        <div className="fixed inset-0 z-[100] flex items-center justify-center p-4 bg-black/40 backdrop-blur-md">
+          <div className="bg-white rounded-[40px] max-w-md w-full p-10 relative shadow-[0_20px_50px_rgba(0,0,0,0.3)] animate-in fade-in zoom-in duration-300">
+            <div className="text-center mb-8">
+              <div className="w-20 h-20 bg-[#2f4b3c]/10 rounded-full flex items-center justify-center mx-auto mb-6">
+                <ShieldCheck className="w-10 h-10 text-[#2f4b3c]" />
+              </div>
+              <h2 className="font-display text-3xl font-bold text-[#2f4b3c] mb-3">Acesso Restrito</h2>
+              <p className="font-body text-gray-600 leading-relaxed text-sm">
+                Para visualizar nossa prestação de contas, por favor identifique-se. Esse procedimento é realizado apenas para controle interno de acesso aos documentos.
+              </p>
+            </div>
+
+            <form onSubmit={handleSubmit} className="space-y-4">
+              <div className="relative">
+                <User className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400" />
+                <input 
+                  type="text" 
+                  placeholder="Seu nome completo" 
+                  required
+                  className="w-full pl-12 pr-4 py-4 bg-gray-50 border border-gray-100 rounded-2xl focus:outline-none focus:ring-2 focus:ring-[#2f4b3c]/20 transition-all font-body"
+                  value={formData.name}
+                  onChange={(e) => setFormData({...formData, name: e.target.value})}
+                />
+              </div>
+              <div className="relative">
+                <Mail className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400" />
+                <input 
+                  type="email" 
+                  placeholder="Seu melhor e-mail" 
+                  required
+                  className="w-full pl-12 pr-4 py-4 bg-gray-50 border border-gray-100 rounded-2xl focus:outline-none focus:ring-2 focus:ring-[#2f4b3c]/20 transition-all font-body"
+                  value={formData.email}
+                  onChange={(e) => setFormData({...formData, email: e.target.value})}
+                />
+              </div>
+
+              <div className="bg-[#e6d5bc]/20 p-4 rounded-2xl border border-[#e6d5bc]/30 flex gap-3 items-start mb-6">
+                <ShieldCheck className="w-5 h-5 text-[#7d5127] shrink-0 mt-0.5" />
+                <p className="text-[11px] text-[#7d5127] leading-tight">
+                  Seus dados estão protegidos. O Instituto Suinã respeita as diretrizes da **LGPD** (Lei Geral de Proteção de Dados) e utiliza essas informações estritamente para segurança e controle de acesso territorial.
+                </p>
+              </div>
+
+              <button 
+                type="submit"
+                className="w-full py-5 bg-[#2f4b3c] text-white rounded-2xl font-display font-bold text-lg flex items-center justify-center gap-2 hover:bg-[#1f3328] transition-all shadow-lg active:scale-[0.98]"
+              >
+                Acessar Documentos
+                <ArrowRight className="w-5 h-5" />
+              </button>
+            </form>
+          </div>
+        </div>
+      )}
     </Layout>
   );
 };
