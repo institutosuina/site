@@ -33,7 +33,7 @@ const navItems = [
     label: "Participe",
     href: "/contato",
     children: [
-      { label: "Como apoiar", href: "/contato" },
+      { label: "Como apoiar", href: "/como-apoiar" },
       { label: "Cadastre-se para receber nossa newsletter", href: "/contato" },
       { label: "Suinã nas Redes Sociais", href: "/contato" },
     ],
@@ -99,7 +99,7 @@ const Header = () => {
         {/* Action Button Desktop */}
         <div className="hidden lg:block">
           <Link 
-            to="/contato"
+            to="/como-apoiar"
             className="px-10 py-4 font-display font-bold text-[18px] rounded-[20px] shadow-sm hover:shadow-md transition-all active:scale-[0.98]"
             style={{ backgroundColor: beigeButton, color: darkBrown, border: "1px solid rgba(62, 39, 35, 0.1)" }}
           >
@@ -145,7 +145,7 @@ const Header = () => {
           ))}
           <div className="pt-4 border-t border-black/10">
             <Link 
-              to="/contato"
+              to="/como-apoiar"
               className="block w-full py-4 text-center font-display font-bold text-xl rounded-[20px]"
               style={{ backgroundColor: beigeButton, color: darkBrown, border: "1px solid rgba(62, 39, 35, 0.2)" }}
               onClick={() => setMobileOpen(false)}
