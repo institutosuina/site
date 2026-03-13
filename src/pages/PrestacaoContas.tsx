@@ -1,10 +1,11 @@
-import { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import Layout from "@/components/Layout";
 import leafDecoration from "@/assets/leaf-decoration.png";
 import paperTexture from "@/assets/paper-texture.png";
-import { Plus, ShieldCheck, Mail, User, ArrowRight } from "lucide-react";
+import { Plus, ShieldCheck, Mail, User, ArrowRight, X } from "lucide-react";
 
 const PrestacaoContas = () => {
+  const navigate = useNavigate();
   const [isAuthorized, setIsAuthorized] = useState(false);
   const [showModal, setShowModal] = useState(false);
   const [formData, setFormData] = useState({ name: "", email: "" });
@@ -67,6 +68,14 @@ const PrestacaoContas = () => {
       {showModal && (
         <div className="fixed inset-0 z-[100] flex items-center justify-center p-4 bg-black/40 backdrop-blur-md">
           <div className="bg-white rounded-[40px] max-w-md w-full p-10 relative shadow-[0_20px_50px_rgba(0,0,0,0.3)] animate-in fade-in zoom-in duration-300">
+            <button 
+              onClick={() => navigate("/transparencia")}
+              className="absolute top-6 right-6 p-2 text-gray-400 hover:text-[#ba2c18] transition-colors"
+              title="Fechar e voltar"
+            >
+              <X className="w-6 h-6" />
+            </button>
+
             <div className="text-center mb-8">
               <div className="w-20 h-20 bg-[#2f4b3c]/10 rounded-full flex items-center justify-center mx-auto mb-6">
                 <ShieldCheck className="w-10 h-10 text-[#2f4b3c]" />
