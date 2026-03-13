@@ -54,6 +54,13 @@ const conselho = [
 
 const Index = () => {
   const scrollRef = useRef<HTMLDivElement>(null);
+  const [openModal, setOpenModal] = useState<string | null>(null);
+
+  const modalContent = {
+    Mission: "Conectar e mobilizar pessoas, ideias e ações para conservar e restaurar a sociobiodiversidade.",
+    Vision: "Consolidar-se como uma organização de referência em conservação e transformação territorial, contribuindo para o desenvolvimento sustentável e a valorização dos territórios.",
+    Values: "Em breve."
+  };
 
   const scroll = (direction: "left" | "right") => {
     if (scrollRef.current) {
@@ -107,11 +114,15 @@ const Index = () => {
         <div className="container mx-auto max-w-4xl">
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             {[
-              { icon: iconeMissao, label: "Missão", color: "card-red" },
-              { icon: iconeVisao, label: "Visão", color: "card-sage" },
-              { icon: iconeValores, label: "Valores", color: "card-orange" },
-            ].map(({ icon, label, color }) => (
-              <div key={label} className={`${color} min-h-[220px] cursor-pointer hover:scale-[1.02] transition-transform pb-16`}>
+              { icon: iconeMissao, label: "Missão", color: "card-red", id: "Mission" },
+              { icon: iconeVisao, label: "Visão", color: "card-sage", id: "Vision" },
+              { icon: iconeValores, label: "Valores", color: "card-orange", id: "Values" },
+            ].map(({ icon, label, color, id }) => (
+              <div 
+                key={label} 
+                className={`${color} min-h-[220px] cursor-pointer hover:scale-[1.02] transition-transform pb-16`}
+                onClick={() => setOpenModal(id)}
+              >
                 <div className="w-16 h-16 flex items-center justify-center">
                   <img src={icon} alt={label} className="w-full h-full object-contain" />
                 </div>
@@ -260,6 +271,44 @@ const Index = () => {
           <img src={logosParceiros} alt="Logos dos parceiros e apoiadores do Instituto Suinã" className="w-full" />
         </div>
       </section>
+
+      {/* Modals */}
+      {openModal && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60 backdrop-blur-sm transition-opacity" onClick={() => setOpenModal(null)}>
+          <div 
+            className="bg-white rounded-2xl max-w-lg w-full p-8 relative shadow-2xl animate-in fade-in zoom-in duration-300" 
+            onClick={(e) => e.stopPropagation()}
+          >
+            <button 
+              className="absolute top-4 right-4 text-gray-400 hover:text-gray-600 transition-colors"
+              onClick={() => setOpenModal(null)}
+            >
+              <Plus className="w-6 h-6 rotate-45" />
+            </button>
+            
+            <div className="flex flex-col items-center text-center">
+              <div className={`w-20 h-20 rounded-full flex items-center justify-center mb-6 ${
+                openModal === 'Mission' ? 'bg-[#ba2c18]/10' : 
+                openModal === 'Vision' ? 'bg-[#2f4b3c]/10' : 'bg-[#e67e22]/10'
+              }`}>
+                <img 
+                  src={openModal === 'Mission' ? iconeMissao : openModal === 'Vision' ? iconeVisao : iconeValores} 
+                  className="w-12 h-12"
+                  alt=""
+                />
+              </div>
+              
+              <h3 className="font-display text-3xl font-bold mb-4 text-[#2f4b3c]">
+                {openModal === 'Mission' ? 'Nossa Missão' : openModal === 'Vision' ? 'Nossa Visão' : 'Nossos Valores'}
+              </h3>
+              
+              <p className="font-body text-lg text-gray-700 leading-relaxed italic">
+                "{modalContent[openModal as keyof typeof modalContent]}"
+              </p>
+            </div>
+          </div>
+        </div>
+      )}
     </Layout>
   );
 };
