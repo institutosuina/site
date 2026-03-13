@@ -49,7 +49,7 @@ const conselho = [
   { role: "PRESIDENTE", name: "Maria José de Brito Zákia" },
   { role: "VICE-PRESIDENTE", name: "Maria Santini de Castro Morini" },
   { role: "CONSELHO FISCAL", name: "Lucila Manzatti" },
-  { role: "", name: "Paulo Valadares Soares" },
+  { role: "CONSELHO FISCAL", name: "Paulo Valadares Soares" },
 ];
 
 const Index = () => {
@@ -92,6 +92,7 @@ const Index = () => {
 
       {/* Quem somos */}
       <section
+        id="quem-somos"
         className="py-16 px-4 relative overflow-hidden"
         style={{
           backgroundImage: `url(${backgroundFlores}), url(${paperTexture})`,
@@ -118,8 +119,8 @@ const Index = () => {
               { icon: iconeVisao, label: "Visão", color: "card-sage", id: "Vision" },
               { icon: iconeValores, label: "Valores", color: "card-orange", id: "Values" },
             ].map(({ icon, label, color, id }) => (
-              <div 
-                key={label} 
+              <div
+                key={label}
                 className={`${color} min-h-[220px] cursor-pointer hover:scale-[1.02] transition-transform pb-16`}
                 onClick={() => setOpenModal(id)}
               >
@@ -137,7 +138,7 @@ const Index = () => {
       </section>
 
       {/* Linha do tempo */}
-      <section className="py-16 px-4">
+      <section id="timeline" className="py-16 px-4">
         <div className="container mx-auto max-w-5xl">
           <h2 className="section-title text-center mb-10 italic text-secondary">Linha do tempo do Suinã</h2>
           <div className="relative">
@@ -160,12 +161,12 @@ const Index = () => {
                 <div className="relative min-w-max py-8">
                   {/* Timeline line */}
                   <div className="h-1 w-full rounded-full absolute top-8 left-0" style={{ backgroundColor: "#2f4b3c" }} />
-                  
+
                   {/* Items container */}
                   <div className="flex">
                     {timelineData.map((item) => (
-                      <div 
-                        key={item.year} 
+                      <div
+                        key={item.year}
                         className="text-center w-[300px] md:w-[500px] lg:w-[550px] flex-shrink-0 pt-12 relative px-16"
                         style={{ scrollSnapAlign: "start" }}
                       >
@@ -192,7 +193,7 @@ const Index = () => {
         </div>
       </section>
 
-      <section className="py-16 px-4 relative overflow-hidden" style={{ backgroundColor: "#2f4b3c" }}>
+      <section id="equipe" className="py-16 px-4 relative overflow-hidden" style={{ backgroundColor: "#2f4b3c" }}>
 
         {/* Brush decorations */}
 
@@ -265,7 +266,7 @@ const Index = () => {
       </section>
 
       {/* Parceiros */}
-      <section className="py-16 px-4">
+      <section id="parceiros" className="py-16 px-4">
         <div className="container mx-auto max-w-5xl text-center">
           <h2 className="font-display text-3xl md:text-4xl font-bold italic text-secondary mb-12">Parceiros e apoiadores</h2>
           <img src={logosParceiros} alt="Logos dos parceiros e apoiadores do Instituto Suinã" className="w-full" />
@@ -275,33 +276,32 @@ const Index = () => {
       {/* Modals */}
       {openModal && (
         <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60 backdrop-blur-sm transition-opacity" onClick={() => setOpenModal(null)}>
-          <div 
-            className="bg-white rounded-2xl max-w-lg w-full p-8 relative shadow-2xl animate-in fade-in zoom-in duration-300" 
+          <div
+            className="bg-white rounded-2xl max-w-lg w-full p-8 relative shadow-2xl animate-in fade-in zoom-in duration-300"
             onClick={(e) => e.stopPropagation()}
           >
-            <button 
+            <button
               className="absolute top-4 right-4 text-gray-400 hover:text-gray-600 transition-colors"
               onClick={() => setOpenModal(null)}
             >
               <Plus className="w-6 h-6 rotate-45" />
             </button>
-            
+
             <div className="flex flex-col items-center text-center">
-              <div className={`w-20 h-20 rounded-full flex items-center justify-center mb-6 ${
-                openModal === 'Mission' ? 'bg-[#ba2c18]/10' : 
-                openModal === 'Vision' ? 'bg-[#2f4b3c]/10' : 'bg-[#e67e22]/10'
-              }`}>
-                <img 
-                  src={openModal === 'Mission' ? iconeMissao : openModal === 'Vision' ? iconeVisao : iconeValores} 
+              <div className={`w-20 h-20 rounded-full flex items-center justify-center mb-6 ${openModal === 'Mission' ? 'bg-[#ba2c18]/10' :
+                  openModal === 'Vision' ? 'bg-[#2f4b3c]/10' : 'bg-[#e67e22]/10'
+                }`}>
+                <img
+                  src={openModal === 'Mission' ? iconeMissao : openModal === 'Vision' ? iconeVisao : iconeValores}
                   className="w-12 h-12"
                   alt=""
                 />
               </div>
-              
+
               <h3 className="font-display text-3xl font-bold mb-4 text-[#2f4b3c]">
                 {openModal === 'Mission' ? 'Nossa Missão' : openModal === 'Vision' ? 'Nossa Visão' : 'Nossos Valores'}
               </h3>
-              
+
               <p className="font-body text-lg text-gray-700 leading-relaxed italic">
                 "{modalContent[openModal as keyof typeof modalContent]}"
               </p>
