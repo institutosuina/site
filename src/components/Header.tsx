@@ -45,12 +45,13 @@ const Header = () => {
   const [mobileOpen, setMobileOpen] = useState(false);
   const [openDropdown, setOpenDropdown] = useState<string | null>(null);
 
-  // Beige: #e6d5bc, Dark Brown: #3e2723
-  const beigeColor = "#e6d5bc";
+  // Background: White, Dark Brown: #3e2723
+  const navBg = "#ffffff";
   const darkBrown = "#3e2723";
+  const beigeButton = "#e6d5bc"; // Keeping the beige for the 'Doar' button to contrast
 
   return (
-    <header className="sticky top-0 z-40 border-b border-black/5" style={{ backgroundColor: beigeColor }}>
+    <header className="sticky top-0 z-40 border-b border-black/5" style={{ backgroundColor: navBg }}>
       <div className="container mx-auto flex items-center justify-between py-4 px-6">
         <Link to="/" className="flex items-center gap-3">
           <img src={logoSuina} alt="Instituto Suinã" className="h-12 w-auto" />
@@ -77,7 +78,7 @@ const Header = () => {
               {item.children && openDropdown === item.label && (
                 <div 
                   className="absolute top-full left-[-10px] mt-2 rounded-[20px] shadow-xl border border-black/5 py-3 min-w-[240px] animate-in slide-in-from-top-2 duration-200"
-                  style={{ backgroundColor: beigeColor }}
+                  style={{ backgroundColor: navBg }}
                 >
                   {item.children.map((child) => (
                     <Link
@@ -100,7 +101,7 @@ const Header = () => {
           <Link 
             to="/contato"
             className="px-10 py-4 font-display font-bold text-[18px] rounded-[20px] shadow-sm hover:shadow-md transition-all active:scale-[0.98]"
-            style={{ backgroundColor: beigeColor, color: darkBrown, border: "1px solid rgba(62, 39, 35, 0.1)" }}
+            style={{ backgroundColor: beigeButton, color: darkBrown, border: "1px solid rgba(62, 39, 35, 0.1)" }}
           >
             Doar
           </Link>
@@ -114,7 +115,7 @@ const Header = () => {
 
       {/* Mobile menu */}
       {mobileOpen && (
-        <div className="lg:hidden border-t border-black/5 px-6 py-6 space-y-4" style={{ backgroundColor: beigeColor }}>
+        <div className="lg:hidden border-t border-black/5 px-6 py-6 space-y-4" style={{ backgroundColor: navBg }}>
           {navItems.map((item) => (
             <div key={item.label} className="space-y-2">
               <Link
@@ -146,7 +147,7 @@ const Header = () => {
             <Link 
               to="/contato"
               className="block w-full py-4 text-center font-display font-bold text-xl rounded-[20px]"
-              style={{ backgroundColor: beigeColor, color: darkBrown, border: "1px solid rgba(62, 39, 35, 0.2)" }}
+              style={{ backgroundColor: beigeButton, color: darkBrown, border: "1px solid rgba(62, 39, 35, 0.2)" }}
               onClick={() => setMobileOpen(false)}
             >
               Doar
