@@ -34,20 +34,20 @@ const Transparencia = () => {
 
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 mb-6">
             {cards.slice(0, 3).map((card, i) => (
-              <div key={i} className={`${card.color} min-h-[200px] cursor-pointer hover:scale-[1.02] transition-transform`}>
-                <span className="font-display text-xl font-bold text-center whitespace-pre-line">{card.label}</span>
-                <div className="w-10 h-10 rounded-full bg-current/20 flex items-center justify-center mt-4">
-                  <Plus className="w-5 h-5" />
+              <div key={i} className={`${card.color} min-h-[200px] cursor-pointer hover:scale-[1.02] transition-transform flex flex-col items-center justify-center p-6 text-center`}>
+                <span className="font-display text-xl font-bold text-white whitespace-pre-line leading-tight">{card.label}</span>
+                <div className="w-10 h-10 rounded-full border-2 border-white flex items-center justify-center mt-4 shrink-0">
+                  <Plus className="w-5 h-5 text-white" />
                 </div>
               </div>
             ))}
           </div>
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 max-w-lg mx-auto">
             {cards.slice(3).map((card, i) => (
-              <div key={i} className={`${card.color} min-h-[200px] cursor-pointer hover:scale-[1.02] transition-transform`}>
-                <span className="font-display text-xl font-bold text-center whitespace-pre-line">{card.label}</span>
-                <div className="w-10 h-10 rounded-full bg-current/20 flex items-center justify-center mt-4">
-                  <Plus className="w-5 h-5" />
+              <div key={i} className={`${card.color} min-h-[200px] cursor-pointer hover:scale-[1.02] transition-transform flex flex-col items-center justify-center p-6`}>
+                <span className="font-display text-xl font-bold text-center whitespace-pre-line text-white">{card.label}</span>
+                <div className="w-10 h-10 rounded-full border-2 border-white flex items-center justify-center mt-4">
+                  <Plus className="w-5 h-5 text-white" />
                 </div>
               </div>
             ))}

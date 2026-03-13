@@ -22,13 +22,13 @@ const NossoTrabalho = () => {
               return (
                 <div
                   key={i}
-                  className="rounded-2xl p-6 flex flex-col items-center justify-center gap-4 cursor-pointer hover:scale-[1.02] transition-transform min-h-[180px]"
+                  className="rounded-2xl p-6 flex flex-col items-center justify-center gap-4 cursor-pointer hover:scale-[1.02] transition-transform min-h-[180px] shadow-md paper-texture"
                   style={{ backgroundColor: area.colorStyle || "hsl(var(--primary))" }}
                 >
                   <div className="w-12 h-12 flex items-center justify-center">
-                    <Icon className="w-9 h-9 text-primary-foreground opacity-90" strokeWidth={1.5} />
+                    <Icon className="w-9 h-9 text-white opacity-90" strokeWidth={1.5} />
                   </div>
-                  <span className="font-display text-sm md:text-base font-bold text-center whitespace-pre-line leading-tight text-primary-foreground">
+                  <span className="font-display text-sm md:text-base font-bold text-center whitespace-pre-line leading-tight text-white">
                     {area.label}
                   </span>
                 </div>

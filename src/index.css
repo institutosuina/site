@@ -5,6 +5,33 @@
 @tailwind utilities;
 
 @layer base {
+  @font-face {
+    font-family: 'Bree';
+    src: url('./assets/fonts/Bree Regular.otf') format('opentype');
+    font-weight: 400;
+    font-style: normal;
+  }
+  @font-face {
+    font-family: 'Bree';
+    src: url('./assets/fonts/Bree Bold.otf') format('opentype');
+    font-weight: 700;
+    font-style: normal;
+  }
+  @font-face {
+    font-family: 'Bree';
+    src: url('./assets/fonts/Bree Light.otf') format('opentype');
+    font-weight: 300;
+    font-style: normal;
+  }
+  @font-face {
+    font-family: 'Bree';
+    src: url('./assets/fonts/Bree ExtraBold.otf') format('opentype');
+    font-weight: 800;
+    font-style: normal;
+  }
+}
+
+@layer base {
   :root {
     --background: 40 33% 98%;
     --foreground: 30 10% 20%;
@@ -66,17 +93,21 @@
   }
 
   body {
-    @apply bg-background text-foreground font-body;
+    @apply bg-background;
+    font-family: 'Source Sans 3', sans-serif;
+    color: hsl(var(--suina-brown));
   }
 
   h1, h2, h3, h4, h5, h6 {
-    @apply font-display;
+    font-family: 'Bree', serif;
+    color: hsl(var(--suina-red));
   }
 }
 
 @layer components {
   .section-title {
-    @apply font-display text-3xl md:text-4xl font-bold text-foreground tracking-tight;
+    @apply font-display text-3xl md:text-5xl font-bold tracking-normal text-center;
+    color: hsl(var(--suina-red));
   }
 
   .section-subtitle {
@@ -84,15 +115,15 @@
   }
 
   .btn-donate {
-    @apply fixed right-6 bottom-6 z-50 w-20 h-20 rounded-full bg-accent flex flex-col items-center justify-center text-accent-foreground font-display font-bold text-xs leading-tight shadow-lg hover:scale-105 transition-transform cursor-pointer;
+    @apply fixed right-6 bottom-6 z-50 w-24 h-24 rounded-full bg-suina-orange flex flex-col items-center justify-center text-white font-display font-bold text-[10px] leading-tight shadow-xl hover:scale-110 transition-transform cursor-pointer border-2 border-white/50;
   }
 
   .nav-link {
-    @apply font-body text-sm font-medium text-secondary hover:text-accent transition-colors cursor-pointer;
+    @apply font-display text-sm font-semibold text-secondary hover:text-accent transition-colors cursor-pointer;
   }
 
   .card-green {
-    @apply bg-primary text-primary-foreground rounded-2xl p-8 flex flex-col items-center justify-center gap-4 relative;
+    @apply bg-suina-green-dark text-white rounded-2xl p-8 flex flex-col items-center justify-center gap-4 relative;
   }
 
   .card-brown {
@@ -151,5 +182,15 @@
   .input-cream::placeholder {
     color: hsl(var(--card));
     opacity: 0.7;
+  }
+
+  .paper-texture {
+    background-image: url('./assets/paper-texture.png');
+    background-size: cover;
+    background-blend-mode: multiply;
+  }
+
+  .card-green, .card-brown, .card-terra, .card-orange, .card-red, .card-sage {
+    @apply paper-texture shadow-md hover:shadow-lg transition-all duration-300;
   }
 }

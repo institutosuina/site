@@ -14,7 +14,7 @@ export default {
     },
     extend: {
       fontFamily: {
-        display: ['"Playfair Display"', 'serif'],
+        display: ['"Bree"', 'serif'],
         body: ['"Source Sans 3"', 'sans-serif'],
       },
       colors: {

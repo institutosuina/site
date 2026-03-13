@@ -7,6 +7,11 @@ import wheatDecoration from "@/assets/wheat-decoration.png";
 import logosParceiros from "@/assets/logos-parceiros.png";
 
 import sketchCircle from "@/assets/sketch-circle.png";
+import paperTexture from "@/assets/paper-texture.png";
+import backgroundFlores from "@/assets/backgroundflores.svg";
+import iconeMissao from "@/assets/missão.svg";
+import iconeVisao from "@/assets/visão.svg";
+import iconeValores from "@/assets/valores.svg";
 
 import { Plus, Eye, Target, Heart, ChevronLeft, ChevronRight } from "lucide-react";
 import { useState, useRef } from "react";
@@ -58,19 +63,38 @@ const Index = () => {
   return (
     <Layout>
       {/* Hero */}
-      <section className="relative h-[60vh] md:h-[70vh] overflow-hidden">
-        <img src={heroForest} alt="Floresta" className="absolute inset-0 w-full h-full object-cover" />
-        <div className="absolute inset-0 bg-gradient-to-b from-black/40 to-black/20" />
+      <section className="relative h-[60vh] md:h-[70vh] overflow-hidden bg-black">
+        <div className="absolute inset-0 w-full h-full pointer-events-none">
+          <iframe
+            src="https://streamable.com/e/kdzkhl?autoplay=1&muted=1&nocontrols=1"
+            frameBorder="0"
+            width="100%"
+            height="100%"
+            allow="autoplay; fullscreen"
+            className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 min-w-[100%] min-h-[100%] w-[177.77vh] h-[56.25vw] scale-[1.5]"
+            style={{ pointerEvents: 'none' }}
+          ></iframe>
+        </div>
+        <div className="absolute inset-0 bg-black/30" />
         <div className="relative z-10 h-full flex flex-col items-center justify-center text-center px-4">
           <img src={logoSuinaWhite} alt="Suinã - Instituto Socioambiental" className="h-32 md:h-48 w-auto" />
         </div>
       </section>
 
       {/* Quem somos */}
-      <section className="py-16 px-4">
-        <div className="container mx-auto max-w-3xl text-center">
-          <h2 className="section-title mb-6 italic text-secondary">Quem somos</h2>
-          <p className="font-body text-base leading-relaxed text-foreground/80">
+      <section
+        className="py-16 px-4 relative overflow-hidden"
+        style={{
+          backgroundImage: `url(${backgroundFlores}), url(${paperTexture})`,
+          backgroundSize: 'cover, cover',
+          backgroundPosition: 'center, center'
+        }}
+      >
+        <img src={wheatDecoration} alt="" className="absolute -left-12 top-0 w-48 md:w-72 opacity-20 pointer-events-none -rotate-12" />
+        <img src={wheatDecoration} alt="" className="absolute -right-12 bottom-0 w-48 md:w-72 opacity-20 pointer-events-none rotate-165" />
+        <div className="container mx-auto max-w-4xl text-center relative z-10 px-8">
+          <h2 className="section-title mb-8">Quem somos</h2>
+          <p className="font-body text-lg md:text-xl leading-relaxed font-medium">
             O Instituto Suinã é uma organização da sociedade civil fundada em 2014, fruto do sonho de cinco biólogas comprometidas em transformar a relação entre pessoas, fauna, flora e território. Inspiradas pelo Suinã, árvore que simboliza força e resiliência, atuamos na conservação e restauração da sociobiodiversidade nas bacias hidrográficas de Alto e Médio Tietê e do Rio Paraíba do Sul. Desde a nossa origem, desenvolvemos projetos que articulam ciência, educação, mobilização social e políticas públicas, porque acreditamos que a conservação só é eficaz quando é feita coletivamente. Hoje somos uma rede de profissionais que fortalece territórios, restaura ecossistemas e valoriza saberes e culturas locais, contribuindo para a transição a uma sociedade mais justa e sustentável.
           </p>
         </div>
@@ -81,17 +105,17 @@ const Index = () => {
         <div className="container mx-auto max-w-4xl">
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             {[
-              { icon: Target, label: "Missão", color: "card-green" },
-              { icon: Eye, label: "Visão", color: "card-brown" },
-              { icon: Heart, label: "Valores", color: "card-terra" },
-            ].map(({ icon: Icon, label, color }) => (
+              { icon: iconeMissao, label: "Missão", color: "card-red" },
+              { icon: iconeVisao, label: "Visão", color: "card-sage" },
+              { icon: iconeValores, label: "Valores", color: "card-orange" },
+            ].map(({ icon, label, color }) => (
               <div key={label} className={`${color} min-h-[220px] cursor-pointer hover:scale-[1.02] transition-transform pb-16`}>
-                <div className="w-14 h-14 rounded-full border-2 border-current/30 flex items-center justify-center">
-                  <Icon className="w-7 h-7" />
+                <div className="w-16 h-16 flex items-center justify-center">
+                  <img src={icon} alt={label} className="w-full h-full object-contain" />
                 </div>
-                <span className="font-display text-xl font-bold">{label}</span>
-                <div className="absolute bottom-5 left-1/2 -translate-x-1/2 w-9 h-9 rounded-full border-2 border-current/50 flex items-center justify-center">
-                  <Plus className="w-5 h-5" />
+                <span className="font-display text-2xl font-bold text-white mt-2">{label}</span>
+                <div className="absolute bottom-5 left-1/2 -translate-x-1/2 w-11 h-11 rounded-full border-2 border-white flex items-center justify-center">
+                  <Plus className="w-6 h-6 text-white" />
                 </div>
               </div>
             ))}
