@@ -14,6 +14,7 @@ import iconeMissao from "@/assets/missão.svg";
 import iconeVisao from "@/assets/visão.svg";
 import iconeValores from "@/assets/valores.svg";
 import brushTop from "@/assets/brush-top.png";
+import leafDecoration from "@/assets/leaf-decoration.png";
 
 import { Plus, Eye, Target, Heart, ChevronLeft, ChevronRight } from "lucide-react";
 import { useState, useRef } from "react";
@@ -169,44 +170,45 @@ const Index = () => {
         </div>
       </section>
 
-      {/* 82% mulheres */}
-      <section className="py-16 px-4 relative overflow-hidden" style={{ backgroundColor: "hsl(var(--suina-green-sage))" }}>
+      <section className="py-16 px-4 relative overflow-hidden" style={{ backgroundColor: "#2f4b3c" }}>
+        <img 
+          src={leafDecoration} 
+          alt="" 
+          className="absolute -right-64 md:-right-80 top-[0%] w-[80%] md:w-[70%] opacity-40 pointer-events-none transform rotate-[45deg] scale-110"
+        />
         {/* Brush decorations */}
-        <img 
-          src={brushTop} 
-          alt="" 
-          className="absolute -top-1 -left-1 w-32 md:w-64 opacity-90 pointer-events-none" 
-        />
-        <img 
-          src={brushTop} 
-          alt="" 
-          className="absolute -top-1 -right-1 w-32 md:w-64 opacity-90 pointer-events-none scale-x-[-1]" 
-        />
-        
+
         <div className="container mx-auto max-w-4xl relative z-10">
-          <div className="flex flex-col md:flex-row items-center justify-center gap-4 mb-10 text-center">
-            <span className="font-display text-7xl md:text-8xl font-bold text-white">82%</span>
-            <p className="font-display text-2xl md:text-4xl font-bold text-white leading-tight">
+
+          {/* Bloco Superior: 82% e Texto */}
+          <div className="flex flex-col md:flex-row items-center justify-center gap-6 mb-12">
+            <span className="font-display text-7xl md:text-[100px] font-bold text-white leading-none">
+              82%
+            </span>
+            <p className="font-display text-xl md:text-3xl font-normal text-white leading-tight md:text-left text-center">
               da equipe do Suinã<br />é composta por mulheres
             </p>
           </div>
+
+          {/* Bloco Inferior: Parágrafos padronizados */}
           <div className="space-y-6 text-center max-w-3xl mx-auto">
-            <p className="font-display text-lg md:text-xl text-white font-medium">
+            <p className="font-display text-base md:text-lg text-white font-normal leading-relaxed">
               Nos orgulhamos de ter um time diverso, forte e atuante, contribuindo diariamente para a transformação que buscamos.
             </p>
-            <p className="font-display text-lg md:text-xl text-white font-medium">
+            <p className="font-display text-base md:text-lg text-white font-normal leading-relaxed">
               O Instituto Suinã conta com uma rede de parceiros, prestadores de serviço, empresas e instituições que caminham conosco para fortalecer nossas ações e ampliar nosso impacto.
             </p>
-            <p className="font-display text-xl md:text-2xl font-bold text-white pt-4">
+            <p className="font-display text-base md:text-lg text-white font-normal leading-relaxed">
               Aqui você conhece as pessoas que fazem parte dessa jornada.
             </p>
           </div>
 
 
+
           {/* Team grid */}
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-8 mb-12">
+          <div className="flex flex-wrap justify-center gap-x-8 gap-y-12 mb-12">
             {teamMembers.map((m) => (
-              <div key={m.name} className="text-center">
+              <div key={m.name} className="text-center w-[calc(50%-1rem)] md:w-[calc(25%-2rem)] min-w-[140px] max-w-[200px]">
                 <div className="relative w-32 h-32 mx-auto mb-3">
                   <img src={sketchCircle} alt="" className="absolute inset-[-8%] w-[116%] h-[116%] pointer-events-none" />
                   <div className="absolute inset-[6%] rounded-full bg-card" />
