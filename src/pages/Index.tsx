@@ -130,52 +130,59 @@ const Index = () => {
         <div className="container mx-auto max-w-5xl">
           <h2 className="section-title text-center mb-10 italic text-secondary">Linha do tempo do Suinã</h2>
           <div className="relative">
-            {/* Navigation arrows */}
-            <button
-              onClick={() => scroll("left")}
-              className="absolute -left-4 top-1/2 -translate-y-1/2 z-10 w-10 h-10 rounded-full bg-secondary text-secondary-foreground flex items-center justify-center shadow-md hover:scale-110 transition-transform"
-            >
-              <ChevronLeft className="w-5 h-5" />
-            </button>
-            <button
-              onClick={() => scroll("right")}
-              className="absolute -right-4 top-1/2 -translate-y-1/2 z-10 w-10 h-10 rounded-full bg-secondary text-secondary-foreground flex items-center justify-center shadow-md hover:scale-110 transition-transform"
-            >
-              <ChevronRight className="w-5 h-5" />
-            </button>
+            <div className="flex items-center gap-4 max-w-7xl mx-auto px-4">
+              {/* Navigation arrows - Left */}
+              <button
+                onClick={() => scroll("left")}
+                className="flex-shrink-0 w-10 h-10 rounded-full flex items-center justify-center text-[#2f4b3c] hover:bg-black/10 transition-colors z-20"
+                aria-label="Anterior"
+              >
+                <ChevronLeft className="w-8 h-8" />
+              </button>
 
-            {/* Scrollable timeline */}
-            <div
-              ref={scrollRef}
-              className="overflow-x-auto scrollbar-hide px-8"
-              style={{ scrollbarWidth: "none", msOverflowStyle: "none" }}
-            >
-              <div className="relative min-w-max py-8">
-                {/* Timeline line */}
-                <div className="timeline-line h-1 w-full rounded-full absolute top-8 left-0" />
-                {/* Items */}
-                <div className="flex gap-12">
-                  {timelineData.map((item) => (
-                    <div key={item.year} className="text-center w-40 flex-shrink-0 pt-12 relative">
-                      {/* Dot on line */}
-                      <div className="absolute top-[26px] left-1/2 -translate-x-1/2 w-4 h-4 rounded-full bg-accent border-2 border-card" />
-                      <span className="font-display text-2xl font-bold text-accent">{item.year}</span>
-                      <p className="font-body text-sm text-foreground/70 mt-3 leading-relaxed">{item.text}</p>
-                    </div>
-                  ))}
+              {/* Scrollable timeline container */}
+              <div
+                ref={scrollRef}
+                className="overflow-hidden flex-1"
+                style={{ scrollSnapType: "x mandatory" }}
+              >
+                <div className="relative min-w-max py-8">
+                  {/* Timeline line */}
+                  <div className="h-1 w-full rounded-full absolute top-8 left-0" style={{ backgroundColor: "#2f4b3c" }} />
+                  
+                  {/* Items container */}
+                  <div className="flex">
+                    {timelineData.map((item) => (
+                      <div 
+                        key={item.year} 
+                        className="text-center w-[300px] md:w-[500px] lg:w-[550px] flex-shrink-0 pt-12 relative px-16"
+                        style={{ scrollSnapAlign: "start" }}
+                      >
+                        {/* Dot on line */}
+                        <div className="absolute top-[-10px] left-1/2 -translate-x-1/2 w-6 h-6 rounded-full border-2 border-white z-10" style={{ backgroundColor: "#2f4b3c" }} />
+                        <span className="font-display text-2xl font-bold block mb-2" style={{ color: "#ba2c18" }}>{item.year}</span>
+                        <p className="font-body text-xs leading-relaxed max-w-[280px] mx-auto" style={{ color: "#7d5127" }}>{item.text}</p>
+                      </div>
+                    ))}
+                  </div>
                 </div>
               </div>
+
+              {/* Navigation arrows - Right */}
+              <button
+                onClick={() => scroll("right")}
+                className="flex-shrink-0 w-10 h-10 rounded-full flex items-center justify-center text-[#2f4b3c] hover:bg-black/10 transition-colors z-20"
+                aria-label="Próximo"
+              >
+                <ChevronRight className="w-8 h-8" />
+              </button>
             </div>
           </div>
         </div>
       </section>
 
       <section className="py-16 px-4 relative overflow-hidden" style={{ backgroundColor: "#2f4b3c" }}>
-        <img 
-          src={leafDecoration} 
-          alt="" 
-          className="absolute -right-64 md:-right-80 top-[0%] w-[80%] md:w-[70%] opacity-40 pointer-events-none transform rotate-[45deg] scale-110"
-        />
+
         {/* Brush decorations */}
 
         <div className="container mx-auto max-w-4xl relative z-10">
