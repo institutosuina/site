@@ -201,8 +201,7 @@ const Index = () => {
               Aqui você conhece as pessoas que fazem parte dessa jornada.
             </p>
           </div>
-        </div>
-      </section>
+
 
           {/* Team grid */}
           <div className="grid grid-cols-2 md:grid-cols-4 gap-8 mb-12">
