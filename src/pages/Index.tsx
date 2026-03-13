@@ -100,10 +100,6 @@ const Index = () => {
           </p>
         </div>
       </section>
-            O Instituto Suinã é uma organização da sociedade civil fundada em 2014, fruto do sonho de cinco biólogas comprometidas em transformar a relação entre pessoas, fauna, flora e território. Inspiradas pelo Suinã, árvore que simboliza força e resiliência, atuamos na conservação e restauração da sociobiodiversidade nas bacias hidrográficas de Alto e Médio Tietê e do Rio Paraíba do Sul. Desde a nossa origem, desenvolvemos projetos que articulam ciência, educação, mobilização social e políticas públicas, porque acreditamos que a conservação só é eficaz quando é feita coletivamente. Hoje somos uma rede de profissionais que fortalece territórios, restaura ecossistemas e valoriza saberes e culturas locais, contribuindo para a transição a uma sociedade mais justa e sustentável.
-          </p>
-        </div>
-      </section>
 
       {/* Missão, Visão, Valores */}
       <section className="py-12 px-4">
@@ -172,7 +168,6 @@ const Index = () => {
           </div>
         </div>
       </section>
-
 
       {/* 82% mulheres */}
       <section className="py-16 px-4" style={{ backgroundColor: "hsl(var(--suina-green-sage))" }}>
