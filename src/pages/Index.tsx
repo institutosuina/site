@@ -15,6 +15,13 @@ import iconeVisao from "@/assets/visão.svg";
 import iconeValores from "@/assets/valores.svg";
 import brushTop from "@/assets/brush-top.png";
 import leafDecoration from "@/assets/leaf-decoration.png";
+import photoAriane from "@/assets/Ariane.png";
+import photoFernanda from "@/assets/Fernanda.png";
+import photoFatima from "@/assets/Fátima.png";
+import photoJhennifer from "@/assets/Jhennifer.png";
+import photoLeilane from "@/assets/Leilane.png";
+import photoMateus from "@/assets/Mateus.png";
+import photoTatiane from "@/assets/Tatiane.png";
 
 import { Plus, Eye, Target, Heart, ChevronLeft, ChevronRight } from "lucide-react";
 import { useState, useRef } from "react";
@@ -36,13 +43,13 @@ const timelineData = [
 ];
 
 const teamMembers = [
-  { name: "Fernanda", role: "DIRETORA INSTITUCIONAL" },
-  { name: "Fátima", role: "DIRETORA TÉCNICA" },
-  { name: "Jhennifer", role: "TÉCNICA EM COMUNICAÇÃO" },
-  { name: "Leilane", role: "ANALISTA DE RECURSOS" },
-  { name: "Mateus", role: "ESTAGIÁRIO ADMINISTRATIVO" },
-  { name: "Ariane", role: "ANALISTA SOCIOAMBIENTAL JÚNIOR" },
-  { name: "Tatiane", role: "ANALISTA SOCIOAMBIENTAL PLENO" },
+  { name: "Fernanda", role: "DIRETORA INSTITUCIONAL", image: photoFernanda },
+  { name: "Fátima", role: "DIRETORA TÉCNICA", image: photoFatima },
+  { name: "Jhennifer", role: "TÉCNICA EM COMUNICAÇÃO", image: photoJhennifer },
+  { name: "Leilane", role: "ANALISTA DE RECURSOS", image: photoLeilane },
+  { name: "Mateus", role: "ESTAGIÁRIO ADMINISTRATIVO", image: photoMateus },
+  { name: "Ariane", role: "ANALISTA SOCIOAMBIENTAL JÚNIOR", image: photoAriane },
+  { name: "Tatiane", role: "ANALISTA SOCIOAMBIENTAL PLENO", image: photoTatiane },
 ];
 
 const conselho = [
@@ -229,8 +236,14 @@ const Index = () => {
             {teamMembers.map((m) => (
               <div key={m.name} className="text-center w-[calc(50%-1rem)] md:w-[calc(25%-2rem)] min-w-[140px] max-w-[200px]">
                 <div className="relative w-32 h-32 mx-auto mb-3">
-                  <img src={sketchCircle} alt="" className="absolute inset-[-8%] w-[116%] h-[116%] pointer-events-none" />
-                  <div className="absolute inset-[6%] rounded-full bg-card" />
+                  <img src={sketchCircle} alt="" className="absolute inset-[-8%] w-[116%] h-[116%] pointer-events-none z-10" />
+                  <div className="absolute inset-[6%] rounded-full bg-card overflow-hidden">
+                    {m.image ? (
+                      <img src={m.image} alt={m.name} className="w-full h-full object-cover" />
+                    ) : (
+                      <div className="w-full h-full bg-card" />
+                    )}
+                  </div>
                 </div>
                 <p className="font-display text-base font-semibold text-card">{m.name}</p>
                 <p className="font-body text-[11px] text-card/70 uppercase tracking-widest">{m.role}</p>
@@ -289,7 +302,7 @@ const Index = () => {
 
             <div className="flex flex-col items-center text-center">
               <div className={`w-20 h-20 rounded-full flex items-center justify-center mb-6 ${openModal === 'Mission' ? 'bg-[#ba2c18]/10' :
-                  openModal === 'Vision' ? 'bg-[#2f4b3c]/10' : 'bg-[#e67e22]/10'
+                openModal === 'Vision' ? 'bg-[#2f4b3c]/10' : 'bg-[#e67e22]/10'
                 }`}>
                 <img
                   src={openModal === 'Mission' ? iconeMissao : openModal === 'Vision' ? iconeVisao : iconeValores}
