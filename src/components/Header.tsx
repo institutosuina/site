@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useRef } from "react";
 import { Link } from "react-router-dom";
 import { ChevronDown, Menu, X } from "lucide-react";
 import logoSuina from "@/assets/logo-suina-full.png";
@@ -44,6 +44,18 @@ const navItems = [
 const Header = () => {
   const [mobileOpen, setMobileOpen] = useState(false);
   const [openDropdown, setOpenDropdown] = useState<string | null>(null);
+  const timeoutRef = useRef<any>(null);
+
+  const handleMouseEnter = (label: string) => {
+    if (timeoutRef.current) clearTimeout(timeoutRef.current);
+    setOpenDropdown(label);
+  };
+
+  const handleMouseLeave = () => {
+    timeoutRef.current = setTimeout(() => {
+      setOpenDropdown(null);
+    }, 150);
+  };
 
   // Background: White, Dark Brown: #3e2723
   const navBg = "#ffffff";
@@ -62,9 +74,9 @@ const Header = () => {
           {navItems.map((item) => (
             <div
               key={item.label}
-              className="relative"
-              onMouseEnter={() => item.children && setOpenDropdown(item.label)}
-              onMouseLeave={() => setOpenDropdown(null)}
+              className="relative py-2" // Add padding to parent to extend hover area
+              onMouseEnter={() => item.children && handleMouseEnter(item.label)}
+              onMouseLeave={() => item.children && handleMouseLeave()}
             >
               <Link 
                 to={item.href} 
@@ -77,19 +89,24 @@ const Header = () => {
               
               {item.children && openDropdown === item.label && (
                 <div 
-                  className="absolute top-full left-[-10px] mt-2 rounded-[20px] shadow-xl border border-black/5 py-3 min-w-[240px] animate-in slide-in-from-top-2 duration-200"
-                  style={{ backgroundColor: navBg }}
+                  className="absolute top-full left-[-10px] pt-2 animate-in slide-in-from-top-1 duration-200"
+                  onMouseEnter={() => handleMouseEnter(item.label)} // Keep open when hovering the menu itself
+                  onMouseLeave={() => handleMouseLeave()}
                 >
-                  {item.children.map((child) => (
-                    <Link
-                      key={child.label}
-                      to={child.href}
-                      className="block px-6 py-2.5 text-[15px] font-display font-bold hover:bg-black/5 transition-colors first:rounded-t-[20px] last:rounded-b-[20px]"
-                      style={{ color: darkBrown }}
-                    >
-                      {child.label}
-                    </Link>
-                  ))}
+                  <div 
+                    className="rounded-[20px] shadow-xl border border-black/5 py-3 min-w-[240px]"
+                    style={{ backgroundColor: navBg }}
+                  >
+                    {item.children.map((child) => (
+                      <Link
+                        key={child.label}
+                        to={child.href}
+                        className="block px-6 py-2.5 text-[15px] font-display font-bold hover:bg-black/5 transition-colors first:rounded-t-[20px] last:rounded-b-[20px]"
+                        style={{ color: darkBrown }}
+                        onClick={() => setOpenDropdown(null)}
+                      </Link>
+                    ))}
+                  </div>
                 </div>
               )}
             </div>
