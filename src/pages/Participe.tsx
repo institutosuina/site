@@ -99,7 +99,7 @@ const Participe = () => {
       </section>
 
       {/* Seção 2: Newsletter */}
-      <section className="py-20 px-4 bg-background">
+      <section id="newsletter" className="py-20 px-4 bg-background">
         <div className="container mx-auto max-w-2xl text-center">
           <h2 className="font-display text-3xl md:text-4xl font-bold text-primary mb-6">
             Cadastre-se para receber nossa newsletter:
