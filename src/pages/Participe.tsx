@@ -140,6 +140,51 @@ const Participe = () => {
           </form>
         </div>
       </section>
+
+      {/* Seção 3: Conteúdos já compartilhados */}
+      <section className="py-20 px-4 bg-background">
+        <div className="container mx-auto max-w-3xl text-center">
+          <h2 className="font-display text-2xl md:text-3xl font-bold text-accent mb-4">
+            Quer revisitar os conteúdos já compartilhados?
+          </h2>
+
+          <p className="font-body text-sm text-muted-foreground leading-relaxed mb-2 max-w-xl mx-auto">
+            Aqui você encontra os informativos anteriores do Instituto Suinã, com
+            notícias, conquistas e registros importantes da nossa caminhada.
+          </p>
+          <p className="font-body text-sm font-bold text-foreground mb-10">
+            Acesse, relembre e acompanhe nossa trajetória.
+          </p>
+
+          <div className="flex items-center justify-center gap-6">
+            <button className="w-10 h-10 rounded-full border border-border flex items-center justify-center text-muted-foreground hover:bg-muted transition-colors">
+              ‹
+            </button>
+
+            <div className="flex gap-4">
+              {[
+                { edition: "01/2026", color: "hsl(var(--suina-red))" },
+                { edition: "11/2025", color: "hsl(var(--primary))" },
+                { edition: "10/2025", color: "hsl(var(--suina-orange))" },
+              ].map((item) => (
+                <a
+                  key={item.edition}
+                  href="#"
+                  className="w-36 h-36 md:w-44 md:h-44 rounded-2xl flex flex-col items-center justify-center text-white hover:opacity-90 transition-opacity"
+                  style={{ backgroundColor: item.color }}
+                >
+                  <span className="font-display text-xs tracking-[0.15em] uppercase mb-1">EDIÇÃO</span>
+                  <span className="font-display text-2xl md:text-3xl font-bold">{item.edition}</span>
+                </a>
+              ))}
+            </div>
+
+            <button className="w-10 h-10 rounded-full border border-border flex items-center justify-center text-muted-foreground hover:bg-muted transition-colors">
+              ›
+            </button>
+          </div>
+        </div>
+      </section>
     </Layout>
   );
 };
