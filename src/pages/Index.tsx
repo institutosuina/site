@@ -5,6 +5,7 @@ import logoSuinaWhite from "@/assets/logo-suina-white.png";
 import teamPhoto from "@/assets/team-photo.jpg";
 import equipeCompleta from "@/assets/equipe-completa.jpg";
 import wheatDecoration from "@/assets/wheat-decoration.png";
+import fundoVerdeBrush from "@/assets/fundo-verde-brush.jpeg";
 import logosParceiros from "@/assets/logos-parceiros.png";
 import folhaContraste from "@/assets/folha-contraste1.svg";
 
