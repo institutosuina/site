@@ -33,7 +33,7 @@ const timelineData = [
   { year: "2015", text: "Primeira parceria com poder público (Prefeitura de Mogi das Cruzes) e ingresso no Conselho Municipal de Meio Ambiente de Guararema-SP." },
   { year: "2016", text: "Primeiro contrato socioambiental com empresa do setor florestal, em mobilização social e educação ambiental." },
   { year: "2017", text: "Cooperação com o Centro Paula Souza para formação de educadores da rede pública." },
-  { year: "2018", text: "Reconhecimento público com o prêmio "Escola Amiga do Verde" (Câmara de Jacareí)." },
+  { year: "2018", text: "Reconhecimento público com o prêmio \"Escola Amiga do Verde\" (Câmara de Jacareí)." },
   { year: "2019", text: "Expansão das parcerias institucionais e primeiros projetos estruturantes em diagnóstico socioambiental e tecnologias sociais." },
   { year: "2020", text: "Participação em programa nacional de aceleração (Instituto EDP/Phomenta), premiação Capital Semente, certificação internacional de transparência e ingresso no Comitê de Bacias do Paraíba do Sul." },
   { year: "2021", text: "Consolidação de parcerias com o setor florestal em projetos de caracterização e diagnóstico social." },
