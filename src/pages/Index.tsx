@@ -198,13 +198,19 @@ const Index = () => {
 
       {/* Equipe */}
       <section id="equipe" className="relative overflow-hidden">
-        {/* Top area with brush circle background */}
-        <div className="relative bg-background py-16 md:py-24 flex items-center justify-center overflow-hidden">
+      {/* Top area with brush circle background */}
+        <div className="relative bg-background flex items-center justify-center overflow-visible" style={{ paddingTop: '8rem', paddingBottom: '8rem' }}>
           <img
             src={fundoVerdeBrush}
             alt=""
-            className="absolute w-[600px] md:w-[800px] h-auto opacity-100 pointer-events-none"
-            style={{ top: '50%', left: '50%', transform: 'translate(-50%, -50%)' }}
+            className="absolute pointer-events-none"
+            style={{
+              width: 'min(90vw, 700px)',
+              height: 'auto',
+              top: '50%',
+              left: '50%',
+              transform: 'translate(-50%, -50%)',
+            }}
           />
           <div className="relative z-10 flex flex-col md:flex-row items-center justify-center gap-6">
             <span className="font-display text-7xl md:text-[100px] font-bold text-primary-foreground leading-none">
@@ -216,8 +222,8 @@ const Index = () => {
           </div>
         </div>
 
-        {/* Green content area */}
-        <div className="bg-primary py-16 md:py-24 px-4">
+        {/* Green content area - negative margin to overlap with brush circle */}
+        <div className="bg-primary py-16 md:py-24 px-4 relative" style={{ marginTop: '-4rem' }}>
           <div className="container mx-auto max-w-4xl relative z-10">
 
           <div className="space-y-6 text-center max-w-3xl mx-auto mb-8">
