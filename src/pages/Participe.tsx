@@ -206,19 +206,19 @@ const Participe = () => {
         <div className="container mx-auto max-w-4xl relative z-10">
           <div className="flex flex-col md:flex-row items-center gap-12 md:gap-16">
             <div className="flex-1">
-              <h2 className="font-display text-3xl md:text-4xl font-bold text-accent italic mb-6 leading-tight">
+              <h2 className="font-display text-3xl md:text-4xl font-bold text-accent mb-6 leading-tight">
                 Suinã<br />nas Redes<br />Sociais:
               </h2>
-              <p className="font-body text-sm text-muted-foreground leading-relaxed mb-8 max-w-sm">
+              <p className="font-body text-sm font-bold text-muted-foreground leading-relaxed mb-8 max-w-sm">
                 Siga o Instituto Suinã no Facebook, Instagram, LinkedIn e YouTube e
                 acompanhe de perto nossas ações em defesa da vida e da natureza.
               </p>
               <div className="flex flex-wrap gap-3">
                 {[
-                  { icon: FaWhatsapp, color: "hsl(var(--primary))", href: "#" },
-                  { icon: FaFacebookF, color: "hsl(var(--suina-brown))", href: "#" },
+                  { icon: FaWhatsapp, color: "#8b6f4e", href: "#" },
+                  { icon: FaFacebookF, color: "#5c7a6b", href: "#" },
                   { icon: FaInstagram, color: "hsl(var(--accent))", href: "#" },
-                  { icon: FaLinkedinIn, color: "hsl(var(--primary))", href: "#" },
+                  { icon: FaLinkedinIn, color: "#5c7a6b", href: "#" },
                   { icon: FaYoutube, color: "hsl(var(--accent))", href: "#" },
                 ].map((social, i) => (
                   <a
