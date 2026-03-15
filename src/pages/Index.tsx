@@ -218,6 +218,7 @@ const Index = () => {
 
         {/* Green content area */}
         <div className="bg-primary py-16 md:py-24 px-4">
+          <div className="container mx-auto max-w-4xl relative z-10">
 
           <div className="space-y-6 text-center max-w-3xl mx-auto mb-8">
             <p className="body-text text-primary-foreground">
