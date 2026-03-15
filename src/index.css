@@ -98,9 +98,32 @@
     color: hsl(var(--suina-brown));
   }
 
-  h1, h2, h3, h4, h5, h6 {
+  /* Typographic Hierarchy System */
+  h1 {
+    font-family: 'Bree', serif;
+    @apply text-5xl md:text-7xl font-bold tracking-tight leading-[1.1];
+    color: hsl(var(--suina-red));
+  }
+
+  h2 {
+    font-family: 'Bree', serif;
+    @apply text-3xl md:text-5xl font-bold tracking-tight leading-[1.2];
+    color: hsl(var(--suina-red));
+  }
+
+  h3 {
+    font-family: 'Bree', serif;
+    @apply text-xl md:text-2xl font-semibold leading-snug;
+    color: hsl(var(--suina-red));
+  }
+
+  h4, h5, h6 {
     font-family: 'Bree', serif;
     color: hsl(var(--suina-red));
+  }
+
+  p, li, span, label {
+    font-family: 'Source Sans 3', sans-serif;
   }
 }
 
