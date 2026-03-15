@@ -144,7 +144,7 @@ const Participe = () => {
       </section>
 
       {/* Seção 3: Conteúdos já compartilhados */}
-      <section className="py-20 px-4 bg-background">
+      <section id="conteudos" className="py-20 px-4 bg-background">
         <div className="container mx-auto max-w-3xl text-center">
           <h2 className="font-display text-2xl md:text-3xl font-bold text-accent mb-4">
             Quer revisitar os conteúdos já compartilhados?
