@@ -139,6 +139,8 @@ const Participe = () => {
             </button>
           </form>
         </div>
+      </section>
+
       {/* Seção 3: Conteúdos já compartilhados */}
       <section className="py-20 px-4 bg-background">
         <div className="container mx-auto max-w-3xl text-center">
