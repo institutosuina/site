@@ -189,7 +189,7 @@ const Participe = () => {
       </section>
 
       {/* Seção 4: Redes Sociais */}
-      <section className="py-20 px-4 bg-background relative overflow-hidden">
+      <section id="redes-sociais" className="py-20 px-4 bg-background relative overflow-hidden">
         <img
           src={folhaSvg}
           alt=""
