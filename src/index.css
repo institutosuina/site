@@ -101,13 +101,15 @@
   /* Typographic Hierarchy System */
   h1 {
     font-family: 'Bree', serif;
-    @apply text-5xl md:text-7xl font-bold tracking-tight leading-[1.1];
+    @apply font-bold tracking-tight leading-[1.1];
+    font-size: clamp(2.5rem, 5vw, 66px);
     color: hsl(var(--suina-red));
   }
 
   h2 {
     font-family: 'Bree', serif;
-    @apply text-3xl md:text-5xl font-bold tracking-tight leading-[1.2];
+    @apply font-bold tracking-tight leading-[1.2];
+    font-size: clamp(2rem, 4vw, 66px);
     color: hsl(var(--suina-red));
   }
 
@@ -124,6 +126,9 @@
 
   p, li, span, label {
     font-family: 'Source Sans 3', sans-serif;
+    font-size: clamp(1.25rem, 3vw, 48px);
+    font-weight: 400;
+    line-height: 1.4;
   }
 }
 
