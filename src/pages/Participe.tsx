@@ -1,4 +1,5 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { useLocation } from "react-router-dom";
 import Layout from "@/components/Layout";
 import { Heart } from "lucide-react";
 import { FaWhatsapp, FaFacebookF, FaInstagram, FaLinkedinIn, FaYoutube } from "react-icons/fa";
@@ -7,9 +8,19 @@ import logoSuina from "@/assets/logo-suina-white.png";
 import brushTop from "@/assets/brush-top.png";
 
 const Participe = () => {
+  const location = useLocation();
   const [donationData, setDonationData] = useState({ name: "", email: "" });
   const [agreed, setAgreed] = useState(false);
   const [newsletterData, setNewsletterData] = useState({ name: "", email: "" });
+
+  useEffect(() => {
+    if (location.hash) {
+      const el = document.querySelector(location.hash);
+      if (el) {
+        setTimeout(() => el.scrollIntoView({ behavior: "smooth" }), 100);
+      }
+    }
+  }, [location.hash]);
 
   const handleDonationSubmit = (e: React.FormEvent) => {
     e.preventDefault();
