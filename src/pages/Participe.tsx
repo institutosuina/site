@@ -23,7 +23,7 @@ const Participe = () => {
   return (
     <Layout>
       {/* Seção 1: Como Apoiar */}
-      <section className="py-20 px-4 bg-background relative overflow-hidden">
+      <section id="como-apoiar" className="py-20 px-4 bg-background relative overflow-hidden">
         <img
           src={folhaSvg}
           alt=""
@@ -99,7 +99,7 @@ const Participe = () => {
       </section>
 
       {/* Seção 2: Newsletter */}
-      <section className="py-20 px-4 bg-background">
+      <section id="newsletter" className="py-20 px-4 bg-background">
         <div className="container mx-auto max-w-2xl text-center">
           <h2 className="font-display text-3xl md:text-4xl font-bold text-primary mb-6">
             Cadastre-se para receber nossa newsletter:
@@ -144,7 +144,7 @@ const Participe = () => {
       </section>
 
       {/* Seção 3: Conteúdos já compartilhados */}
-      <section className="py-20 px-4 bg-background">
+      <section id="conteudos" className="py-20 px-4 bg-background">
         <div className="container mx-auto max-w-3xl text-center">
           <h2 className="font-display text-2xl md:text-3xl font-bold text-accent mb-4">
             Quer revisitar os conteúdos já compartilhados?
@@ -189,7 +189,7 @@ const Participe = () => {
       </section>
 
       {/* Seção 4: Redes Sociais */}
-      <section className="py-20 px-4 bg-background relative overflow-hidden">
+      <section id="redes-sociais" className="py-20 px-4 bg-background relative overflow-hidden">
         <img
           src={folhaSvg}
           alt=""
