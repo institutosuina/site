@@ -97,25 +97,13 @@ const Participe = () => {
       </section>
 
       {/* Seção 2: Newsletter */}
-      <section className="relative py-20 px-4 bg-muted overflow-hidden">
-        {/* Brush stroke decorations */}
-        <img
-          src={brushTop}
-          alt=""
-          className="absolute top-0 left-0 w-full h-auto pointer-events-none opacity-40"
-        />
-        <img
-          src={brushTop}
-          alt=""
-          className="absolute bottom-0 left-0 w-full h-auto pointer-events-none opacity-40 rotate-180"
-        />
-
-        <div className="container mx-auto max-w-2xl text-center relative z-10">
+      <section className="py-20 px-4 bg-background">
+        <div className="container mx-auto max-w-2xl text-center">
           <h2 className="font-display text-3xl md:text-4xl font-bold text-primary mb-6">
             Cadastre-se para receber nossa newsletter:
           </h2>
 
-          <p className="font-body text-base text-muted-foreground leading-relaxed mb-10 max-w-xl mx-auto">
+          <p className="font-body text-sm text-muted-foreground leading-relaxed mb-10 max-w-xl mx-auto">
             Fique por dentro das ações, projetos e novidades do Instituto Suinã. Ao
             se cadastrar em nossa newsletter, você receberá conteúdos exclusivos
             sobre nossas iniciativas em defesa da vida e da natureza, além de
@@ -131,7 +119,7 @@ const Participe = () => {
                 required
                 value={newsletterData.name}
                 onChange={(e) => setNewsletterData({ ...newsletterData, name: e.target.value })}
-                className="flex-1 px-6 py-4 rounded-full bg-background text-foreground placeholder:text-muted-foreground font-body text-base focus:outline-none focus:ring-2 focus:ring-ring/20 transition-all border border-border"
+                className="flex-1 px-6 py-4 rounded-full bg-input text-foreground placeholder:text-muted-foreground font-body text-base focus:outline-none focus:ring-2 focus:ring-ring/20 transition-all"
               />
               <input
                 type="email"
@@ -139,7 +127,7 @@ const Participe = () => {
                 required
                 value={newsletterData.email}
                 onChange={(e) => setNewsletterData({ ...newsletterData, email: e.target.value })}
-                className="flex-1 px-6 py-4 rounded-full bg-background text-foreground placeholder:text-muted-foreground font-body text-base focus:outline-none focus:ring-2 focus:ring-ring/20 transition-all border border-border"
+                className="flex-1 px-6 py-4 rounded-full bg-input text-foreground placeholder:text-muted-foreground font-body text-base focus:outline-none focus:ring-2 focus:ring-ring/20 transition-all"
               />
             </div>
 
