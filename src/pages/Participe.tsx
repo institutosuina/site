@@ -23,7 +23,7 @@ const Participe = () => {
   return (
     <Layout>
       {/* Seção 1: Como Apoiar */}
-      <section className="py-20 px-4 bg-background relative overflow-hidden">
+      <section id="como-apoiar" className="py-20 px-4 bg-background relative overflow-hidden">
         <img
           src={folhaSvg}
           alt=""
