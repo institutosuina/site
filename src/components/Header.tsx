@@ -6,7 +6,7 @@ import logoSuina from "@/assets/logo-suina-full.png";
 const navItems = [
   {
     label: "Sobre nós",
-    href: "/",
+    href: "",
     children: [
       { label: "Quem somos", href: "/#quem-somos" },
       { label: "Linha do tempo", href: "/#timeline" },
@@ -21,7 +21,7 @@ const navItems = [
   { label: "Transparência", href: "/transparencia" },
   {
     label: "Nossas publicações",
-    href: "/noticias",
+    href: "",
     children: [
       { label: "Blog", href: "/noticias" },
       { label: "Notícias", href: "/noticias" },
@@ -31,11 +31,11 @@ const navItems = [
   },
   {
     label: "Participe",
-    href: "/contato",
+    href: "",
     children: [
       { label: "Como apoiar", href: "/como-apoiar" },
       { label: "Cadastre-se para receber nossa newsletter", href: "/newsletter" },
-      { label: "Suinã nas Redes Sociais", href: "/contato" },
+      { label: "Suinã nas Redes Sociais", href: "/redessociais" },
     ],
   },
   { label: "Contato", href: "/contato" },
@@ -52,6 +52,7 @@ const Header = () => {
   };
 
   const handleMouseLeave = () => {
+    if (timeoutRef.current) clearTimeout(timeoutRef.current);
     timeoutRef.current = setTimeout(() => {
       setOpenDropdown(null);
     }, 150);
@@ -60,7 +61,7 @@ const Header = () => {
   // Background: White, Dark Brown: #3e2723
   const navBg = "#ffffff";
   const darkBrown = "#3e2723";
-  const beigeButton = "#e6d5bc"; // Keeping the beige for the 'Doar' button to contrast
+  const beigeButton = "#e6d5bc";
 
   return (
     <header className="sticky top-0 z-40 border-b border-black/5" style={{ backgroundColor: navBg }}>
@@ -74,26 +75,30 @@ const Header = () => {
           {navItems.map((item) => (
             <div
               key={item.label}
-              className="relative py-2" // Add padding to parent to extend hover area
+              className="relative py-2"
               onMouseEnter={() => item.children && handleMouseEnter(item.label)}
               onMouseLeave={() => item.children && handleMouseLeave()}
             >
-              <Link 
-                to={item.href} 
+              <Link
+                to={item.href}
                 className="text-[17px] font-display font-bold transition-colors flex items-center gap-1 group"
                 style={{ color: darkBrown }}
               >
                 {item.label}
-                {item.children && <ChevronDown className={`w-4 h-4 transition-transform ${openDropdown === item.label ? 'rotate-180' : ''}`} />}
+                {item.children && (
+                  <ChevronDown
+                    className={`w-4 h-4 transition-transform ${openDropdown === item.label ? 'rotate-180' : ''}`}
+                  />
+                )}
               </Link>
-              
+
               {item.children && openDropdown === item.label && (
-                <div 
+                <div
                   className="absolute top-full left-[-10px] pt-2 animate-in slide-in-from-top-1 duration-200"
-                  onMouseEnter={() => handleMouseEnter(item.label)} // Keep open when hovering the menu itself
+                  onMouseEnter={() => handleMouseEnter(item.label)}
                   onMouseLeave={() => handleMouseLeave()}
                 >
-                  <div 
+                  <div
                     className="rounded-[20px] shadow-xl border border-black/5 py-3 min-w-[240px]"
                     style={{ backgroundColor: navBg }}
                   >
@@ -104,6 +109,8 @@ const Header = () => {
                         className="block px-6 py-2.5 text-[15px] font-display font-bold hover:bg-black/5 transition-colors first:rounded-t-[20px] last:rounded-b-[20px]"
                         style={{ color: darkBrown }}
                         onClick={() => setOpenDropdown(null)}
+                      >
+                        {child.label}
                       </Link>
                     ))}
                   </div>
@@ -115,7 +122,7 @@ const Header = () => {
 
         {/* Action Button Desktop */}
         <div className="hidden lg:block">
-          <Link 
+          <Link
             to="/como-apoiar"
             className="px-10 py-4 font-display font-bold text-[18px] rounded-[20px] shadow-sm hover:shadow-md transition-all active:scale-[0.98]"
             style={{ backgroundColor: beigeButton, color: darkBrown, border: "1px solid rgba(62, 39, 35, 0.1)" }}
@@ -161,7 +168,7 @@ const Header = () => {
             </div>
           ))}
           <div className="pt-4 border-t border-black/10">
-            <Link 
+            <Link
               to="/como-apoiar"
               className="block w-full py-4 text-center font-display font-bold text-xl rounded-[20px]"
               style={{ backgroundColor: beigeButton, color: darkBrown, border: "1px solid rgba(62, 39, 35, 0.2)" }}

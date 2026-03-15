@@ -6,6 +6,8 @@ import teamPhoto from "@/assets/team-photo.jpg";
 import equipeCompleta from "@/assets/equipe-completa.jpg";
 import wheatDecoration from "@/assets/wheat-decoration.png";
 import logosParceiros from "@/assets/logos-parceiros.png";
+import folhaContraste from "@/assets/folha-contraste1.svg"; // Importe a folha correta aqui
+
 
 import sketchCircle from "@/assets/sketch-circle.png";
 import paperTexture from "@/assets/paper-texture.png";
@@ -71,8 +73,18 @@ const Index = () => {
 
   const scroll = (direction: "left" | "right") => {
     if (scrollRef.current) {
-      const amount = 300;
-      scrollRef.current.scrollBy({ left: direction === "left" ? -amount : amount, behavior: "smooth" });
+      // Pega a largura de um item individual (assumindo que todos têm a mesma largura)
+      const firstItem = scrollRef.current.querySelector('.timeline-item');
+      if (firstItem) {
+        const itemWidth = firstItem.clientWidth;
+        // Scrolla de 2 em 2 anos (largura de 2 itens)
+        const amount = itemWidth * 2;
+        scrollRef.current.scrollBy({ left: direction === "left" ? -amount : amount, behavior: "smooth" });
+      } else {
+        // Fallback caso não encontre a classe
+        const amount = 300;
+        scrollRef.current.scrollBy({ left: direction === "left" ? -amount : amount, behavior: "smooth" });
+      }
     }
   };
 
@@ -101,14 +113,22 @@ const Index = () => {
       <section
         id="quem-somos"
         className="py-16 px-4 relative overflow-hidden"
-        style={{
-          backgroundImage: `url(${backgroundFlores}), url(${paperTexture})`,
-          backgroundSize: 'cover, cover',
-          backgroundPosition: 'center, center'
-        }}
       >
-        <img src={wheatDecoration} alt="" className="absolute -left-12 top-0 w-48 md:w-72 opacity-20 pointer-events-none -rotate-12" />
-        <img src={wheatDecoration} alt="" className="absolute -right-12 bottom-0 w-48 md:w-72 opacity-20 pointer-events-none rotate-165" />
+        {/* Folha Superior Esquerda */}
+        <img
+          src={folhaContraste}
+          alt=""
+          className="absolute -left-16 -top-12 w-48 md:w-80 opacity-20 pointer-events-none -rotate-12"
+        />
+
+        {/* Folha Inferior Direita: Invertida com rotate-180 */}
+        <img
+          src={folhaContraste}
+          alt=""
+          // Aqui ela também gira 180, ficando com a ponta apontando para o canto inferior direito
+          className="absolute -right-24 -bottom-50 w-64 md:w-96 opacity-20 pointer-events-none rotate-180"
+        />
+
         <div className="container mx-auto max-w-4xl text-center relative z-10 px-8">
           <h2 className="section-title mb-8">Quem somos</h2>
           <p className="font-body text-lg md:text-xl leading-relaxed font-medium">
@@ -174,13 +194,13 @@ const Index = () => {
                     {timelineData.map((item) => (
                       <div
                         key={item.year}
-                        className="text-center w-[300px] md:w-[500px] lg:w-[550px] flex-shrink-0 pt-12 relative px-16"
+                        className="timeline-item text-center w-[280px] md:w-[400px] flex-shrink-0 pt-12 relative px-4"
                         style={{ scrollSnapAlign: "start" }}
                       >
                         {/* Dot on line */}
                         <div className="absolute top-[-10px] left-1/2 -translate-x-1/2 w-6 h-6 rounded-full border-2 border-white z-10" style={{ backgroundColor: "#2f4b3c" }} />
                         <span className="font-display text-2xl font-bold block mb-2" style={{ color: "#ba2c18" }}>{item.year}</span>
-                        <p className="font-body text-xs leading-relaxed max-w-[280px] mx-auto" style={{ color: "#7d5127" }}>{item.text}</p>
+                        <p className="font-body text-xs leading-relaxed max-w-[240px] mx-auto" style={{ color: "#7d5127" }}>{item.text}</p>
                       </div>
                     ))}
                   </div>
@@ -236,8 +256,8 @@ const Index = () => {
             {teamMembers.map((m) => (
               <div key={m.name} className="text-center w-[calc(50%-1rem)] md:w-[calc(25%-2rem)] min-w-[140px] max-w-[200px]">
                 <div className="relative w-32 h-32 mx-auto mb-3">
-                  <img src={sketchCircle} alt="" className="absolute inset-[-8%] w-[116%] h-[116%] pointer-events-none z-10" />
-                  <div className="absolute inset-[6%] rounded-full bg-card overflow-hidden">
+                  <img src={sketchCircle} alt="" className="absolute inset-[-12%] w-[124%] h-[124%] opacity-50 pointer-events-none" />
+                  <div className="relative w-full h-full rounded-full bg-[#fdfaf6] overflow-hidden border-2 border-white/20 shadow-inner">
                     {m.image ? (
                       <img src={m.image} alt={m.name} className="w-full h-full object-cover" />
                     ) : (
@@ -258,10 +278,18 @@ const Index = () => {
         </div>
       </section>
 
+
       {/* Conselho */}
       <section className="py-16 px-4 relative overflow-hidden" style={{ backgroundColor: "hsl(var(--suina-orange))" }}>
-        <img src={wheatDecoration} alt="" className="absolute left-4 top-8 w-36 md:w-48 opacity-40 pointer-events-none" />
-        <img src={wheatDecoration} alt="" className="absolute right-4 bottom-8 w-36 md:w-48 opacity-40 pointer-events-none rotate-180" />
+
+        {/* Elemento da Folha Decorativa (Com Rotação) */}
+        <div
+          // Adicionei -rotate-90 e ajustei o posicionamento (top/left) para compensar a rotação
+          className="absolute -left-32 top-1/2 -translate-y-1/2 z-0 h-[400px] w-[400px] md:h-[600px] md:w-[600px] bg-left bg-no-repeat bg-contain opacity-20 md:opacity-40 pointer-events-none -rotate-90"
+          style={{ backgroundImage: `url(${folhaContraste})` }}
+          aria-hidden="true"
+        />
+
         <div className="container mx-auto max-w-2xl text-center relative z-10">
           <h2 className="font-display text-3xl md:text-4xl font-bold text-card mb-10">Conselho</h2>
           <div className="space-y-8">
