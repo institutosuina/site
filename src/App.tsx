@@ -9,8 +9,7 @@ import Transparencia from "./pages/Transparencia";
 import Noticias from "./pages/Noticias";
 import MaterialTecnico from "./pages/MaterialTecnico";
 import PrestacaoContas from "./pages/PrestacaoContas";
-import ComoApoiar from "./pages/ComoApoiar";
-import Newsletter from "./pages/Newsletter";
+import Participe from "./pages/Participe";
 import Contato from "./pages/Contato";
 import NotFound from "./pages/NotFound";
 
