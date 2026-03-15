@@ -198,22 +198,18 @@ const Index = () => {
 
       {/* Equipe */}
       <section id="equipe" className="relative overflow-hidden">
-        {/* Brush circle transition */}
-        <div className="relative bg-background">
-          <div className="relative flex items-end justify-center" style={{ height: 'min(50vw, 400px)' }}>
-            <img
-              src={fundoVerdeBrush}
-              alt=""
-              className="absolute pointer-events-none"
-              style={{
-                width: 'min(90vw, 750px)',
-                height: 'auto',
-                bottom: '-50%',
-                left: '50%',
-                transform: 'translateX(-50%)',
-              }}
-            />
-          </div>
+        {/* Brush circle transition - full width, only top arc visible */}
+        <div className="relative bg-background overflow-hidden" style={{ height: 'clamp(80px, 15vw, 200px)' }}>
+          <img
+            src={fundoVerdeBrush}
+            alt=""
+            className="absolute pointer-events-none left-1/2 -translate-x-1/2"
+            style={{
+              width: '120vw',
+              height: 'auto',
+              top: '0',
+            }}
+          />
         </div>
 
         {/* Green content area */}
