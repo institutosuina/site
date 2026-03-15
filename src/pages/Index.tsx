@@ -5,6 +5,7 @@ import logoSuinaWhite from "@/assets/logo-suina-white.png";
 import teamPhoto from "@/assets/team-photo.jpg";
 import equipeCompleta from "@/assets/equipe-completa.jpg";
 import wheatDecoration from "@/assets/wheat-decoration.png";
+import fundoVerdeBrush from "@/assets/fundo-verde-brush.jpeg";
 import logosParceiros from "@/assets/logos-parceiros.png";
 import folhaContraste from "@/assets/folha-contraste1.svg";
 
@@ -196,9 +197,16 @@ const Index = () => {
       </section>
 
       {/* Equipe */}
-      <section id="equipe" className="py-16 md:py-24 px-4 relative overflow-hidden bg-primary">
-        <div className="container mx-auto max-w-4xl relative z-10">
-          <div className="flex flex-col md:flex-row items-center justify-center gap-6 mb-12">
+      <section id="equipe" className="relative overflow-hidden">
+        {/* Top area with brush circle background */}
+        <div className="relative bg-background py-16 md:py-24 flex items-center justify-center overflow-hidden">
+          <img
+            src={fundoVerdeBrush}
+            alt=""
+            className="absolute w-[600px] md:w-[800px] h-auto opacity-100 pointer-events-none"
+            style={{ top: '50%', left: '50%', transform: 'translate(-50%, -50%)' }}
+          />
+          <div className="relative z-10 flex flex-col md:flex-row items-center justify-center gap-6">
             <span className="font-display text-7xl md:text-[100px] font-bold text-primary-foreground leading-none">
               82%
             </span>
@@ -206,6 +214,11 @@ const Index = () => {
               da equipe do Suinã<br />é composta por mulheres
             </p>
           </div>
+        </div>
+
+        {/* Green content area */}
+        <div className="bg-primary py-16 md:py-24 px-4">
+          <div className="container mx-auto max-w-4xl relative z-10">
 
           <div className="space-y-6 text-center max-w-3xl mx-auto mb-8">
             <p className="body-text text-primary-foreground">
@@ -241,6 +254,7 @@ const Index = () => {
           <div className="rounded-2xl overflow-hidden">
             <img src={equipeCompleta} alt="Equipe completa do Instituto Suinã" className="w-full h-64 md:h-96 object-cover" />
           </div>
+        </div>
         </div>
       </section>
 
