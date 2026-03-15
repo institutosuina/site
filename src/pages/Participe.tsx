@@ -209,7 +209,7 @@ const Participe = () => {
               <h2 className="font-display text-3xl md:text-4xl font-bold text-accent mb-6 leading-tight">
                 Suinã<br />nas Redes<br />Sociais:
               </h2>
-              <p className="font-body text-sm text-muted-foreground leading-relaxed mb-8 max-w-sm">
+              <p className="font-body text-base font-bold text-muted-foreground leading-relaxed mb-8 max-w-sm">
                 Siga o Instituto Suinã no
                 Facebook, Instagram,
                 LinkedIn e YouTube e
