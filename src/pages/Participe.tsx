@@ -1,7 +1,9 @@
 import { useState } from "react";
 import Layout from "@/components/Layout";
 import { Heart } from "lucide-react";
+import { FaWhatsapp, FaFacebookF, FaInstagram, FaLinkedinIn, FaYoutube } from "react-icons/fa";
 import folhaSvg from "@/assets/folha.svg";
+import logoSuina from "@/assets/logo-suina-white.png";
 import brushTop from "@/assets/brush-top.png";
 
 const Participe = () => {
@@ -182,6 +184,71 @@ const Participe = () => {
             <button className="w-10 h-10 rounded-full border border-border flex items-center justify-center text-muted-foreground hover:bg-muted transition-colors">
               ›
             </button>
+          </div>
+        </div>
+      </section>
+
+      {/* Seção 4: Redes Sociais */}
+      <section className="py-20 px-4 bg-background relative overflow-hidden">
+        <img
+          src={folhaSvg}
+          alt=""
+          className="absolute -left-12 top-10 w-36 md:w-48 opacity-20 pointer-events-none rotate-[20deg]"
+          style={{ filter: "hue-rotate(340deg) saturate(2) brightness(0.7)" }}
+        />
+        <img
+          src={folhaSvg}
+          alt=""
+          className="absolute -right-8 bottom-10 w-36 md:w-48 opacity-15 pointer-events-none -scale-x-100 rotate-[-10deg]"
+          style={{ filter: "hue-rotate(340deg) saturate(2) brightness(0.7)" }}
+        />
+
+        <div className="container mx-auto max-w-4xl relative z-10">
+          <div className="flex flex-col md:flex-row items-center gap-12 md:gap-16">
+            <div className="flex-1">
+              <h2 className="font-display text-3xl md:text-4xl font-bold text-accent italic mb-6 leading-tight">
+                Suinã<br />nas Redes<br />Sociais:
+              </h2>
+              <p className="font-body text-sm text-muted-foreground leading-relaxed mb-8 max-w-sm">
+                Siga o Instituto Suinã no Facebook, Instagram, LinkedIn e YouTube e
+                acompanhe de perto nossas ações em defesa da vida e da natureza.
+              </p>
+              <div className="flex flex-wrap gap-3">
+                {[
+                  { icon: FaWhatsapp, color: "hsl(var(--primary))", href: "#" },
+                  { icon: FaFacebookF, color: "hsl(var(--suina-brown))", href: "#" },
+                  { icon: FaInstagram, color: "hsl(var(--accent))", href: "#" },
+                  { icon: FaLinkedinIn, color: "hsl(var(--primary))", href: "#" },
+                  { icon: FaYoutube, color: "hsl(var(--accent))", href: "#" },
+                ].map((social, i) => (
+                  <a
+                    key={i}
+                    href={social.href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="w-12 h-12 rounded-xl flex items-center justify-center text-white text-xl hover:opacity-80 transition-opacity"
+                    style={{ backgroundColor: social.color }}
+                  >
+                    <social.icon />
+                  </a>
+                ))}
+              </div>
+            </div>
+
+            <div className="relative">
+              <div className="w-64 h-[500px] bg-foreground rounded-[40px] p-3 shadow-2xl">
+                <div className="w-full h-full bg-primary rounded-[32px] flex flex-col items-center justify-center gap-6">
+                  <img src={logoSuina} alt="Instituto Suinã" className="w-32 h-auto" />
+                  <div className="flex gap-2">
+                    {[FaWhatsapp, FaFacebookF, FaInstagram, FaLinkedinIn, FaYoutube].map((Icon, i) => (
+                      <div key={i} className="w-6 h-6 rounded-full border border-white/50 flex items-center justify-center">
+                        <Icon className="text-white text-[10px]" />
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </section>
