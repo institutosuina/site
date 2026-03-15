@@ -198,32 +198,38 @@ const Index = () => {
 
       {/* Equipe */}
       <section id="equipe" className="relative overflow-hidden">
-      {/* Top area with brush circle background */}
-        <div className="relative bg-background flex items-center justify-center overflow-visible" style={{ paddingTop: '8rem', paddingBottom: '8rem' }}>
-          <img
-            src={fundoVerdeBrush}
-            alt=""
-            className="absolute pointer-events-none"
-            style={{
-              width: 'min(90vw, 700px)',
-              height: 'auto',
-              top: '50%',
-              left: '50%',
-              transform: 'translate(-50%, -50%)',
-            }}
-          />
-          <div className="relative z-10 flex flex-col md:flex-row items-center justify-center gap-6">
-            <span className="font-display text-7xl md:text-[100px] font-bold text-primary-foreground leading-none">
-              82%
-            </span>
-            <p className="font-display text-xl md:text-3xl font-normal text-primary-foreground leading-tight md:text-left text-center">
-              da equipe do Suinã<br />é composta por mulheres
-            </p>
+        {/* Brush circle transition */}
+        <div className="relative bg-background">
+          <div className="relative flex items-end justify-center" style={{ height: 'min(50vw, 400px)' }}>
+            <img
+              src={fundoVerdeBrush}
+              alt=""
+              className="absolute pointer-events-none"
+              style={{
+                width: 'min(90vw, 750px)',
+                height: 'auto',
+                bottom: '-50%',
+                left: '50%',
+                transform: 'translateX(-50%)',
+              }}
+            />
           </div>
         </div>
 
-        {/* Green content area - negative margin to overlap with brush circle */}
-        <div className="bg-primary py-16 md:py-24 px-4 relative" style={{ marginTop: '-4rem' }}>
+        {/* Green content area */}
+        <div className="bg-primary relative z-10">
+          <div className="flex items-center justify-center py-12 md:py-16">
+            <div className="relative z-10 flex flex-col md:flex-row items-center justify-center gap-6">
+              <span className="font-display text-7xl md:text-[100px] font-bold text-primary-foreground leading-none">
+                82%
+              </span>
+              <p className="font-display text-xl md:text-3xl font-normal text-primary-foreground leading-tight md:text-left text-center">
+                da equipe do Suinã<br />é composta por mulheres
+              </p>
+            </div>
+          </div>
+
+          <div className="py-16 md:py-24 px-4">
           <div className="container mx-auto max-w-4xl relative z-10">
 
           <div className="space-y-6 text-center max-w-3xl mx-auto mb-8">
@@ -260,6 +266,7 @@ const Index = () => {
           <div className="rounded-2xl overflow-hidden">
             <img src={equipeCompleta} alt="Equipe completa do Instituto Suinã" className="w-full h-64 md:h-96 object-cover" />
           </div>
+        </div>
         </div>
         </div>
       </section>
