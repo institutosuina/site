@@ -1,7 +1,9 @@
 import { useState } from "react";
 import Layout from "@/components/Layout";
 import { Heart } from "lucide-react";
+import { FaWhatsapp, FaFacebookF, FaInstagram, FaLinkedinIn, FaYoutube } from "react-icons/fa";
 import folhaSvg from "@/assets/folha.svg";
+import logoSuina from "@/assets/logo-suina-white.png";
 import brushTop from "@/assets/brush-top.png";
 
 const Participe = () => {
