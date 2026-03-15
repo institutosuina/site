@@ -8,48 +8,23 @@ import news6 from "@/assets/news-6.jpg";
 import { ArrowRight } from "lucide-react";
 
 const newsItems = [
-  {
-    image: news1,
-    title: "Junho EcoSustentável realiza palestra sobre compostagem doméstica no Viveiro de Mudas",
-    date: "25/06/2025",
-  },
-  {
-    image: news2,
-    title: "Encontro no Parque Municipal debate ações conjuntas para unidades de conservação da Serra do Itapeti",
-    date: "25/04/2024",
-  },
-  {
-    image: news3,
-    title: "'Viver o Viveiro'! Público aprova abertura do Viveiro Municipal aos domingos, em Jacareí.",
-    date: "25/09/2023",
-  },
-  {
-    image: news4,
-    title: "É neste e em todo domingo, hein! Viveiro de Jacareí agora abre todos os domingos, com trilhas, oficinas, e diversas atrações.",
-    date: "22/09/2023",
-  },
-  {
-    image: news5,
-    title: "Condemat participa de APL para fortalecer cadeia produtiva do mel na região",
-    date: "20/10/2021",
-  },
-  {
-    image: news6,
-    title: "Fibria estimula práticas sustentáveis em escolas municipais de Capão Bonito",
-    date: "27/07/2018",
-  },
+  { image: news1, title: "Junho EcoSustentável realiza palestra sobre compostagem doméstica no Viveiro de Mudas", date: "25/06/2025" },
+  { image: news2, title: "Encontro no Parque Municipal debate ações conjuntas para unidades de conservação da Serra do Itapeti", date: "25/04/2024" },
+  { image: news3, title: "'Viver o Viveiro'! Público aprova abertura do Viveiro Municipal aos domingos, em Jacareí.", date: "25/09/2023" },
+  { image: news4, title: "É neste e em todo domingo, hein! Viveiro de Jacareí agora abre todos os domingos, com trilhas, oficinas, e diversas atrações.", date: "22/09/2023" },
+  { image: news5, title: "Condemat participa de APL para fortalecer cadeia produtiva do mel na região", date: "20/10/2021" },
+  { image: news6, title: "Fibria estimula práticas sustentáveis em escolas municipais de Capão Bonito", date: "27/07/2018" },
 ];
 
 const Noticias = () => {
   return (
     <Layout>
-      <section className="py-16 px-4">
+      <section className="py-16 md:py-24 px-4">
         <div className="container mx-auto max-w-5xl">
-          <h1 className="section-title text-center mb-12 uppercase tracking-wide text-secondary">Notícias</h1>
+          <h1 className="section-title mb-8 uppercase text-secondary">Notícias</h1>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             {newsItems.map((item, i) => (
               <div key={i} className="group cursor-pointer rounded-2xl overflow-hidden border border-border bg-card shadow-sm">
-                {/* Image */}
                 <div className="relative overflow-hidden h-52 md:h-60">
                   <img
                     src={item.image}
@@ -57,13 +32,12 @@ const Noticias = () => {
                     className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                   />
                 </div>
-                {/* Content below image */}
                 <div className="px-5 py-4">
                   <h3 className="font-display text-base md:text-lg font-bold text-foreground leading-snug mb-3">
                     {item.title}
                   </h3>
                   <div className="flex items-center justify-between">
-                    <span className="font-body text-xs text-secondary italic">Publicação: {item.date}</span>
+                    <span className="caption-text italic text-secondary">Publicação: {item.date}</span>
                     <button className="flex items-center gap-1 bg-secondary text-secondary-foreground px-4 py-1.5 rounded font-body text-xs font-semibold uppercase hover:bg-secondary/90 transition-colors">
                       LEIA MAIS <ArrowRight className="w-3 h-3" />
                     </button>
