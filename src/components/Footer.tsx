@@ -12,23 +12,15 @@ const Footer = () => {
       {/* RENDERIZAÇÃO CONDICIONAL DAS FOLHAS */}
       {isHome && (
         <>
-          {/* FOLHA ESQUERDA (Vaza para cima) */}
-          <div className="absolute -top-24 bottom-0 -left-24 w-[400px] md:-top-40 md:-left-40 md:w-[700px] overflow-hidden pointer-events-none z-10">
+          {/* FOLHA DIREITA (Vaza para cima) */}
+          <div className="absolute -top-24 bottom-0 -right-30 w-[400px] md:-top-60 md:-right-80 md:w-[700px] overflow-hidden pointer-events-none z-10">
             <div
-              className="absolute top-0 left-0 h-[400px] w-[400px] bg-left-bottom bg-no-repeat bg-contain opacity-30 md:h-[700px] md:w-[700px] md:opacity-100"
+              className="absolute top-0 right-0 h-[400px] w-[400px] bg-right-bottom bg-no-repeat bg-contain opacity-30 md:h-[700px] md:w-[700px] md:opacity-100 scale-x-[-1]"
               style={{ backgroundImage: `url(${folhaSvg})` }}
               aria-hidden="true"
             />
           </div>
 
-          {/* FOLHA DIREITA (Ajustada para tamanho fixo maior e corte perfeito) */}
-          <div className="absolute right-0 bottom-0 top-0 w-[300px] md:w-[500px] overflow-hidden pointer-events-none z-0">
-            <div
-              className="absolute top-0 left-0 h-[400px] w-[400px] bg-left-bottom bg-no-repeat bg-contain opacity-30 md:h-[700px] md:w-[700px] md:opacity-100 -scale-x-100"
-              style={{ backgroundImage: `url(${folhaSvg})` }}
-              aria-hidden="true"
-            />
-          </div>
         </>
       )}
 

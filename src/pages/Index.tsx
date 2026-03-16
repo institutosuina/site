@@ -5,7 +5,7 @@ import logoSuinaWhite from "@/assets/logo-suina-white.png";
 import teamPhoto from "@/assets/team-photo.jpg";
 import equipeCompleta from "@/assets/equipe-completa.jpg";
 import wheatDecoration from "@/assets/wheat-decoration.png";
-import fundoVerdeBrush from "@/assets/fundo-verde-brush.jpeg";
+import fundoVerdeBrush from "@/assets/fundo-verde-brush.png";
 import logosParceiros from "@/assets/logos-parceiros.png";
 import folhaContraste from "@/assets/folha-contraste1.svg";
 
@@ -119,26 +119,34 @@ const Index = () => {
         </div>
       </section>
 
-      {/* Missão, Visão, Valores */}
-      <section className="py-16 md:py-24 px-4">
+      {/* Missão, Visão e Valores - CORRIGIDO */}
+      <section className="py-20 px-4 bg-[#FDFBF6]">
         <div className="container mx-auto max-w-4xl">
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-10">
             {[
-              { icon: iconeMissao, label: "Missão", color: "card-red", id: "Mission" },
-              { icon: iconeVisao, label: "Visão", color: "card-sage", id: "Vision" },
-              { icon: iconeValores, label: "Valores", color: "card-orange", id: "Values" },
-            ].map(({ icon, label, color, id }) => (
+              { id: "Mission", label: "Missão", icon: iconeMissao, bgColor: "bg-[#D16B5D]" },
+              { id: "Vision", label: "Visão", icon: iconeVisao, bgColor: "bg-[#718E7B]" },
+              { id: "Values", label: "Valores", icon: iconeValores, bgColor: "bg-[#CD7D32]" }
+            ].map((item) => (
               <div
-                key={label}
-                className={`${color} min-h-[220px] cursor-pointer hover:scale-[1.02] transition-transform pb-16`}
-                onClick={() => setOpenModal(id)}
+                key={item.id}
+                className={`${item.bgColor} min-h-[250px] cursor-pointer hover:scale-[1.05] transition-all relative shadow-xl rounded-[2rem] flex flex-col items-center justify-center text-center p-8`}
+                onClick={() => setOpenModal(item.id)}
               >
-                <div className="w-16 h-16 flex items-center justify-center">
-                  <img src={icon} alt={label} className="w-full h-full object-contain" />
+                <div className="w-20 h-20 flex items-center justify-center mb-4">
+                  <img
+                    src={item.icon}
+                    alt={item.label}
+                    className="w-full h-full object-contain brightness-0 invert"
+                  />
                 </div>
-                <span className="font-display text-2xl font-bold text-white mt-2">{label}</span>
-                <div className="absolute bottom-5 left-1/2 -translate-x-1/2 w-11 h-11 rounded-full border-2 border-white flex items-center justify-center">
-                  <Plus className="w-6 h-6 text-white" />
+                <span className="font-display text-3xl font-bold text-white block">
+                  {item.label}
+                </span>
+                <div className="absolute -bottom-7 left-1/2 -translate-x-1/2 w-14 h-14 bg-white rounded-full flex items-center justify-center shadow-lg">
+                  <div className={`${item.bgColor} w-[85%] h-[85%] rounded-full flex items-center justify-center`}>
+                    <Plus className="w-8 h-8 text-white font-bold" />
+                  </div>
                 </div>
               </div>
             ))}
@@ -146,77 +154,87 @@ const Index = () => {
         </div>
       </section>
 
-      {/* Linha do tempo */}
-      <section id="timeline" className="py-16 md:py-24 px-4">
+      {/* Linha do tempo (Ajustada para a linha não vazar) */}
+      <section id="timeline" className="py-24 px-4 bg-[#FDFBF6] relative overflow-hidden">
         <div className="container mx-auto max-w-5xl">
-          <h2 className="section-title text-center mb-8 italic text-secondary">Linha do tempo do Suinã</h2>
-          <div className="relative">
-            <div className="flex items-center gap-4 max-w-7xl mx-auto px-4">
-              <button
-                onClick={() => scroll("left")}
-                className="flex-shrink-0 w-10 h-10 rounded-full flex items-center justify-center text-primary hover:bg-black/10 transition-colors z-20"
-                aria-label="Anterior"
-              >
-                <ChevronLeft className="w-8 h-8" />
-              </button>
+          <h2 className="section-title text-center mb-16 italic text-secondary">Linha do tempo do Suinã</h2>
 
-              <div
-                ref={scrollRef}
-                className="overflow-hidden flex-1"
-                style={{ scrollSnapType: "x mandatory" }}
-              >
-                <div className="relative min-w-max py-8">
-                  <div className="h-1 w-full rounded-full absolute top-8 left-0 bg-primary" />
+          <div className="relative mx-auto max-w-4xl"> {/* Container que limita as setas e a linha */}
 
-                  <div className="flex">
-                    {timelineData.map((item) => (
-                      <div
-                        key={item.year}
-                        className="timeline-item text-center w-[280px] md:w-[400px] flex-shrink-0 pt-12 relative px-4"
-                        style={{ scrollSnapAlign: "start" }}
-                      >
-                        <div className="absolute top-[-10px] left-1/2 -translate-x-1/2 w-6 h-6 rounded-full border-2 border-white z-10 bg-primary" />
-                        <span className="font-display text-2xl font-bold block mb-2 text-suina-red">{item.year}</span>
-                        <p className="font-body text-xs leading-relaxed max-w-[240px] mx-auto opacity-90">{item.text}</p>
-                      </div>
-                    ))}
+            {/* LINHA VERDE - Agora com limites laterais para não ultrapassar as setas */}
+            <div className="absolute top-[48px] left-8 right-8 h-[2px] bg-[#2f4b3c] z-0 opacity-80" />
+
+            {/* Seta Esquerda */}
+            <button
+              onClick={() => scroll("left")}
+              className="absolute left-[-20px] top-[30px] z-30 bg-white w-9 h-9 rounded-full flex items-center justify-center shadow-md border border-black/5"
+            >
+              <ChevronLeft className="w-4 h-4 text-[#2f4b3c]" />
+            </button>
+
+            {/* Seta Direita */}
+            <button
+              onClick={() => scroll("right")}
+              className="absolute right-[-20px] top-[30px] z-30 bg-white w-9 h-9 rounded-full flex items-center justify-center shadow-md border border-black/5"
+            >
+              <ChevronRight className="w-4 h-4 text-[#2f4b3c]" />
+            </button>
+
+            {/* Container do Scroll */}
+            <div
+              ref={scrollRef}
+              className="overflow-hidden flex scroll-smooth snap-x snap-mandatory"
+            >
+              <div className="flex py-10 w-full">
+                {timelineData.map((item) => (
+                  <div
+                    key={item.year}
+                    className="timeline-item flex-shrink-0 w-full md:w-1/3 snap-start flex flex-col items-center px-2 relative"
+                  >
+                    {/* Ponto na linha */}
+                    <div className="w-5 h-5 rounded-full border-[3px] border-[#FDFBF6] z-10 mb-8 bg-[#2f4b3c]" />
+
+                    <span className="font-display text-2xl font-bold text-[#ba2c18] mb-2">
+                      {item.year}
+                    </span>
+                    <p className="font-body text-xs md:text-[13px] text-[#7d5127] text-center leading-relaxed max-w-[200px]">
+                      {item.text}
+                    </p>
                   </div>
-                </div>
+                ))}
               </div>
-
-              <button
-                onClick={() => scroll("right")}
-                className="flex-shrink-0 w-10 h-10 rounded-full flex items-center justify-center text-primary hover:bg-black/10 transition-colors z-20"
-                aria-label="Próximo"
-              >
-                <ChevronRight className="w-8 h-8" />
-              </button>
             </div>
           </div>
         </div>
       </section>
 
-      {/* Equipe */}
-      <section id="equipe" className="relative overflow-hidden">
-        {/* Brush circle transition - full width, only top arc visible */}
-        <div className="relative bg-background overflow-hidden" style={{ height: 'clamp(80px, 15vw, 200px)' }}>
+      {/* Seção Equipe */}
+      <section id="equipe" className="relative w-full overflow-hidden">
+
+        {/* 1. O ARCO DA PINCELADA */}
+        <div className="w-full bg-[#FDFBF6] overflow-hidden relative" style={{ height: '300px' }}> {/* Aumentei a altura da janela */}
           <img
             src={fundoVerdeBrush}
             alt=""
-            className="absolute pointer-events-none left-1/2 -translate-x-1/2"
+            className="absolute pointer-events-none"
             style={{
-              width: '120vw',
-              height: 'auto',
+              width: '100vw',    // Ocupa a largura total da tela
+              height: '100%',    // Ocupa a altura total da div de 300px
+              left: '0',
               top: '0',
+              // O SEGREDO: object-fit: fill força o estiramento horizontal 
+              // mas permite que o arco apareça inteiro na vertical
+              objectFit: 'fill',
             }}
           />
         </div>
 
-        {/* Green content area */}
-        <div className="bg-primary relative z-10">
-          <div className="flex items-center justify-center py-12 md:py-16">
-            <div className="relative z-10 flex flex-col md:flex-row items-center justify-center gap-6">
-              <span className="font-display text-7xl md:text-[100px] font-bold text-primary-foreground leading-none">
+        {/* 2. ÁREA VERDE (CONTEÚDO) */}
+        <div className="bg-primary relative z-10 -mt-1 pb-20">
+          <div className="container mx-auto px-4">
+            {/* Bloco do 82% */}
+            <div className="flex flex-col md:flex-row items-center justify-center gap-6 py-10">
+              <span className="font-display text-7xl md:text-[110px] font-bold text-primary-foreground leading-none">
                 82%
               </span>
               <p className="font-display text-xl md:text-3xl font-normal text-primary-foreground leading-tight md:text-left text-center">
@@ -224,54 +242,69 @@ const Index = () => {
               </p>
             </div>
           </div>
+          {/* O resto do seu código (texto de apoio e fotos) continua aqui igual */}
 
           <div className="py-16 md:py-24 px-4">
-          <div className="container mx-auto max-w-4xl relative z-10">
+            <div className="container mx-auto max-w-4xl relative z-10">
 
-          <div className="space-y-6 text-center max-w-3xl mx-auto mb-8">
-            <p className="body-text text-primary-foreground">
-              Nos orgulhamos de ter um time diverso, forte e atuante, contribuindo diariamente para a transformação que buscamos.
-            </p>
-            <p className="body-text text-primary-foreground">
-              O Instituto Suinã conta com uma rede de parceiros, prestadores de serviço, empresas e instituições que caminham conosco para fortalecer nossas ações e ampliar nosso impacto.
-            </p>
-            <p className="body-text text-primary-foreground">
-              Aqui você conhece as pessoas que fazem parte dessa jornada.
-            </p>
-          </div>
-
-          <div className="flex flex-wrap justify-center gap-x-8 gap-y-12 mb-12">
-            {teamMembers.map((m) => (
-              <div key={m.name} className="text-center w-[calc(50%-1rem)] md:w-[calc(25%-2rem)] min-w-[140px] max-w-[200px]">
-                <div className="relative w-32 h-32 mx-auto mb-3">
-                  <img src={sketchCircle} alt="" className="absolute inset-[-12%] w-[124%] h-[124%] opacity-50 pointer-events-none" />
-                  <div className="relative w-full h-full rounded-full bg-background overflow-hidden border-2 border-white/20 shadow-inner">
-                    {m.image ? (
-                      <img src={m.image} alt={m.name} className="w-full h-full object-cover" />
-                    ) : (
-                      <div className="w-full h-full bg-card" />
-                    )}
-                  </div>
-                </div>
-                <p className="font-display text-base font-semibold text-card">{m.name}</p>
-                <p className="caption-text text-card/70">{m.role}</p>
+              <div className="space-y-6 text-center max-w-3xl mx-auto mb-16">
+                <p className="body-text text-primary-foreground text-lg italic opacity-90">
+                  Nos orgulhamos de ter um time diverso, forte e atuante, contribuindo diariamente para a transformação que buscamos.
+                </p>
+                <p className="body-text text-primary-foreground opacity-80">
+                  O Instituto Suinã conta com uma rede de parceiros, prestadores de serviço, empresas e instituições que caminham conosco para fortalecer nossas ações e ampliar nosso impacto.
+                </p>
               </div>
-            ))}
-          </div>
 
-          <div className="rounded-2xl overflow-hidden">
-            <img src={equipeCompleta} alt="Equipe completa do Instituto Suinã" className="w-full h-64 md:h-96 object-cover" />
+              {/* Grid de Membros */}
+              <div className="flex flex-wrap justify-center gap-x-8 gap-y-16 mb-20">
+                {teamMembers.map((m) => (
+                  <div key={m.name} className="text-center w-[calc(50%-1rem)] md:w-[calc(25%-2rem)] min-w-[140px] max-w-[200px]">
+                    <div className="relative w-32 h-32 mx-auto mb-6">
+                      <img src={sketchCircle} alt="" className="absolute inset-[-15%] w-[130%] h-[130%] opacity-40 pointer-events-none" />
+                      <div className="relative w-full h-full rounded-full bg-[#FDFBF6] overflow-hidden border-4 border-white/10 shadow-xl">
+                        {m.image ? (
+                          <img src={m.image} alt={m.name} className="w-full h-full object-cover" />
+                        ) : (
+                          <div className="w-full h-full bg-slate-200" />
+                        )}
+                      </div>
+                    </div>
+                    <p className="font-display text-lg font-bold text-white">{m.name}</p>
+                    <p className="font-body text-[10px] text-white/60 uppercase tracking-widest mt-1">{m.role}</p>
+                  </div>
+                ))}
+              </div>
+
+              {/* Foto da Equipe Completa */}
+              <div className="rounded-[2rem] overflow-hidden shadow-2xl border-8 border-white/5">
+                <img src={equipeCompleta} alt="Equipe completa" className="w-full h-auto object-cover" />
+              </div>
+            </div>
           </div>
-        </div>
-        </div>
         </div>
       </section>
 
       {/* Conselho */}
       <section className="py-16 md:py-24 px-4 relative overflow-hidden bg-suina-orange">
         <div
-          className="absolute -left-32 top-1/2 -translate-y-1/2 z-0 h-[400px] w-[400px] md:h-[600px] md:w-[600px] bg-left bg-no-repeat bg-contain opacity-20 md:opacity-40 pointer-events-none -rotate-90"
-          style={{ backgroundImage: `url(${folhaContraste})` }}
+          className="absolute z-0 pointer-events-none"
+          style={{
+            backgroundImage: `url(${folhaContraste})`,
+            backgroundRepeat: 'no-repeat',
+            backgroundSize: 'contain',
+            backgroundPosition: 'left center',
+            opacity: 0.4,
+            // Tamanho da div (aumente ou diminua se precisar)
+            width: '600px',
+            height: '600px',
+            // Posicionamento: Colada na esquerda
+            left: '-20px',  // Ajuste esse valor para o caule "entrar" mais ou menos na tela
+            top: '50%',    // Ajuste aqui para a altura que você quer que ela brote
+            // A MÁGICA: Centraliza verticalmente e gira para cima (-90) a partir da base esquerda
+            transform: 'translateY(-30%) rotate(-40deg)',
+            transformOrigin: 'left bottom',
+          }}
           aria-hidden="true"
         />
 
@@ -300,40 +333,42 @@ const Index = () => {
       </section>
 
       {/* Modals */}
-      {openModal && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60 backdrop-blur-sm transition-opacity" onClick={() => setOpenModal(null)}>
-          <div
-            className="bg-white rounded-2xl max-w-lg w-full p-8 relative shadow-2xl animate-in fade-in zoom-in duration-300"
-            onClick={(e) => e.stopPropagation()}
-          >
-            <button
-              className="absolute top-4 right-4 text-muted-foreground hover:text-foreground transition-colors"
-              onClick={() => setOpenModal(null)}
+      {
+        openModal && (
+          <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60 backdrop-blur-sm transition-opacity" onClick={() => setOpenModal(null)}>
+            <div
+              className="bg-white rounded-2xl max-w-lg w-full p-8 relative shadow-2xl animate-in fade-in zoom-in duration-300"
+              onClick={(e) => e.stopPropagation()}
             >
-              <Plus className="w-6 h-6 rotate-45" />
-            </button>
+              <button
+                className="absolute top-4 right-4 text-muted-foreground hover:text-foreground transition-colors"
+                onClick={() => setOpenModal(null)}
+              >
+                <Plus className="w-6 h-6 rotate-45" />
+              </button>
 
-            <div className="flex flex-col items-center text-center">
-              <div className={`w-20 h-20 rounded-full flex items-center justify-center mb-6 ${openModal === 'Mission' ? 'bg-suina-red/10' :
-                openModal === 'Vision' ? 'bg-primary/10' : 'bg-suina-orange/10'
-                }`}>
-                <img
-                  src={openModal === 'Mission' ? iconeMissao : openModal === 'Vision' ? iconeVisao : iconeValores}
-                  className="w-12 h-12"
-                  alt=""
-                />
+              <div className="flex flex-col items-center text-center">
+                <div className={`w-20 h-20 rounded-full flex items-center justify-center mb-6 ${openModal === 'Mission' ? 'bg-suina-red/10' :
+                  openModal === 'Vision' ? 'bg-primary/10' : 'bg-suina-orange/10'
+                  }`}>
+                  <img
+                    src={openModal === 'Mission' ? iconeMissao : openModal === 'Vision' ? iconeVisao : iconeValores}
+                    className="w-12 h-12"
+                    alt=""
+                  />
+                </div>
+                <h3 className="font-display text-xl md:text-2xl font-semibold leading-snug mb-6">
+                  {openModal === 'Mission' ? 'Missão' : openModal === 'Vision' ? 'Visão' : 'Valores'}
+                </h3>
+                <p className="body-text">
+                  {modalContent[openModal as keyof typeof modalContent]}
+                </p>
               </div>
-              <h3 className="font-display text-xl md:text-2xl font-semibold leading-snug mb-6">
-                {openModal === 'Mission' ? 'Missão' : openModal === 'Vision' ? 'Visão' : 'Valores'}
-              </h3>
-              <p className="body-text">
-                {modalContent[openModal as keyof typeof modalContent]}
-              </p>
             </div>
           </div>
-        </div>
-      )}
-    </Layout>
+        )
+      }
+    </Layout >
   );
 };
 
