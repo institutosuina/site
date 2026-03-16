@@ -98,20 +98,56 @@
     color: hsl(var(--suina-brown));
   }
 
-  h1, h2, h3, h4, h5, h6 {
+  /* Typographic Hierarchy System */
+  h1 {
+    font-family: 'Bree', serif;
+    @apply font-bold tracking-tight leading-[1.1];
+    font-size: clamp(2.5rem, 5vw, 66px);
+    color: hsl(var(--suina-red));
+  }
+
+  h2 {
+    font-family: 'Bree', serif;
+    @apply font-bold tracking-tight leading-[1.2];
+    font-size: clamp(2rem, 4vw, 66px);
+    color: hsl(var(--suina-red));
+  }
+
+  h3 {
+    font-family: 'Bree', serif;
+    @apply text-xl md:text-2xl font-semibold leading-snug;
+    color: hsl(var(--suina-red));
+  }
+
+  h4, h5, h6 {
     font-family: 'Bree', serif;
     color: hsl(var(--suina-red));
+  }
+
+  p, li, span, label {
+    font-family: 'Source Sans 3', sans-serif;
+    font-size: clamp(1.25rem, 3vw, 48px);
+    font-weight: 400;
+    line-height: 1.4;
   }
 }
 
 @layer components {
   .section-title {
-    @apply font-display text-3xl md:text-5xl font-bold tracking-normal text-center;
+    @apply font-display text-3xl md:text-5xl font-bold tracking-tight text-center leading-[1.2];
     color: hsl(var(--suina-red));
   }
 
   .section-subtitle {
-    @apply font-display text-xl md:text-2xl font-semibold text-foreground;
+    @apply font-display text-xl md:text-2xl font-semibold leading-snug text-foreground;
+  }
+
+  .body-text {
+    @apply font-body text-base md:text-lg leading-relaxed opacity-90;
+  }
+
+  .caption-text {
+    @apply font-body text-xs md:text-sm uppercase tracking-widest opacity-70;
   }
 
   .btn-donate {

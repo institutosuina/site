@@ -5,9 +5,9 @@ import logoSuinaWhite from "@/assets/logo-suina-white.png";
 import teamPhoto from "@/assets/team-photo.jpg";
 import equipeCompleta from "@/assets/equipe-completa.jpg";
 import wheatDecoration from "@/assets/wheat-decoration.png";
+import fundoVerdeBrush from "@/assets/fundo-verde-brush.jpeg";
 import logosParceiros from "@/assets/logos-parceiros.png";
-import folhaContraste from "@/assets/folha-contraste1.svg"; // Importe a folha correta aqui
-
+import folhaContraste from "@/assets/folha-contraste1.svg";
 
 import sketchCircle from "@/assets/sketch-circle.png";
 import paperTexture from "@/assets/paper-texture.png";
@@ -34,7 +34,7 @@ const timelineData = [
   { year: "2015", text: "Primeira parceria com poder público (Prefeitura de Mogi das Cruzes) e ingresso no Conselho Municipal de Meio Ambiente de Guararema-SP." },
   { year: "2016", text: "Primeiro contrato socioambiental com empresa do setor florestal, em mobilização social e educação ambiental." },
   { year: "2017", text: "Cooperação com o Centro Paula Souza para formação de educadores da rede pública." },
-  { year: "2018", text: "Reconhecimento público com o prêmio “Escola Amiga do Verde” (Câmara de Jacareí)." },
+  { year: "2018", text: "Reconhecimento público com o prêmio \"Escola Amiga do Verde\" (Câmara de Jacareí)." },
   { year: "2019", text: "Expansão das parcerias institucionais e primeiros projetos estruturantes em diagnóstico socioambiental e tecnologias sociais." },
   { year: "2020", text: "Participação em programa nacional de aceleração (Instituto EDP/Phomenta), premiação Capital Semente, certificação internacional de transparência e ingresso no Comitê de Bacias do Paraíba do Sul." },
   { year: "2021", text: "Consolidação de parcerias com o setor florestal em projetos de caracterização e diagnóstico social." },
@@ -73,15 +73,12 @@ const Index = () => {
 
   const scroll = (direction: "left" | "right") => {
     if (scrollRef.current) {
-      // Pega a largura de um item individual (assumindo que todos têm a mesma largura)
       const firstItem = scrollRef.current.querySelector('.timeline-item');
       if (firstItem) {
         const itemWidth = firstItem.clientWidth;
-        // Scrolla de 2 em 2 anos (largura de 2 itens)
         const amount = itemWidth * 2;
         scrollRef.current.scrollBy({ left: direction === "left" ? -amount : amount, behavior: "smooth" });
       } else {
-        // Fallback caso não encontre a classe
         const amount = 300;
         scrollRef.current.scrollBy({ left: direction === "left" ? -amount : amount, behavior: "smooth" });
       }
@@ -110,35 +107,20 @@ const Index = () => {
       </section>
 
       {/* Quem somos */}
-      <section
-        id="quem-somos"
-        className="py-16 px-4 relative overflow-hidden"
-      >
-        {/* Folha Superior Esquerda */}
-        <img
-          src={folhaContraste}
-          alt=""
-          className="absolute -left-16 -top-12 w-48 md:w-80 opacity-20 pointer-events-none -rotate-12"
-        />
-
-        {/* Folha Inferior Direita: Invertida com rotate-180 */}
-        <img
-          src={folhaContraste}
-          alt=""
-          // Aqui ela também gira 180, ficando com a ponta apontando para o canto inferior direito
-          className="absolute -right-24 -bottom-50 w-64 md:w-96 opacity-20 pointer-events-none rotate-180"
-        />
+      <section id="quem-somos" className="py-16 md:py-24 px-4 relative overflow-hidden">
+        <img src={folhaContraste} alt="" className="absolute -left-16 -top-12 w-48 md:w-80 opacity-20 pointer-events-none -rotate-12" />
+        <img src={folhaContraste} alt="" className="absolute -right-24 -bottom-50 w-64 md:w-96 opacity-20 pointer-events-none rotate-180" />
 
         <div className="container mx-auto max-w-4xl text-center relative z-10 px-8">
           <h2 className="section-title mb-8">Quem somos</h2>
-          <p className="font-body text-lg md:text-xl leading-relaxed font-medium">
+          <p className="body-text font-medium">
             O Instituto Suinã é uma organização da sociedade civil fundada em 2014, fruto do sonho de cinco biólogas comprometidas em transformar a relação entre pessoas, fauna, flora e território. Inspiradas pelo Suinã, árvore que simboliza força e resiliência, atuamos na conservação e restauração da sociobiodiversidade nas bacias hidrográficas de Alto e Médio Tietê e do Rio Paraíba do Sul. Desde a nossa origem, desenvolvemos projetos que articulam ciência, educação, mobilização social e políticas públicas, porque acreditamos que a conservação só é eficaz quando é feita coletivamente. Hoje somos uma rede de profissionais que fortalece territórios, restaura ecossistemas e valoriza saberes e culturas locais, contribuindo para a transição a uma sociedade mais justa e sustentável.
           </p>
         </div>
       </section>
 
       {/* Missão, Visão, Valores */}
-      <section className="py-12 px-4">
+      <section className="py-16 md:py-24 px-4">
         <div className="container mx-auto max-w-4xl">
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             {[
@@ -165,31 +147,27 @@ const Index = () => {
       </section>
 
       {/* Linha do tempo */}
-      <section id="timeline" className="py-16 px-4">
+      <section id="timeline" className="py-16 md:py-24 px-4">
         <div className="container mx-auto max-w-5xl">
-          <h2 className="section-title text-center mb-10 italic text-secondary">Linha do tempo do Suinã</h2>
+          <h2 className="section-title text-center mb-8 italic text-secondary">Linha do tempo do Suinã</h2>
           <div className="relative">
             <div className="flex items-center gap-4 max-w-7xl mx-auto px-4">
-              {/* Navigation arrows - Left */}
               <button
                 onClick={() => scroll("left")}
-                className="flex-shrink-0 w-10 h-10 rounded-full flex items-center justify-center text-[#2f4b3c] hover:bg-black/10 transition-colors z-20"
+                className="flex-shrink-0 w-10 h-10 rounded-full flex items-center justify-center text-primary hover:bg-black/10 transition-colors z-20"
                 aria-label="Anterior"
               >
                 <ChevronLeft className="w-8 h-8" />
               </button>
 
-              {/* Scrollable timeline container */}
               <div
                 ref={scrollRef}
                 className="overflow-hidden flex-1"
                 style={{ scrollSnapType: "x mandatory" }}
               >
                 <div className="relative min-w-max py-8">
-                  {/* Timeline line */}
-                  <div className="h-1 w-full rounded-full absolute top-8 left-0" style={{ backgroundColor: "#2f4b3c" }} />
+                  <div className="h-1 w-full rounded-full absolute top-8 left-0 bg-primary" />
 
-                  {/* Items container */}
                   <div className="flex">
                     {timelineData.map((item) => (
                       <div
@@ -197,20 +175,18 @@ const Index = () => {
                         className="timeline-item text-center w-[280px] md:w-[400px] flex-shrink-0 pt-12 relative px-4"
                         style={{ scrollSnapAlign: "start" }}
                       >
-                        {/* Dot on line */}
-                        <div className="absolute top-[-10px] left-1/2 -translate-x-1/2 w-6 h-6 rounded-full border-2 border-white z-10" style={{ backgroundColor: "#2f4b3c" }} />
-                        <span className="font-display text-2xl font-bold block mb-2" style={{ color: "#ba2c18" }}>{item.year}</span>
-                        <p className="font-body text-xs leading-relaxed max-w-[240px] mx-auto" style={{ color: "#7d5127" }}>{item.text}</p>
+                        <div className="absolute top-[-10px] left-1/2 -translate-x-1/2 w-6 h-6 rounded-full border-2 border-white z-10 bg-primary" />
+                        <span className="font-display text-2xl font-bold block mb-2 text-suina-red">{item.year}</span>
+                        <p className="font-body text-xs leading-relaxed max-w-[240px] mx-auto opacity-90">{item.text}</p>
                       </div>
                     ))}
                   </div>
                 </div>
               </div>
 
-              {/* Navigation arrows - Right */}
               <button
                 onClick={() => scroll("right")}
-                className="flex-shrink-0 w-10 h-10 rounded-full flex items-center justify-center text-[#2f4b3c] hover:bg-black/10 transition-colors z-20"
+                className="flex-shrink-0 w-10 h-10 rounded-full flex items-center justify-center text-primary hover:bg-black/10 transition-colors z-20"
                 aria-label="Próximo"
               >
                 <ChevronRight className="w-8 h-8" />
@@ -220,44 +196,56 @@ const Index = () => {
         </div>
       </section>
 
-      <section id="equipe" className="py-16 px-4 relative overflow-hidden" style={{ backgroundColor: "#2f4b3c" }}>
+      {/* Equipe */}
+      <section id="equipe" className="relative overflow-hidden">
+        {/* Brush circle transition - full width, only top arc visible */}
+        <div className="relative bg-background overflow-hidden" style={{ height: 'clamp(80px, 15vw, 200px)' }}>
+          <img
+            src={fundoVerdeBrush}
+            alt=""
+            className="absolute pointer-events-none left-1/2 -translate-x-1/2"
+            style={{
+              width: '120vw',
+              height: 'auto',
+              top: '0',
+            }}
+          />
+        </div>
 
-        {/* Brush decorations */}
-
-        <div className="container mx-auto max-w-4xl relative z-10">
-
-          {/* Bloco Superior: 82% e Texto */}
-          <div className="flex flex-col md:flex-row items-center justify-center gap-6 mb-12">
-            <span className="font-display text-7xl md:text-[100px] font-bold text-white leading-none">
-              82%
-            </span>
-            <p className="font-display text-xl md:text-3xl font-normal text-white leading-tight md:text-left text-center">
-              da equipe do Suinã<br />é composta por mulheres
-            </p>
+        {/* Green content area */}
+        <div className="bg-primary relative z-10">
+          <div className="flex items-center justify-center py-12 md:py-16">
+            <div className="relative z-10 flex flex-col md:flex-row items-center justify-center gap-6">
+              <span className="font-display text-7xl md:text-[100px] font-bold text-primary-foreground leading-none">
+                82%
+              </span>
+              <p className="font-display text-xl md:text-3xl font-normal text-primary-foreground leading-tight md:text-left text-center">
+                da equipe do Suinã<br />é composta por mulheres
+              </p>
+            </div>
           </div>
 
-          {/* Bloco Inferior: Parágrafos padronizados */}
-          <div className="space-y-6 text-center max-w-3xl mx-auto">
-            <p className="font-display text-base md:text-lg text-white font-normal leading-relaxed">
+          <div className="py-16 md:py-24 px-4">
+          <div className="container mx-auto max-w-4xl relative z-10">
+
+          <div className="space-y-6 text-center max-w-3xl mx-auto mb-8">
+            <p className="body-text text-primary-foreground">
               Nos orgulhamos de ter um time diverso, forte e atuante, contribuindo diariamente para a transformação que buscamos.
             </p>
-            <p className="font-display text-base md:text-lg text-white font-normal leading-relaxed">
+            <p className="body-text text-primary-foreground">
               O Instituto Suinã conta com uma rede de parceiros, prestadores de serviço, empresas e instituições que caminham conosco para fortalecer nossas ações e ampliar nosso impacto.
             </p>
-            <p className="font-display text-base md:text-lg text-white font-normal leading-relaxed">
+            <p className="body-text text-primary-foreground">
               Aqui você conhece as pessoas que fazem parte dessa jornada.
             </p>
           </div>
 
-
-
-          {/* Team grid */}
           <div className="flex flex-wrap justify-center gap-x-8 gap-y-12 mb-12">
             {teamMembers.map((m) => (
               <div key={m.name} className="text-center w-[calc(50%-1rem)] md:w-[calc(25%-2rem)] min-w-[140px] max-w-[200px]">
                 <div className="relative w-32 h-32 mx-auto mb-3">
                   <img src={sketchCircle} alt="" className="absolute inset-[-12%] w-[124%] h-[124%] opacity-50 pointer-events-none" />
-                  <div className="relative w-full h-full rounded-full bg-[#fdfaf6] overflow-hidden border-2 border-white/20 shadow-inner">
+                  <div className="relative w-full h-full rounded-full bg-background overflow-hidden border-2 border-white/20 shadow-inner">
                     {m.image ? (
                       <img src={m.image} alt={m.name} className="w-full h-full object-cover" />
                     ) : (
@@ -266,50 +254,47 @@ const Index = () => {
                   </div>
                 </div>
                 <p className="font-display text-base font-semibold text-card">{m.name}</p>
-                <p className="font-body text-[11px] text-card/70 uppercase tracking-widest">{m.role}</p>
+                <p className="caption-text text-card/70">{m.role}</p>
               </div>
             ))}
           </div>
 
-          {/* Foto da equipe completa */}
           <div className="rounded-2xl overflow-hidden">
             <img src={equipeCompleta} alt="Equipe completa do Instituto Suinã" className="w-full h-64 md:h-96 object-cover" />
           </div>
         </div>
+        </div>
+        </div>
       </section>
 
-
       {/* Conselho */}
-      <section className="py-16 px-4 relative overflow-hidden" style={{ backgroundColor: "hsl(var(--suina-orange))" }}>
-
-        {/* Elemento da Folha Decorativa (Com Rotação) */}
+      <section className="py-16 md:py-24 px-4 relative overflow-hidden bg-suina-orange">
         <div
-          // Adicionei -rotate-90 e ajustei o posicionamento (top/left) para compensar a rotação
           className="absolute -left-32 top-1/2 -translate-y-1/2 z-0 h-[400px] w-[400px] md:h-[600px] md:w-[600px] bg-left bg-no-repeat bg-contain opacity-20 md:opacity-40 pointer-events-none -rotate-90"
           style={{ backgroundImage: `url(${folhaContraste})` }}
           aria-hidden="true"
         />
 
         <div className="container mx-auto max-w-2xl text-center relative z-10">
-          <h2 className="font-display text-3xl md:text-4xl font-bold text-card mb-10">Conselho</h2>
+          <h2 className="font-display text-3xl md:text-5xl font-bold tracking-tight leading-[1.2] text-card mb-8">Conselho</h2>
           <div className="space-y-8">
             {conselho.map((c, i) => (
               <div key={i}>
-                {c.role && <p className="font-body text-xs uppercase tracking-[0.2em] text-card/70 mb-1">{c.role}</p>}
-                <p className="font-display text-lg font-semibold text-card">{c.name}</p>
+                {c.role && <p className="caption-text text-card/70 mb-1">{c.role}</p>}
+                <p className="font-display text-xl md:text-2xl font-semibold text-card">{c.name}</p>
               </div>
             ))}
           </div>
-          <p className="font-body text-xs text-card/60 mt-10 uppercase tracking-wider">
+          <p className="caption-text text-card/60 mt-10">
             MANDATO: 08/03/2023 A 08/03/2026
           </p>
         </div>
       </section>
 
       {/* Parceiros */}
-      <section id="parceiros" className="py-16 px-4">
+      <section id="parceiros" className="py-16 md:py-24 px-4">
         <div className="container mx-auto max-w-5xl text-center">
-          <h2 className="font-display text-3xl md:text-4xl font-bold italic text-secondary mb-12">Parceiros e apoiadores</h2>
+          <h2 className="font-display text-3xl md:text-5xl font-bold tracking-tight leading-[1.2] italic text-secondary mb-8">Parceiros e apoiadores</h2>
           <img src={logosParceiros} alt="Logos dos parceiros e apoiadores do Instituto Suinã" className="w-full" />
         </div>
       </section>
@@ -322,15 +307,15 @@ const Index = () => {
             onClick={(e) => e.stopPropagation()}
           >
             <button
-              className="absolute top-4 right-4 text-gray-400 hover:text-gray-600 transition-colors"
+              className="absolute top-4 right-4 text-muted-foreground hover:text-foreground transition-colors"
               onClick={() => setOpenModal(null)}
             >
               <Plus className="w-6 h-6 rotate-45" />
             </button>
 
             <div className="flex flex-col items-center text-center">
-              <div className={`w-20 h-20 rounded-full flex items-center justify-center mb-6 ${openModal === 'Mission' ? 'bg-[#ba2c18]/10' :
-                openModal === 'Vision' ? 'bg-[#2f4b3c]/10' : 'bg-[#e67e22]/10'
+              <div className={`w-20 h-20 rounded-full flex items-center justify-center mb-6 ${openModal === 'Mission' ? 'bg-suina-red/10' :
+                openModal === 'Vision' ? 'bg-primary/10' : 'bg-suina-orange/10'
                 }`}>
                 <img
                   src={openModal === 'Mission' ? iconeMissao : openModal === 'Vision' ? iconeVisao : iconeValores}
@@ -338,13 +323,11 @@ const Index = () => {
                   alt=""
                 />
               </div>
-
-              <h3 className="font-display text-3xl font-bold mb-4 text-[#2f4b3c]">
-                {openModal === 'Mission' ? 'Nossa Missão' : openModal === 'Vision' ? 'Nossa Visão' : 'Nossos Valores'}
+              <h3 className="font-display text-xl md:text-2xl font-semibold leading-snug mb-6">
+                {openModal === 'Mission' ? 'Missão' : openModal === 'Vision' ? 'Visão' : 'Valores'}
               </h3>
-
-              <p className="font-body text-lg text-gray-700 leading-relaxed italic">
-                "{modalContent[openModal as keyof typeof modalContent]}"
+              <p className="body-text">
+                {modalContent[openModal as keyof typeof modalContent]}
               </p>
             </div>
           </div>

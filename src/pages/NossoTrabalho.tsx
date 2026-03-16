@@ -3,7 +3,7 @@ import { BookOpen, Users, Leaf, Workflow } from "lucide-react";
 
 const areas = [
   { icon: BookOpen, label: "Educação\nAmbiental", color: "bg-primary" },
-  { icon: Users, label: "Fortalecimento e\nMobilização\nsocioambiental", color: "bg-destructive", colorStyle: "hsl(var(--suina-red))" },
+  { icon: Users, label: "Fortalecimento e\nMobilização\nsocioambiental", colorStyle: "hsl(var(--suina-red))" },
   { icon: Leaf, label: "Conservação\ne manejo de\nbiodiversidade", colorStyle: "hsl(var(--suina-brown))" },
   { icon: Workflow, label: "Outras linhas\nde atuação", colorStyle: "hsl(var(--suina-orange))" },
 ];
@@ -11,9 +11,9 @@ const areas = [
 const NossoTrabalho = () => {
   return (
     <Layout>
-      <section className="py-16 px-4">
+      <section className="py-16 md:py-24 px-4">
         <div className="container mx-auto max-w-md">
-          <h1 className="font-display text-3xl md:text-4xl font-bold text-center mb-10 italic text-secondary">
+          <h1 className="section-title mb-8 italic text-secondary">
             Nosso trabalho
           </h1>
           <div className="grid grid-cols-2 gap-4 auto-rows-fr">
@@ -26,9 +26,9 @@ const NossoTrabalho = () => {
                   style={{ backgroundColor: area.colorStyle || "hsl(var(--primary))" }}
                 >
                   <div className="w-12 h-12 flex items-center justify-center">
-                    <Icon className="w-9 h-9 text-white opacity-90" strokeWidth={1.5} />
+                    <Icon className="w-9 h-9 text-primary-foreground opacity-90" strokeWidth={1.5} />
                   </div>
-                  <span className="font-display text-sm md:text-base font-bold text-center whitespace-pre-line leading-tight text-white">
+                  <span className="font-display text-sm md:text-base font-bold text-center whitespace-pre-line leading-tight text-primary-foreground">
                     {area.label}
                   </span>
                 </div>
