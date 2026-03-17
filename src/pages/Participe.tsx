@@ -28,8 +28,25 @@ const Participe = () => {
     if (!agreed) return;
   };
 
-  const handleNewsletterSubmit = (e: React.FormEvent) => {
+  const [newsletterSubmitting, setNewsletterSubmitting] = useState(false);
+
+  const handleNewsletterSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    if (!newsletterData.name.trim() || !newsletterData.email.trim()) return;
+    setNewsletterSubmitting(true);
+    try {
+      const { error } = await supabase.from("subscribers").insert({
+        name: newsletterData.name.trim(),
+        email: newsletterData.email.trim(),
+      });
+      if (error) throw error;
+      toast({ title: "✅ Cadastro realizado!", description: "Você receberá nossas novidades em breve." });
+      setNewsletterData({ name: "", email: "" });
+    } catch (err: any) {
+      toast({ title: "Erro ao cadastrar", description: err.message || "Tente novamente.", variant: "destructive" });
+    } finally {
+      setNewsletterSubmitting(false);
+    }
   };
 
   return (
