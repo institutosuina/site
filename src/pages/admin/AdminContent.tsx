@@ -375,11 +375,15 @@ const AdminContent = ({ contentType = "posts_blog" }: AdminContentProps) => {
 
       {/* Edital Anexos Manager */}
       {anexosItem && (
-        <EditalAnexosManager
-          editalId={anexosItem.id}
-          editalTitle={anexosItem.title}
+        <AnexosManager
+          parentId={anexosItem.id}
+          parentTitle={anexosItem.title}
           open={!!anexosItem}
           onOpenChange={(open) => !open && setAnexosItem(null)}
+          tableName={activeTab === "editais" ? "edital_anexos" : "material_tecnico_anexos"}
+          foreignKey={activeTab === "editais" ? "edital_id" : "material_id"}
+          storageBucket={activeTab === "editais" ? "editais" : "covers"}
+          label={activeTab === "editais" ? "Anexos do Edital" : "Anexos do Material Técnico"}
         />
       )}
     </div>
