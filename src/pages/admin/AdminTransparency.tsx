@@ -388,6 +388,85 @@ const ProjectDetail = ({ projectId, onBack }: { projectId: string; onBack: () =>
   );
 };
 
+/* ───── Page access logs component ───── */
+const PageAccessLogs = () => {
+  const { data: logs, isLoading } = useQuery({
+    queryKey: ["admin-page-access-logs"],
+    queryFn: async () => {
+      const { data, error } = await supabase
+        .from("acessos_pagina")
+        .select("*")
+        .order("access_time", { ascending: false });
+      if (error) throw error;
+      return data;
+    },
+  });
+
+  const exportCSV = () => {
+    if (!logs?.length) return;
+    const header = "Nome,E-mail,Página,Data e Hora\n";
+    const rows = logs.map((l) =>
+      `"${l.user_name}","${l.user_email}","${l.page}","${new Date(l.access_time).toLocaleString("pt-BR")}"`
+    ).join("\n");
+    const blob = new Blob([header + rows], { type: "text/csv;charset=utf-8;" });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement("a");
+    a.href = url;
+    a.download = `acessos_pagina_${new Date().toISOString().slice(0, 10)}.csv`;
+    a.click();
+    URL.revokeObjectURL(url);
+  };
+
+  return (
+    <div className="space-y-4">
+      <div className="flex items-center justify-between">
+        <div>
+          <h3 className="font-semibold text-zinc-800" style={{ ...s, fontSize: "1.125rem" }}>Logs de Acesso — Prestação de Contas</h3>
+          <p style={{ ...s, fontSize: "0.8125rem" }} className="text-zinc-500 mt-0.5">
+            Registros de quem preencheu o formulário LGPD para acessar a página
+          </p>
+        </div>
+        {logs?.length ? (
+          <Button onClick={exportCSV} variant="outline" className="!text-sm">
+            <Download className="h-4 w-4 mr-2" /> Exportar CSV
+          </Button>
+        ) : null}
+      </div>
+      <div className="bg-white rounded-xl border border-zinc-200 overflow-hidden">
+        {isLoading ? (
+          <div className="p-6 space-y-3">{[1, 2, 3].map(i => <Skeleton key={i} className="h-12 w-full" />)}</div>
+        ) : !logs?.length ? (
+          <div className="text-center py-12">
+            <Eye className="h-10 w-10 text-zinc-300 mx-auto mb-3" />
+            <p style={{ ...s, fontSize: "0.875rem" }} className="text-zinc-400">Nenhum acesso registrado ainda.</p>
+          </div>
+        ) : (
+          <Table>
+            <TableHeader>
+              <TableRow className="bg-zinc-50">
+                <TableHead style={{ ...s, fontSize: "0.75rem" }} className="font-semibold text-zinc-600">Nome</TableHead>
+                <TableHead style={{ ...s, fontSize: "0.75rem" }} className="font-semibold text-zinc-600">E-mail</TableHead>
+                <TableHead style={{ ...s, fontSize: "0.75rem" }} className="font-semibold text-zinc-600 hidden sm:table-cell">Data e Hora</TableHead>
+              </TableRow>
+            </TableHeader>
+            <TableBody>
+              {logs.map((l) => (
+                <TableRow key={l.id} className="hover:bg-zinc-50">
+                  <TableCell style={{ ...s, fontSize: "0.875rem" }} className="text-zinc-800">{l.user_name}</TableCell>
+                  <TableCell style={{ ...s, fontSize: "0.8125rem" }} className="text-zinc-500">{l.user_email}</TableCell>
+                  <TableCell style={{ ...s, fontSize: "0.8125rem" }} className="text-zinc-500 hidden sm:table-cell">
+                    {new Date(l.access_time).toLocaleString("pt-BR")}
+                  </TableCell>
+                </TableRow>
+              ))}
+            </TableBody>
+          </Table>
+        )}
+      </div>
+    </div>
+  );
+};
+
 /* ───── Main component ───── */
 const AdminTransparency = () => {
   const [selectedProject, setSelectedProject] = useState<string | null>(null);
@@ -401,8 +480,9 @@ const AdminTransparency = () => {
   }
 
   return (
-    <div className="font-['Inter',sans-serif]">
+    <div className="font-['Inter',sans-serif] space-y-10">
       <ProjectList onSelect={setSelectedProject} />
+      <PageAccessLogs />
     </div>
   );
 };
