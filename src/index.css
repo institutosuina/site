@@ -98,37 +98,55 @@
     color: hsl(var(--suina-brown));
   }
 
-  /* Typographic Hierarchy System */
-  h1 {
+  /* Typographic Hierarchy System — scoped to public site only */
+  :not(.admin-scope) > h1,
+  :not(.admin-scope) h1:not(.admin-scope *) {
     font-family: 'Bree', serif;
     @apply font-bold tracking-tight leading-[1.1];
     font-size: clamp(2.5rem, 5vw, 66px);
     color: hsl(var(--suina-red));
   }
 
-  h2 {
+  :not(.admin-scope) > h2,
+  :not(.admin-scope) h2:not(.admin-scope *) {
     font-family: 'Bree', serif;
     @apply font-bold tracking-tight leading-[1.2];
     font-size: clamp(2rem, 4vw, 66px);
     color: hsl(var(--suina-red));
   }
 
-  h3 {
+  :not(.admin-scope) > h3,
+  :not(.admin-scope) h3:not(.admin-scope *) {
     font-family: 'Bree', serif;
     @apply text-xl md:text-2xl font-semibold leading-snug;
     color: hsl(var(--suina-red));
   }
 
-  h4, h5, h6 {
+  :not(.admin-scope) > h4, :not(.admin-scope) > h5, :not(.admin-scope) > h6,
+  h4:not(.admin-scope *), h5:not(.admin-scope *), h6:not(.admin-scope *) {
     font-family: 'Bree', serif;
     color: hsl(var(--suina-red));
   }
 
-  p, li, span, label {
+  p:not(.admin-scope *), li:not(.admin-scope *), span:not(.admin-scope *), label:not(.admin-scope *) {
     font-family: 'Source Sans 3', sans-serif;
     font-size: clamp(1.25rem, 3vw, 48px);
     font-weight: 400;
     line-height: 1.4;
+  }
+
+  /* Admin scope reset — clean Inter typography */
+  .admin-scope h1, .admin-scope h2, .admin-scope h3,
+  .admin-scope h4, .admin-scope h5, .admin-scope h6 {
+    font-family: 'Inter', sans-serif;
+    color: #27272a;
+  }
+
+  .admin-scope p, .admin-scope li, .admin-scope span, .admin-scope label {
+    font-family: 'Inter', sans-serif;
+    font-size: inherit;
+    font-weight: inherit;
+    line-height: inherit;
   }
 }
 
