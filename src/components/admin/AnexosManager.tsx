@@ -48,7 +48,7 @@ const AnexosManager = ({
 
   const deleteMutation = useMutation({
     mutationFn: async (id: string) => {
-      const { error } = await supabase.from(tableName).delete().eq("id", id);
+      const { error } = await (supabase.from(tableName as "edital_anexos") as any).delete().eq("id", id);
       if (error) throw error;
     },
     onSuccess: () => {
