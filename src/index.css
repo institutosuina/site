@@ -138,12 +138,32 @@
   /* Admin scope reset — clean Inter typography */
   .admin-scope h1, .admin-scope h2, .admin-scope h3,
   .admin-scope h4, .admin-scope h5, .admin-scope h6 {
-    font-family: 'Inter', sans-serif;
-    color: #27272a;
+    font-family: 'Inter', sans-serif !important;
+    font-size: revert !important;
+    color: #27272a !important;
   }
 
-  .admin-scope p, .admin-scope li, .admin-scope span, .admin-scope label {
-    font-family: 'Inter', sans-serif;
+  .admin-scope p, .admin-scope li, .admin-scope span, .admin-scope label,
+  .admin-scope td, .admin-scope th, .admin-scope input, .admin-scope textarea,
+  .admin-scope button, .admin-scope a, .admin-scope div {
+    font-family: 'Inter', sans-serif !important;
+    font-size: inherit;
+    font-weight: inherit;
+    line-height: inherit;
+  }
+
+  /* Radix portals (dialogs, selects, toasts) rendered outside admin-scope */
+  [data-radix-portal] h1, [data-radix-portal] h2, [data-radix-portal] h3,
+  [data-radix-portal] h4, [data-radix-portal] h5, [data-radix-portal] h6 {
+    font-family: 'Inter', sans-serif !important;
+    font-size: revert !important;
+    color: #27272a !important;
+  }
+
+  [data-radix-portal] p, [data-radix-portal] li, [data-radix-portal] span,
+  [data-radix-portal] label, [data-radix-portal] input, [data-radix-portal] textarea,
+  [data-radix-portal] button, [data-radix-portal] a {
+    font-family: 'Inter', sans-serif !important;
     font-size: inherit;
     font-weight: inherit;
     line-height: inherit;
