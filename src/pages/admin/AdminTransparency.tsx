@@ -1,7 +1,7 @@
 import { useState, useRef } from "react";
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import { supabase } from "@/integrations/supabase/client";
-import { Upload, FileText, Trash2, Eye, Download } from "lucide-react";
+import { Upload, FileText, Trash2, Eye, Download, FolderOpen, Plus, ArrowLeft } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Skeleton } from "@/components/ui/skeleton";
@@ -13,14 +13,129 @@ import {
 import {
   Dialog, DialogContent, DialogHeader, DialogTitle, DialogFooter, DialogDescription,
 } from "@/components/ui/dialog";
-import type { Tables } from "@/integrations/supabase/types";
-
-type Report = Tables<"relatorios">;
-type AccessLog = Tables<"acessos_relatorios">;
 
 const s = { fontFamily: "'Inter', sans-serif" } as const;
 
-const AdminTransparency = () => {
+/* ───── Project list component ───── */
+const ProjectList = ({ onSelect }: { onSelect: (id: string) => void }) => {
+  const queryClient = useQueryClient();
+  const [createOpen, setCreateOpen] = useState(false);
+  const [name, setName] = useState("");
+  const [period, setPeriod] = useState("");
+
+  const { data: projects, isLoading } = useQuery({
+    queryKey: ["admin-projects"],
+    queryFn: async () => {
+      const { data, error } = await supabase
+        .from("projetos")
+        .select("*, relatorios(id)")
+        .order("created_at", { ascending: false });
+      if (error) throw error;
+      return data as (any & { relatorios: { id: string }[] })[];
+    },
+  });
+
+  const createMutation = useMutation({
+    mutationFn: async () => {
+      if (!name.trim()) throw new Error("Nome obrigatório");
+      const { error } = await supabase.from("projetos").insert({
+        name: name.trim(),
+        period: period.trim() || null,
+      });
+      if (error) throw error;
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["admin-projects"] });
+      toast({ title: "✅ Projeto criado!" });
+      setCreateOpen(false);
+      setName("");
+      setPeriod("");
+    },
+    onError: (e: any) => toast({ title: "Erro", description: e.message, variant: "destructive" }),
+  });
+
+  const deleteMutation = useMutation({
+    mutationFn: async (id: string) => {
+      const { error } = await supabase.from("projetos").delete().eq("id", id);
+      if (error) throw error;
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["admin-projects"] });
+      toast({ title: "✅ Projeto excluído." });
+    },
+  });
+
+  return (
+    <>
+      <div className="flex items-center justify-between mb-6">
+        <div>
+          <h2 className="font-bold text-zinc-800" style={{ ...s, fontSize: "1.5rem" }}>Projetos</h2>
+          <p style={{ ...s, fontSize: "0.875rem" }} className="text-zinc-500 mt-1">Gerencie projetos e seus relatórios de prestação de contas</p>
+        </div>
+        <Button onClick={() => setCreateOpen(true)} className="bg-emerald-500 hover:bg-emerald-600 text-white !text-sm">
+          <Plus className="h-4 w-4 mr-2" /> Novo Projeto
+        </Button>
+      </div>
+
+      {isLoading ? (
+        <div className="space-y-3">{[1, 2, 3].map(i => <Skeleton key={i} className="h-20 w-full" />)}</div>
+      ) : !projects?.length ? (
+        <div className="text-center py-16 bg-white rounded-xl border border-zinc-200">
+          <FolderOpen className="h-12 w-12 text-zinc-300 mx-auto mb-3" />
+          <p style={{ ...s, fontSize: "0.875rem" }} className="text-zinc-400">Nenhum projeto criado ainda.</p>
+        </div>
+      ) : (
+        <div className="grid gap-4">
+          {projects.map((p) => (
+            <div key={p.id} className="bg-white rounded-xl border border-zinc-200 p-5 flex items-center justify-between hover:shadow-sm transition-shadow">
+              <button onClick={() => onSelect(p.id)} className="flex-1 text-left">
+                <h3 style={{ ...s, fontSize: "1rem" }} className="font-semibold text-zinc-800">{p.name}</h3>
+                <p style={{ ...s, fontSize: "0.8125rem" }} className="text-zinc-400 mt-0.5">
+                  {p.period || "Sem período"} · {p.relatorios?.length || 0} relatório(s)
+                </p>
+              </button>
+              <div className="flex gap-1">
+                <Button variant="ghost" size="icon" className="h-8 w-8 text-zinc-400 hover:text-emerald-600" onClick={() => onSelect(p.id)}>
+                  <Eye className="h-4 w-4" />
+                </Button>
+                <Button variant="ghost" size="icon" className="h-8 w-8 text-zinc-400 hover:text-red-600" onClick={() => deleteMutation.mutate(p.id)}>
+                  <Trash2 className="h-4 w-4" />
+                </Button>
+              </div>
+            </div>
+          ))}
+        </div>
+      )}
+
+      <Dialog open={createOpen} onOpenChange={setCreateOpen}>
+        <DialogContent>
+          <DialogHeader>
+            <DialogTitle style={{ ...s, fontSize: "1.125rem" }}>Novo Projeto</DialogTitle>
+            <DialogDescription style={{ ...s, fontSize: "0.8125rem" }}>Crie um projeto para agrupar relatórios.</DialogDescription>
+          </DialogHeader>
+          <div className="space-y-4 py-2">
+            <div className="space-y-2">
+              <label style={{ ...s, fontSize: "0.8125rem" }} className="font-medium text-zinc-700">Nome do Projeto</label>
+              <Input value={name} onChange={(e) => setName(e.target.value)} placeholder="Ex: Viver o Viveiro" className="!text-sm" />
+            </div>
+            <div className="space-y-2">
+              <label style={{ ...s, fontSize: "0.8125rem" }} className="font-medium text-zinc-700">Período (opcional)</label>
+              <Input value={period} onChange={(e) => setPeriod(e.target.value)} placeholder="Ex: 2023-2024" className="!text-sm" />
+            </div>
+          </div>
+          <DialogFooter>
+            <Button variant="outline" onClick={() => setCreateOpen(false)} className="!text-sm">Cancelar</Button>
+            <Button onClick={() => createMutation.mutate()} disabled={!name.trim()} className="bg-emerald-500 hover:bg-emerald-600 text-white !text-sm">Criar</Button>
+          </DialogFooter>
+        </DialogContent>
+      </Dialog>
+    </>
+  );
+};
+
+/* ───── Project detail (reports + logs) ───── */
+const ProjectDetail = ({ projectId, onBack }: { projectId: string; onBack: () => void }) => {
+  const queryClient = useQueryClient();
   const [activeView, setActiveView] = useState<"reports" | "logs">("reports");
   const [uploadOpen, setUploadOpen] = useState(false);
   const [title, setTitle] = useState("");
@@ -28,28 +143,39 @@ const AdminTransparency = () => {
   const [file, setFile] = useState<File | null>(null);
   const [uploading, setUploading] = useState(false);
   const fileRef = useRef<HTMLInputElement>(null);
-  const queryClient = useQueryClient();
+
+  const { data: project } = useQuery({
+    queryKey: ["admin-project", projectId],
+    queryFn: async () => {
+      const { data, error } = await supabase.from("projetos").select("*").eq("id", projectId).single();
+      if (error) throw error;
+      return data;
+    },
+  });
 
   const { data: reports, isLoading: loadingReports } = useQuery({
-    queryKey: ["admin-reports"],
+    queryKey: ["admin-project-reports", projectId],
     queryFn: async () => {
-      const { data, error } = await supabase.from("relatorios").select("*").order("created_at", { ascending: false });
+      const { data, error } = await supabase.from("relatorios").select("*").eq("project_id", projectId).order("created_at", { ascending: false });
       if (error) throw error;
-      return data as Report[];
+      return data;
     },
   });
 
   const { data: logs, isLoading: loadingLogs } = useQuery({
-    queryKey: ["admin-access-logs"],
+    queryKey: ["admin-project-logs", projectId],
     queryFn: async () => {
+      const reportIds = reports?.map(r => r.id) || [];
+      if (!reportIds.length) return [];
       const { data, error } = await supabase
         .from("acessos_relatorios")
         .select("*, relatorios(title)")
+        .in("report_id", reportIds)
         .order("access_time", { ascending: false });
       if (error) throw error;
-      return data as (AccessLog & { relatorios: { title: string } | null })[];
+      return data as any[];
     },
-    enabled: activeView === "logs",
+    enabled: activeView === "logs" && !!reports,
   });
 
   const uploadMutation = useMutation({
@@ -64,20 +190,22 @@ const AdminTransparency = () => {
         title: title.trim(),
         file_url: urlData.publicUrl,
         description: description.trim() || null,
+        project_id: projectId,
       });
       if (error) throw error;
     },
     onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ["admin-reports"] });
-      toast({ title: "✅ Relatório enviado com sucesso!" });
+      queryClient.invalidateQueries({ queryKey: ["admin-project-reports", projectId] });
+      queryClient.invalidateQueries({ queryKey: ["admin-projects"] });
+      toast({ title: "✅ Relatório enviado!" });
       setUploadOpen(false);
       setTitle("");
       setDescription("");
       setFile(null);
       setUploading(false);
     },
-    onError: (e) => {
-      toast({ title: "❌ Erro ao enviar relatório.", description: e.message, variant: "destructive" });
+    onError: (e: any) => {
+      toast({ title: "Erro", description: e.message, variant: "destructive" });
       setUploading(false);
     },
   });
@@ -88,36 +216,38 @@ const AdminTransparency = () => {
       if (error) throw error;
     },
     onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ["admin-reports"] });
+      queryClient.invalidateQueries({ queryKey: ["admin-project-reports", projectId] });
+      queryClient.invalidateQueries({ queryKey: ["admin-projects"] });
       toast({ title: "✅ Relatório excluído." });
     },
   });
 
   const exportCSV = () => {
     if (!logs?.length) return;
-    const header = "Nome,E-mail,Documento Acessado,Data e Hora\n";
-    const rows = logs.map((l) =>
+    const header = "Nome,E-mail,Documento,Data e Hora\n";
+    const rows = logs.map((l: any) =>
       `"${l.user_name}","${l.user_email}","${l.relatorios?.title || ""}","${new Date(l.access_time).toLocaleString("pt-BR")}"`
     ).join("\n");
     const blob = new Blob([header + rows], { type: "text/csv;charset=utf-8;" });
     const url = URL.createObjectURL(blob);
     const a = document.createElement("a");
     a.href = url;
-    a.download = `acessos_relatorios_${new Date().toISOString().slice(0, 10)}.csv`;
+    a.download = `acessos_${project?.name || "projeto"}_${new Date().toISOString().slice(0, 10)}.csv`;
     a.click();
     URL.revokeObjectURL(url);
   };
 
   return (
-    <div className="space-y-6 font-['Inter',sans-serif]">
+    <div className="space-y-6">
       <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
-        <div>
-          <h2 className="font-bold text-zinc-800" style={{ ...s, fontSize: "1.5rem", color: "#27272a" }}>
-            Transparência e Prestação de Contas
-          </h2>
-          <p style={{ ...s, fontSize: "0.875rem" }} className="text-zinc-500 mt-1">
-            Gerencie relatórios e acompanhe acessos
-          </p>
+        <div className="flex items-center gap-3">
+          <Button variant="ghost" size="icon" className="h-9 w-9" onClick={onBack}>
+            <ArrowLeft className="h-4 w-4" />
+          </Button>
+          <div>
+            <h2 className="font-bold text-zinc-800" style={{ ...s, fontSize: "1.5rem" }}>{project?.name || "Projeto"}</h2>
+            <p style={{ ...s, fontSize: "0.875rem" }} className="text-zinc-500">{project?.period || ""}</p>
+          </div>
         </div>
         <div className="flex gap-2">
           {activeView === "logs" && (
@@ -131,7 +261,6 @@ const AdminTransparency = () => {
         </div>
       </div>
 
-      {/* View toggle */}
       <div className="flex gap-1 bg-zinc-100 p-1 rounded-lg w-fit">
         <button onClick={() => setActiveView("reports")}
           className={`px-4 py-2 rounded-md text-sm font-medium transition-colors ${activeView === "reports" ? "bg-white text-zinc-900 shadow-sm" : "text-zinc-500"}`}
@@ -148,11 +277,11 @@ const AdminTransparency = () => {
       {activeView === "reports" ? (
         <div className="bg-white rounded-xl border border-zinc-200 overflow-hidden">
           {loadingReports ? (
-            <div className="p-6 space-y-3">{[1, 2, 3].map((i) => <Skeleton key={i} className="h-12 w-full" />)}</div>
+            <div className="p-6 space-y-3">{[1, 2, 3].map(i => <Skeleton key={i} className="h-12 w-full" />)}</div>
           ) : !reports?.length ? (
             <div className="text-center py-16">
               <FileText className="h-12 w-12 text-zinc-300 mx-auto mb-3" />
-              <p style={{ ...s, fontSize: "0.875rem" }} className="text-zinc-400">Nenhum relatório enviado ainda.</p>
+              <p style={{ ...s, fontSize: "0.875rem" }} className="text-zinc-400">Nenhum relatório neste projeto.</p>
             </div>
           ) : (
             <Table>
@@ -191,11 +320,11 @@ const AdminTransparency = () => {
       ) : (
         <div className="bg-white rounded-xl border border-zinc-200 overflow-hidden">
           {loadingLogs ? (
-            <div className="p-6 space-y-3">{[1, 2, 3].map((i) => <Skeleton key={i} className="h-12 w-full" />)}</div>
+            <div className="p-6 space-y-3">{[1, 2, 3].map(i => <Skeleton key={i} className="h-12 w-full" />)}</div>
           ) : !logs?.length ? (
             <div className="text-center py-16">
               <Eye className="h-12 w-12 text-zinc-300 mx-auto mb-3" />
-              <p style={{ ...s, fontSize: "0.875rem" }} className="text-zinc-400">Nenhum acesso registrado ainda.</p>
+              <p style={{ ...s, fontSize: "0.875rem" }} className="text-zinc-400">Nenhum acesso registrado.</p>
             </div>
           ) : (
             <Table>
@@ -208,7 +337,7 @@ const AdminTransparency = () => {
                 </TableRow>
               </TableHeader>
               <TableBody>
-                {logs.map((l) => (
+                {logs.map((l: any) => (
                   <TableRow key={l.id} className="hover:bg-zinc-50">
                     <TableCell style={{ ...s, fontSize: "0.875rem" }} className="text-zinc-800">{l.user_name}</TableCell>
                     <TableCell style={{ ...s, fontSize: "0.8125rem" }} className="text-zinc-500">{l.user_email}</TableCell>
@@ -229,7 +358,7 @@ const AdminTransparency = () => {
         <DialogContent>
           <DialogHeader>
             <DialogTitle style={{ ...s, fontSize: "1.125rem" }}>Upload de Relatório</DialogTitle>
-            <DialogDescription style={{ ...s, fontSize: "0.8125rem" }}>Envie um PDF para a área de transparência.</DialogDescription>
+            <DialogDescription style={{ ...s, fontSize: "0.8125rem" }}>Envie um PDF para o projeto {project?.name}.</DialogDescription>
           </DialogHeader>
           <div className="space-y-4 py-2">
             <div className="space-y-2">
@@ -255,6 +384,25 @@ const AdminTransparency = () => {
           </DialogFooter>
         </DialogContent>
       </Dialog>
+    </div>
+  );
+};
+
+/* ───── Main component ───── */
+const AdminTransparency = () => {
+  const [selectedProject, setSelectedProject] = useState<string | null>(null);
+
+  if (selectedProject) {
+    return (
+      <div className="font-['Inter',sans-serif]">
+        <ProjectDetail projectId={selectedProject} onBack={() => setSelectedProject(null)} />
+      </div>
+    );
+  }
+
+  return (
+    <div className="font-['Inter',sans-serif]">
+      <ProjectList onSelect={setSelectedProject} />
     </div>
   );
 };
