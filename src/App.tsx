@@ -77,6 +77,7 @@ const App = () => (
               <Route path="/como-apoiar" element={<Participe />} />
               <Route path="/participe" element={<Participe />} />
               <Route path="/contato" element={<Contato />} />
+              <Route path="/informativos/:ano" element={<InformativosAno />} />
 
               {/* Admin routes */}
               <Route path="/admin/login" element={<AdminLogin />} />
