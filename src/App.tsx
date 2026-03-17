@@ -28,6 +28,7 @@ const AdminContent = lazy(() => import("./pages/admin/AdminContent"));
 const AdminTransparency = lazy(() => import("./pages/admin/AdminTransparency"));
 const AdminNewsletter = lazy(() => import("./pages/admin/AdminNewsletter"));
 const AdminEmailMarketing = lazy(() => import("./pages/admin/AdminEmailMarketing"));
+const AdminInformativos = lazy(() => import("./pages/admin/AdminInformativos"));
 
 import AdminLayout from "./components/admin/AdminLayout";
 import ProtectedRoute from "./components/admin/ProtectedRoute";
