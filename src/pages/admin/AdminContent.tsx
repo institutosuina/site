@@ -1,8 +1,9 @@
 import { useState } from "react";
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import { supabase } from "@/integrations/supabase/client";
-import { FileText, Newspaper, BookOpen, ClipboardList, Plus, Pencil, Trash2, X, Save } from "lucide-react";
+import { FileText, Newspaper, BookOpen, ClipboardList, Plus, Pencil, Trash2, X, Save, Paperclip } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import EditalAnexosManager from "@/components/admin/EditalAnexosManager";
 import { Input } from "@/components/ui/input";
 import { Skeleton } from "@/components/ui/skeleton";
 import { toast } from "@/hooks/use-toast";
@@ -39,6 +40,7 @@ const AdminContent = () => {
   const [editingId, setEditingId] = useState<string | null>(null);
   const [form, setForm] = useState(emptyForm);
   const [deleteId, setDeleteId] = useState<string | null>(null);
+  const [anexosItem, setAnexosItem] = useState<{ id: string; title: string } | null>(null);
   const queryClient = useQueryClient();
 
   const { data: items, isLoading } = useQuery({
@@ -198,6 +200,11 @@ const AdminContent = () => {
                   </TableCell>
                   <TableCell className="text-right">
                     <div className="flex justify-end gap-1">
+                      {activeTab === "editais" && (
+                        <Button variant="ghost" size="icon" className="h-8 w-8 text-zinc-400 hover:text-emerald-600" onClick={() => setAnexosItem({ id: item.id, title: item.title })} title="Gerenciar anexos">
+                          <Paperclip className="h-4 w-4" />
+                        </Button>
+                      )}
                       <Button variant="ghost" size="icon" className="h-8 w-8 text-zinc-400 hover:text-blue-600" onClick={() => openEdit(item)}>
                         <Pencil className="h-4 w-4" />
                       </Button>
@@ -285,6 +292,16 @@ const AdminContent = () => {
           </DialogFooter>
         </DialogContent>
       </Dialog>
+
+      {/* Edital Anexos Manager */}
+      {anexosItem && (
+        <EditalAnexosManager
+          editalId={anexosItem.id}
+          editalTitle={anexosItem.title}
+          open={!!anexosItem}
+          onOpenChange={(open) => !open && setAnexosItem(null)}
+        />
+      )}
     </div>
   );
 };

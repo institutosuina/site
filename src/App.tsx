@@ -17,6 +17,7 @@ import PrestacaoContas from "./pages/PrestacaoContas";
 import Participe from "./pages/Participe";
 import Contato from "./pages/Contato";
 import PostDetail from "./pages/PostDetail";
+import EditalDetail from "./pages/EditalDetail";
 import NotFound from "./pages/NotFound";
 
 // Admin pages (lazy loaded)
@@ -67,7 +68,7 @@ const App = () => (
               <Route path="/blog" element={<Blog />} />
               <Route path="/blog/:slug" element={<PostDetail table="posts_blog" />} />
               <Route path="/editais" element={<Editais />} />
-              <Route path="/editais/:slug" element={<PostDetail table="editais" />} />
+              <Route path="/editais/:slug" element={<EditalDetail />} />
               <Route path="/material-tecnico" element={<MaterialTecnico />} />
               <Route path="/material-tecnico/:slug" element={<PostDetail table="material_tecnico" />} />
               <Route path="/prestacao-de-contas" element={<PrestacaoContas />} />
