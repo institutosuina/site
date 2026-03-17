@@ -144,7 +144,6 @@ const PrestacaoContas = () => {
                 <ProjectPillCard
                   key={projeto.id}
                   name={projeto.name}
-                  period={projeto.period || undefined}
                   onClick={() => setSelectedProject(projeto.id)}
                 />
               )) : (
