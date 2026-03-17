@@ -5,6 +5,7 @@ import {
   FileText,
   Shield,
   Mail,
+  Send,
   LogOut,
   Menu,
   X,
