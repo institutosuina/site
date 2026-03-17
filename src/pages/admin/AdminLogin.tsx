@@ -34,7 +34,7 @@ const AdminLogin = () => {
   };
 
   return (
-    <div className="min-h-screen bg-zinc-50 flex items-center justify-center px-4 font-['Inter',sans-serif]">
+    <div className="admin-scope min-h-screen bg-zinc-50 flex items-center justify-center px-4 font-['Inter',sans-serif]">
       <div className="w-full max-w-sm">
         <div className="text-center mb-8">
           <img src={logoSuina} alt="Instituto Suinã" className="h-16 w-16 object-contain mx-auto mb-4" />

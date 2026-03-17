@@ -38,7 +38,7 @@ const AdminLayout = ({ children }: { children: ReactNode }) => {
   };
 
   return (
-    <div className="min-h-screen bg-zinc-50 font-['Inter',sans-serif] flex">
+    <div className="admin-scope min-h-screen bg-zinc-50 font-['Inter',sans-serif] flex">
       {/* Mobile overlay */}
       {sidebarOpen && (
         <div
