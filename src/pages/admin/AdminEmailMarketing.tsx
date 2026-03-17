@@ -392,7 +392,7 @@ const AdminEmailMarketing = () => {
 
       {/* Save List Dialog */}
       <Dialog open={saveListOpen} onOpenChange={setSaveListOpen}>
-        <DialogContent className="max-w-md">
+        <DialogContent className="admin-scope max-w-md text-sm">
           <DialogHeader>
             <DialogTitle style={{ ...s, fontSize: "1.125rem" }}>Salvar Lista de Destinatários</DialogTitle>
             <DialogDescription style={{ ...s, fontSize: "0.8125rem" }}>
