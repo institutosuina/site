@@ -1,11 +1,16 @@
+import { useState } from "react";
 import Layout from "@/components/Layout";
-import { Download } from "lucide-react";
+import { Download, X } from "lucide-react";
 import { useQuery } from "@tanstack/react-query";
 import { supabase } from "@/integrations/supabase/client";
 import { Skeleton } from "@/components/ui/skeleton";
-import { Link } from "react-router-dom";
+import {
+  Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription,
+} from "@/components/ui/dialog";
 
 const MaterialTecnico = () => {
+  const [selectedId, setSelectedId] = useState<string | null>(null);
+
   const { data: items, isLoading } = useQuery({
     queryKey: ["material-tecnico-public"],
     queryFn: async () => {
@@ -17,6 +22,22 @@ const MaterialTecnico = () => {
       if (error) throw error;
       return data;
     },
+  });
+
+  const selectedItem = items?.find((m) => m.id === selectedId);
+
+  const { data: anexos } = useQuery({
+    queryKey: ["material-tecnico-anexos", selectedId],
+    queryFn: async () => {
+      const { data, error } = await supabase
+        .from("material_tecnico_anexos")
+        .select("*")
+        .eq("material_id", selectedId!)
+        .order("sort_order", { ascending: true });
+      if (error) throw error;
+      return data;
+    },
+    enabled: !!selectedId,
   });
 
   return (
@@ -35,10 +56,10 @@ const MaterialTecnico = () => {
           ) : (
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
               {items.map((m) => (
-                <Link
+                <button
                   key={m.id}
-                  to={`/material-tecnico/${m.slug}`}
-                  className="rounded-2xl overflow-hidden shadow-lg group cursor-pointer relative block aspect-[4/3]"
+                  onClick={() => setSelectedId(m.id)}
+                  className="rounded-2xl overflow-hidden shadow-lg group cursor-pointer relative block aspect-[4/3] w-full text-left"
                 >
                   {m.cover_image ? (
                     <img src={m.cover_image} alt={m.title} className="w-full h-full object-cover" />
@@ -51,12 +72,49 @@ const MaterialTecnico = () => {
                     <Download className="w-10 h-10 mb-3" />
                     <p className="font-display text-lg font-bold leading-tight">{m.title}</p>
                   </div>
-                </Link>
+                </button>
               ))}
             </div>
           )}
         </div>
       </section>
+
+      {/* Modal de downloads */}
+      <Dialog open={!!selectedId} onOpenChange={(open) => !open && setSelectedId(null)}>
+        <DialogContent className="max-w-md">
+          <DialogHeader>
+            <DialogTitle className="font-display text-xl font-bold text-foreground leading-tight">
+              {selectedItem?.title}
+            </DialogTitle>
+            <DialogDescription className="text-muted-foreground font-body text-sm">
+              Documentos disponíveis para download
+            </DialogDescription>
+          </DialogHeader>
+
+          <div className="space-y-3 py-2">
+            {!anexos?.length ? (
+              <p className="text-muted-foreground text-sm text-center py-6 font-body">
+                Nenhum documento disponível.
+              </p>
+            ) : (
+              anexos.map((a) => (
+                <a
+                  key={a.id}
+                  href={a.file_url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex items-center gap-3 p-4 rounded-xl border border-border bg-card hover:bg-accent/50 transition-colors group"
+                >
+                  <div className="h-10 w-10 rounded-lg bg-primary/10 flex items-center justify-center flex-shrink-0 group-hover:bg-primary/20 transition-colors">
+                    <Download className="h-5 w-5 text-primary" />
+                  </div>
+                  <span className="font-body font-medium text-foreground flex-1">{a.title}</span>
+                </a>
+              ))
+            )}
+          </div>
+        </DialogContent>
+      </Dialog>
     </Layout>
   );
 };
