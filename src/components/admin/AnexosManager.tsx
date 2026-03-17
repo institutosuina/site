@@ -35,13 +35,13 @@ const AnexosManager = ({
   const { data: anexos, isLoading } = useQuery({
     queryKey,
     queryFn: async () => {
-      const { data, error } = await supabase
-        .from(tableName)
+      const { data, error } = await (supabase
+        .from(tableName as "edital_anexos") as any)
         .select("*")
         .eq(foreignKey, parentId)
         .order("sort_order", { ascending: true });
       if (error) throw error;
-      return data;
+      return data as any[];
     },
     enabled: open,
   });
