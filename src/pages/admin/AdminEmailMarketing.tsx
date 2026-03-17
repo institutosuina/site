@@ -163,7 +163,7 @@ const AdminEmailMarketing = () => {
   const canSend = subject.trim() && body.trim() && finalAudience;
 
   return (
-    <div className="space-y-6 font-['Inter',sans-serif]">
+    <div className="admin-scope space-y-6 font-['Inter',sans-serif] text-sm">
       <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
         <div>
           <h2 className="font-bold text-zinc-800" style={{ ...s, fontSize: "1.5rem" }}>E-mail Marketing</h2>
