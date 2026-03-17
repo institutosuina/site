@@ -292,6 +292,16 @@ const AdminContent = () => {
           </DialogFooter>
         </DialogContent>
       </Dialog>
+
+      {/* Edital Anexos Manager */}
+      {anexosItem && (
+        <EditalAnexosManager
+          editalId={anexosItem.id}
+          editalTitle={anexosItem.title}
+          open={!!anexosItem}
+          onOpenChange={(open) => !open && setAnexosItem(null)}
+        />
+      )}
     </div>
   );
 };
