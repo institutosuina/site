@@ -84,7 +84,7 @@ const AnexosManager = ({
         file_url: urlData.publicUrl,
         sort_order: nextOrder,
       };
-      const { error: insertError } = await supabase.from(tableName).insert(insertData);
+      const { error: insertError } = await (supabase.from(tableName as "edital_anexos") as any).insert(insertData);
       if (insertError) throw insertError;
 
       queryClient.invalidateQueries({ queryKey });
