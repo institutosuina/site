@@ -19,12 +19,12 @@ import {
 } from "@/components/ui/select";
 import type { Tables, TablesInsert } from "@/integrations/supabase/types";
 
-const tabConfig = [
-  { key: "posts_blog" as const, label: "Blog", icon: FileText },
-  { key: "noticias" as const, label: "Notícias", icon: Newspaper },
-  { key: "material_tecnico" as const, label: "Material Técnico", icon: BookOpen },
-  { key: "editais" as const, label: "Editais", icon: ClipboardList },
-];
+const tabConfig: Record<ContentTable, { label: string; icon: any }> = {
+  posts_blog: { label: "Blog", icon: FileText },
+  noticias: { label: "Notícias", icon: Newspaper },
+  material_tecnico: { label: "Material Técnico", icon: BookOpen },
+  editais: { label: "Editais", icon: ClipboardList },
+};
 
 type ContentTable = "posts_blog" | "noticias" | "material_tecnico" | "editais";
 type ContentRow = Tables<ContentTable>;
@@ -34,8 +34,12 @@ const slugify = (text: string) =>
 
 const emptyForm = { title: "", slug: "", content: "", status: "Rascunho", cover_image: "", attachments: [] as { name: string; url: string }[] };
 
-const AdminContent = () => {
-  const [activeTab, setActiveTab] = useState<ContentTable>("posts_blog");
+interface AdminContentProps {
+  contentType?: ContentTable;
+}
+
+const AdminContent = ({ contentType = "posts_blog" }: AdminContentProps) => {
+  const activeTab = contentType;
   const [dialogOpen, setDialogOpen] = useState(false);
   const [editingId, setEditingId] = useState<string | null>(null);
   const [form, setForm] = useState(emptyForm);
