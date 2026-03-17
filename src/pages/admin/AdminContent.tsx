@@ -300,12 +300,49 @@ const AdminContent = () => {
               <Input value={form.slug} onChange={(e) => setForm({ ...form, slug: e.target.value })} placeholder="slug-automatico" className="!text-sm" />
             </div>
             <div className="space-y-2">
-              <label style={{ ...s, fontSize: "0.8125rem" }} className="font-medium text-zinc-700">URL da imagem de capa</label>
-              <Input value={form.cover_image} onChange={(e) => setForm({ ...form, cover_image: e.target.value })} placeholder="https://..." className="!text-sm" />
+              <label style={{ ...s, fontSize: "0.8125rem" }} className="font-medium text-zinc-700">Imagem de capa</label>
+              {form.cover_image && (
+                <div className="relative w-full h-32 rounded-lg overflow-hidden border border-zinc-200 mb-2">
+                  <img src={form.cover_image} alt="Capa" className="w-full h-full object-cover" />
+                  <button onClick={() => setForm({ ...form, cover_image: "" })} className="absolute top-1 right-1 bg-white/80 rounded-full p-1 hover:bg-white">
+                    <X className="h-3 w-3" />
+                  </button>
+                </div>
+              )}
+              <label className="flex items-center justify-center gap-2 px-4 py-3 rounded-lg border-2 border-dashed border-zinc-300 cursor-pointer hover:border-emerald-400 transition-colors">
+                <ImageIcon className="h-4 w-4 text-zinc-500" />
+                <span style={{ ...s, fontSize: "0.8125rem" }} className="text-zinc-600">
+                  {uploadingCover ? "Enviando..." : "Selecionar imagem"}
+                </span>
+                <input type="file" className="hidden" accept="image/*" onChange={handleCoverUpload} disabled={uploadingCover} />
+              </label>
             </div>
             <div className="space-y-2">
-              <label style={{ ...s, fontSize: "0.8125rem" }} className="font-medium text-zinc-700">Conteúdo</label>
-              <Textarea value={form.content} onChange={(e) => setForm({ ...form, content: e.target.value })} placeholder="Escreva o conteúdo aqui (Markdown suportado)" rows={10} className="!text-sm" />
+              <label style={{ ...s, fontSize: "0.8125rem" }} className="font-medium text-zinc-700">Conteúdo (texto)</label>
+              <Textarea value={form.content} onChange={(e) => setForm({ ...form, content: e.target.value })} placeholder="Escreva o conteúdo aqui (opcional)" rows={6} className="!text-sm" />
+            </div>
+            <div className="space-y-2">
+              <label style={{ ...s, fontSize: "0.8125rem" }} className="font-medium text-zinc-700">Arquivos (PDFs, documentos)</label>
+              {form.attachments.length > 0 && (
+                <div className="space-y-1">
+                  {form.attachments.map((a, i) => (
+                    <div key={i} className="flex items-center gap-2 p-2 rounded border border-zinc-200 bg-zinc-50">
+                      <File className="h-4 w-4 text-zinc-400 flex-shrink-0" />
+                      <span style={{ ...s, fontSize: "0.75rem" }} className="flex-1 truncate text-zinc-700">{a.name}</span>
+                      <button onClick={() => setForm((f) => ({ ...f, attachments: f.attachments.filter((_, j) => j !== i) }))} className="text-zinc-400 hover:text-red-500">
+                        <X className="h-3 w-3" />
+                      </button>
+                    </div>
+                  ))}
+                </div>
+              )}
+              <label className="flex items-center justify-center gap-2 px-4 py-3 rounded-lg border-2 border-dashed border-zinc-300 cursor-pointer hover:border-emerald-400 transition-colors">
+                <Upload className="h-4 w-4 text-zinc-500" />
+                <span style={{ ...s, fontSize: "0.8125rem" }} className="text-zinc-600">
+                  {uploadingPdfs ? "Enviando..." : "Selecionar arquivos (múltiplos)"}
+                </span>
+                <input type="file" className="hidden" accept=".pdf,.doc,.docx,.xls,.xlsx,.zip" multiple onChange={handlePdfUpload} disabled={uploadingPdfs} />
+              </label>
             </div>
             <div className="space-y-2">
               <label style={{ ...s, fontSize: "0.8125rem" }} className="font-medium text-zinc-700">Status</label>
