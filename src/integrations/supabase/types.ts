@@ -106,6 +106,41 @@ export type Database = {
         }
         Relationships: []
       }
+      edital_anexos: {
+        Row: {
+          created_at: string
+          edital_id: string
+          file_url: string
+          id: string
+          sort_order: number
+          title: string
+        }
+        Insert: {
+          created_at?: string
+          edital_id: string
+          file_url: string
+          id?: string
+          sort_order?: number
+          title: string
+        }
+        Update: {
+          created_at?: string
+          edital_id?: string
+          file_url?: string
+          id?: string
+          sort_order?: number
+          title?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "edital_anexos_edital_id_fkey"
+            columns: ["edital_id"]
+            isOneToOne: false
+            referencedRelation: "editais"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       emails_enviados: {
         Row: {
           body: string
