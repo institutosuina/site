@@ -111,16 +111,67 @@ const AdminContent = () => {
     setForm(emptyForm);
   };
 
+  const [uploadingCover, setUploadingCover] = useState(false);
+  const [uploadingPdfs, setUploadingPdfs] = useState(false);
+
+  const handleCoverUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (!file) return;
+    setUploadingCover(true);
+    try {
+      const path = `${activeTab}/${Date.now()}-${file.name}`;
+      const { error } = await supabase.storage.from("covers").upload(path, file);
+      if (error) throw error;
+      const { data } = supabase.storage.from("covers").getPublicUrl(path);
+      setForm((f) => ({ ...f, cover_image: data.publicUrl }));
+      toast({ title: "✅ Imagem enviada!" });
+    } catch (err: any) {
+      toast({ title: "❌ Erro ao enviar imagem.", description: err.message, variant: "destructive" });
+    } finally {
+      setUploadingCover(false);
+      e.target.value = "";
+    }
+  };
+
+  const handlePdfUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
+    const files = e.target.files;
+    if (!files?.length) return;
+    setUploadingPdfs(true);
+    try {
+      const newAttachments: { name: string; url: string }[] = [];
+      for (const file of Array.from(files)) {
+        const path = `${activeTab}/${Date.now()}-${file.name}`;
+        const { error } = await supabase.storage.from("covers").upload(path, file);
+        if (error) throw error;
+        const { data } = supabase.storage.from("covers").getPublicUrl(path);
+        newAttachments.push({ name: file.name, url: data.publicUrl });
+      }
+      setForm((f) => ({ ...f, attachments: [...f.attachments, ...newAttachments] }));
+      toast({ title: `✅ ${newAttachments.length} arquivo(s) enviado(s)!` });
+    } catch (err: any) {
+      toast({ title: "❌ Erro ao enviar arquivo.", description: err.message, variant: "destructive" });
+    } finally {
+      setUploadingPdfs(false);
+      e.target.value = "";
+    }
+  };
+
   const handleSubmit = () => {
     if (!form.title.trim()) {
       toast({ title: "Título é obrigatório", variant: "destructive" });
       return;
     }
     const slug = form.slug || slugify(form.title);
+    // Build content: text + attachment links
+    let finalContent = form.content;
+    if (form.attachments.length > 0) {
+      const links = form.attachments.map((a) => `[${a.name}](${a.url})`).join("\n");
+      finalContent = finalContent ? `${finalContent}\n\n---\n\n**Arquivos anexos:**\n${links}` : `**Arquivos anexos:**\n${links}`;
+    }
     const payload: any = {
       title: form.title.trim(),
       slug,
-      content: form.content,
+      content: finalContent,
       status: form.status,
       cover_image: form.cover_image || null,
       published_at: form.status === "Publicado" ? new Date().toISOString() : null,
