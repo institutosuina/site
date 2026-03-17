@@ -14,6 +14,30 @@ export type Database = {
   }
   public: {
     Tables: {
+      acessos_pagina: {
+        Row: {
+          access_time: string
+          id: string
+          page: string
+          user_email: string
+          user_name: string
+        }
+        Insert: {
+          access_time?: string
+          id?: string
+          page?: string
+          user_email: string
+          user_name: string
+        }
+        Update: {
+          access_time?: string
+          id?: string
+          page?: string
+          user_email?: string
+          user_name?: string
+        }
+        Relationships: []
+      }
       acessos_relatorios: {
         Row: {
           access_time: string
