@@ -3,13 +3,15 @@ import { Link, useLocation, useNavigate } from "react-router-dom";
 import {
   LayoutDashboard,
   FileText,
+  Newspaper,
+  BookOpen,
+  ClipboardList,
   Shield,
   Mail,
   Send,
   LogOut,
   Menu,
   X,
-  ChevronDown,
   Megaphone,
 } from "lucide-react";
 import { useAuth } from "@/contexts/AuthContext";
@@ -18,11 +20,14 @@ import logoSuina from "@/assets/logo-suina.png";
 
 const navItems = [
   { label: "Dashboard", icon: LayoutDashboard, path: "/admin" },
-  { label: "Conteúdo", icon: FileText, path: "/admin/content" },
+  { label: "Blog", icon: FileText, path: "/admin/blog" },
+  { label: "Notícias", icon: Newspaper, path: "/admin/noticias" },
+  { label: "Material Técnico", icon: BookOpen, path: "/admin/material-tecnico" },
+  { label: "Editais", icon: ClipboardList, path: "/admin/editais" },
+  { label: "Informativos", icon: Megaphone, path: "/admin/informativos" },
   { label: "Transparência", icon: Shield, path: "/admin/transparency" },
   { label: "Newsletter", icon: Mail, path: "/admin/newsletter" },
   { label: "E-mail Marketing", icon: Send, path: "/admin/email-marketing" },
-  { label: "Informativos", icon: Megaphone, path: "/admin/informativos" },
 ];
 
 const AdminLayout = ({ children }: { children: ReactNode }) => {
