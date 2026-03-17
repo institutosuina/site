@@ -11,6 +11,7 @@ import logoSuina from "@/assets/logo-suina-white.png";
 
 const Participe = () => {
   const location = useLocation();
+  const navigate = useNavigate();
   const [donationData, setDonationData] = useState({ name: "", email: "" });
   const [agreed, setAgreed] = useState(false);
   const [newsletterData, setNewsletterData] = useState({ name: "", email: "" });
