@@ -235,12 +235,34 @@ export type Database = {
         }
         Relationships: []
       }
+      projetos: {
+        Row: {
+          created_at: string
+          id: string
+          name: string
+          period: string | null
+        }
+        Insert: {
+          created_at?: string
+          id?: string
+          name: string
+          period?: string | null
+        }
+        Update: {
+          created_at?: string
+          id?: string
+          name?: string
+          period?: string | null
+        }
+        Relationships: []
+      }
       relatorios: {
         Row: {
           created_at: string
           description: string | null
           file_url: string
           id: string
+          project_id: string | null
           title: string
         }
         Insert: {
@@ -248,6 +270,7 @@ export type Database = {
           description?: string | null
           file_url: string
           id?: string
+          project_id?: string | null
           title: string
         }
         Update: {
@@ -255,9 +278,18 @@ export type Database = {
           description?: string | null
           file_url?: string
           id?: string
+          project_id?: string | null
           title?: string
         }
-        Relationships: []
+        Relationships: [
+          {
+            foreignKeyName: "relatorios_project_id_fkey"
+            columns: ["project_id"]
+            isOneToOne: false
+            referencedRelation: "projetos"
+            referencedColumns: ["id"]
+          },
+        ]
       }
       subscribers: {
         Row: {
