@@ -3,7 +3,7 @@ import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import { supabase } from "@/integrations/supabase/client";
 import { FileText, Newspaper, BookOpen, ClipboardList, Plus, Pencil, Trash2, X, Save, Paperclip, Upload, Image as ImageIcon, File } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import EditalAnexosManager from "@/components/admin/EditalAnexosManager";
+import AnexosManager from "@/components/admin/AnexosManager";
 import { Input } from "@/components/ui/input";
 import { Skeleton } from "@/components/ui/skeleton";
 import { toast } from "@/hooks/use-toast";
