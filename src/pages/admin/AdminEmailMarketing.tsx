@@ -163,7 +163,7 @@ const AdminEmailMarketing = () => {
   const canSend = subject.trim() && body.trim() && finalAudience;
 
   return (
-    <div className="space-y-6 font-['Inter',sans-serif]">
+    <div className="admin-scope space-y-6 font-['Inter',sans-serif] text-sm">
       <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
         <div>
           <h2 className="font-bold text-zinc-800" style={{ ...s, fontSize: "1.5rem" }}>E-mail Marketing</h2>
@@ -277,7 +277,7 @@ const AdminEmailMarketing = () => {
 
       {/* Compose Dialog */}
       <Dialog open={composeOpen} onOpenChange={setComposeOpen}>
-        <DialogContent className="max-w-2xl max-h-[90vh] overflow-y-auto">
+        <DialogContent className="admin-scope max-w-2xl max-h-[90vh] overflow-y-auto text-sm">
           <DialogHeader>
             <DialogTitle style={{ ...s, fontSize: "1.125rem" }}>Nova Campanha</DialogTitle>
             <DialogDescription style={{ ...s, fontSize: "0.8125rem" }}>
@@ -317,7 +317,7 @@ const AdminEmailMarketing = () => {
                     <SelectTrigger className="!text-sm flex-1">
                       <SelectValue placeholder="Carregar lista salva..." />
                     </SelectTrigger>
-                    <SelectContent>
+                    <SelectContent className="admin-scope text-sm">
                       {savedLists.map((list) => (
                         <SelectItem key={list.id} value={list.id}>
                           {list.name} ({list.emails.length} e-mails)
@@ -392,7 +392,7 @@ const AdminEmailMarketing = () => {
 
       {/* Save List Dialog */}
       <Dialog open={saveListOpen} onOpenChange={setSaveListOpen}>
-        <DialogContent className="max-w-md">
+        <DialogContent className="admin-scope max-w-md text-sm">
           <DialogHeader>
             <DialogTitle style={{ ...s, fontSize: "1.125rem" }}>Salvar Lista de Destinatários</DialogTitle>
             <DialogDescription style={{ ...s, fontSize: "0.8125rem" }}>
