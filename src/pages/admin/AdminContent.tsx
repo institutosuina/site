@@ -200,6 +200,11 @@ const AdminContent = () => {
                   </TableCell>
                   <TableCell className="text-right">
                     <div className="flex justify-end gap-1">
+                      {activeTab === "editais" && (
+                        <Button variant="ghost" size="icon" className="h-8 w-8 text-zinc-400 hover:text-emerald-600" onClick={() => setAnexosItem({ id: item.id, title: item.title })} title="Gerenciar anexos">
+                          <Paperclip className="h-4 w-4" />
+                        </Button>
+                      )}
                       <Button variant="ghost" size="icon" className="h-8 w-8 text-zinc-400 hover:text-blue-600" onClick={() => openEdit(item)}>
                         <Pencil className="h-4 w-4" />
                       </Button>
