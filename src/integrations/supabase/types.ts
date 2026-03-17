@@ -14,7 +14,251 @@ export type Database = {
   }
   public: {
     Tables: {
-      [_ in never]: never
+      acessos_relatorios: {
+        Row: {
+          access_time: string
+          id: string
+          report_id: string
+          user_email: string
+          user_name: string
+        }
+        Insert: {
+          access_time?: string
+          id?: string
+          report_id: string
+          user_email: string
+          user_name: string
+        }
+        Update: {
+          access_time?: string
+          id?: string
+          report_id?: string
+          user_email?: string
+          user_name?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "acessos_relatorios_report_id_fkey"
+            columns: ["report_id"]
+            isOneToOne: false
+            referencedRelation: "relatorios"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      editais: {
+        Row: {
+          content: string | null
+          cover_image: string | null
+          created_at: string
+          id: string
+          published_at: string | null
+          slug: string
+          status: string
+          title: string
+          updated_at: string
+        }
+        Insert: {
+          content?: string | null
+          cover_image?: string | null
+          created_at?: string
+          id?: string
+          published_at?: string | null
+          slug: string
+          status?: string
+          title: string
+          updated_at?: string
+        }
+        Update: {
+          content?: string | null
+          cover_image?: string | null
+          created_at?: string
+          id?: string
+          published_at?: string | null
+          slug?: string
+          status?: string
+          title?: string
+          updated_at?: string
+        }
+        Relationships: []
+      }
+      emails_enviados: {
+        Row: {
+          body: string
+          id: string
+          sent_at: string
+          subject: string
+          target_audience: string
+        }
+        Insert: {
+          body: string
+          id?: string
+          sent_at?: string
+          subject: string
+          target_audience: string
+        }
+        Update: {
+          body?: string
+          id?: string
+          sent_at?: string
+          subject?: string
+          target_audience?: string
+        }
+        Relationships: []
+      }
+      material_tecnico: {
+        Row: {
+          content: string | null
+          cover_image: string | null
+          created_at: string
+          id: string
+          published_at: string | null
+          slug: string
+          status: string
+          title: string
+          updated_at: string
+        }
+        Insert: {
+          content?: string | null
+          cover_image?: string | null
+          created_at?: string
+          id?: string
+          published_at?: string | null
+          slug: string
+          status?: string
+          title: string
+          updated_at?: string
+        }
+        Update: {
+          content?: string | null
+          cover_image?: string | null
+          created_at?: string
+          id?: string
+          published_at?: string | null
+          slug?: string
+          status?: string
+          title?: string
+          updated_at?: string
+        }
+        Relationships: []
+      }
+      noticias: {
+        Row: {
+          content: string | null
+          cover_image: string | null
+          created_at: string
+          id: string
+          published_at: string | null
+          slug: string
+          status: string
+          title: string
+          updated_at: string
+        }
+        Insert: {
+          content?: string | null
+          cover_image?: string | null
+          created_at?: string
+          id?: string
+          published_at?: string | null
+          slug: string
+          status?: string
+          title: string
+          updated_at?: string
+        }
+        Update: {
+          content?: string | null
+          cover_image?: string | null
+          created_at?: string
+          id?: string
+          published_at?: string | null
+          slug?: string
+          status?: string
+          title?: string
+          updated_at?: string
+        }
+        Relationships: []
+      }
+      posts_blog: {
+        Row: {
+          content: string | null
+          cover_image: string | null
+          created_at: string
+          id: string
+          published_at: string | null
+          slug: string
+          status: string
+          title: string
+          updated_at: string
+        }
+        Insert: {
+          content?: string | null
+          cover_image?: string | null
+          created_at?: string
+          id?: string
+          published_at?: string | null
+          slug: string
+          status?: string
+          title: string
+          updated_at?: string
+        }
+        Update: {
+          content?: string | null
+          cover_image?: string | null
+          created_at?: string
+          id?: string
+          published_at?: string | null
+          slug?: string
+          status?: string
+          title?: string
+          updated_at?: string
+        }
+        Relationships: []
+      }
+      relatorios: {
+        Row: {
+          created_at: string
+          description: string | null
+          file_url: string
+          id: string
+          title: string
+        }
+        Insert: {
+          created_at?: string
+          description?: string | null
+          file_url: string
+          id?: string
+          title: string
+        }
+        Update: {
+          created_at?: string
+          description?: string | null
+          file_url?: string
+          id?: string
+          title?: string
+        }
+        Relationships: []
+      }
+      subscribers: {
+        Row: {
+          created_at: string
+          email: string
+          id: string
+          name: string
+        }
+        Insert: {
+          created_at?: string
+          email: string
+          id?: string
+          name: string
+        }
+        Update: {
+          created_at?: string
+          email?: string
+          id?: string
+          name?: string
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never
