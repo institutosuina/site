@@ -117,7 +117,8 @@ const AdminInformativos = () => {
     if (!file) return;
     setUploading(true);
     try {
-      const path = `informativos/${Date.now()}-${file.name}`;
+      const safeName = file.name.replace(/[^a-zA-Z0-9._-]/g, '_');
+      const path = `informativos/${Date.now()}-${safeName}`;
       const { error } = await supabase.storage.from("covers").upload(path, file);
       if (error) throw error;
       const { data } = supabase.storage.from("covers").getPublicUrl(path);
