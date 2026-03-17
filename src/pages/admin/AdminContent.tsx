@@ -185,15 +185,17 @@ const AdminContent = ({ contentType = "posts_blog" }: AdminContentProps) => {
 
   const s = { fontFamily: "'Inter', sans-serif" } as const;
 
+  const config = tabConfig[activeTab];
+
   return (
     <div className="space-y-6 font-['Inter',sans-serif]">
       <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
         <div>
           <h2 className="font-bold text-zinc-800" style={{ ...s, fontSize: "1.5rem", color: "#27272a" }}>
-            Gestão de Conteúdo
+            {config.label}
           </h2>
           <p style={{ ...s, fontSize: "0.875rem" }} className="text-zinc-500 mt-1">
-            Gerencie blog, notícias, materiais e editais
+            Gerencie os conteúdos de {config.label.toLowerCase()}
           </p>
         </div>
         <Button onClick={openNew} className="bg-emerald-500 hover:bg-emerald-600 text-white !text-sm">
@@ -201,21 +203,6 @@ const AdminContent = ({ contentType = "posts_blog" }: AdminContentProps) => {
         </Button>
       </div>
 
-      {/* Tabs */}
-      <div className="flex gap-1 bg-zinc-100 p-1 rounded-lg overflow-x-auto">
-        {tabConfig.map((tab) => (
-          <button
-            key={tab.key}
-            onClick={() => setActiveTab(tab.key)}
-            className={`flex items-center gap-2 px-4 py-2 rounded-md text-sm font-medium transition-colors whitespace-nowrap ${
-              activeTab === tab.key ? "bg-white text-zinc-900 shadow-sm" : "text-zinc-500 hover:text-zinc-700"
-            }`}
-            style={{ ...s, fontSize: "0.8125rem" }}
-          >
-            <tab.icon className="h-4 w-4" /> {tab.label}
-          </button>
-        ))}
-      </div>
 
       {/* Table */}
       <div className="bg-white rounded-xl border border-zinc-200 overflow-hidden">
