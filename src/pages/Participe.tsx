@@ -9,6 +9,88 @@ import { FaWhatsapp, FaFacebookF, FaInstagram, FaLinkedinIn, FaYoutube } from "r
 import folhaSvg from "@/assets/folha.svg";
 import logoSuina from "@/assets/logo-suina-white.png";
 
+const cardColors = [
+  "hsl(var(--suina-red))",
+  "hsl(var(--primary))",
+  "hsl(var(--suina-orange))",
+];
+
+const InformativosSection = ({ navigate }: { navigate: (path: string) => void }) => {
+  const { data: anos } = useQuery({
+    queryKey: ["informativo-anos-public"],
+    queryFn: async () => {
+      const { data, error } = await supabase
+        .from("informativo_anos")
+        .select("*")
+        .order("ano", { ascending: false });
+      if (error) throw error;
+      return data;
+    },
+  });
+
+  const [startIndex, setStartIndex] = useState(0);
+  const visibleCount = 3;
+  const items = anos || [];
+  const canPrev = startIndex > 0;
+  const canNext = startIndex + visibleCount < items.length;
+  const visible = items.slice(startIndex, startIndex + visibleCount);
+
+  return (
+    <section id="conteudos" className="py-16 md:py-24 px-4 bg-background">
+      <div className="container mx-auto max-w-3xl text-center">
+        <h2 className="section-title text-accent mb-6">
+          Quer revisitar os conteúdos já compartilhados?
+        </h2>
+        <p className="body-text text-muted-foreground mb-2 max-w-xl mx-auto">
+          Aqui você encontra os informativos anteriores do Instituto Suinã, com
+          notícias, conquistas e registros importantes da nossa caminhada.
+        </p>
+        <p className="font-body text-base md:text-lg font-bold text-foreground mb-8">
+          Acesse, relembre e acompanhe nossa trajetória.
+        </p>
+
+        {items.length > 0 && (
+          <div className="flex items-center justify-center gap-6">
+            <button
+              onClick={() => canPrev && setStartIndex((i) => i - 1)}
+              disabled={!canPrev}
+              className="w-10 h-10 rounded-full border border-border flex items-center justify-center text-muted-foreground hover:bg-muted transition-colors disabled:opacity-30"
+            >
+              <ChevronLeft className="w-5 h-5" />
+            </button>
+
+            <div className="flex gap-4">
+              {visible.map((item, i) => (
+                <button
+                  key={item.id}
+                  onClick={() => navigate(`/informativos/${item.ano}`)}
+                  className="w-36 h-36 md:w-44 md:h-44 rounded-2xl flex flex-col items-center justify-center text-primary-foreground hover:opacity-90 transition-opacity cursor-pointer"
+                  style={{ backgroundColor: cardColors[i % cardColors.length] }}
+                >
+                  <span className="caption-text mb-1">EDIÇÃO</span>
+                  <span className="font-display text-2xl md:text-3xl font-bold">{item.ano}</span>
+                </button>
+              ))}
+            </div>
+
+            <button
+              onClick={() => canNext && setStartIndex((i) => i + 1)}
+              disabled={!canNext}
+              className="w-10 h-10 rounded-full border border-border flex items-center justify-center text-muted-foreground hover:bg-muted transition-colors disabled:opacity-30"
+            >
+              <ChevronRight className="w-5 h-5" />
+            </button>
+          </div>
+        )}
+
+        {items.length === 0 && (
+          <p className="text-muted-foreground font-body text-sm">Nenhum informativo disponível ainda.</p>
+        )}
+      </div>
+    </section>
+  );
+};
+
 const Participe = () => {
   const location = useLocation();
   const navigate = useNavigate();
