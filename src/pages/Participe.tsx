@@ -124,9 +124,9 @@ const Participe = () => {
                 className="flex-1 px-6 py-4 rounded-full bg-input text-foreground placeholder:text-muted-foreground font-body text-base focus:outline-none focus:ring-2 focus:ring-ring/20 transition-all" />
             </div>
 
-            <button type="submit"
-              className="px-10 py-3 bg-primary text-primary-foreground font-display font-bold text-base tracking-[0.2em] uppercase rounded-lg hover:opacity-90 transition-all shadow-md">
-              ENVIAR
+            <button type="submit" disabled={newsletterSubmitting}
+              className="px-10 py-3 bg-primary text-primary-foreground font-display font-bold text-base tracking-[0.2em] uppercase rounded-lg hover:opacity-90 transition-all shadow-md disabled:opacity-50 disabled:cursor-not-allowed">
+              {newsletterSubmitting ? "ENVIANDO..." : "ENVIAR"}
             </button>
           </form>
         </div>
