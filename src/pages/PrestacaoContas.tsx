@@ -132,23 +132,16 @@ const PrestacaoContas = () => {
               </div>
             </>
           ) : (
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+            <div className="flex flex-col items-center gap-6">
               {projects?.length ? projects.map((projeto) => (
-                <button
+                <ProjectPillCard
                   key={projeto.id}
+                  name={projeto.name}
+                  period={projeto.period || undefined}
                   onClick={() => setSelectedProject(projeto.id)}
-                  className="flex items-center gap-4 bg-suina-brown rounded-[24px] px-8 py-5 cursor-pointer hover:scale-[1.02] transition-all shadow-xl group paper-texture text-left w-full"
-                >
-                  <div className="flex-1">
-                    <h3 className="font-display text-xl md:text-2xl font-semibold leading-snug text-primary-foreground mb-1">{projeto.name}</h3>
-                    <p className="caption-text text-primary-foreground/70">{projeto.period || ""}</p>
-                  </div>
-                  <div className="w-12 h-12 rounded-full border-2 border-white/30 flex items-center justify-center shrink-0 group-hover:border-white transition-colors">
-                    <Plus className="w-6 h-6 text-primary-foreground" />
-                  </div>
-                </button>
+                />
               )) : (
-                <p className="body-text text-muted-foreground col-span-2 text-center py-8">Nenhum projeto disponível ainda.</p>
+                <p className="body-text text-muted-foreground text-center py-8">Nenhum projeto disponível ainda.</p>
               )}
             </div>
           )}
