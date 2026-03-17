@@ -1,6 +1,8 @@
 import { useState, useEffect } from "react";
 import { useLocation } from "react-router-dom";
 import Layout from "@/components/Layout";
+import { supabase } from "@/integrations/supabase/client";
+import { toast } from "@/hooks/use-toast";
 import { Heart } from "lucide-react";
 import { FaWhatsapp, FaFacebookF, FaInstagram, FaLinkedinIn, FaYoutube } from "react-icons/fa";
 import folhaSvg from "@/assets/folha.svg";
@@ -26,8 +28,25 @@ const Participe = () => {
     if (!agreed) return;
   };
 
-  const handleNewsletterSubmit = (e: React.FormEvent) => {
+  const [newsletterSubmitting, setNewsletterSubmitting] = useState(false);
+
+  const handleNewsletterSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    if (!newsletterData.name.trim() || !newsletterData.email.trim()) return;
+    setNewsletterSubmitting(true);
+    try {
+      const { error } = await supabase.from("subscribers").insert({
+        name: newsletterData.name.trim(),
+        email: newsletterData.email.trim(),
+      });
+      if (error) throw error;
+      toast({ title: "✅ Cadastro realizado!", description: "Você receberá nossas novidades em breve." });
+      setNewsletterData({ name: "", email: "" });
+    } catch (err: any) {
+      toast({ title: "Erro ao cadastrar", description: err.message || "Tente novamente.", variant: "destructive" });
+    } finally {
+      setNewsletterSubmitting(false);
+    }
   };
 
   return (
@@ -105,9 +124,9 @@ const Participe = () => {
                 className="flex-1 px-6 py-4 rounded-full bg-input text-foreground placeholder:text-muted-foreground font-body text-base focus:outline-none focus:ring-2 focus:ring-ring/20 transition-all" />
             </div>
 
-            <button type="submit"
-              className="px-10 py-3 bg-primary text-primary-foreground font-display font-bold text-base tracking-[0.2em] uppercase rounded-lg hover:opacity-90 transition-all shadow-md">
-              ENVIAR
+            <button type="submit" disabled={newsletterSubmitting}
+              className="px-10 py-3 bg-primary text-primary-foreground font-display font-bold text-base tracking-[0.2em] uppercase rounded-lg hover:opacity-90 transition-all shadow-md disabled:opacity-50 disabled:cursor-not-allowed">
+              {newsletterSubmitting ? "ENVIANDO..." : "ENVIAR"}
             </button>
           </form>
         </div>
