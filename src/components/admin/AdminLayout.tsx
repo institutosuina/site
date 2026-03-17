@@ -5,6 +5,7 @@ import {
   FileText,
   Shield,
   Mail,
+  Send,
   LogOut,
   Menu,
   X,
@@ -19,6 +20,7 @@ const navItems = [
   { label: "Conteúdo", icon: FileText, path: "/admin/content" },
   { label: "Transparência", icon: Shield, path: "/admin/transparency" },
   { label: "Newsletter", icon: Mail, path: "/admin/newsletter" },
+  { label: "E-mail Marketing", icon: Send, path: "/admin/email-marketing" },
 ];
 
 const AdminLayout = ({ children }: { children: ReactNode }) => {
