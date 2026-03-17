@@ -34,35 +34,25 @@ const MaterialTecnico = () => {
             <p className="text-center text-muted-foreground font-body py-16">Nenhum material publicado ainda.</p>
           ) : (
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-              {items.map((m) => {
-                // Extract first PDF/link from content if available
-                const pdfMatch = m.content?.match(/\[.*?\]\((https?:\/\/[^\s)]+)\)/);
-                const downloadUrl = pdfMatch?.[1];
-                const Wrapper = downloadUrl ? 'a' : Link;
-                const wrapperProps = downloadUrl
-                  ? { href: downloadUrl, target: "_blank", rel: "noopener noreferrer" }
-                  : { to: `/material-tecnico/${m.slug}` };
-
-                return (
-                  <Wrapper
-                    key={m.id}
-                    {...(wrapperProps as any)}
-                    className="rounded-2xl overflow-hidden shadow-lg group cursor-pointer relative block aspect-[4/3]"
-                  >
-                    {m.cover_image ? (
-                      <img src={m.cover_image} alt={m.title} className="w-full h-full object-cover" />
-                    ) : (
-                      <div className="w-full h-full bg-muted flex items-center justify-center">
-                        <span className="text-muted-foreground text-sm">Sem imagem</span>
-                      </div>
-                    )}
-                    <div className="absolute inset-0 bg-black/50 flex flex-col items-center justify-center text-white opacity-0 group-hover:opacity-100 transition-opacity duration-300 p-6 text-center">
-                      <Download className="w-10 h-10 mb-3" />
-                      <p className="font-display text-lg font-bold leading-tight">{m.title}</p>
+              {items.map((m) => (
+                <Link
+                  key={m.id}
+                  to={`/material-tecnico/${m.slug}`}
+                  className="rounded-2xl overflow-hidden shadow-lg group cursor-pointer relative block aspect-[4/3]"
+                >
+                  {m.cover_image ? (
+                    <img src={m.cover_image} alt={m.title} className="w-full h-full object-cover" />
+                  ) : (
+                    <div className="w-full h-full bg-muted flex items-center justify-center">
+                      <span className="text-muted-foreground text-sm">Sem imagem</span>
                     </div>
-                  </Wrapper>
-                );
-              })}
+                  )}
+                  <div className="absolute inset-0 bg-black/50 flex flex-col items-center justify-center text-white opacity-0 group-hover:opacity-100 transition-opacity duration-300 p-6 text-center">
+                    <Download className="w-10 h-10 mb-3" />
+                    <p className="font-display text-lg font-bold leading-tight">{m.title}</p>
+                  </div>
+                </Link>
+              ))}
             </div>
           )}
         </div>
