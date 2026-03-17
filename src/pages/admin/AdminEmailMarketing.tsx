@@ -277,7 +277,7 @@ const AdminEmailMarketing = () => {
 
       {/* Compose Dialog */}
       <Dialog open={composeOpen} onOpenChange={setComposeOpen}>
-        <DialogContent className="max-w-2xl max-h-[90vh] overflow-y-auto">
+        <DialogContent className="admin-scope max-w-2xl max-h-[90vh] overflow-y-auto text-sm">
           <DialogHeader>
             <DialogTitle style={{ ...s, fontSize: "1.125rem" }}>Nova Campanha</DialogTitle>
             <DialogDescription style={{ ...s, fontSize: "0.8125rem" }}>
