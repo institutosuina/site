@@ -1,15 +1,18 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import { useQuery } from "@tanstack/react-query";
+import { supabase } from "@/integrations/supabase/client";
 import Layout from "@/components/Layout";
 import leafDecoration from "@/assets/leaf-decoration.png";
-import paperTexture from "@/assets/paper-texture.png";
-import { Plus, ShieldCheck, Mail, User, ArrowRight, X } from "lucide-react";
+import { Plus, ShieldCheck, Mail, User, ArrowRight, X, Download, ArrowLeft } from "lucide-react";
+import { toast } from "@/hooks/use-toast";
 
 const PrestacaoContas = () => {
   const navigate = useNavigate();
   const [isAuthorized, setIsAuthorized] = useState(false);
   const [showModal, setShowModal] = useState(false);
   const [formData, setFormData] = useState({ name: "", email: "" });
+  const [selectedProject, setSelectedProject] = useState<string | null>(null);
 
   useEffect(() => {
     const authorized = localStorage.getItem("suina_accountability_auth");
@@ -20,13 +23,56 @@ const PrestacaoContas = () => {
     }
   }, []);
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const { data: projects } = useQuery({
+    queryKey: ["public-projects"],
+    queryFn: async () => {
+      const { data, error } = await supabase
+        .from("projetos")
+        .select("*")
+        .order("created_at", { ascending: false });
+      if (error) throw error;
+      return data;
+    },
+    enabled: isAuthorized,
+  });
+
+  const { data: reports } = useQuery({
+    queryKey: ["public-project-reports", selectedProject],
+    queryFn: async () => {
+      const { data, error } = await supabase
+        .from("relatorios")
+        .select("*")
+        .eq("project_id", selectedProject!)
+        .order("created_at", { ascending: false });
+      if (error) throw error;
+      return data;
+    },
+    enabled: !!selectedProject && isAuthorized,
+  });
+
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (formData.name && formData.email) {
       localStorage.setItem("suina_accountability_auth", "true");
+      localStorage.setItem("suina_user_name", formData.name);
+      localStorage.setItem("suina_user_email", formData.email);
       setIsAuthorized(true);
       setShowModal(false);
     }
+  };
+
+  const handleAccessReport = async (report: any) => {
+    const userName = localStorage.getItem("suina_user_name") || formData.name;
+    const userEmail = localStorage.getItem("suina_user_email") || formData.email;
+
+    // Log access
+    await supabase.from("acessos_relatorios").insert({
+      report_id: report.id,
+      user_name: userName,
+      user_email: userEmail,
+    });
+
+    window.open(report.file_url, "_blank");
   };
 
   return (
@@ -37,26 +83,61 @@ const PrestacaoContas = () => {
           <h1 className="section-title mb-8 uppercase underline underline-offset-4 text-secondary">
             Prestação de Contas
           </h1>
-          
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-            {[
-              { title: "Viver o Viveiro", date: "2023-2024" },
-              { title: "Restauração Rio Paraíba", date: "2022-2023" },
-            ].map((projeto, i) => (
-              <div 
-                key={i}
-                className="flex items-center gap-4 bg-suina-brown rounded-[24px] px-8 py-5 cursor-pointer hover:scale-[1.02] transition-all shadow-xl group paper-texture"
+
+          {selectedProject ? (
+            <>
+              <button
+                onClick={() => setSelectedProject(null)}
+                className="flex items-center gap-2 mb-8 font-body text-secondary hover:opacity-80 transition-opacity"
               >
-                <div className="flex-1">
-                  <h3 className="font-display text-xl md:text-2xl font-semibold leading-snug text-primary-foreground mb-1">{projeto.title}</h3>
-                  <p className="caption-text text-primary-foreground/70">{projeto.date}</p>
-                </div>
-                <div className="w-12 h-12 rounded-full border-2 border-white/30 flex items-center justify-center shrink-0 group-hover:border-white transition-colors">
-                  <Plus className="w-6 h-6 text-primary-foreground" />
-                </div>
+                <ArrowLeft className="w-4 h-4" /> Voltar aos projetos
+              </button>
+              <div className="grid grid-cols-1 gap-4">
+                {reports?.length ? reports.map((report) => (
+                  <button
+                    key={report.id}
+                    onClick={() => handleAccessReport(report)}
+                    className="flex items-center gap-4 bg-suina-brown rounded-[24px] px-8 py-5 cursor-pointer hover:scale-[1.02] transition-all shadow-xl group paper-texture text-left w-full"
+                  >
+                    <div className="flex-1">
+                      <h3 className="font-display text-lg md:text-xl font-semibold leading-snug text-primary-foreground">{report.title}</h3>
+                      {report.description && (
+                        <p className="caption-text text-primary-foreground/70 mt-1">{report.description}</p>
+                      )}
+                      <p className="caption-text text-primary-foreground/50 mt-1">
+                        {new Date(report.created_at).toLocaleDateString("pt-BR")}
+                      </p>
+                    </div>
+                    <div className="w-12 h-12 rounded-full border-2 border-white/30 flex items-center justify-center shrink-0 group-hover:border-white transition-colors">
+                      <Download className="w-5 h-5 text-primary-foreground" />
+                    </div>
+                  </button>
+                )) : (
+                  <p className="body-text text-center text-muted-foreground py-8">Nenhum relatório disponível para este projeto.</p>
+                )}
               </div>
-            ))}
-          </div>
+            </>
+          ) : (
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+              {projects?.length ? projects.map((projeto) => (
+                <button
+                  key={projeto.id}
+                  onClick={() => setSelectedProject(projeto.id)}
+                  className="flex items-center gap-4 bg-suina-brown rounded-[24px] px-8 py-5 cursor-pointer hover:scale-[1.02] transition-all shadow-xl group paper-texture text-left w-full"
+                >
+                  <div className="flex-1">
+                    <h3 className="font-display text-xl md:text-2xl font-semibold leading-snug text-primary-foreground mb-1">{projeto.name}</h3>
+                    <p className="caption-text text-primary-foreground/70">{projeto.period || ""}</p>
+                  </div>
+                  <div className="w-12 h-12 rounded-full border-2 border-white/30 flex items-center justify-center shrink-0 group-hover:border-white transition-colors">
+                    <Plus className="w-6 h-6 text-primary-foreground" />
+                  </div>
+                </button>
+              )) : (
+                <p className="body-text text-muted-foreground col-span-2 text-center py-8">Nenhum projeto disponível ainda.</p>
+              )}
+            </div>
+          )}
         </div>
       </section>
 
@@ -64,7 +145,7 @@ const PrestacaoContas = () => {
       {showModal && (
         <div className="fixed inset-0 z-[100] flex items-center justify-center p-4 bg-black/40 backdrop-blur-md">
           <div className="bg-card rounded-[40px] max-w-md w-full p-10 relative shadow-[0_20px_50px_rgba(0,0,0,0.3)] animate-in fade-in zoom-in duration-300">
-            <button 
+            <button
               onClick={() => navigate("/transparencia")}
               className="absolute top-6 right-6 p-2 text-muted-foreground hover:text-suina-red transition-colors"
               title="Fechar e voltar"
@@ -85,18 +166,18 @@ const PrestacaoContas = () => {
             <form onSubmit={handleSubmit} className="space-y-4">
               <div className="relative">
                 <User className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-muted-foreground" />
-                <input 
+                <input
                   type="text" placeholder="Seu nome completo" required
                   className="w-full pl-12 pr-4 py-4 bg-muted border border-border rounded-2xl focus:outline-none focus:ring-2 focus:ring-primary/20 transition-all font-body"
-                  value={formData.name} onChange={(e) => setFormData({...formData, name: e.target.value})}
+                  value={formData.name} onChange={(e) => setFormData({ ...formData, name: e.target.value })}
                 />
               </div>
               <div className="relative">
                 <Mail className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-muted-foreground" />
-                <input 
+                <input
                   type="email" placeholder="Seu melhor e-mail" required
                   className="w-full pl-12 pr-4 py-4 bg-muted border border-border rounded-2xl focus:outline-none focus:ring-2 focus:ring-primary/20 transition-all font-body"
-                  value={formData.email} onChange={(e) => setFormData({...formData, email: e.target.value})}
+                  value={formData.email} onChange={(e) => setFormData({ ...formData, email: e.target.value })}
                 />
               </div>
 
@@ -107,7 +188,7 @@ const PrestacaoContas = () => {
                 </p>
               </div>
 
-              <button 
+              <button
                 type="submit"
                 className="w-full py-5 bg-primary text-primary-foreground rounded-2xl font-display font-bold text-lg flex items-center justify-center gap-2 hover:opacity-90 transition-all shadow-lg active:scale-[0.98]"
               >
