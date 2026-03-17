@@ -7,16 +7,15 @@ import leafDecoration from "@/assets/leaf-decoration.png";
 import { Plus, ShieldCheck, Mail, User, ArrowRight, X, Download, ArrowLeft } from "lucide-react";
 import { toast } from "@/hooks/use-toast";
 
-const ProjectPillCard = ({ name, period, onClick }: { name: string; period?: string; onClick: () => void }) => (
-  <button onClick={onClick} className="group relative flex items-center w-full max-w-[520px] hover:scale-[1.02] transition-transform">
+const ProjectPillCard = ({ name, onClick }: { name: string; onClick: () => void }) => (
+  <button onClick={onClick} className="group relative flex items-center hover:scale-[1.02] transition-transform" style={{ width: 'min(420px, 85vw)' }}>
     {/* Pill body */}
-    <div className="flex-1 bg-suina-brown border-[3px] border-white rounded-full py-4 px-8 pr-16 min-h-[72px] flex flex-col justify-center">
-      <span className="font-display text-base md:text-lg font-bold text-primary-foreground leading-tight">{name}</span>
-      {period && <span className="font-body text-xs text-primary-foreground/70 mt-0.5">{period}</span>}
+    <div className="flex-1 bg-suina-brown border-[3px] border-white/80 rounded-full h-[56px] md:h-[64px] flex items-center pl-6 md:pl-8 pr-14 md:pr-16 shadow-lg">
+      <span className="font-display text-sm md:text-base font-bold text-primary-foreground leading-tight whitespace-nowrap">{name}</span>
     </div>
-    {/* Circle + icon */}
-    <div className="absolute right-0 w-[72px] h-[72px] rounded-full bg-suina-brown border-[3px] border-white flex items-center justify-center">
-      <span className="font-display text-4xl font-normal text-primary-foreground leading-none select-none">+</span>
+    {/* Circle + icon overlapping right edge */}
+    <div className="absolute right-0 w-[56px] h-[56px] md:w-[64px] md:h-[64px] rounded-full bg-suina-brown border-[3px] border-white/80 flex items-center justify-center shadow-lg">
+      <span className="font-display text-3xl md:text-4xl font-normal text-primary-foreground leading-none select-none" style={{ marginTop: '-2px' }}>+</span>
     </div>
   </button>
 );
@@ -145,7 +144,6 @@ const PrestacaoContas = () => {
                 <ProjectPillCard
                   key={projeto.id}
                   name={projeto.name}
-                  period={projeto.period || undefined}
                   onClick={() => setSelectedProject(projeto.id)}
                 />
               )) : (
