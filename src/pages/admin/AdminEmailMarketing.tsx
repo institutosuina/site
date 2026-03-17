@@ -317,7 +317,7 @@ const AdminEmailMarketing = () => {
                     <SelectTrigger className="!text-sm flex-1">
                       <SelectValue placeholder="Carregar lista salva..." />
                     </SelectTrigger>
-                    <SelectContent>
+                    <SelectContent className="admin-scope text-sm">
                       {savedLists.map((list) => (
                         <SelectItem key={list.id} value={list.id}>
                           {list.name} ({list.emails.length} e-mails)
