@@ -32,7 +32,7 @@ type ContentRow = Tables<ContentTable>;
 const slugify = (text: string) =>
   text.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "").replace(/[^a-z0-9]+/g, "-").replace(/(^-|-$)/g, "");
 
-const emptyForm = { title: "", slug: "", content: "", status: "Rascunho", cover_image: "" };
+const emptyForm = { title: "", slug: "", content: "", status: "Rascunho", cover_image: "", attachments: [] as { name: string; url: string }[] };
 
 const AdminContent = () => {
   const [activeTab, setActiveTab] = useState<ContentTable>("posts_blog");
