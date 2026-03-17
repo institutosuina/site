@@ -1,7 +1,7 @@
-import { useState } from "react";
+import { useState, useRef } from "react";
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import { supabase } from "@/integrations/supabase/client";
-import { FileText, Newspaper, BookOpen, ClipboardList, Plus, Pencil, Trash2, X, Save, Paperclip } from "lucide-react";
+import { FileText, Newspaper, BookOpen, ClipboardList, Plus, Pencil, Trash2, X, Save, Paperclip, Upload, Image as ImageIcon, File } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import EditalAnexosManager from "@/components/admin/EditalAnexosManager";
 import { Input } from "@/components/ui/input";
