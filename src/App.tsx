@@ -18,6 +18,7 @@ import Participe from "./pages/Participe";
 import Contato from "./pages/Contato";
 import PostDetail from "./pages/PostDetail";
 import EditalDetail from "./pages/EditalDetail";
+import InformativosAno from "./pages/InformativosAno";
 import NotFound from "./pages/NotFound";
 
 // Admin pages (lazy loaded)
@@ -27,6 +28,7 @@ const AdminContent = lazy(() => import("./pages/admin/AdminContent"));
 const AdminTransparency = lazy(() => import("./pages/admin/AdminTransparency"));
 const AdminNewsletter = lazy(() => import("./pages/admin/AdminNewsletter"));
 const AdminEmailMarketing = lazy(() => import("./pages/admin/AdminEmailMarketing"));
+const AdminInformativos = lazy(() => import("./pages/admin/AdminInformativos"));
 
 import AdminLayout from "./components/admin/AdminLayout";
 import ProtectedRoute from "./components/admin/ProtectedRoute";
@@ -75,6 +77,7 @@ const App = () => (
               <Route path="/como-apoiar" element={<Participe />} />
               <Route path="/participe" element={<Participe />} />
               <Route path="/contato" element={<Contato />} />
+              <Route path="/informativos/:ano" element={<InformativosAno />} />
 
               {/* Admin routes */}
               <Route path="/admin/login" element={<AdminLogin />} />
@@ -83,6 +86,7 @@ const App = () => (
               <Route path="/admin/transparency" element={<AdminPage><AdminTransparency /></AdminPage>} />
               <Route path="/admin/newsletter" element={<AdminPage><AdminNewsletter /></AdminPage>} />
               <Route path="/admin/email-marketing" element={<AdminPage><AdminEmailMarketing /></AdminPage>} />
+              <Route path="/admin/informativos" element={<AdminPage><AdminInformativos /></AdminPage>} />
 
               <Route path="*" element={<NotFound />} />
             </Routes>
