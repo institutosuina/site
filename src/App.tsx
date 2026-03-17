@@ -18,6 +18,7 @@ import Participe from "./pages/Participe";
 import Contato from "./pages/Contato";
 import PostDetail from "./pages/PostDetail";
 import EditalDetail from "./pages/EditalDetail";
+import MaterialTecnicoDetail from "./pages/MaterialTecnicoDetail";
 import InformativosAno from "./pages/InformativosAno";
 import NotFound from "./pages/NotFound";
 
