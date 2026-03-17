@@ -70,6 +70,14 @@ const PrestacaoContas = () => {
       localStorage.setItem("suina_accountability_auth", "true");
       localStorage.setItem("suina_user_name", formData.name);
       localStorage.setItem("suina_user_email", formData.email);
+
+      // Log page access
+      await supabase.from("acessos_pagina").insert({
+        user_name: formData.name,
+        user_email: formData.email,
+        page: "prestacao-de-contas",
+      });
+
       setIsAuthorized(true);
       setShowModal(false);
     }
