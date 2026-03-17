@@ -106,6 +106,27 @@ export type Database = {
         }
         Relationships: []
       }
+      listas_destinatarios: {
+        Row: {
+          created_at: string
+          emails: string[]
+          id: string
+          name: string
+        }
+        Insert: {
+          created_at?: string
+          emails?: string[]
+          id?: string
+          name: string
+        }
+        Update: {
+          created_at?: string
+          emails?: string[]
+          id?: string
+          name?: string
+        }
+        Relationships: []
+      }
       material_tecnico: {
         Row: {
           content: string | null
