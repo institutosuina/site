@@ -165,6 +165,62 @@ export type Database = {
         }
         Relationships: []
       }
+      informativo_anos: {
+        Row: {
+          ano: number
+          created_at: string
+          id: string
+        }
+        Insert: {
+          ano: number
+          created_at?: string
+          id?: string
+        }
+        Update: {
+          ano?: number
+          created_at?: string
+          id?: string
+        }
+        Relationships: []
+      }
+      informativos: {
+        Row: {
+          ano_id: string
+          created_at: string
+          file_url: string
+          id: string
+          numero: number
+          sort_order: number
+          title: string
+        }
+        Insert: {
+          ano_id: string
+          created_at?: string
+          file_url: string
+          id?: string
+          numero?: number
+          sort_order?: number
+          title: string
+        }
+        Update: {
+          ano_id?: string
+          created_at?: string
+          file_url?: string
+          id?: string
+          numero?: number
+          sort_order?: number
+          title?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "informativos_ano_id_fkey"
+            columns: ["ano_id"]
+            isOneToOne: false
+            referencedRelation: "informativo_anos"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       listas_destinatarios: {
         Row: {
           created_at: string
