@@ -89,7 +89,7 @@ const ProjectList = ({ onSelect }: { onSelect: (id: string) => void }) => {
           {projects.map((p) => (
             <div key={p.id} className="bg-white rounded-xl border border-zinc-200 p-5 flex items-center justify-between hover:shadow-sm transition-shadow">
               <button onClick={() => onSelect(p.id)} className="flex-1 text-left">
-                <h3 style={{ ...s, fontSize: "1rem" }} className="font-semibold text-zinc-800">{p.name}</h3>
+                <h3 style={{ ...s, fontSize: "1rem" }} className="font-bold text-zinc-800">{p.name}</h3>
                 <p style={{ ...s, fontSize: "0.8125rem" }} className="text-zinc-400 mt-0.5">
                   {p.period || "Sem período"} · {p.relatorios?.length || 0} relatório(s)
                 </p>
@@ -287,10 +287,10 @@ const ProjectDetail = ({ projectId, onBack }: { projectId: string; onBack: () =>
             <Table>
               <TableHeader>
                 <TableRow className="bg-zinc-50">
-                  <TableHead style={{ ...s, fontSize: "0.75rem" }} className="font-semibold text-zinc-600">Título</TableHead>
-                  <TableHead style={{ ...s, fontSize: "0.75rem" }} className="font-semibold text-zinc-600 hidden sm:table-cell">Descrição</TableHead>
-                  <TableHead style={{ ...s, fontSize: "0.75rem" }} className="font-semibold text-zinc-600 hidden md:table-cell">Data</TableHead>
-                  <TableHead style={{ ...s, fontSize: "0.75rem" }} className="font-semibold text-zinc-600 text-right">Ações</TableHead>
+                  <TableHead style={{ ...s, fontSize: "0.75rem" }} className="font-bold text-zinc-600">Título</TableHead>
+                  <TableHead style={{ ...s, fontSize: "0.75rem" }} className="font-bold text-zinc-600 hidden sm:table-cell">Descrição</TableHead>
+                  <TableHead style={{ ...s, fontSize: "0.75rem" }} className="font-bold text-zinc-600 hidden md:table-cell">Data</TableHead>
+                  <TableHead style={{ ...s, fontSize: "0.75rem" }} className="font-bold text-zinc-600 text-right">Ações</TableHead>
                 </TableRow>
               </TableHeader>
               <TableBody>
@@ -330,10 +330,10 @@ const ProjectDetail = ({ projectId, onBack }: { projectId: string; onBack: () =>
             <Table>
               <TableHeader>
                 <TableRow className="bg-zinc-50">
-                  <TableHead style={{ ...s, fontSize: "0.75rem" }} className="font-semibold text-zinc-600">Nome</TableHead>
-                  <TableHead style={{ ...s, fontSize: "0.75rem" }} className="font-semibold text-zinc-600">E-mail</TableHead>
-                  <TableHead style={{ ...s, fontSize: "0.75rem" }} className="font-semibold text-zinc-600 hidden md:table-cell">Documento</TableHead>
-                  <TableHead style={{ ...s, fontSize: "0.75rem" }} className="font-semibold text-zinc-600 hidden sm:table-cell">Data e Hora</TableHead>
+                  <TableHead style={{ ...s, fontSize: "0.75rem" }} className="font-bold text-zinc-600">Nome</TableHead>
+                  <TableHead style={{ ...s, fontSize: "0.75rem" }} className="font-bold text-zinc-600">E-mail</TableHead>
+                  <TableHead style={{ ...s, fontSize: "0.75rem" }} className="font-bold text-zinc-600 hidden md:table-cell">Documento</TableHead>
+                  <TableHead style={{ ...s, fontSize: "0.75rem" }} className="font-bold text-zinc-600 hidden sm:table-cell">Data e Hora</TableHead>
                 </TableRow>
               </TableHeader>
               <TableBody>
@@ -421,7 +421,7 @@ const PageAccessLogs = () => {
     <div className="space-y-4">
       <div className="flex items-center justify-between">
         <div>
-          <h3 className="font-semibold text-zinc-800" style={{ ...s, fontSize: "1.125rem" }}>Logs de Acesso — Prestação de Contas</h3>
+          <h3 className="font-bold text-zinc-800" style={{ ...s, fontSize: "1.125rem" }}>Logs de Acesso — Prestação de Contas</h3>
           <p style={{ ...s, fontSize: "0.8125rem" }} className="text-zinc-500 mt-0.5">
             Registros de quem preencheu o formulário LGPD para acessar a página
           </p>
@@ -444,9 +444,9 @@ const PageAccessLogs = () => {
           <Table>
             <TableHeader>
               <TableRow className="bg-zinc-50">
-                <TableHead style={{ ...s, fontSize: "0.75rem" }} className="font-semibold text-zinc-600">Nome</TableHead>
-                <TableHead style={{ ...s, fontSize: "0.75rem" }} className="font-semibold text-zinc-600">E-mail</TableHead>
-                <TableHead style={{ ...s, fontSize: "0.75rem" }} className="font-semibold text-zinc-600 hidden sm:table-cell">Data e Hora</TableHead>
+                <TableHead style={{ ...s, fontSize: "0.75rem" }} className="font-bold text-zinc-600">Nome</TableHead>
+                <TableHead style={{ ...s, fontSize: "0.75rem" }} className="font-bold text-zinc-600">E-mail</TableHead>
+                <TableHead style={{ ...s, fontSize: "0.75rem" }} className="font-bold text-zinc-600 hidden sm:table-cell">Data e Hora</TableHead>
               </TableRow>
             </TableHeader>
             <TableBody>

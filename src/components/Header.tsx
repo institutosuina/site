@@ -31,7 +31,7 @@ const navItems = [
   },
   {
     label: "Participe",
-    href: "",
+    href: "/participe",
     children: [
       { label: "Como apoiar", href: "/como-apoiar#como-apoiar" },
       { label: "Cadastre-se para receber nossa newsletter", href: "/como-apoiar#newsletter" },

@@ -101,27 +101,28 @@
   /* Typographic Hierarchy System — scoped to public site only */
   :where(:not(.admin-scope) > h1, :not(.admin-scope) h1:not(.admin-scope *)) {
     font-family: 'Bree', serif;
-    @apply font-bold tracking-tight leading-[1.1];
+    @apply font-bold tracking-tight leading-[1.1] not-italic;
     font-size: clamp(2.5rem, 5vw, 66px);
     color: hsl(var(--suina-red));
   }
 
   :where(:not(.admin-scope) > h2, :not(.admin-scope) h2:not(.admin-scope *)) {
     font-family: 'Bree', serif;
-    @apply font-bold tracking-tight leading-[1.2];
+    @apply font-bold tracking-tight leading-[1.2] not-italic;
     font-size: clamp(2rem, 4vw, 66px);
     color: hsl(var(--suina-red));
   }
 
   :where(:not(.admin-scope) > h3, :not(.admin-scope) h3:not(.admin-scope *)) {
     font-family: 'Bree', serif;
-    @apply text-xl md:text-2xl font-semibold leading-snug;
+    @apply text-xl md:text-2xl font-bold leading-snug not-italic;
     color: hsl(var(--suina-red));
   }
 
   :where(:not(.admin-scope) > h4, :not(.admin-scope) > h5, :not(.admin-scope) > h6,
   h4:not(.admin-scope *), h5:not(.admin-scope *), h6:not(.admin-scope *)) {
     font-family: 'Bree', serif;
+    @apply font-bold not-italic;
     color: hsl(var(--suina-red));
   }
 
@@ -168,12 +169,12 @@
 
 @layer components {
   .section-title {
-    @apply font-display text-3xl md:text-5xl font-bold tracking-tight text-center leading-[1.2];
+    @apply font-display text-3xl md:text-5xl font-bold tracking-tight text-center leading-[1.2] not-italic;
     color: hsl(var(--suina-red));
   }
 
   .section-subtitle {
-    @apply font-display text-xl md:text-2xl font-semibold leading-snug text-foreground;
+    @apply font-display text-xl md:text-2xl font-bold leading-snug text-foreground not-italic;
   }
 
   .body-text {

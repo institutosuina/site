@@ -75,7 +75,7 @@ const AdminDashboard = () => {
       </div>
 
       <div>
-        <h3 className="font-semibold text-zinc-800 mb-4" style={{ ...s, fontSize: "1rem", color: "#27272a" }}>Acesso rápido</h3>
+        <h3 className="font-bold text-zinc-800 mb-4" style={{ ...s, fontSize: "1rem", color: "#27272a" }}>Acesso rápido</h3>
         <div className="flex flex-wrap gap-3">
           {quickActions.map((action) => (
             <Link key={action.label} to={action.path}

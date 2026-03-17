@@ -25,7 +25,7 @@ const Newsletter = () => {
           <h1 className="font-display text-5xl md:text-7xl font-bold tracking-tight leading-[1.1] mb-6 drop-shadow-lg text-primary-foreground">
             Nossa Newsletter
           </h1>
-          <p className="body-text max-w-2xl mx-auto italic text-primary-foreground">
+          <p className="body-text max-w-2xl mx-auto text-primary-foreground">
             "Conectando você às raízes da nossa transformação."
           </p>
         </div>
@@ -63,7 +63,7 @@ const Newsletter = () => {
                       <div className="w-16 h-16 bg-card rounded-2xl flex items-center justify-center mx-auto mb-4 shadow-sm">
                         <Mail className="w-8 h-8 text-suina-red" />
                       </div>
-                      <h3 className="font-display text-xl md:text-2xl font-semibold leading-snug text-primary">Inscreva-se</h3>
+                      <h3 className="font-display text-xl md:text-2xl font-bold leading-snug text-primary">Inscreva-se</h3>
                       <p className="font-body text-sm opacity-70">Receba conteúdo exclusivo por e-mail.</p>
                     </div>
 
@@ -95,7 +95,7 @@ const Newsletter = () => {
                     <div className="w-20 h-20 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-6">
                       <CheckCircle2 className="w-12 h-12 text-primary" />
                     </div>
-                    <h3 className="font-display text-xl md:text-2xl font-semibold leading-snug text-primary mb-6">Bem-vindo(a)!</h3>
+                    <h3 className="font-display text-xl md:text-2xl font-bold leading-snug text-primary mb-6">Bem-vindo(a)!</h3>
                     <p className="body-text mb-8">
                       Obrigado por se juntar à nossa rede, <strong>{formData.name}</strong>. Em breve você receberá nossas novidades.
                     </p>

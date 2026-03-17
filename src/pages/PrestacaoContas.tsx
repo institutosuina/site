@@ -121,7 +121,7 @@ const PrestacaoContas = () => {
                     className="flex items-center gap-4 bg-suina-brown rounded-[24px] px-8 py-5 cursor-pointer hover:scale-[1.02] transition-all shadow-xl group paper-texture text-left w-full"
                   >
                     <div className="flex-1">
-                      <h3 className="font-display text-lg md:text-xl font-semibold leading-snug text-primary-foreground">{report.title}</h3>
+                      <h3 className="font-display text-lg md:text-xl font-bold leading-snug text-primary-foreground">{report.title}</h3>
                       {report.description && (
                         <p className="caption-text text-primary-foreground/70 mt-1">{report.description}</p>
                       )}

@@ -137,8 +137,8 @@ const Participe = () => {
     <Layout>
       {/* Seção 1: Como Apoiar */}
       <section id="como-apoiar" className="py-16 md:py-24 px-4 bg-background relative overflow-hidden">
-        <img src={folhaSvg} alt="" className="absolute -left-16 top-1/4 w-40 md:w-56 opacity-25 pointer-events-none rotate-[30deg]" style={{ filter: "hue-rotate(340deg) saturate(2) brightness(0.7)" }} />
-        <img src={folhaSvg} alt="" className="absolute -right-10 -bottom-10 w-40 md:w-56 opacity-25 pointer-events-none -scale-x-100" style={{ filter: "hue-rotate(340deg) saturate(2) brightness(0.7)" }} />
+        <img src={folhaSvg} alt="" className="absolute -left-16 top-1/4 w-40 md:w-56 opacity-25 pointer-events-none rotate-[60deg]" style={{ filter: "hue-rotate(340deg) saturate(2) brightness(0.7)" }} />
+        <img src={folhaSvg} alt="" className="absolute -right-10 -bottom-10 w-40 md:w-56 opacity-25 pointer-events-none -scale-x-100 -rotate-[60deg]" style={{ filter: "hue-rotate(340deg) saturate(2) brightness(0.7)" }} />
 
         <div className="container mx-auto max-w-2xl text-center relative z-10">
           <h2 className="section-title mb-8 text-foreground">
@@ -220,8 +220,8 @@ const Participe = () => {
 
       {/* Seção 4: Redes Sociais */}
       <section id="redes-sociais" className="py-16 md:py-24 px-4 bg-background relative overflow-hidden">
-        <img src={folhaSvg} alt="" className="absolute -left-12 top-10 w-36 md:w-48 opacity-20 pointer-events-none rotate-[20deg]" style={{ filter: "hue-rotate(340deg) saturate(2) brightness(0.7)" }} />
-        <img src={folhaSvg} alt="" className="absolute -right-8 bottom-10 w-36 md:w-48 opacity-15 pointer-events-none -scale-x-100 rotate-[-10deg]" style={{ filter: "hue-rotate(340deg) saturate(2) brightness(0.7)" }} />
+        <img src={folhaSvg} alt="" className="absolute -left-16 top-1/4 w-40 md:w-56 opacity-25 pointer-events-none rotate-[60deg]" style={{ filter: "hue-rotate(340deg) saturate(2) brightness(0.7)" }} />
+        <img src={folhaSvg} alt="" className="absolute -right-10 -bottom-10 w-40 md:w-56 opacity-25 pointer-events-none -scale-x-100 -rotate-[60deg]" style={{ filter: "hue-rotate(340deg) saturate(2) brightness(0.7)" }} />
 
         <div className="container mx-auto max-w-4xl relative z-10">
           <div className="flex flex-col md:flex-row items-center gap-12 md:gap-16">

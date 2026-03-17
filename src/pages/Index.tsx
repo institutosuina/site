@@ -5,7 +5,7 @@ import logoSuinaWhite from "@/assets/logo-suina-white.png";
 import teamPhoto from "@/assets/team-photo.jpg";
 import equipeCompleta from "@/assets/equipe-completa.jpg";
 import wheatDecoration from "@/assets/wheat-decoration.png";
-import fundoVerdeBrush from "@/assets/fundo-verde-brush.png";
+import fundoVerdeBrush from "@/assets/circulos-02.svg";
 import logosParceiros from "@/assets/logos-parceiros.png";
 import folhaContraste from "@/assets/folha-contraste1.svg";
 
@@ -91,7 +91,7 @@ const Index = () => {
       <section className="relative h-[60vh] md:h-[70vh] overflow-hidden bg-black">
         <div className="absolute inset-0 w-full h-full pointer-events-none">
           <iframe
-            src="https://streamable.com/e/kdzkhl?autoplay=1&muted=1&nocontrols=1"
+            src="https://youtu.be/lXy1H_GSU0k"
             frameBorder="0"
             width="100%"
             height="100%"
@@ -157,7 +157,7 @@ const Index = () => {
       {/* Linha do tempo (Ajustada para a linha não vazar) */}
       <section id="timeline" className="py-24 px-4 bg-[#FDFBF6] relative overflow-hidden">
         <div className="container mx-auto max-w-5xl">
-          <h2 className="section-title text-center mb-16 italic text-secondary">Linha do tempo do Suinã</h2>
+          <h2 className="section-title text-center mb-16 text-secondary">Linha do tempo do Suinã</h2>
 
           <div className="relative mx-auto max-w-4xl"> {/* Container que limita as setas e a linha */}
 
@@ -208,85 +208,114 @@ const Index = () => {
         </div>
       </section>
 
-      {/* Seção Equipe */}
-      <section id="equipe" className="relative w-full overflow-hidden">
+      {/* ==========================================================
+          Seção Equipe (Código Consolidado - Versão Final 3:00 AM)
+          ========================================================== */}
+      <section
+        id="equipe"
+        className="w-full relative z-10"
+        style={{
+          // 1. FUNDO VERDE SÓLIDO (Garante que a seção inteira tenha a cor correta)
 
-        {/* 1. O ARCO DA PINCELADA */}
-        <div className="w-full bg-[#FDFBF6] overflow-hidden relative" style={{ height: '300px' }}> {/* Aumentei a altura da janela */}
-          <img
-            src={fundoVerdeBrush}
-            alt=""
-            className="absolute pointer-events-none"
-            style={{
-              width: '100vw',    // Ocupa a largura total da tela
-              height: '100%',    // Ocupa a altura total da div de 300px
-              left: '0',
-              top: '0',
-              // O SEGREDO: object-fit: fill força o estiramento horizontal 
-              // mas permite que o arco apareça inteiro na vertical
-              objectFit: 'fill',
-            }}
-          />
-        </div>
+          // 2. O SVG GIGANTE DA CURVA (Ajustes de Posição)
+          backgroundImage: `url(${fundoVerdeBrush})`, // circulos-02.svg
+          backgroundSize: '100% auto', // Estica na largura da tela
+          backgroundRepeat: 'no-repeat',
 
-        {/* 2. ÁREA VERDE (CONTEÚDO) */}
-        <div className="bg-primary relative z-10 -mt-1 pb-20">
-          <div className="container mx-auto px-4">
-            {/* Bloco do 82% */}
-            <div className="flex flex-col md:flex-row items-center justify-center gap-6 py-10">
-              <span className="font-display text-7xl md:text-[110px] font-bold text-primary-foreground leading-none">
-                82%
-              </span>
-              <p className="font-display text-xl md:text-3xl font-normal text-primary-foreground leading-tight md:text-left text-center">
-                da equipe do Suinã<br />é composta por mulheres
+          // 🔥 CONTROLE DO PUXÃO (backgroundPosition): 
+          // Ajuste o segundo valor (-200px) se a curva verde ainda não cobrir o '82%'. 
+          // Tente valores como -150px, -200px, -250px... até encaixar no 82%.
+          backgroundPosition: 'center -250px',
+
+          // 🔥 CONTROLE DO TEXTO (paddingTop): 
+          // Ajuste este valor se o texto '82%' estiver muito colado no teto do monitor.
+          // Tente valores como 250px, 300px, 350px... para empurrar o texto para baixo.
+          paddingTop: '270px',
+
+          marginTop: '-170px',
+        }}
+      >
+        {/* CONTAINER DE CONTEÚDO (Limita a largura para texto e grid de membros) */}
+        <div className="container mx-auto px-4 relative z-10">
+
+          {/* Bloco do 82% */}
+          <div className="flex flex-col md:flex-row items-center justify-center gap-6 pb-12">
+            <span className="font-display text-7xl md:text-[110px] font-bold text-white leading-none">
+              82%
+            </span>
+            <p className="font-display text-xl md:text-3xl font-normal text-white leading-tight md:text-left text-center">
+              da equipe do Suinã<br />é composta por mulheres
+            </p>
+          </div>
+
+          {/* Textos de Apoio */}
+          <div className="max-w-4xl mx-auto mb-20">
+            <div className="space-y-6 text-center max-w-3xl mx-auto">
+              <p className="body-text text-white text-lg opacity-90">
+                Nos orgulhamos de ter um time diverso, forte e atuante, contribuindo diariamente para a transformação que buscamos.
+              </p>
+              <p className="body-text text-white opacity-80">
+                O Instituto Suinã conta com uma rede de parceiros, prestadores de serviço, empresas e instituições que caminham conosco para fortalecer nossas ações e ampliar nosso impacto.
               </p>
             </div>
           </div>
-          {/* O resto do seu código (texto de apoio e fotos) continua aqui igual */}
 
-          <div className="py-16 md:py-24 px-4">
-            <div className="container mx-auto max-w-4xl relative z-10">
-
-              <div className="space-y-6 text-center max-w-3xl mx-auto mb-16">
-                <p className="body-text text-primary-foreground text-lg italic opacity-90">
-                  Nos orgulhamos de ter um time diverso, forte e atuante, contribuindo diariamente para a transformação que buscamos.
-                </p>
-                <p className="body-text text-primary-foreground opacity-80">
-                  O Instituto Suinã conta com uma rede de parceiros, prestadores de serviço, empresas e instituições que caminham conosco para fortalecer nossas ações e ampliar nosso impacto.
-                </p>
-              </div>
-
-              {/* Grid de Membros */}
-              <div className="flex flex-wrap justify-center gap-x-8 gap-y-16 mb-20">
-                {teamMembers.map((m) => (
-                  <div key={m.name} className="text-center w-[calc(50%-1rem)] md:w-[calc(25%-2rem)] min-w-[140px] max-w-[200px]">
-                    <div className="relative w-32 h-32 mx-auto mb-6">
-                      <img src={sketchCircle} alt="" className="absolute inset-[-15%] w-[130%] h-[130%] opacity-40 pointer-events-none" />
-                      <div className="relative w-full h-full rounded-full bg-[#FDFBF6] overflow-hidden border-4 border-white/10 shadow-xl">
-                        {m.image ? (
-                          <img src={m.image} alt={m.name} className="w-full h-full object-cover" />
-                        ) : (
-                          <div className="w-full h-full bg-slate-200" />
-                        )}
-                      </div>
-                    </div>
-                    <p className="font-display text-lg font-bold text-white">{m.name}</p>
-                    <p className="font-body text-[10px] text-white/60 uppercase tracking-widest mt-1">{m.role}</p>
+          {/* ==========================================================
+              Grid de Membros (Limitado para forçar 4 na primeira linha e 3 na segunda)
+              ========================================================== */}
+          <div className="max-w-5xl mx-auto flex flex-wrap justify-center gap-x-6 md:gap-x-12 gap-y-12 md:gap-y-16 mb-24 px-4">
+            {teamMembers.map((m) => (
+              // Largura fixa no card (200px) garante que 5 não caibam na tela
+              <div key={m.name} className="text-center w-[150px] md:w-[200px] flex-shrink-0">
+                <div className="relative w-32 h-32 md:w-40 md:h-40 mx-auto mb-6">
+                  {/* Ícone de Risco do Lápis */}
+                  <img src={sketchCircle} alt="" className="absolute inset-[-15%] w-[130%] h-[130%] opacity-40 pointer-events-none" />
+                  {/* Avatar Circular */}
+                  <div className="relative w-full h-full rounded-full bg-[#FDFBF6] overflow-hidden border-4 border-white/10 shadow-xl">
+                    {m.image ? (
+                      <img src={m.image} alt={m.name} className="w-full h-full object-cover" />
+                    ) : (
+                      <div className="w-full h-full bg-[#759580]/50" />
+                    )}
                   </div>
-                ))}
+                </div>
+                {/* Nome e Cargo */}
+                <p className="font-display text-lg md:text-xl font-bold text-white leading-tight">{m.name}</p>
+                <p className="font-body text-[10px] md:text-xs text-white/70 uppercase tracking-widest mt-1 md:mt-2">{m.role}</p>
               </div>
-
-              {/* Foto da Equipe Completa */}
-              <div className="rounded-[2rem] overflow-hidden shadow-2xl border-8 border-white/5">
-                <img src={equipeCompleta} alt="Equipe completa" className="w-full h-auto object-cover" />
-              </div>
-            </div>
+            ))}
           </div>
+
+          {/* Adicione ESTA tag aqui, flutuando na direita, espelhada, girada e presa na base do container */}
+          <img
+            src={folhaSvg} // image_18.png
+            alt=""
+            // 🔥 A MÁGICA DE DOIS PASSOS AQUI:
+            // 1. -scale-x-100 (Inverte a planta horizontalmente)
+            // 2. -rotate-30 (Gira 30 graus no sentido anti-horário para o caule apontar pra dentro)
+            // Ajustei também o bottom/right para ela não voar para fora do verde com o giro
+            className="absolute -right-16 bottom-16 md:-right-24 md:bottom-32 w-48 md:w-[300px] pointer-events-none z-0 scale-x-100 opacity-60"
+          />
+
+        </div> {/* <-- FECHAMOS O CONTAINER MAX-W-4XL AQUI */}
+
+        {/* ==========================================================
+            3. FOTO DA EQUIPE FULL WIDTH (Vazando na tela de ponta a ponta)
+            ========================================================== */}
+        <div className="w-full relative z-0">
+          <img
+            src={equipeCompleta}
+            alt="Equipe completa do Instituto Suinã"
+            className="w-full h-auto object-cover block"
+            style={{ maxHeight: '600px' }} // Opcional: limita a altura para não ficar gigante em telas muito largas
+          />
         </div>
+
       </section>
 
       {/* Conselho */}
       <section className="py-16 md:py-24 px-4 relative overflow-hidden bg-suina-orange">
+        {/* Folha de fundo */}
         <div
           className="absolute z-0 pointer-events-none"
           style={{
@@ -295,13 +324,10 @@ const Index = () => {
             backgroundSize: 'contain',
             backgroundPosition: 'left center',
             opacity: 0.4,
-            // Tamanho da div (aumente ou diminua se precisar)
             width: '600px',
             height: '600px',
-            // Posicionamento: Colada na esquerda
-            left: '-20px',  // Ajuste esse valor para o caule "entrar" mais ou menos na tela
-            top: '50%',    // Ajuste aqui para a altura que você quer que ela brote
-            // A MÁGICA: Centraliza verticalmente e gira para cima (-90) a partir da base esquerda
+            left: '-20px',
+            top: '50%',
             transform: 'translateY(-30%) rotate(-40deg)',
             transformOrigin: 'left bottom',
           }}
@@ -309,25 +335,41 @@ const Index = () => {
         />
 
         <div className="container mx-auto max-w-2xl text-center relative z-10">
-          <h2 className="font-display text-3xl md:text-5xl font-bold tracking-tight leading-[1.2] text-card mb-8">Conselho</h2>
-          <div className="space-y-8">
-            {conselho.map((c, i) => (
-              <div key={i}>
-                {c.role && <p className="caption-text text-card/70 mb-1">{c.role}</p>}
-                <p className="font-display text-xl md:text-2xl font-semibold text-card">{c.name}</p>
+          <h2 className="font-display text-3xl md:text-5xl font-bold tracking-tight leading-[1.2] text-card mb-12">Conselho</h2>
+
+          <div className="space-y-10">
+            {/* Presidente */}
+            <div>
+              <p className="caption-text text-card/70 mb-1 uppercase tracking-widest text-sm">Presidente</p>
+              <p className="font-display text-xl md:text-3xl font-bold text-card">Maria José de Brito Zákia</p>
+            </div>
+
+            {/* Vice-Presidente */}
+            <div>
+              <p className="caption-text text-card/70 mb-1 uppercase tracking-widest text-sm">Vice-Presidente</p>
+              <p className="font-display text-xl md:text-3xl font-bold text-card">Maria Santini de Castro Morini</p>
+            </div>
+
+            {/* Conselho Fiscal (Agrupado) */}
+            <div>
+              <p className="caption-text text-card/70 mb-2 uppercase tracking-widest text-sm">Conselho Fiscal</p>
+              <div className="space-y-3">
+                <p className="font-display text-xl md:text-3xl font-bold text-card">Lucila Manzatti</p>
+                <p className="font-display text-xl md:text-3xl font-bold text-card">Paulo Valadares Soares</p>
               </div>
-            ))}
+            </div>
           </div>
-          <p className="caption-text text-card/60 mt-10">
+
+          <p className="caption-text text-card/60 mt-16 border-t border-card/20 pt-8 inline-block text-xs tracking-widest uppercase">
             MANDATO: 08/03/2023 A 08/03/2026
           </p>
         </div>
       </section>
 
       {/* Parceiros */}
-      <section id="parceiros" className="py-16 md:py-24 px-4">
+      <section id="parceiros" className="py-16 md:py-24 px-4 bg-white">
         <div className="container mx-auto max-w-5xl text-center">
-          <h2 className="font-display text-3xl md:text-5xl font-bold tracking-tight leading-[1.2] italic text-secondary mb-8">Parceiros e apoiadores</h2>
+          <h2 className="font-display text-3xl md:text-5xl font-bold tracking-tight leading-[1.2] text-secondary mb-8">Parceiros e apoiadores</h2>
           <img src={logosParceiros} alt="Logos dos parceiros e apoiadores do Instituto Suinã" className="w-full" />
         </div>
       </section>

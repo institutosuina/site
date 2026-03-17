@@ -1,16 +1,19 @@
-import { Heart } from "lucide-react";
+import { Plus } from "lucide-react";
 
 const DonateButton = () => {
   return (
-    <a
-      href="#"
-      className="btn-donate group flex items-center gap-3 bg-[#e27d3c] hover:bg-[#c96a32] text-white px-7 py-3 rounded-full transition-all duration-300 shadow-lg hover:scale-105"
-    >
-      <Heart className="w-5 h-5 fill-transparent group-hover:fill-current transition-colors text-white" />
-      <span className="font-display text-xs font-bold uppercase tracking-wider whitespace-nowrap">
-        Quero Doar
+    <div className="fixed bottom-6 right-6 z-[100] group flex flex-col items-end gap-2">
+      {/* Botão de Doação Rápida */}
+      <span className="bg-white text-secondary text-[10px] font-bold px-3 py-1 rounded-full shadow-md opacity-0 group-hover:opacity-100 transition-opacity uppercase tracking-wider">
+        Quero Apoiar
       </span>
-    </a>
+      <button
+        className="bg-[#B45045] text-white p-4 rounded-full shadow-2xl hover:scale-110 active:scale-95 transition-all border-4 border-white"
+        onClick={() => window.location.href = '/como-apoiar'}
+      >
+        <Plus className="w-6 h-6" />
+      </button>
+    </div>
   );
 };
 

@@ -198,7 +198,7 @@ const AdminEmailMarketing = () => {
       {/* Saved Lists */}
       <div className="bg-white rounded-xl border border-zinc-200 overflow-hidden">
         <div className="px-6 py-4 border-b border-zinc-100 flex items-center justify-between">
-          <h3 className="font-semibold text-zinc-800" style={{ ...s, fontSize: "0.9375rem" }}>
+          <h3 className="font-bold text-zinc-800" style={{ ...s, fontSize: "0.9375rem" }}>
             <FolderOpen className="h-4 w-4 inline mr-2 text-zinc-400" />
             Listas de Destinatários Salvas
           </h3>
@@ -232,7 +232,7 @@ const AdminEmailMarketing = () => {
       {/* History */}
       <div className="bg-white rounded-xl border border-zinc-200 overflow-hidden">
         <div className="px-6 py-4 border-b border-zinc-100">
-          <h3 className="font-semibold text-zinc-800" style={{ ...s, fontSize: "0.9375rem" }}>Histórico de envios</h3>
+          <h3 className="font-bold text-zinc-800" style={{ ...s, fontSize: "0.9375rem" }}>Histórico de envios</h3>
         </div>
         {isLoading ? (
           <div className="p-6 space-y-3">{[1, 2, 3].map((i) => <Skeleton key={i} className="h-12 w-full" />)}</div>
@@ -245,10 +245,10 @@ const AdminEmailMarketing = () => {
           <Table>
             <TableHeader>
               <TableRow className="bg-zinc-50">
-                <TableHead style={{ ...s, fontSize: "0.75rem" }} className="font-semibold text-zinc-600">Assunto</TableHead>
-                <TableHead style={{ ...s, fontSize: "0.75rem" }} className="font-semibold text-zinc-600">Nicho / Público</TableHead>
-                <TableHead style={{ ...s, fontSize: "0.75rem" }} className="font-semibold text-zinc-600 hidden sm:table-cell">Data</TableHead>
-                <TableHead style={{ ...s, fontSize: "0.75rem" }} className="font-semibold text-zinc-600 text-right">Ações</TableHead>
+                <TableHead style={{ ...s, fontSize: "0.75rem" }} className="font-bold text-zinc-600">Assunto</TableHead>
+                <TableHead style={{ ...s, fontSize: "0.75rem" }} className="font-bold text-zinc-600">Nicho / Público</TableHead>
+                <TableHead style={{ ...s, fontSize: "0.75rem" }} className="font-bold text-zinc-600 hidden sm:table-cell">Data</TableHead>
+                <TableHead style={{ ...s, fontSize: "0.75rem" }} className="font-bold text-zinc-600 text-right">Ações</TableHead>
               </TableRow>
             </TableHeader>
             <TableBody>
