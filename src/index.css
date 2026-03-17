@@ -128,9 +128,8 @@
     color: hsl(var(--suina-red));
   }
 
-  p:not(.admin-scope *), li:not(.admin-scope *), span:not(.admin-scope *), label:not(.admin-scope *) {
+  :where(p:not(.admin-scope *), li:not(.admin-scope *), span:not(.admin-scope *), label:not(.admin-scope *)) {
     font-family: 'Source Sans 3', sans-serif;
-    font-size: clamp(1.25rem, 3vw, 48px);
     font-weight: 400;
     line-height: 1.4;
   }
