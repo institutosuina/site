@@ -17,6 +17,7 @@ import PrestacaoContas from "./pages/PrestacaoContas";
 import Participe from "./pages/Participe";
 import Contato from "./pages/Contato";
 import PostDetail from "./pages/PostDetail";
+import EditalDetail from "./pages/EditalDetail";
 import NotFound from "./pages/NotFound";
 
 // Admin pages (lazy loaded)
