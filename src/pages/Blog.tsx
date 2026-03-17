@@ -5,12 +5,12 @@ import { supabase } from "@/integrations/supabase/client";
 import { Skeleton } from "@/components/ui/skeleton";
 import { Link } from "react-router-dom";
 
-const Noticias = () => {
+const Blog = () => {
   const { data: items, isLoading } = useQuery({
-    queryKey: ["noticias-public"],
+    queryKey: ["blog-public"],
     queryFn: async () => {
       const { data, error } = await supabase
-        .from("noticias")
+        .from("posts_blog")
         .select("*")
         .eq("status", "Publicado")
         .order("published_at", { ascending: false });
@@ -23,7 +23,7 @@ const Noticias = () => {
     <Layout>
       <section className="py-16 md:py-24 px-4">
         <div className="container mx-auto max-w-5xl">
-          <h1 className="section-title mb-8 uppercase text-secondary">Notícias</h1>
+          <h1 className="section-title mb-8 uppercase text-secondary">Blog</h1>
           {isLoading ? (
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               {[1, 2, 3, 4].map((i) => (
@@ -31,7 +31,7 @@ const Noticias = () => {
               ))}
             </div>
           ) : !items?.length ? (
-            <p className="text-center text-muted-foreground font-body py-16">Nenhuma notícia publicada ainda.</p>
+            <p className="text-center text-muted-foreground font-body py-16">Nenhum post publicado ainda.</p>
           ) : (
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               {items.map((item) => (
@@ -58,7 +58,7 @@ const Noticias = () => {
                         Publicação: {item.published_at ? new Date(item.published_at).toLocaleDateString("pt-BR") : "—"}
                       </span>
                       <Link
-                        to={`/noticias/${item.slug}`}
+                        to={`/blog/${item.slug}`}
                         className="flex items-center gap-1 bg-secondary text-secondary-foreground px-4 py-1.5 rounded font-body text-xs font-semibold uppercase hover:bg-secondary/90 transition-colors"
                       >
                         LEIA MAIS <ArrowRight className="w-3 h-3" />
@@ -75,4 +75,4 @@ const Noticias = () => {
   );
 };
 
-export default Noticias;
+export default Blog;

@@ -23,10 +23,10 @@ const navItems = [
     label: "Nossas publicações",
     href: "",
     children: [
-      { label: "Blog", href: "/noticias" },
+      { label: "Blog", href: "/blog" },
       { label: "Notícias", href: "/noticias" },
       { label: "Material Técnico", href: "/material-tecnico" },
-      { label: "Editais", href: "/noticias" },
+      { label: "Editais", href: "/editais" },
     ],
   },
   {
