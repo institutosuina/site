@@ -278,6 +278,41 @@ export type Database = {
         }
         Relationships: []
       }
+      material_tecnico_anexos: {
+        Row: {
+          created_at: string
+          file_url: string
+          id: string
+          material_id: string
+          sort_order: number
+          title: string
+        }
+        Insert: {
+          created_at?: string
+          file_url: string
+          id?: string
+          material_id: string
+          sort_order?: number
+          title: string
+        }
+        Update: {
+          created_at?: string
+          file_url?: string
+          id?: string
+          material_id?: string
+          sort_order?: number
+          title?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "material_tecnico_anexos_material_id_fkey"
+            columns: ["material_id"]
+            isOneToOne: false
+            referencedRelation: "material_tecnico"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       noticias: {
         Row: {
           content: string | null

@@ -3,7 +3,7 @@ import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import { supabase } from "@/integrations/supabase/client";
 import { FileText, Newspaper, BookOpen, ClipboardList, Plus, Pencil, Trash2, X, Save, Paperclip, Upload, Image as ImageIcon, File } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import EditalAnexosManager from "@/components/admin/EditalAnexosManager";
+import AnexosManager from "@/components/admin/AnexosManager";
 import { Input } from "@/components/ui/input";
 import { Skeleton } from "@/components/ui/skeleton";
 import { toast } from "@/hooks/use-toast";
@@ -243,7 +243,7 @@ const AdminContent = ({ contentType = "posts_blog" }: AdminContentProps) => {
                   </TableCell>
                   <TableCell className="text-right">
                     <div className="flex justify-end gap-1">
-                      {activeTab === "editais" && (
+                      {(activeTab === "editais" || activeTab === "material_tecnico") && (
                         <Button variant="ghost" size="icon" className="h-8 w-8 text-zinc-400 hover:text-emerald-600" onClick={() => setAnexosItem({ id: item.id, title: item.title })} title="Gerenciar anexos">
                           <Paperclip className="h-4 w-4" />
                         </Button>
@@ -375,11 +375,15 @@ const AdminContent = ({ contentType = "posts_blog" }: AdminContentProps) => {
 
       {/* Edital Anexos Manager */}
       {anexosItem && (
-        <EditalAnexosManager
-          editalId={anexosItem.id}
-          editalTitle={anexosItem.title}
+        <AnexosManager
+          parentId={anexosItem.id}
+          parentTitle={anexosItem.title}
           open={!!anexosItem}
           onOpenChange={(open) => !open && setAnexosItem(null)}
+          tableName={activeTab === "editais" ? "edital_anexos" : "material_tecnico_anexos"}
+          foreignKey={activeTab === "editais" ? "edital_id" : "material_id"}
+          storageBucket={activeTab === "editais" ? "editais" : "covers"}
+          label={activeTab === "editais" ? "Anexos do Edital" : "Anexos do Material Técnico"}
         />
       )}
     </div>

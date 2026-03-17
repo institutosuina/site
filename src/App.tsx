@@ -18,6 +18,7 @@ import Participe from "./pages/Participe";
 import Contato from "./pages/Contato";
 import PostDetail from "./pages/PostDetail";
 import EditalDetail from "./pages/EditalDetail";
+import MaterialTecnicoDetail from "./pages/MaterialTecnicoDetail";
 import InformativosAno from "./pages/InformativosAno";
 import NotFound from "./pages/NotFound";
 
@@ -72,7 +73,7 @@ const App = () => (
               <Route path="/editais" element={<Editais />} />
               <Route path="/editais/:slug" element={<EditalDetail />} />
               <Route path="/material-tecnico" element={<MaterialTecnico />} />
-              <Route path="/material-tecnico/:slug" element={<PostDetail table="material_tecnico" />} />
+              <Route path="/material-tecnico/:slug" element={<MaterialTecnicoDetail />} />
               <Route path="/prestacao-de-contas" element={<PrestacaoContas />} />
               <Route path="/como-apoiar" element={<Participe />} />
               <Route path="/participe" element={<Participe />} />
