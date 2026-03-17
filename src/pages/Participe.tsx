@@ -134,47 +134,7 @@ const Participe = () => {
         </div>
       </section>
 
-      {/* Seção 3: Conteúdos já compartilhados */}
-      <section id="conteudos" className="py-16 md:py-24 px-4 bg-background">
-        <div className="container mx-auto max-w-3xl text-center">
-          <h2 className="section-title text-accent mb-6">
-            Quer revisitar os conteúdos já compartilhados?
-          </h2>
-
-          <p className="body-text text-muted-foreground mb-2 max-w-xl mx-auto">
-            Aqui você encontra os informativos anteriores do Instituto Suinã, com
-            notícias, conquistas e registros importantes da nossa caminhada.
-          </p>
-          <p className="font-body text-base md:text-lg font-bold text-foreground mb-8">
-            Acesse, relembre e acompanhe nossa trajetória.
-          </p>
-
-          <div className="flex items-center justify-center gap-6">
-            <button className="w-10 h-10 rounded-full border border-border flex items-center justify-center text-muted-foreground hover:bg-muted transition-colors">
-              ‹
-            </button>
-
-            <div className="flex gap-4">
-              {[
-                { edition: "01/2026", color: "hsl(var(--suina-red))" },
-                { edition: "11/2025", color: "hsl(var(--primary))" },
-                { edition: "10/2025", color: "hsl(var(--suina-orange))" },
-              ].map((item) => (
-                <a key={item.edition} href="#"
-                  className="w-36 h-36 md:w-44 md:h-44 rounded-2xl flex flex-col items-center justify-center text-primary-foreground hover:opacity-90 transition-opacity"
-                  style={{ backgroundColor: item.color }}>
-                  <span className="caption-text mb-1">EDIÇÃO</span>
-                  <span className="font-display text-2xl md:text-3xl font-bold">{item.edition}</span>
-                </a>
-              ))}
-            </div>
-
-            <button className="w-10 h-10 rounded-full border border-border flex items-center justify-center text-muted-foreground hover:bg-muted transition-colors">
-              ›
-            </button>
-          </div>
-        </div>
-      </section>
+      <InformativosSection navigate={navigate} />
 
       {/* Seção 4: Redes Sociais */}
       <section id="redes-sociais" className="py-16 md:py-24 px-4 bg-background relative overflow-hidden">
