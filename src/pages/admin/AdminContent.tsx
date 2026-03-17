@@ -40,6 +40,7 @@ const AdminContent = () => {
   const [editingId, setEditingId] = useState<string | null>(null);
   const [form, setForm] = useState(emptyForm);
   const [deleteId, setDeleteId] = useState<string | null>(null);
+  const [anexosItem, setAnexosItem] = useState<{ id: string; title: string } | null>(null);
   const queryClient = useQueryClient();
 
   const { data: items, isLoading } = useQuery({
