@@ -100,6 +100,7 @@ const AdminContent = () => {
       content: item.content || "",
       status: item.status,
       cover_image: item.cover_image || "",
+      attachments: [],
     });
     setDialogOpen(true);
   };
