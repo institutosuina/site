@@ -28,7 +28,7 @@ const Footer = () => {
       <div className="container mx-auto py-12 px-4 text-center relative z-10 [&_p]:!text-[length:inherit]">
         <p className="font-display !text-lg font-semibold mb-4">Suinã Instituto Socioambiental</p>
         <div className="space-y-1 font-body opacity-80 mb-4">
-          <p className="font-normal !text-sm">Rua Capitão Alberto Aguiar Weisshon, 337 - Centro - Guararema/SP.</p>
+          <p className="font-normal !text-sm">Av. Japão, 135 - Jardim Marister, Jacareí - SP, 12321-820</p>
           <p className="font-normal !text-sm">21.766.841/0001-84</p>
           <p className="font-normal !text-sm">contato@institutosuina.org</p>
           <p className="font-normal !text-sm">(12) 3965-0328</p>

@@ -61,6 +61,41 @@ const conselho = [
   { role: "CONSELHO FISCAL", name: "Paulo Valadares Soares" },
 ];
 
+const parceiros = [
+  { name: "Corredor Ecológico", logo: "/logos/1.png" },
+  { name: "SOS Mata Atlântica", logo: "/logos/2.jpg" }, // Atualizado para .jpg
+  { name: "Ecofuturo", logo: "/logos/3.png" },
+  { name: "SAVE Brasil", logo: "/logos/4.png" },
+  { name: "Akarui", logo: "/logos/5.png" },
+  { name: "Pacto pela Restauração da Mata Atlântica", logo: "/logos/6.jpg" }, // Atualizado para .jpg
+  { name: "REBRE", logo: "/logos/7.jpg" }, // Atualizado para .jpg
+  { name: "Prática Socioambiental", logo: "/logos/8.png" },
+  { name: "Cultura no Morro", logo: "/logos/9.jpg" }, // Atualizado para .jpg
+  { name: "Parque Estadual Serra do Mar", logo: "/logos/10.jpg" }, // Atualizado para .jpg
+  { name: "CBH-PS", logo: "/logos/11.png" },
+  { name: "FEHIDRO", logo: "/logos/12.jpg" }, // Atualizado para .jpg
+  { name: "Programa Nascentes", logo: "/logos/13.jpg" }, // Atualizado para .jpg
+  { name: "RBA Sistemas", logo: "/logos/14.png" },
+  { name: "UMC Universidade", logo: "/logos/15.png" },
+  { name: "Casulo", logo: "/logos/16.png" },
+  { name: "Fatec / CPS", logo: "/logos/17.png" },
+  { name: "SerrAcima", logo: "/logos/18.webp" }, // Atualizado para .jpg
+  { name: "CAMAT", logo: "/logos/19(1).jpg" }, // Atualizado para .jpg
+  { name: "Diálogo Florestal", logo: "/logos/19.jpg" }, // Atualizado para .jpg
+  { name: "NEA Ambiental", logo: "/logos/20.png" },
+  { name: "LD Celulose", logo: "/logos/21.png" },
+  { name: "Bracell", logo: "/logos/22.png" },
+  { name: "Suzano", logo: "/logos/23.png" },
+
+  // As logos abaixo não apareceram no seu último print. 
+  // Se elas também quebrarem, basta trocar o ".png" por ".jpg" aqui:
+  { name: "Prefeitura de Jacareí", logo: "/logos/24.jpg" },
+  { name: "Prefeitura de Igaratá", logo: "/logos/25.png" },
+  { name: "Prefeitura de Santa Isabel", logo: "/logos/26.png" },
+  { name: "Prefeitura de Santos", logo: "/logos/27.png" }
+];
+
+
 const Index = () => {
   const scrollRef = useRef<HTMLDivElement>(null);
   const [openModal, setOpenModal] = useState<string | null>(null);
@@ -211,6 +246,7 @@ const Index = () => {
       {/* ==========================================================
           Seção Equipe (Código Consolidado - Versão Final 3:00 AM)
           ========================================================== */}
+      {/* 
       <section
         id="equipe"
         className="w-full relative z-10"
@@ -235,10 +271,8 @@ const Index = () => {
           marginTop: '-170px',
         }}
       >
-        {/* CONTAINER DE CONTEÚDO (Limita a largura para texto e grid de membros) */}
         <div className="container mx-auto px-4 relative z-10">
 
-          {/* Bloco do 82% */}
           <div className="flex flex-col md:flex-row items-center justify-center gap-6 pb-12">
             <span className="font-display text-7xl md:text-[110px] font-bold text-white leading-none">
               82%
@@ -248,7 +282,6 @@ const Index = () => {
             </p>
           </div>
 
-          {/* Textos de Apoio */}
           <div className="max-w-4xl mx-auto mb-20">
             <div className="space-y-6 text-center max-w-3xl mx-auto">
               <p className="body-text text-white text-lg opacity-90">
@@ -260,17 +293,11 @@ const Index = () => {
             </div>
           </div>
 
-          {/* ==========================================================
-              Grid de Membros (Limitado para forçar 4 na primeira linha e 3 na segunda)
-              ========================================================== */}
           <div className="max-w-5xl mx-auto flex flex-wrap justify-center gap-x-6 md:gap-x-12 gap-y-12 md:gap-y-16 mb-24 px-4">
             {teamMembers.map((m) => (
-              // Largura fixa no card (200px) garante que 5 não caibam na tela
               <div key={m.name} className="text-center w-[150px] md:w-[200px] flex-shrink-0">
                 <div className="relative w-32 h-32 md:w-40 md:h-40 mx-auto mb-6">
-                  {/* Ícone de Risco do Lápis */}
                   <img src={sketchCircle} alt="" className="absolute inset-[-15%] w-[130%] h-[130%] opacity-40 pointer-events-none" />
-                  {/* Avatar Circular */}
                   <div className="relative w-full h-full rounded-full bg-[#FDFBF6] overflow-hidden border-4 border-white/10 shadow-xl">
                     {m.image ? (
                       <img src={m.image} alt={m.name} className="w-full h-full object-cover" />
@@ -279,39 +306,31 @@ const Index = () => {
                     )}
                   </div>
                 </div>
-                {/* Nome e Cargo */}
                 <p className="font-display text-lg md:text-xl font-bold text-white leading-tight">{m.name}</p>
                 <p className="font-body text-[10px] md:text-xs text-white/70 uppercase tracking-widest mt-1 md:mt-2">{m.role}</p>
               </div>
             ))}
           </div>
 
-          {/* Adicione ESTA tag aqui, flutuando na direita, espelhada, girada e presa na base do container */}
           <img
             src={folhaSvg} // image_18.png
             alt=""
-            // 🔥 A MÁGICA DE DOIS PASSOS AQUI:
-            // 1. -scale-x-100 (Inverte a planta horizontalmente)
-            // 2. -rotate-30 (Gira 30 graus no sentido anti-horário para o caule apontar pra dentro)
-            // Ajustei também o bottom/right para ela não voar para fora do verde com o giro
             className="absolute -right-16 bottom-16 md:-right-24 md:bottom-32 w-48 md:w-[300px] pointer-events-none z-0 scale-x-100 opacity-60"
           />
 
-        </div> {/* <-- FECHAMOS O CONTAINER MAX-W-4XL AQUI */}
+        </div> 
 
-        {/* ==========================================================
-            3. FOTO DA EQUIPE FULL WIDTH (Vazando na tela de ponta a ponta)
-            ========================================================== */}
         <div className="w-full relative z-0">
           <img
             src={equipeCompleta}
             alt="Equipe completa do Instituto Suinã"
             className="w-full h-auto object-cover block"
-            style={{ maxHeight: '600px' }} // Opcional: limita a altura para não ficar gigante em telas muito largas
+            style={{ maxHeight: '600px' }} 
           />
         </div>
 
       </section>
+      */}
 
       {/* Conselho */}
       <section className="py-16 md:py-24 px-4 relative overflow-hidden bg-suina-orange">
@@ -341,7 +360,7 @@ const Index = () => {
             {/* Presidente */}
             <div>
               <p className="caption-text text-card/70 mb-1 uppercase tracking-widest text-sm">Presidente</p>
-              <p className="font-display text-xl md:text-3xl font-bold text-card">Maria José de Brito Zákia</p>
+              <p className="font-display text-xl md:text-3xl font-bold text-card">Paulo Valladares Soares</p>
             </div>
 
             {/* Vice-Presidente */}
@@ -355,22 +374,51 @@ const Index = () => {
               <p className="caption-text text-card/70 mb-2 uppercase tracking-widest text-sm">Conselho Fiscal</p>
               <div className="space-y-3">
                 <p className="font-display text-xl md:text-3xl font-bold text-card">Lucila Manzatti</p>
-                <p className="font-display text-xl md:text-3xl font-bold text-card">Paulo Valadares Soares</p>
+                <p className="font-display text-xl md:text-3xl font-bold text-card">Fausto Rodrigues Alves de Camargo</p>
               </div>
             </div>
           </div>
 
           <p className="caption-text text-card/60 mt-16 border-t border-card/20 pt-8 inline-block text-xs tracking-widest uppercase">
-            MANDATO: 08/03/2023 A 08/03/2026
+            MANDATO: 09/03/2026 a 08/03/2029
           </p>
+
+          <div className="space-y-10 mt-16">
+            <div>
+              <p className="caption-text text-card/70 mb-1 uppercase tracking-widest text-sm">Diretora Técnica</p>
+              <p className="font-display text-xl md:text-3xl font-bold text-card">Maria de Fátima de Oliveira</p>
+            </div>
+
+            <div>
+              <p className="caption-text text-card/70 mb-1 uppercase tracking-widest text-sm">Diretora Institucional</p>
+              <p className="font-display text-xl md:text-3xl font-bold text-card">Fernanda de Moraes Alvarenga Scalambrino</p>
+            </div>
+          </div>
         </div>
       </section>
 
-      {/* Parceiros */}
+      {/* Parceiros em Grid Dinâmico */}
       <section id="parceiros" className="py-16 md:py-24 px-4 bg-white">
-        <div className="container mx-auto max-w-5xl text-center">
-          <h2 className="font-display text-3xl md:text-5xl font-bold tracking-tight leading-[1.2] text-secondary mb-8">Parceiros e apoiadores</h2>
-          <img src={logosParceiros} alt="Logos dos parceiros e apoiadores do Instituto Suinã" className="w-full" />
+        <div className="container mx-auto max-w-7xl text-center">
+          <h2 className="font-display text-3xl md:text-5xl font-bold tracking-tight leading-[1.2] text-secondary mb-12">
+            Parceiros e apoiadores
+          </h2>
+
+          <div className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-6 lg:grid-cols-8 gap-6 md:gap-8 items-center justify-items-center">
+            {parceiros.map((parceiro) => (
+              <div
+                key={parceiro.name}
+                className="w-full flex justify-center p-2 transition-all duration-300 hover:scale-110"
+              >
+                <img
+                  src={parceiro.logo}
+                  alt={`Logótipo do parceiro ${parceiro.name}`}
+                  className="max-h-12 md:max-h-16 w-auto object-contain grayscale hover:grayscale-0 transition-all duration-300"
+                  loading="lazy"
+                />
+              </div>
+            ))}
+          </div>
         </div>
       </section>
 
