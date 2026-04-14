@@ -27,6 +27,9 @@ import photoTatiane from "@/assets/Tatiane.png";
 
 import { Plus, Eye, Target, Heart, ChevronLeft, ChevronRight } from "lucide-react";
 import { useState, useRef } from "react";
+import { useQuery } from "@tanstack/react-query";
+import { supabase } from "@/integrations/supabase/client";
+
 
 const timelineData = [
   { year: "2013", text: "Concepção do Instituto Suinã e início da estruturação institucional." },
@@ -61,44 +64,26 @@ const conselho = [
   { role: "CONSELHO FISCAL", name: "Paulo Valadares Soares" },
 ];
 
-const parceiros = [
-  { name: "Corredor Ecológico", logo: "/logos/1.png" },
-  { name: "SOS Mata Atlântica", logo: "/logos/2.jpg" }, // Atualizado para .jpg
-  { name: "Ecofuturo", logo: "/logos/3.png" },
-  { name: "SAVE Brasil", logo: "/logos/4.png" },
-  { name: "Akarui", logo: "/logos/5.png" },
-  { name: "Pacto pela Restauração da Mata Atlântica", logo: "/logos/6.jpg" }, // Atualizado para .jpg
-  { name: "REBRE", logo: "/logos/7.jpg" }, // Atualizado para .jpg
-  { name: "Prática Socioambiental", logo: "/logos/8.png" },
-  { name: "Cultura no Morro", logo: "/logos/9.jpg" }, // Atualizado para .jpg
-  { name: "Parque Estadual Serra do Mar", logo: "/logos/10.jpg" }, // Atualizado para .jpg
-  { name: "CBH-PS", logo: "/logos/11.png" },
-  { name: "FEHIDRO", logo: "/logos/12.jpg" }, // Atualizado para .jpg
-  { name: "Programa Nascentes", logo: "/logos/13.jpg" }, // Atualizado para .jpg
-  { name: "RBA Sistemas", logo: "/logos/14.png" },
-  { name: "UMC Universidade", logo: "/logos/15.png" },
-  { name: "Casulo", logo: "/logos/16.png" },
-  { name: "Fatec / CPS", logo: "/logos/17.png" },
-  { name: "SerrAcima", logo: "/logos/18.webp" }, // Atualizado para .jpg
-  { name: "CAMAT", logo: "/logos/19(1).jpg" }, // Atualizado para .jpg
-  { name: "Diálogo Florestal", logo: "/logos/19.jpg" }, // Atualizado para .jpg
-  { name: "NEA Ambiental", logo: "/logos/20.png" },
-  { name: "LD Celulose", logo: "/logos/21.png" },
-  { name: "Bracell", logo: "/logos/22.png" },
-  { name: "Suzano", logo: "/logos/23.png" },
+// Static partners removed. Now fetching from Supabase.
 
-  // As logos abaixo não apareceram no seu último print. 
-  // Se elas também quebrarem, basta trocar o ".png" por ".jpg" aqui:
-  { name: "Prefeitura de Jacareí", logo: "/logos/24.jpg" },
-  { name: "Prefeitura de Igaratá", logo: "/logos/25.png" },
-  { name: "Prefeitura de Santa Isabel", logo: "/logos/26.png" },
-  { name: "Prefeitura de Santos", logo: "/logos/27.png" }
-];
 
 
 const Index = () => {
   const scrollRef = useRef<HTMLDivElement>(null);
   const [openModal, setOpenModal] = useState<string | null>(null);
+
+  const { data: parceirosList } = useQuery({
+    queryKey: ["parceiros-home"],
+    queryFn: async () => {
+      const { data, error } = await supabase
+        .from("parceiros")
+        .select("*")
+        .order("sort_order", { ascending: true });
+      if (error) throw error;
+      return data;
+    },
+  });
+
 
   const modalContent = {
     Mission: "Conectar e mobilizar pessoas, ideias e ações para conservar e restaurar a sociobiodiversidade.",
@@ -405,20 +390,21 @@ const Index = () => {
           </h2>
 
           <div className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-6 lg:grid-cols-8 gap-6 md:gap-8 items-center justify-items-center">
-            {parceiros.map((parceiro) => (
+            {parceirosList?.map((parceiro) => (
               <div
-                key={parceiro.name}
+                key={parceiro.id}
                 className="w-full flex justify-center p-2 transition-all duration-300 hover:scale-110"
               >
                 <img
-                  src={parceiro.logo}
+                  src={parceiro.logo_url}
                   alt={`Logótipo do parceiro ${parceiro.name}`}
-                  className="max-h-12 md:max-h-16 w-auto object-contain grayscale hover:grayscale-0 transition-all duration-300"
+                  className="max-h-12 md:max-h-16 w-auto object-contain transition-all duration-300"
                   loading="lazy"
                 />
               </div>
             ))}
           </div>
+
         </div>
       </section>
 

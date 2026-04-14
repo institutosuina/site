@@ -30,6 +30,8 @@ const AdminTransparency = lazy(() => import("./pages/admin/AdminTransparency"));
 const AdminNewsletter = lazy(() => import("./pages/admin/AdminNewsletter"));
 const AdminEmailMarketing = lazy(() => import("./pages/admin/AdminEmailMarketing"));
 const AdminInformativos = lazy(() => import("./pages/admin/AdminInformativos"));
+const AdminPartners = lazy(() => import("./pages/admin/AdminPartners"));
+
 
 import AdminLayout from "./components/admin/AdminLayout";
 import ProtectedRoute from "./components/admin/ProtectedRoute";
@@ -92,6 +94,8 @@ const App = () => (
               <Route path="/admin/newsletter" element={<AdminPage><AdminNewsletter /></AdminPage>} />
               <Route path="/admin/email-marketing" element={<AdminPage><AdminEmailMarketing /></AdminPage>} />
               <Route path="/admin/informativos" element={<AdminPage><AdminInformativos /></AdminPage>} />
+              <Route path="/admin/partners" element={<AdminPage><AdminPartners /></AdminPage>} />
+
 
               <Route path="*" element={<NotFound />} />
             </Routes>

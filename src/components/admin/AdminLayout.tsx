@@ -13,6 +13,7 @@ import {
   Menu,
   X,
   Megaphone,
+  Users,
 } from "lucide-react";
 import { useAuth } from "@/contexts/AuthContext";
 import { Button } from "@/components/ui/button";
@@ -28,6 +29,7 @@ const navItems = [
   { label: "Transparência", icon: Shield, path: "/admin/transparency" },
   { label: "Newsletter", icon: Mail, path: "/admin/newsletter" },
   { label: "E-mail Marketing", icon: Send, path: "/admin/email-marketing" },
+  { label: "Parceiros", icon: Users, path: "/admin/partners" },
 ];
 
 const AdminLayout = ({ children }: { children: ReactNode }) => {
