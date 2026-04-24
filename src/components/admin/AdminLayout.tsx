@@ -14,6 +14,7 @@ import {
   X,
   Megaphone,
   Users,
+  UserPlus,
 } from "lucide-react";
 import { useAuth } from "@/contexts/AuthContext";
 import { Button } from "@/components/ui/button";
@@ -31,6 +32,8 @@ const navItems = [
   { label: "E-mail Marketing", icon: Send, path: "/admin/email-marketing" },
   { label: "Parceiros", icon: Users, path: "/admin/partners" },
 ];
+
+const SUPER_ADMIN_EMAIL = "comunicacao@institutosuina.org";
 
 const AdminLayout = ({ children }: { children: ReactNode }) => {
   const { user, signOut } = useAuth();
@@ -91,6 +94,21 @@ const AdminLayout = ({ children }: { children: ReactNode }) => {
               <span>{item.label}</span>
             </Link>
           ))}
+          
+          {user?.email === SUPER_ADMIN_EMAIL && (
+            <Link
+              to="/admin/users"
+              onClick={() => setSidebarOpen(false)}
+              className={`flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium transition-colors ${
+                isActive("/admin/users")
+                  ? "bg-emerald-50 text-emerald-700"
+                  : "text-zinc-600 hover:bg-zinc-100 hover:text-zinc-900"
+              }`}
+            >
+              <UserPlus className="h-5 w-5 shrink-0" />
+              <span>Usuários</span>
+            </Link>
+          )}
         </nav>
 
         <div className="border-t border-zinc-200 p-4">

@@ -1,7 +1,8 @@
 import { useQuery } from "@tanstack/react-query";
 import { supabase } from "@/integrations/supabase/client";
-import { FileText, MailPlus, Eye, Plus, Upload, FilePlus } from "lucide-react";
+import { FileText, MailPlus, Eye, Plus, Upload, FilePlus, UserPlus } from "lucide-react";
 import { Link } from "react-router-dom";
+import { useAuth } from "@/contexts/AuthContext";
 import { Skeleton } from "@/components/ui/skeleton";
 
 const s = { fontFamily: "'Inter', sans-serif" } as const;
@@ -12,7 +13,10 @@ const quickActions = [
   { label: "Upload de Relatório", icon: Upload, path: "/admin/transparency" },
 ];
 
+const SUPER_ADMIN_EMAIL = "comunicacao@institutosuina.org";
+
 const AdminDashboard = () => {
+  const { user } = useAuth();
   const { data: blogCount, isLoading: l1 } = useQuery({
     queryKey: ["dashboard-blog-count"],
     queryFn: async () => {
@@ -84,6 +88,13 @@ const AdminDashboard = () => {
               <action.icon className="h-4 w-4" /> {action.label}
             </Link>
           ))}
+          {user?.email === SUPER_ADMIN_EMAIL && (
+            <Link to="/admin/users"
+              className="inline-flex items-center gap-2 bg-zinc-800 text-white px-6 py-3 rounded-lg font-medium hover:bg-zinc-900 transition-colors"
+              style={{ ...s, fontSize: "0.875rem" }}>
+              <UserPlus className="h-4 w-4" /> Gerenciar Usuários
+            </Link>
+          )}
         </div>
       </div>
     </div>

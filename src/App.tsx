@@ -21,6 +21,7 @@ import EditalDetail from "./pages/EditalDetail";
 import MaterialTecnicoDetail from "./pages/MaterialTecnicoDetail";
 import InformativosAno from "./pages/InformativosAno";
 import NotFound from "./pages/NotFound";
+import QrCodePage, { QR_CODE_NAMES } from "./pages/QrCodePage";
 
 // Admin pages (lazy loaded)
 const AdminLogin = lazy(() => import("./pages/admin/AdminLogin"));
@@ -31,6 +32,7 @@ const AdminNewsletter = lazy(() => import("./pages/admin/AdminNewsletter"));
 const AdminEmailMarketing = lazy(() => import("./pages/admin/AdminEmailMarketing"));
 const AdminInformativos = lazy(() => import("./pages/admin/AdminInformativos"));
 const AdminPartners = lazy(() => import("./pages/admin/AdminPartners"));
+const AdminUsers = lazy(() => import("./pages/admin/AdminUsers"));
 
 
 import AdminLayout from "./components/admin/AdminLayout";
@@ -95,7 +97,11 @@ const App = () => (
               <Route path="/admin/email-marketing" element={<AdminPage><AdminEmailMarketing /></AdminPage>} />
               <Route path="/admin/informativos" element={<AdminPage><AdminInformativos /></AdminPage>} />
               <Route path="/admin/partners" element={<AdminPage><AdminPartners /></AdminPage>} />
+              <Route path="/admin/users" element={<AdminPage><AdminUsers /></AdminPage>} />
 
+
+              {/* QR Code routes — dynamic slug catch-all */}
+              <Route path="/:slug" element={<QrCodePage />} />
 
               <Route path="*" element={<NotFound />} />
             </Routes>
