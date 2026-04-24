@@ -17,6 +17,7 @@ import {
   Select, SelectContent, SelectItem, SelectTrigger, SelectValue,
 } from "@/components/ui/select";
 import type { Tables } from "@/integrations/supabase/types";
+import TiptapEditor from "@/components/admin/TiptapEditor";
 
 type EmailSent = Tables<"emails_enviados">;
 const s = { fontFamily: "'Inter', sans-serif" } as const;
@@ -377,7 +378,11 @@ const AdminEmailMarketing = () => {
             {/* Body */}
             <div className="space-y-2">
               <label style={{ ...s, fontSize: "0.8125rem" }} className="font-medium text-zinc-700">Conteúdo</label>
-              <Textarea value={body} onChange={(e) => setBody(e.target.value)} placeholder="Corpo do e-mail..." rows={8} className="!text-sm" />
+              <TiptapEditor 
+                content={body} 
+                onChange={(html) => setBody(html)} 
+                storageBucket="covers"
+              />
             </div>
           </div>
           <DialogFooter>

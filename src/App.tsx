@@ -27,6 +27,7 @@ import QrCodePage, { QR_CODE_NAMES } from "./pages/QrCodePage";
 const AdminLogin = lazy(() => import("./pages/admin/AdminLogin"));
 const AdminDashboard = lazy(() => import("./pages/admin/AdminDashboard"));
 const AdminContent = lazy(() => import("./pages/admin/AdminContent"));
+const AdminContentEdit = lazy(() => import("./pages/admin/AdminContentEdit"));
 const AdminTransparency = lazy(() => import("./pages/admin/AdminTransparency"));
 const AdminNewsletter = lazy(() => import("./pages/admin/AdminNewsletter"));
 const AdminEmailMarketing = lazy(() => import("./pages/admin/AdminEmailMarketing"));
@@ -90,8 +91,11 @@ const App = () => (
               <Route path="/admin/content" element={<AdminPage><AdminContent /></AdminPage>} />
               <Route path="/admin/blog" element={<AdminPage><AdminContent contentType="posts_blog" /></AdminPage>} />
               <Route path="/admin/noticias" element={<AdminPage><AdminContent contentType="noticias" /></AdminPage>} />
-              <Route path="/admin/material-tecnico" element={<AdminPage><AdminContent contentType="material_tecnico" /></AdminPage>} />
               <Route path="/admin/editais" element={<AdminPage><AdminContent contentType="editais" /></AdminPage>} />
+              <Route path="/admin/material-tecnico" element={<AdminPage><AdminContent contentType="material_tecnico" /></AdminPage>} />
+              
+              <Route path="/admin/content/:type/:id/edit" element={<AdminPage><AdminContentEdit /></AdminPage>} />
+              <Route path="/admin/content/:type/new" element={<AdminPage><AdminContentEdit /></AdminPage>} />
               <Route path="/admin/transparency" element={<AdminPage><AdminTransparency /></AdminPage>} />
               <Route path="/admin/newsletter" element={<AdminPage><AdminNewsletter /></AdminPage>} />
               <Route path="/admin/email-marketing" element={<AdminPage><AdminEmailMarketing /></AdminPage>} />

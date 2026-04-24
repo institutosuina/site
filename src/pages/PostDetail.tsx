@@ -68,9 +68,10 @@ const PostDetail = ({ table }: { table: ContentType }) => {
                   <img src={post.cover_image} alt={post.title} className="w-full h-auto object-cover" />
                 </div>
               )}
-              <div className="prose prose-lg max-w-none font-body text-foreground leading-relaxed whitespace-pre-wrap">
-                {post.content}
-              </div>
+              <div 
+                className="prose prose-lg max-w-none font-body text-foreground leading-relaxed"
+                dangerouslySetInnerHTML={{ __html: post.content || "" }}
+              />
             </article>
           )}
         </div>

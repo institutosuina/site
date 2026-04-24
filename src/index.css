@@ -264,4 +264,22 @@
   .card-green, .card-brown, .card-terra, .card-orange, .card-red, .card-sage {
     @apply paper-texture shadow-md hover:shadow-lg transition-all duration-300;
   }
+
+  .suina-button-link {
+    display: inline-block !important;
+    background-color: #3e2723 !important;
+    color: white !important;
+    padding: 12px 32px !important;
+    border-radius: 9999px !important;
+    text-decoration: none !important;
+    font-weight: bold !important;
+    margin: 10px 0 !important;
+    transition: all 0.2s !important;
+    border: none !important;
+  }
+
+  .suina-button-link:hover {
+    opacity: 0.9 !important;
+    transform: translateY(-1px) !important;
+  }
 }
