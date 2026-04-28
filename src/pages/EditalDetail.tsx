@@ -57,77 +57,111 @@ const EditalDetail = () => {
           ) : !edital ? (
             <p className="text-center text-muted-foreground font-body py-16">Edital não encontrado.</p>
           ) : (
-            <div>
+            <div className="animate-fade-in">
+              {/* Header Section */}
+              <div className="text-center mb-12">
+                <span className="inline-block px-4 py-1 rounded-full bg-secondary/10 text-secondary text-xs font-bold uppercase tracking-wider mb-4">
+                  Edital de Contratação
+                </span>
+                <h1 className="font-display text-3xl md:text-5xl font-bold text-foreground mb-6 leading-tight">
+                  {edital.title}
+                </h1>
+                <div className="w-20 h-1.5 bg-secondary mx-auto rounded-full"></div>
+              </div>
+
               {/* Cover image */}
               {edital.cover_image && (
-                <div className="rounded-2xl overflow-hidden mb-8 h-48 md:h-64">
+                <div className="rounded-3xl overflow-hidden mb-12 shadow-xl h-64 md:h-80 border-4 border-white">
                   <img src={edital.cover_image} alt={edital.title} className="w-full h-full object-cover" />
                 </div>
               )}
 
-              {/* Title */}
-              <h1 className="font-display text-2xl md:text-4xl font-bold text-foreground text-center mb-6 uppercase">
-                EDITAIS
-              </h1>
-
-              <h2 className="font-display text-xl md:text-2xl font-bold text-foreground text-center mb-8">
-                {edital.title}
-              </h2>
-
-              {/* Content / Objeto */}
-              {edital.content && (
-                <div className="bg-muted/30 rounded-xl p-6 mb-10 border border-border">
-                  <p className="font-body text-sm md:text-base text-foreground/90 leading-relaxed whitespace-pre-wrap">
-                    {edital.content}
-                  </p>
-                </div>
-              )}
-
-              {/* Two column: QR/info + Anexos */}
-              <div className="grid grid-cols-1 md:grid-cols-[280px_1fr] gap-8 items-start">
-                {/* Left: QR-like info box */}
-                <div className="bg-[hsl(var(--suina-green)/0.15)] rounded-2xl p-6 flex flex-col items-center text-center border border-[hsl(var(--suina-green)/0.3)]">
-                  <p className="font-display text-sm font-bold text-foreground mb-2">{edital.title}</p>
-                  <p className="font-body text-xs text-muted-foreground mb-4">
-                    Acesse o edital através do nosso site:
-                  </p>
-                  <p className="font-body text-xs text-secondary break-all mb-4">
-                    www.institutosuina.org/editais
-                  </p>
-                  <img src={logoSuina} alt="Instituto Suinã" className="h-10 w-auto opacity-80" />
-                </div>
-
-                {/* Right: Anexos list */}
-                <div className="space-y-3">
-                  {!anexos?.length ? (
-                    <p className="text-muted-foreground font-body text-sm py-4">Nenhum anexo adicionado.</p>
-                  ) : (
-                    anexos.map((anexo) => (
-                      <a
-                        key={anexo.id}
-                        href={anexo.file_url}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="flex items-center gap-4 p-4 rounded-xl border border-border bg-card hover:bg-muted/50 transition-colors group"
-                      >
-                        <div className="flex-shrink-0 w-10 h-12 bg-[hsl(var(--suina-green)/0.2)] rounded-lg flex items-center justify-center">
-                          <FileDown className="w-5 h-5 text-[hsl(var(--suina-green))]" />
-                        </div>
-                        <span className="font-display text-sm md:text-base font-bold text-foreground group-hover:text-secondary transition-colors">
-                          {anexo.title}
-                        </span>
-                      </a>
-                    ))
-                  )}
-                </div>
+              {/* Objeto / Descrição Section */}
+              <div className="bg-white rounded-3xl p-8 md:p-10 mb-12 shadow-sm border border-border/50 relative overflow-hidden">
+                <div className="absolute top-0 left-0 w-2 h-full bg-secondary"></div>
+                <h3 className="font-display text-lg font-bold text-secondary uppercase tracking-wider mb-4 flex items-center gap-2">
+                  <span className="w-6 h-6 rounded-full bg-secondary/20 flex items-center justify-center text-[10px]">i</span>
+                  Objeto do Edital
+                </h3>
+                <p className="font-body text-base md:text-lg text-foreground/80 leading-relaxed italic">
+                  {edital.content}
+                </p>
               </div>
 
-              {/* Updated date */}
-              {edital.updated_at && (
-                <p className="text-center font-body text-xs text-muted-foreground mt-10">
-                  Atualizado em: {new Date(edital.updated_at).toLocaleDateString("pt-BR")}
-                </p>
-              )}
+              {/* Downloads Section */}
+              <div className="grid grid-cols-1 lg:grid-cols-3 gap-10">
+                <div className="lg:col-span-2">
+                  <h3 className="font-display text-xl font-bold text-foreground mb-6 flex items-center gap-3">
+                    <FileDown className="text-secondary w-6 h-6" />
+                    Documentos e Anexos
+                  </h3>
+                  
+                  <div className="space-y-4">
+                    {!anexos?.length ? (
+                      <div className="p-8 text-center rounded-2xl border-2 border-dashed border-border bg-muted/20 text-muted-foreground font-body italic">
+                        Nenhum anexo disponível para este edital.
+                      </div>
+                    ) : (
+                      anexos.map((anexo, index) => (
+                        <a
+                          key={anexo.id}
+                          href={anexo.file_url}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="flex items-center gap-4 p-5 rounded-2xl border border-border bg-white hover:border-secondary hover:shadow-md hover:-translate-y-1 transition-all duration-300 group"
+                        >
+                          <div className="flex-shrink-0 w-12 h-12 bg-secondary/10 rounded-xl flex items-center justify-center group-hover:bg-secondary group-hover:text-white transition-colors">
+                            <FileDown className="w-6 h-6 text-secondary group-hover:text-white transition-colors" />
+                          </div>
+                          <div className="flex-1 min-w-0">
+                            <span className="block font-display text-sm md:text-base font-bold text-foreground group-hover:text-secondary transition-colors truncate">
+                              {anexo.title}
+                            </span>
+                            <span className="text-[10px] text-muted-foreground uppercase font-bold tracking-widest group-hover:text-secondary/60">
+                              Clique para baixar (PDF)
+                            </span>
+                          </div>
+                          <div className="w-8 h-8 rounded-full bg-muted/50 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
+                            <ArrowLeft className="w-4 h-4 rotate-180" />
+                          </div>
+                        </a>
+                      ))
+                    )}
+                  </div>
+                </div>
+
+                {/* Sidebar Info */}
+                <div className="space-y-6">
+                  <div className="bg-SuinaDark rounded-3xl p-8 text-white shadow-lg shadow-SuinaDark/20 relative overflow-hidden group">
+                    <div className="relative z-10">
+                      <p className="font-display text-sm font-bold opacity-70 mb-2 uppercase tracking-widest">Informações</p>
+                      <div className="space-y-4">
+                        <div>
+                          <p className="text-[10px] uppercase opacity-50 font-bold mb-1">Publicação</p>
+                          <p className="font-body text-sm">
+                            {edital.published_at ? new Date(edital.published_at).toLocaleDateString("pt-BR") : "—"}
+                          </p>
+                        </div>
+                        <div>
+                          <p className="text-[10px] uppercase opacity-50 font-bold mb-1">Status</p>
+                          <span className="inline-block px-2 py-0.5 rounded bg-green-500/20 text-green-400 text-[10px] font-bold uppercase">
+                            {edital.status}
+                          </span>
+                        </div>
+                      </div>
+                      <div className="mt-8 pt-6 border-t border-white/10">
+                        <img src={logoSuina} alt="Instituto Suinã" className="h-8 w-auto brightness-0 invert opacity-80" />
+                      </div>
+                    </div>
+                  </div>
+
+                  <div className="p-6 rounded-3xl bg-secondary/5 border border-secondary/10 text-center">
+                    <p className="font-body text-xs text-muted-foreground italic leading-relaxed">
+                      Este é um documento oficial do Instituto Suinã. Em caso de dúvidas, entre em contato através dos nossos canais de atendimento.
+                    </p>
+                  </div>
+                </div>
+              </div>
             </div>
           )}
         </div>
