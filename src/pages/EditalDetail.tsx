@@ -117,9 +117,19 @@ const EditalDetail = () => {
                             <span className="block font-display text-sm md:text-base font-bold text-foreground group-hover:text-secondary transition-colors truncate">
                               {anexo.title}
                             </span>
-                            <span className="text-[10px] text-muted-foreground uppercase font-bold tracking-widest group-hover:text-secondary/60">
-                              Clique para baixar (PDF)
-                            </span>
+                            <div className="flex items-center gap-3 mt-1">
+                              <span className="text-[10px] text-muted-foreground uppercase font-bold tracking-widest group-hover:text-secondary/60">
+                                Clique para baixar (PDF)
+                              </span>
+                              {anexo.created_at && (
+                                <>
+                                  <span className="w-1 h-1 rounded-full bg-border"></span>
+                                  <span className="text-[10px] text-muted-foreground font-medium">
+                                    {new Date(anexo.created_at).toLocaleDateString("pt-BR")}
+                                  </span>
+                                </>
+                              )}
+                            </div>
                           </div>
                           <div className="w-8 h-8 rounded-full bg-muted/50 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
                             <ArrowLeft className="w-4 h-4 rotate-180" />
