@@ -2,29 +2,75 @@ import Layout from "@/components/Layout";
 import wheatDecoration from "@/assets/wheat-decoration.png";
 import manualLGPD from "@/assets/Manual_LGPD_Suina.pdf";
 import estatutoSuina from "@/assets/Estatuto_Suina.pdf";
-import { Plus } from "lucide-react";
-import { Link } from "react-router-dom";
+import { Plus, Download, X, FileText } from "lucide-react";
+import { useState } from "react";
+import { useQuery } from "@tanstack/react-query";
+import { supabase } from "@/integrations/supabase/client";
+import { motion, AnimatePresence } from "framer-motion";
 
 const cards = [
-  { label: "Política e\nManual de\nBoas práticas\n(LGPD)", color: "bg-[#2D5A41]", href: "#", isDownload: true, file: manualLGPD, fileName: 'Manual_LGPD_Suina.pdf' },
-  { label: "Estatuto\nsocial", color: "bg-[#759580]", href: "#", isDownload: true, file: estatutoSuina, fileName: 'Estatuto_Suina.pdf' },
-  { label: "Relatórios\nde Resultados", color: "bg-[#B45045]", href: "/transparencia" },
-  { label: "Demonstrativos\nContábeis", color: "bg-[#8B5A2B]", href: "/transparencia" },
-  { label: "Prestação\nde contas", color: "bg-[#759580]", href: "/prestacao-de-contas" },
+  { id: 'lgpd', label: "Política e\nManual de\nBoas práticas\n(LGPD)", color: "bg-[#2D5A41]", isDownload: true, file: manualLGPD, fileName: 'Manual_LGPD_Suina.pdf' },
+  { id: 'estatuto', label: "Estatuto\nsocial", color: "bg-[#759580]", isDownload: true, file: estatutoSuina, fileName: 'Estatuto_Suina.pdf' },
+  { id: 'resultados', label: "Relatórios\nde Resultados", color: "bg-[#B45045]" },
+  { id: 'contabeis', label: "Demonstrativos\nContábeis", color: "bg-[#8B5A2B]" },
+  { id: 'prestacao', label: "Prestação\nde contas", color: "bg-[#759580]", href: "/prestacao-de-contas" },
 ];
 
 const Transparencia = () => {
-  const handleDownload = (e: React.MouseEvent, card: typeof cards[0]) => {
+  const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
+
+  const { data: allRelatorios } = useQuery({
+    queryKey: ["relatorios-transparencia"],
+    queryFn: async () => {
+      const { data, error } = await supabase
+        .from("relatorios")
+        .select("*")
+        .order("title", { ascending: false });
+      if (error) throw error;
+      return data;
+    },
+  });
+
+  const getFilteredDocs = (categoryId: string) => {
+    if (!allRelatorios) return [];
+    
+    if (categoryId === 'resultados') {
+      return allRelatorios.filter(d => 
+        d.title.toLowerCase().includes('relatório') || 
+        d.title.toLowerCase().includes('portfólio')
+      );
+    }
+    if (categoryId === 'contabeis') {
+      return allRelatorios.filter(d => 
+        d.title.toLowerCase().includes('balanço') || 
+        d.title.toLowerCase().includes('demonstrat') ||
+        d.title.toLowerCase().includes('contábil')
+      );
+    }
+    return [];
+  };
+
+  const handleCardClick = (e: React.MouseEvent, card: typeof cards[0]) => {
     if (card.isDownload && card.file) {
-      e.preventDefault();
+      // Para arquivos locais importados, é mais seguro usar um link direto com atributo download
       const link = document.createElement('a');
       link.href = card.file;
-      link.download = card.fileName || 'documento.pdf';
+      link.setAttribute('download', card.fileName || 'documento.pdf');
+      link.setAttribute('target', '_blank');
       document.body.appendChild(link);
       link.click();
       document.body.removeChild(link);
+      return;
+    }
+
+    if (card.id === 'resultados' || card.id === 'contabeis') {
+      e.preventDefault();
+      setSelectedCategory(card.id);
     }
   };
+
+  const currentDocs = selectedCategory ? getFilteredDocs(selectedCategory) : [];
+  const currentCard = cards.find(c => c.id === selectedCategory);
 
   return (
     <Layout>
@@ -34,74 +80,131 @@ const Transparencia = () => {
         <img src={wheatDecoration} alt="" className="absolute left-0 bottom-20 w-40 opacity-10 pointer-events-none rotate-180" />
 
         <div className="container mx-auto max-w-5xl relative z-10">
-
           {/* Cabeçalho */}
           <div className="text-center mb-16">
-            <h1 className="font-display text-4xl md:text-6xl font-bold text-[#8B5A2B] uppercase tracking-tighter mb-4">
+            <motion.h1 
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              className="font-display text-4xl md:text-6xl font-bold text-[#8B5A2B] uppercase tracking-tighter mb-4"
+            >
               Transparência
-            </h1>
+            </motion.h1>
             <div className="w-24 h-1 bg-[#8B5A2B] mx-auto mb-8"></div>
             <h2 className="font-display text-2xl md:text-3xl font-bold text-[#2D2D2D]">
               Resultados e compromissos:
             </h2>
           </div>
 
-          {/* Texto Institucional */}
-          <div className="max-w-4xl mx-auto text-center mb-20 space-y-6">
-            <p className="body-text text-lg text-gray-700 leading-relaxed">
-              O Instituto Suinã é uma organização da sociedade civil, sem fins lucrativos, dedicada à promoção de boas práticas de governança e à gestão transparente de suas ações. Trabalhamos de forma comprometida com nossos valores, acompanhando de perto a execução dos projetos e iniciativas, fortalecendo vínculos com comunidades e parceiros e definindo estratégias que garantem a realização de nossa missão.
-            </p>
-            <p className="body-text text-lg text-gray-700 leading-relaxed">
-              Acreditamos que transparência e responsabilidade são essenciais para gerar confiança e impacto positivo. Por isso, disponibilizamos nesta página informações atualizadas sobre nossas atividades, resultados e compromissos, reafirmando nosso compromisso com a vida e com o futuro das próximas gerações.
-            </p>
-          </div>
-
-          {/* Grid Principal (Primeiros 3 Cards) */}
+          {/* Grid de Cards */}
           <div className="grid grid-cols-1 md:grid-cols-3 gap-10 mb-10">
-            {cards.slice(0, 3).map((card, i) => (
-              <Link
-                key={i}
-                to={card.href}
-                onClick={(e) => handleDownload(e, card)}
-                className={`${card.color} aspect-square rounded-[2rem] p-8 flex flex-col items-center justify-center text-center shadow-xl hover:scale-[1.03] transition-all duration-300 relative group`}
-              >
-                <span className="font-display text-2xl md:text-3xl font-bold text-white whitespace-pre-line leading-tight mb-6">
-                  {card.label}
-                </span>
-
-                {/* Botão circular vazado com ícone Plus (+) */}
-                <div className="absolute -bottom-7 w-14 h-14 rounded-full bg-white shadow-lg flex items-center justify-center transition-all">
-                  <div className={`${card.color} w-full h-full rounded-full flex items-center justify-center`}>
-                    <Plus className="w-6 h-6 text-white" />
+            {cards.map((card, i) => {
+              const Content = (
+                <div className={`${card.color} aspect-square rounded-[2rem] p-8 flex flex-col items-center justify-center text-center shadow-xl hover:scale-[1.03] transition-all duration-300 relative group cursor-pointer`}>
+                  <span className="font-display text-2xl md:text-3xl font-bold text-white whitespace-pre-line leading-tight mb-6">
+                    {card.label}
+                  </span>
+                  <div className="absolute -bottom-7 w-14 h-14 rounded-full bg-white shadow-lg flex items-center justify-center transition-all">
+                    <div className={`${card.color} w-full h-full rounded-full flex items-center justify-center`}>
+                      <Plus className="w-6 h-6 text-white" />
+                    </div>
                   </div>
                 </div>
-              </Link>
-            ))}
-          </div>
+              );
 
-          {/* Grid Inferior (Últimos 2 Cards) */}
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-10 max-w-2xl mx-auto mt-20">
-            {cards.slice(3).map((card, i) => (
-              <Link
-                key={i}
-                to={card.href}
-                onClick={(e) => handleDownload(e, card)}
-                className={`${card.color} aspect-square rounded-[2rem] p-8 flex flex-col items-center justify-center text-center shadow-xl hover:scale-[1.03] transition-all duration-300 relative group`}
-              >
-                <span className="font-display text-2xl md:text-3xl font-bold text-white whitespace-pre-line leading-tight mb-6">
-                  {card.label}
-                </span>
+              if (card.href) {
+                return (
+                  <motion.a 
+                    key={i} 
+                    href={card.href}
+                    initial={{ opacity: 0, scale: 0.9 }}
+                    animate={{ opacity: 1, scale: 1 }}
+                    transition={{ delay: i * 0.1 }}
+                  >
+                    {Content}
+                  </motion.a>
+                );
+              }
 
-                <div className="absolute -bottom-7 w-14 h-14 rounded-full bg-white shadow-lg flex items-center justify-center transition-all">
-                  <div className={`${card.color} w-full h-full rounded-full flex items-center justify-center`}>
-                    <Plus className="w-6 h-6 text-white" />
-                  </div>
-                </div>
-              </Link>
-            ))}
+              return (
+                <motion.div 
+                  key={i} 
+                  onClick={(e) => handleCardClick(e, card)}
+                  initial={{ opacity: 0, scale: 0.9 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  transition={{ delay: i * 0.1 }}
+                >
+                  {Content}
+                </motion.div>
+              );
+            })}
           </div>
         </div>
       </section>
+
+      {/* Modal de Documentos */}
+      <AnimatePresence>
+        {selectedCategory && (
+          <div className="fixed inset-0 z-[100] flex items-center justify-center px-4">
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              onClick={() => setSelectedCategory(null)}
+              className="absolute inset-0 bg-black/60 backdrop-blur-sm"
+            />
+            <motion.div
+              initial={{ opacity: 0, scale: 0.9, y: 20 }}
+              animate={{ opacity: 1, scale: 1, y: 0 }}
+              exit={{ opacity: 0, scale: 0.9, y: 20 }}
+              className="bg-white rounded-[2.5rem] w-full max-w-2xl overflow-hidden shadow-2xl relative z-10"
+            >
+              <div className={`${currentCard?.color} p-8 text-white relative`}>
+                <button 
+                  onClick={() => setSelectedCategory(null)}
+                  className="absolute right-6 top-6 w-10 h-10 rounded-full bg-white/20 hover:bg-white/30 flex items-center justify-center transition-colors"
+                >
+                  <X className="w-5 h-5" />
+                </button>
+                <h3 className="font-display text-2xl md:text-3xl font-bold mt-4">
+                  {currentCard?.label.replace(/\n/g, ' ')}
+                </h3>
+              </div>
+
+              <div className="p-8 max-h-[60vh] overflow-y-auto">
+                <div className="space-y-4">
+                  {currentDocs.length > 0 ? (
+                    currentDocs.map((doc) => (
+                      <a
+                        key={doc.id}
+                        href={doc.file_url}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="flex items-center gap-4 p-4 rounded-2xl border border-border hover:border-secondary hover:bg-secondary/5 transition-all group"
+                      >
+                        <div className="w-12 h-12 rounded-xl bg-muted flex items-center justify-center group-hover:bg-secondary/10 transition-colors">
+                          <FileText className="w-6 h-6 text-muted-foreground group-hover:text-secondary" />
+                        </div>
+                        <div className="flex-1">
+                          <p className="font-display font-bold text-foreground group-hover:text-secondary transition-colors">
+                            {doc.title}
+                          </p>
+                          <p className="text-xs text-muted-foreground uppercase font-bold tracking-widest mt-1 flex items-center gap-2">
+                            Clique para baixar <Download className="w-3 h-3" />
+                          </p>
+                        </div>
+                      </a>
+                    ))
+                  ) : (
+                    <div className="text-center py-12">
+                      <p className="text-muted-foreground">Nenhum documento encontrado nesta categoria.</p>
+                    </div>
+                  )}
+                </div>
+              </div>
+            </motion.div>
+          </div>
+        )}
+      </AnimatePresence>
     </Layout>
   );
 };
