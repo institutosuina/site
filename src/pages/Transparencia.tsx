@@ -50,16 +50,26 @@ const Transparencia = () => {
     return [];
   };
 
-  const handleCardClick = (e: React.MouseEvent, card: typeof cards[0]) => {
+  const handleCardClick = async (e: React.MouseEvent, card: typeof cards[0]) => {
     if (card.isDownload && card.file) {
-      // Para arquivos locais importados, é mais seguro usar um link direto com atributo download
-      const link = document.createElement('a');
-      link.href = card.file;
-      link.setAttribute('download', card.fileName || 'documento.pdf');
-      link.setAttribute('target', '_blank');
-      document.body.appendChild(link);
-      link.click();
-      document.body.removeChild(link);
+      e.preventDefault();
+      try {
+        // Busca o arquivo, transforma em Blob para garantir o nome e extensão no download
+        const response = await fetch(card.file);
+        const blob = await response.blob();
+        const url = window.URL.createObjectURL(blob);
+        const link = document.createElement('a');
+        link.href = url;
+        link.setAttribute('download', card.fileName || 'documento.pdf');
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+        window.URL.revokeObjectURL(url);
+      } catch (error) {
+        console.error("Erro ao baixar arquivo:", error);
+        // Fallback simples caso o fetch falhe
+        window.open(card.file, '_blank');
+      }
       return;
     }
 
