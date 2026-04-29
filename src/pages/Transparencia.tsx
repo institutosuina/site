@@ -79,6 +79,25 @@ const Transparencia = () => {
     }
   };
 
+  const handleDocDownload = async (e: React.MouseEvent, url: string, title: string) => {
+    e.preventDefault();
+    try {
+      const response = await fetch(url);
+      const blob = await response.blob();
+      const blobUrl = window.URL.createObjectURL(blob);
+      const link = document.createElement('a');
+      link.href = blobUrl;
+      link.setAttribute('download', `${title}.pdf`);
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+      window.URL.revokeObjectURL(blobUrl);
+    } catch (error) {
+      console.error("Erro ao baixar documento:", error);
+      window.open(url, '_blank');
+    }
+  };
+
   const currentDocs = selectedCategory ? getFilteredDocs(selectedCategory) : [];
   const currentCard = cards.find(c => c.id === selectedCategory);
 
@@ -184,12 +203,10 @@ const Transparencia = () => {
                 <div className="space-y-4">
                   {currentDocs.length > 0 ? (
                     currentDocs.map((doc) => (
-                      <a
+                      <div
                         key={doc.id}
-                        href={doc.file_url}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="flex items-center gap-4 p-4 rounded-2xl border border-border hover:border-secondary hover:bg-secondary/5 transition-all group"
+                        onClick={(e) => handleDocDownload(e, doc.file_url, doc.title)}
+                        className="flex items-center gap-4 p-4 rounded-2xl border border-border hover:border-secondary hover:bg-secondary/5 transition-all group cursor-pointer"
                       >
                         <div className="w-12 h-12 rounded-xl bg-muted flex items-center justify-center group-hover:bg-secondary/10 transition-colors">
                           <FileText className="w-6 h-6 text-muted-foreground group-hover:text-secondary" />
@@ -202,7 +219,7 @@ const Transparencia = () => {
                             Clique para baixar <Download className="w-3 h-3" />
                           </p>
                         </div>
-                      </a>
+                      </div>
                     ))
                   ) : (
                     <div className="text-center py-12">
