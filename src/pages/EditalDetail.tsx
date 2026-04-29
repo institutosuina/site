@@ -69,12 +69,6 @@ const EditalDetail = () => {
                 <div className="w-20 h-1.5 bg-secondary mx-auto rounded-full"></div>
               </div>
 
-              {/* Cover image */}
-              {edital.cover_image && (
-                <div className="rounded-3xl overflow-hidden mb-12 shadow-xl h-64 md:h-80 border-4 border-white">
-                  <img src={edital.cover_image} alt={edital.title} className="w-full h-full object-cover" />
-                </div>
-              )}
 
               {/* Objeto / Descrição Section */}
               <div className="bg-white rounded-3xl p-8 md:p-10 mb-12 shadow-sm border border-border/50 relative overflow-hidden">
