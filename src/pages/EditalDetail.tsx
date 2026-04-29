@@ -136,9 +136,9 @@ const EditalDetail = () => {
 
                 {/* Sidebar Info */}
                 <div className="space-y-6">
-                  <div className="bg-SuinaDark rounded-3xl p-8 text-white shadow-lg shadow-SuinaDark/20 relative overflow-hidden group">
+                  <div className="bg-[#1A1F2C] rounded-3xl p-8 text-white shadow-lg shadow-black/10 relative overflow-hidden group">
                     <div className="relative z-10">
-                      <p className="font-display text-sm font-bold opacity-70 mb-2 uppercase tracking-widest">Informações</p>
+                      <p className="font-display text-sm font-bold opacity-70 mb-2 uppercase tracking-widest text-secondary">Informações</p>
                       <div className="space-y-4">
                         <div>
                           <p className="text-[10px] uppercase opacity-50 font-bold mb-1">Publicação</p>
