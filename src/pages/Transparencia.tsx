@@ -36,15 +36,16 @@ const Transparencia = () => {
     
     if (categoryId === 'resultados') {
       return allRelatorios.filter(d => 
-        d.title.toLowerCase().includes('relatório') || 
-        d.title.toLowerCase().includes('portfólio')
+        d.title.toLowerCase().includes('relat') || 
+        d.title.toLowerCase().includes('portf') ||
+        d.title.toLowerCase().includes('resultado')
       );
     }
     if (categoryId === 'contabeis') {
       return allRelatorios.filter(d => 
-        d.title.toLowerCase().includes('balanço') || 
+        d.title.toLowerCase().includes('balan') || 
         d.title.toLowerCase().includes('demonstrat') ||
-        d.title.toLowerCase().includes('contábil')
+        d.title.toLowerCase().includes('cont')
       );
     }
     return [];
