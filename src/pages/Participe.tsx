@@ -239,11 +239,11 @@ const Participe = () => {
               </p>
               <div className="flex flex-wrap gap-3">
                 {[
-                  { icon: FaWhatsapp, color: "hsl(var(--suina-brown))", href: "#" },
-                  { icon: FaFacebookF, color: "hsl(var(--suina-green-sage))", href: "#" },
-                  { icon: FaInstagram, color: "hsl(var(--accent))", href: "#" },
-                  { icon: FaLinkedinIn, color: "hsl(var(--suina-green-sage))", href: "#" },
-                  { icon: FaYoutube, color: "hsl(var(--accent))", href: "#" },
+                  { icon: FaWhatsapp, color: "hsl(var(--suina-brown))", href: "https://wa.me/551239650328" },
+                  { icon: FaFacebookF, color: "hsl(var(--suina-green-sage))", href: "https://facebook.com/institutosuina" },
+                  { icon: FaInstagram, color: "hsl(var(--accent))", href: "https://instagram.com/institutosuina" },
+                  { icon: FaLinkedinIn, color: "hsl(var(--suina-green-sage))", href: "https://linkedin.com/company/institutosuina" },
+                  { icon: FaYoutube, color: "hsl(var(--accent))", href: "https://youtube.com/@institutosuina" },
                 ].map((social, i) => (
                   <a key={i} href={social.href} target="_blank" rel="noopener noreferrer"
                     className="w-12 h-12 rounded-xl flex items-center justify-center text-primary-foreground text-xl hover:opacity-80 transition-opacity"

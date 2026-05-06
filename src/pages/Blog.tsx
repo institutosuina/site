@@ -38,11 +38,14 @@ const Blog = () => {
                 <div key={item.id} className="group cursor-pointer rounded-2xl overflow-hidden border border-border bg-card shadow-sm">
                   <div className="relative overflow-hidden h-52 md:h-60">
                     {item.cover_image ? (
-                      <img
-                        src={item.cover_image}
-                        alt={item.title}
-                        className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-                      />
+                      <>
+                        <img src={item.cover_image} alt="" className="absolute inset-0 w-full h-full object-cover blur-xl opacity-40 scale-110 group-hover:scale-125 transition-transform duration-500" />
+                        <img
+                          src={item.cover_image}
+                          alt={item.title}
+                          className="relative w-full h-full object-contain p-2 drop-shadow-xl group-hover:scale-105 transition-transform duration-500"
+                        />
+                      </>
                     ) : (
                       <div className="w-full h-full bg-muted flex items-center justify-center">
                         <span className="text-muted-foreground text-sm">Sem imagem</span>

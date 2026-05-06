@@ -34,19 +34,20 @@ const Transparencia = () => {
   const getFilteredDocs = (categoryId: string) => {
     if (!allRelatorios) return [];
     
+    const normalize = (str: string) => 
+      str.normalize('NFD').replace(/[\u0300-\u036f]/g, "").toLowerCase();
+
     if (categoryId === 'resultados') {
-      return allRelatorios.filter(d => 
-        d.title.toLowerCase().includes('relat') || 
-        d.title.toLowerCase().includes('portf') ||
-        d.title.toLowerCase().includes('resultado')
-      );
+      return allRelatorios.filter(d => {
+        const t = normalize(d.title);
+        return t.includes('relat') || t.includes('portf') || t.includes('resultado');
+      });
     }
     if (categoryId === 'contabeis') {
-      return allRelatorios.filter(d => 
-        d.title.toLowerCase().includes('balan') || 
-        d.title.toLowerCase().includes('demonstrat') ||
-        d.title.toLowerCase().includes('cont')
-      );
+      return allRelatorios.filter(d => {
+        const t = normalize(d.title);
+        return t.includes('balan') || t.includes('demonstrat') || t.includes('cont');
+      });
     }
     return [];
   };
@@ -55,7 +56,6 @@ const Transparencia = () => {
     if (card.isDownload && card.file) {
       e.preventDefault();
       try {
-        // Busca o arquivo, transforma em Blob para garantir o nome e extensão no download
         const response = await fetch(card.file);
         const blob = await response.blob();
         const url = window.URL.createObjectURL(blob);
@@ -68,7 +68,6 @@ const Transparencia = () => {
         window.URL.revokeObjectURL(url);
       } catch (error) {
         console.error("Erro ao baixar arquivo:", error);
-        // Fallback simples caso o fetch falhe
         window.open(card.file, '_blank');
       }
       return;
@@ -80,23 +79,9 @@ const Transparencia = () => {
     }
   };
 
-  const handleDocDownload = async (e: React.MouseEvent, url: string, title: string) => {
+  const handleDocDownload = (e: React.MouseEvent, url: string, title: string) => {
     e.preventDefault();
-    try {
-      const response = await fetch(url);
-      const blob = await response.blob();
-      const blobUrl = window.URL.createObjectURL(blob);
-      const link = document.createElement('a');
-      link.href = blobUrl;
-      link.setAttribute('download', `${title}.pdf`);
-      document.body.appendChild(link);
-      link.click();
-      document.body.removeChild(link);
-      window.URL.revokeObjectURL(blobUrl);
-    } catch (error) {
-      console.error("Erro ao baixar documento:", error);
-      window.open(url, '_blank');
-    }
+    window.open(url, '_blank', 'noopener,noreferrer');
   };
 
   const currentDocs = selectedCategory ? getFilteredDocs(selectedCategory) : [];

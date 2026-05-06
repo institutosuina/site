@@ -1,0 +1,160 @@
+{
+  "platform": {
+    "ssrPropsUpdates": [
+      {
+        "comp-jwt4ugw2": {
+          "items": [
+            {
+              "isVisible": true,
+              "isVisibleMobile": true,
+              "items": [],
+              "label": "Perfil",
+              "link": {
+                "href": "https://www.institutosuina.org/profile/undefined/profile",
+                "target": "_self",
+                "type": "DynamicPageLink"
+              }
+            },
+            {
+              "isVisible": true,
+              "isVisibleMobile": true,
+              "items": [],
+              "label": "My Orders",
+              "link": {
+                "href": "https://www.institutosuina.org/account/my-orders",
+                "target": "_self",
+                "type": "DynamicPageLink"
+              }
+            },
+            {
+              "isVisible": true,
+              "isVisibleMobile": true,
+              "items": [],
+              "label": "Meus endere\u00e7os",
+              "link": {
+                "href": "https://www.institutosuina.org/account/my-addresses",
+                "target": "_self",
+                "type": "DynamicPageLink"
+              }
+            },
+            {
+              "isVisible": true,
+              "isVisibleMobile": true,
+              "items": [],
+              "label": "Minha carteira",
+              "link": {
+                "href": "https://www.institutosuina.org/account/my-wallet",
+                "target": "_self",
+                "type": "DynamicPageLink"
+              }
+            },
+            {
+              "isVisible": true,
+              "isVisibleMobile": true,
+              "items": [],
+              "label": "My Subscriptions",
+              "link": {
+                "href": "https://www.institutosuina.org/account/my-subscriptions",
+                "target": "_self",
+                "type": "DynamicPageLink"
+              }
+            },
+            {
+              "isVisible": true,
+              "isVisibleMobile": true,
+              "items": [],
+              "label": "Meus agendamentos",
+              "link": {
+                "href": "https://www.institutosuina.org/account/my-bookings",
+                "target": "_self",
+                "type": "DynamicPageLink"
+              }
+            },
+            {
+              "isVisible": true,
+              "isVisibleMobile": true,
+              "items": [],
+              "label": "Minha Conta",
+              "link": {
+                "href": "https://www.institutosuina.org/account/minha-conta",
+                "target": "_self",
+                "type": "DynamicPageLink"
+              }
+            },
+            {
+              "isVisible": true,
+              "isVisibleMobile": true,
+              "items": [],
+              "label": "Configura\u00e7\u00f5es",
+              "link": {
+                "href": "https://www.institutosuina.org/account/settings",
+                "target": "_self",
+                "type": "DynamicPageLink"
+              }
+            },
+            {
+              "isVisible": true,
+              "isVisibleMobile": true,
+              "items": [],
+              "label": "Notifica\u00e7\u00f5es",
+              "link": {
+                "href": "https://www.institutosuina.org/account/notifications",
+                "target": "_self",
+                "type": "DynamicPageLink"
+              }
+            }
+          ]
+        }
+      }
+    ],
+    "ssrStyleUpdates": [],
+    "ssrStructureUpdates": []
+  },
+  "pages": {
+    "compIdToTypeMap": {
+      "CONTROLLER_COMP_CUSTOM_ID": "AppController",
+      "comp-kk1f4isc": "WPhoto",
+      "comp-ksirc22r": "WPhoto",
+      "comp-iuqn0kks": "DropDownMenu",
+      "comp-itwxelml": "WRichText",
+      "comp-jwt4ugw2": "VerticalMenu",
+      "masterPage": "MasterPage",
+      "SITE_HEADER": "HeaderContainer",
+      "SITE_FOOTER": "FooterContainer",
+      "PAGES_CONTAINER": "PagesContainer",
+      "SOSP_CONTAINER_CUSTOM_ID": "Container",
+      "comp-kmm1ajg5": "tpaWidgetNative",
+      "SITE_PAGES": "PageGroup",
+      "comp-jwt4uhqh": "tpaWidgetNative",
+      "BACKGROUND_GROUP": "BackgroundGroup",
+      "SCROLL_TO_TOP": "Anchor",
+      "SCROLL_TO_BOTTOM": "Anchor",
+      "soapAfterPagesContainer": "MeshGroup",
+      "SKIP_TO_CONTENT_BTN": "SkipToContentButton",
+      "pageBackground_d39c3": "PageBackground",
+      "d39c3": "Page",
+      "comp-lb548tjx": "ClassicSection",
+      "TPAMultiSection_kk1gjhrb": "tpaWidgetNative",
+      "Containerd39c3": "Group",
+      "DYNAMIC_STRUCTURE_CONTAINER": "DynamicStructureContainer",
+      "site-root": "DivWithChildren",
+      "main_MF": "DivWithChildren",
+      "d39c3_wrapper": "PageMountUnmount",
+      "d39c3_wrapper_background": "PageMountUnmount"
+    }
+  },
+  "appsWarmupData": {
+    "14cc59bc-f0b7-15b8-e1c7-89ce41d0e0c9": {
+      "initialData": {
+        "counters": {},
+        "roles": {}
+      }
+    },
+    "14bcded7-0066-7c35-14d7-466cb3f09103": {
+      "projeto-quatro-ribeiras-integrando-sociedade-e-natureza": "4b7fe342-3754-4a4b-9422-83b03dd1d55a"
+    }
+  },
+  "ooi": {
+    "failedInSsr": {}
+  }
+}

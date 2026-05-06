@@ -8,6 +8,7 @@ import { lazy, Suspense } from "react";
 
 import Index from "./pages/Index";
 import NossoTrabalho from "./pages/NossoTrabalho";
+import NossoTrabalhoDetail from "./pages/NossoTrabalhoDetail";
 import Transparencia from "./pages/Transparencia";
 import Noticias from "./pages/Noticias";
 import Blog from "./pages/Blog";
@@ -70,6 +71,7 @@ const App = () => (
               {/* Public routes */}
               <Route path="/" element={<Index />} />
               <Route path="/nosso-trabalho" element={<NossoTrabalho />} />
+              <Route path="/nosso-trabalho/:slug" element={<NossoTrabalhoDetail />} />
               <Route path="/transparencia" element={<Transparencia />} />
               <Route path="/noticias" element={<Noticias />} />
               <Route path="/noticias/:slug" element={<PostDetail table="noticias" />} />

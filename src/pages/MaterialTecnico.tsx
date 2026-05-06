@@ -62,7 +62,10 @@ const MaterialTecnico = () => {
                   className="rounded-2xl overflow-hidden shadow-lg group cursor-pointer relative block aspect-[4/3] w-full text-left"
                 >
                   {m.cover_image ? (
-                    <img src={m.cover_image} alt={m.title} className="w-full h-full object-cover" />
+                    <>
+                      <img src={m.cover_image} alt="" className="absolute inset-0 w-full h-full object-cover blur-xl opacity-40 scale-110" />
+                      <img src={m.cover_image} alt={m.title} className="relative w-full h-full object-contain p-4 drop-shadow-2xl" />
+                    </>
                   ) : (
                     <div className="w-full h-full bg-muted flex items-center justify-center">
                       <span className="text-muted-foreground text-sm">Sem imagem</span>

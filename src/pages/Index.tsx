@@ -26,9 +26,10 @@ import photoMateus from "@/assets/Mateus.png";
 import photoTatiane from "@/assets/Tatiane.png";
 
 import { Plus, Eye, Target, Heart, ChevronLeft, ChevronRight } from "lucide-react";
-import { useState, useRef } from "react";
+import { useState, useRef, useEffect } from "react";
 import { useQuery } from "@tanstack/react-query";
 import { supabase } from "@/integrations/supabase/client";
+import { useLocation } from "react-router-dom";
 
 
 const timelineData = [
@@ -71,6 +72,21 @@ const conselho = [
 const Index = () => {
   const scrollRef = useRef<HTMLDivElement>(null);
   const [openModal, setOpenModal] = useState<string | null>(null);
+  const location = useLocation();
+
+  useEffect(() => {
+    if (location.hash) {
+      setTimeout(() => {
+        const id = location.hash.replace('#', '');
+        const element = document.getElementById(id);
+        if (element) {
+          element.scrollIntoView({ behavior: 'smooth' });
+        }
+      }, 100);
+    } else {
+      window.scrollTo(0, 0);
+    }
+  }, [location.hash]);
 
   const { data: parceirosList } = useQuery({
     queryKey: ["parceiros-home"],
@@ -111,7 +127,7 @@ const Index = () => {
       <section className="relative h-[60vh] md:h-[70vh] overflow-hidden bg-black">
         <div className="absolute inset-0 w-full h-full pointer-events-none">
           <iframe
-            src="https://youtu.be/lXy1H_GSU0k"
+            src="https://www.youtube.com/embed/lXy1H_GSU0k?autoplay=1&mute=1&loop=1&playlist=lXy1H_GSU0k&controls=0&showinfo=0&rel=0&modestbranding=1&iv_load_policy=3"
             frameBorder="0"
             width="100%"
             height="100%"
@@ -318,7 +334,7 @@ const Index = () => {
       */}
 
       {/* Conselho */}
-      <section className="py-16 md:py-24 px-4 relative overflow-hidden bg-suina-orange">
+      <section id="conselho" className="py-16 md:py-24 px-4 relative overflow-hidden bg-suina-orange">
         {/* Folha de fundo */}
         <div
           className="absolute z-0 pointer-events-none"

@@ -10,7 +10,7 @@ const navItems = [
     children: [
       { label: "Quem somos", href: "/#quem-somos" },
       { label: "Linha do tempo", href: "/#timeline" },
-      { label: "Equipe", href: "/#equipe" },
+      { label: "Conselho", href: "/#conselho" },
       { label: "Apoiadores e parceiros", href: "/#parceiros" },
     ],
   },
