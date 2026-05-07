@@ -26,7 +26,10 @@ const PostDetail = ({ table }: { table: ContentType }) => {
         .from(table)
         .select("*")
         .eq("slug", slug!)
-        .single();
+        .eq("status", "Publicado")
+        .order("updated_at", { ascending: false })
+        .limit(1)
+        .maybeSingle();
       if (error) throw error;
       return data;
     },

@@ -1,7 +1,7 @@
 import { useState, useRef } from "react";
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import { supabase } from "@/integrations/supabase/client";
-import { Upload, FileText, Trash2, Eye, Download, FolderOpen, Plus, ArrowLeft } from "lucide-react";
+import { Upload, FileText, Trash2, Eye, Download, FolderOpen, Plus, ArrowLeft, Pencil } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Skeleton } from "@/components/ui/skeleton";
@@ -20,6 +20,8 @@ const s = { fontFamily: "'Inter', sans-serif" } as const;
 const ProjectList = ({ onSelect }: { onSelect: (id: string) => void }) => {
   const queryClient = useQueryClient();
   const [createOpen, setCreateOpen] = useState(false);
+  const [editOpen, setEditOpen] = useState(false);
+  const [editingProjectId, setEditingProjectId] = useState<string | null>(null);
   const [name, setName] = useState("");
   const [period, setPeriod] = useState("");
 
@@ -65,6 +67,34 @@ const ProjectList = ({ onSelect }: { onSelect: (id: string) => void }) => {
     },
   });
 
+  const updateMutation = useMutation({
+    mutationFn: async () => {
+      if (!editingProjectId) throw new Error("Projeto não selecionado");
+      if (!name.trim()) throw new Error("Nome obrigatório");
+      const { error } = await supabase
+        .from("projetos")
+        .update({ name: name.trim(), period: period.trim() || null })
+        .eq("id", editingProjectId);
+      if (error) throw error;
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["admin-projects"] });
+      toast({ title: "✅ Projeto atualizado!" });
+      setEditOpen(false);
+      setEditingProjectId(null);
+      setName("");
+      setPeriod("");
+    },
+    onError: (e: any) => toast({ title: "Erro", description: e.message, variant: "destructive" }),
+  });
+
+  const openEdit = (project: any) => {
+    setEditingProjectId(project.id);
+    setName(project.name || "");
+    setPeriod(project.period || "");
+    setEditOpen(true);
+  };
+
   return (
     <>
       <div className="flex items-center justify-between mb-6">
@@ -98,6 +128,9 @@ const ProjectList = ({ onSelect }: { onSelect: (id: string) => void }) => {
                 <Button variant="ghost" size="icon" className="h-8 w-8 text-zinc-400 hover:text-emerald-600" onClick={() => onSelect(p.id)}>
                   <Eye className="h-4 w-4" />
                 </Button>
+                <Button variant="ghost" size="icon" className="h-8 w-8 text-zinc-400 hover:text-blue-600" onClick={() => openEdit(p)}>
+                  <Pencil className="h-4 w-4" />
+                </Button>
                 <Button variant="ghost" size="icon" className="h-8 w-8 text-zinc-400 hover:text-red-600" onClick={() => deleteMutation.mutate(p.id)}>
                   <Trash2 className="h-4 w-4" />
                 </Button>
@@ -129,6 +162,31 @@ const ProjectList = ({ onSelect }: { onSelect: (id: string) => void }) => {
           </DialogFooter>
         </DialogContent>
       </Dialog>
+
+      <Dialog open={editOpen} onOpenChange={setEditOpen}>
+        <DialogContent>
+          <DialogHeader>
+            <DialogTitle style={{ ...s, fontSize: "1.125rem" }}>Editar Projeto</DialogTitle>
+            <DialogDescription style={{ ...s, fontSize: "0.8125rem" }}>Atualize os dados do projeto.</DialogDescription>
+          </DialogHeader>
+          <div className="space-y-4 py-2">
+            <div className="space-y-2">
+              <label style={{ ...s, fontSize: "0.8125rem" }} className="font-medium text-zinc-700">Nome do Projeto</label>
+              <Input value={name} onChange={(e) => setName(e.target.value)} className="!text-sm" />
+            </div>
+            <div className="space-y-2">
+              <label style={{ ...s, fontSize: "0.8125rem" }} className="font-medium text-zinc-700">Período (opcional)</label>
+              <Input value={period} onChange={(e) => setPeriod(e.target.value)} className="!text-sm" />
+            </div>
+          </div>
+          <DialogFooter>
+            <Button variant="outline" onClick={() => setEditOpen(false)} className="!text-sm">Cancelar</Button>
+            <Button onClick={() => updateMutation.mutate()} disabled={!name.trim() || updateMutation.isPending} className="bg-emerald-500 hover:bg-emerald-600 text-white !text-sm">
+              {updateMutation.isPending ? "Salvando..." : "Salvar"}
+            </Button>
+          </DialogFooter>
+        </DialogContent>
+      </Dialog>
     </>
   );
 };
@@ -138,6 +196,8 @@ const ProjectDetail = ({ projectId, onBack }: { projectId: string; onBack: () =>
   const queryClient = useQueryClient();
   const [activeView, setActiveView] = useState<"reports" | "logs">("reports");
   const [uploadOpen, setUploadOpen] = useState(false);
+  const [editReportOpen, setEditReportOpen] = useState(false);
+  const [editingReportId, setEditingReportId] = useState<string | null>(null);
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   const [file, setFile] = useState<File | null>(null);
@@ -221,6 +281,34 @@ const ProjectDetail = ({ projectId, onBack }: { projectId: string; onBack: () =>
       toast({ title: "✅ Relatório excluído." });
     },
   });
+
+  const updateReportMutation = useMutation({
+    mutationFn: async () => {
+      if (!editingReportId) throw new Error("Relatório não selecionado");
+      if (!title.trim()) throw new Error("Título obrigatório");
+      const { error } = await supabase
+        .from("relatorios")
+        .update({ title: title.trim(), description: description.trim() || null })
+        .eq("id", editingReportId);
+      if (error) throw error;
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["admin-project-reports", projectId] });
+      toast({ title: "✅ Relatório atualizado!" });
+      setEditReportOpen(false);
+      setEditingReportId(null);
+      setTitle("");
+      setDescription("");
+    },
+    onError: (e: any) => toast({ title: "Erro", description: e.message, variant: "destructive" }),
+  });
+
+  const openEditReport = (report: any) => {
+    setEditingReportId(report.id);
+    setTitle(report.title || "");
+    setDescription(report.description || "");
+    setEditReportOpen(true);
+  };
 
   const exportCSV = () => {
     if (!logs?.length) return;
@@ -306,6 +394,9 @@ const ProjectDetail = ({ projectId, onBack }: { projectId: string; onBack: () =>
                         <Button variant="ghost" size="icon" className="h-8 w-8 text-zinc-400 hover:text-blue-600" asChild>
                           <a href={r.file_url} target="_blank" rel="noopener noreferrer"><Eye className="h-4 w-4" /></a>
                         </Button>
+                        <Button variant="ghost" size="icon" className="h-8 w-8 text-zinc-400 hover:text-emerald-600" onClick={() => openEditReport(r)}>
+                          <Pencil className="h-4 w-4" />
+                        </Button>
                         <Button variant="ghost" size="icon" className="h-8 w-8 text-zinc-400 hover:text-red-600" onClick={() => deleteMutation.mutate(r.id)}>
                           <Trash2 className="h-4 w-4" />
                         </Button>
@@ -380,6 +471,31 @@ const ProjectDetail = ({ projectId, onBack }: { projectId: string; onBack: () =>
             <Button onClick={() => uploadMutation.mutate()} disabled={uploading || !file || !title.trim()}
               className="bg-emerald-500 hover:bg-emerald-600 text-white !text-sm">
               {uploading ? "Enviando..." : "Enviar"}
+            </Button>
+          </DialogFooter>
+        </DialogContent>
+      </Dialog>
+
+      <Dialog open={editReportOpen} onOpenChange={setEditReportOpen}>
+        <DialogContent>
+          <DialogHeader>
+            <DialogTitle style={{ ...s, fontSize: "1.125rem" }}>Editar Relatório</DialogTitle>
+            <DialogDescription style={{ ...s, fontSize: "0.8125rem" }}>Atualize os dados do material na transparência.</DialogDescription>
+          </DialogHeader>
+          <div className="space-y-4 py-2">
+            <div className="space-y-2">
+              <label style={{ ...s, fontSize: "0.8125rem" }} className="font-medium text-zinc-700">Título</label>
+              <Input value={title} onChange={(e) => setTitle(e.target.value)} className="!text-sm" />
+            </div>
+            <div className="space-y-2">
+              <label style={{ ...s, fontSize: "0.8125rem" }} className="font-medium text-zinc-700">Descrição (opcional)</label>
+              <Textarea value={description} onChange={(e) => setDescription(e.target.value)} rows={3} className="!text-sm" />
+            </div>
+          </div>
+          <DialogFooter>
+            <Button variant="outline" onClick={() => setEditReportOpen(false)} className="!text-sm">Cancelar</Button>
+            <Button onClick={() => updateReportMutation.mutate()} disabled={!title.trim() || updateReportMutation.isPending} className="bg-emerald-500 hover:bg-emerald-600 text-white !text-sm">
+              {updateReportMutation.isPending ? "Salvando..." : "Salvar"}
             </Button>
           </DialogFooter>
         </DialogContent>

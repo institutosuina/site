@@ -2,6 +2,8 @@ import { useParams, Link, Navigate } from "react-router-dom";
 import { ArrowLeft } from "lucide-react";
 import Layout from "@/components/Layout";
 import { WORK_AREAS_DATA } from "@/data/nossoTrabalho";
+import { useQuery } from "@tanstack/react-query";
+import { supabase } from "@/integrations/supabase/client";
 
 // Icons and style definitions (same as NossoTrabalho.tsx)
 import educAmbientalIcon from "@/assets/educ ambiental.svg";
@@ -28,13 +30,25 @@ const areaMeta = {
 
 const NossoTrabalhoDetail = () => {
   const { slug } = useParams<{ slug: string }>();
+  const { data: dynamicContent } = useQuery({
+    queryKey: ["work-projects-content"],
+    queryFn: async () => {
+      const { data, error } = await supabase
+        .from("site_page_content")
+        .select("content")
+        .eq("page_key", "nosso_trabalho")
+        .maybeSingle();
+      if (error) throw error;
+      return data?.content as typeof WORK_AREAS_DATA | null;
+    },
+  });
 
   if (!slug || !(slug in WORK_AREAS_DATA)) {
     return <Navigate to="/nosso-trabalho" replace />;
   }
 
   const areaId = slug as keyof typeof WORK_AREAS_DATA;
-  const projects = WORK_AREAS_DATA[areaId];
+  const projects = (dynamicContent?.[areaId] && Array.isArray(dynamicContent[areaId]) ? dynamicContent[areaId] : WORK_AREAS_DATA[areaId]);
   const meta = areaMeta[areaId];
 
   return (

@@ -15,6 +15,8 @@ import {
   Megaphone,
   Users,
   UserPlus,
+  PanelsTopLeft,
+  BriefcaseBusiness,
 } from "lucide-react";
 import { useAuth } from "@/contexts/AuthContext";
 import { Button } from "@/components/ui/button";
@@ -27,6 +29,8 @@ const navItems = [
   { label: "Material Técnico", icon: BookOpen, path: "/admin/material-tecnico" },
   { label: "Editais", icon: ClipboardList, path: "/admin/editais" },
   { label: "Informativos", icon: Megaphone, path: "/admin/informativos" },
+  { label: "Páginas", icon: PanelsTopLeft, path: "/admin/pages" },
+  { label: "Nosso Trabalho", icon: BriefcaseBusiness, path: "/admin/work-projects" },
   { label: "Transparência", icon: Shield, path: "/admin/transparency" },
   { label: "Newsletter", icon: Mail, path: "/admin/newsletter" },
   { label: "E-mail Marketing", icon: Send, path: "/admin/email-marketing" },

@@ -13,9 +13,13 @@ const Noticias = () => {
         .from("noticias")
         .select("*")
         .eq("status", "Publicado")
-        .order("published_at", { ascending: false });
+        .order("created_at", { ascending: false });
       if (error) throw error;
-      return data;
+      return [...(data || [])].sort((a, b) => {
+        const dateA = new Date(a.published_at || a.created_at || 0).getTime();
+        const dateB = new Date(b.published_at || b.created_at || 0).getTime();
+        return dateB - dateA;
+      });
     },
   });
 
@@ -64,7 +68,7 @@ const Noticias = () => {
                         to={`/noticias/${item.slug}`}
                         className="flex items-center gap-1 bg-secondary text-secondary-foreground px-4 py-1.5 rounded font-body text-xs font-semibold uppercase hover:bg-secondary/90 transition-colors"
                       >
-                        LEIA MAIS <ArrowRight className="w-3 h-3" />
+                        Acesse aqui <ArrowRight className="w-3 h-3" />
                       </Link>
                     </div>
                   </div>

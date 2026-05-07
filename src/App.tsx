@@ -35,6 +35,8 @@ const AdminEmailMarketing = lazy(() => import("./pages/admin/AdminEmailMarketing
 const AdminInformativos = lazy(() => import("./pages/admin/AdminInformativos"));
 const AdminPartners = lazy(() => import("./pages/admin/AdminPartners"));
 const AdminUsers = lazy(() => import("./pages/admin/AdminUsers"));
+const AdminPagesContent = lazy(() => import("./pages/admin/AdminPagesContent"));
+const AdminWorkProjects = lazy(() => import("./pages/admin/AdminWorkProjects"));
 
 
 import AdminLayout from "./components/admin/AdminLayout";
@@ -103,6 +105,8 @@ const App = () => (
               <Route path="/admin/email-marketing" element={<AdminPage><AdminEmailMarketing /></AdminPage>} />
               <Route path="/admin/informativos" element={<AdminPage><AdminInformativos /></AdminPage>} />
               <Route path="/admin/partners" element={<AdminPage><AdminPartners /></AdminPage>} />
+              <Route path="/admin/pages" element={<AdminPage><AdminPagesContent /></AdminPage>} />
+              <Route path="/admin/work-projects" element={<AdminPage><AdminWorkProjects /></AdminPage>} />
               <Route path="/admin/users" element={<AdminPage><AdminUsers /></AdminPage>} />
 
 

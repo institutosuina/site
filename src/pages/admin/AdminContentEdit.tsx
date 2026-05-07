@@ -82,6 +82,13 @@ const AdminContentEdit = () => {
     },
     onSuccess: (data: any) => {
       queryClient.invalidateQueries({ queryKey: ["admin-content", activeTab] });
+      if (activeTab === "posts_blog") {
+        queryClient.invalidateQueries({ queryKey: ["blog-public"] });
+      }
+      if (activeTab === "noticias") {
+        queryClient.invalidateQueries({ queryKey: ["noticias-public"] });
+      }
+      queryClient.invalidateQueries({ queryKey: ["post-detail"] });
       toast({ title: `✅ ${config.singular} salvo com sucesso!` });
       if (isNew && data) {
         navigate(`/admin/content/${activeTab}/${data.id}/edit`, { replace: true });

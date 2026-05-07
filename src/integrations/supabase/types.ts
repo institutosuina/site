@@ -441,6 +441,30 @@ export type Database = {
           },
         ]
       }
+      site_page_content: {
+        Row: {
+          content: Json
+          created_at: string
+          id: string
+          page_key: string
+          updated_at: string
+        }
+        Insert: {
+          content?: Json
+          created_at?: string
+          id?: string
+          page_key: string
+          updated_at?: string
+        }
+        Update: {
+          content?: Json
+          created_at?: string
+          id?: string
+          page_key?: string
+          updated_at?: string
+        }
+        Relationships: []
+      }
       subscribers: {
         Row: {
           created_at: string

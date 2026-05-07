@@ -6,6 +6,7 @@ import { supabase } from "@/integrations/supabase/client";
 import { toast } from "@/hooks/use-toast";
 import { Heart, ChevronLeft, ChevronRight } from "lucide-react";
 import { FaWhatsapp, FaFacebookF, FaInstagram, FaLinkedinIn, FaYoutube } from "react-icons/fa";
+import { defaultSocialLinks, type SocialLinksContent } from "@/data/socialLinksDefaults";
 import folhaSvg from "@/assets/folha.svg";
 import logoSuina from "@/assets/logo-suina-white.png";
 
@@ -113,6 +114,29 @@ const Participe = () => {
   };
 
   const [newsletterSubmitting, setNewsletterSubmitting] = useState(false);
+
+  const { data: socialLinks } = useQuery({
+    queryKey: ["social-links-content"],
+    queryFn: async () => {
+      const { data, error } = await supabase
+        .from("site_page_content")
+        .select("content")
+        .eq("page_key", "social_links")
+        .maybeSingle();
+      if (error) throw error;
+
+      const content = data?.content as Partial<SocialLinksContent> | undefined;
+      return {
+        whatsapp: typeof content?.whatsapp === "string" ? content.whatsapp : defaultSocialLinks.whatsapp,
+        facebook: typeof content?.facebook === "string" ? content.facebook : defaultSocialLinks.facebook,
+        instagram: typeof content?.instagram === "string" ? content.instagram : defaultSocialLinks.instagram,
+        linkedin: typeof content?.linkedin === "string" ? content.linkedin : defaultSocialLinks.linkedin,
+        youtube: typeof content?.youtube === "string" ? content.youtube : defaultSocialLinks.youtube,
+      } as SocialLinksContent;
+    },
+  });
+
+  const links = socialLinks || defaultSocialLinks;
 
   const handleNewsletterSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -239,11 +263,11 @@ const Participe = () => {
               </p>
               <div className="flex flex-wrap gap-3">
                 {[
-                  { icon: FaWhatsapp, color: "hsl(var(--suina-brown))", href: "https://wa.me/551239650328" },
-                  { icon: FaFacebookF, color: "hsl(var(--suina-green-sage))", href: "https://facebook.com/institutosuina" },
-                  { icon: FaInstagram, color: "hsl(var(--accent))", href: "https://instagram.com/institutosuina" },
-                  { icon: FaLinkedinIn, color: "hsl(var(--suina-green-sage))", href: "https://linkedin.com/company/institutosuina" },
-                  { icon: FaYoutube, color: "hsl(var(--accent))", href: "https://youtube.com/@institutosuina" },
+                  { icon: FaWhatsapp, color: "hsl(var(--suina-brown))", href: links.whatsapp },
+                  { icon: FaFacebookF, color: "hsl(var(--suina-green-sage))", href: links.facebook },
+                  { icon: FaInstagram, color: "hsl(var(--accent))", href: links.instagram },
+                  { icon: FaLinkedinIn, color: "hsl(var(--suina-green-sage))", href: links.linkedin },
+                  { icon: FaYoutube, color: "hsl(var(--accent))", href: links.youtube },
                 ].map((social, i) => (
                   <a key={i} href={social.href} target="_blank" rel="noopener noreferrer"
                     className="w-12 h-12 rounded-xl flex items-center justify-center text-primary-foreground text-xl hover:opacity-80 transition-opacity"
