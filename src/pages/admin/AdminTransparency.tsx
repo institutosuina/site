@@ -512,6 +512,7 @@ const PageAccessLogs = () => {
       const { data, error } = await supabase
         .from("acessos_pagina")
         .select("*")
+        .eq("page", "prestacao-de-contas")
         .order("access_time", { ascending: false });
       if (error) throw error;
       return data;
