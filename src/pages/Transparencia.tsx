@@ -120,7 +120,11 @@ const Transparencia = () => {
                   </span>
                   <div className="absolute -bottom-7 w-14 h-14 rounded-full bg-white shadow-lg flex items-center justify-center transition-all">
                     <div className={`${card.color} w-full h-full rounded-full flex items-center justify-center`}>
-                      <Plus className="w-6 h-6 text-white" />
+                      {card.isDownload ? (
+                        <Download className="w-6 h-6 text-white" />
+                      ) : (
+                        <Plus className="w-6 h-6 text-white" />
+                      )}
                     </div>
                   </div>
                 </div>
