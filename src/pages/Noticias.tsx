@@ -13,13 +13,10 @@ const Noticias = () => {
         .from("noticias")
         .select("*")
         .eq("status", "Publicado")
+        .order("published_at", { ascending: false, nullsFirst: false })
         .order("created_at", { ascending: false });
       if (error) throw error;
-      return [...(data || [])].sort((a, b) => {
-        const dateA = new Date(a.published_at || a.created_at || 0).getTime();
-        const dateB = new Date(b.published_at || b.created_at || 0).getTime();
-        return dateB - dateA;
-      });
+      return data || [];
     },
   });
 

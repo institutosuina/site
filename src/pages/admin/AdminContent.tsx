@@ -42,6 +42,7 @@ const AdminContent = ({ contentType = "posts_blog" }: AdminContentProps) => {
       const { data, error } = await supabase
         .from(activeTab)
         .select("*")
+        .order("published_at", { ascending: false, nullsFirst: false })
         .order("created_at", { ascending: false });
       if (error) throw error;
       return data as ContentRow[];
