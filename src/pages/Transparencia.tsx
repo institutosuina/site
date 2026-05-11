@@ -2,17 +2,31 @@ import Layout from "@/components/Layout";
 import wheatDecoration from "@/assets/wheat-decoration.png";
 import manualLGPD from "@/assets/Manual_LGPD_Suina.pdf";
 import estatutoSuina from "@/assets/Estatuto_Suina.pdf";
+import portfolioSuina from "@/assets/Portfolio_Suina.pdf";
 import { Plus, Download, X, FileText } from "lucide-react";
 import { useState } from "react";
 import { useQuery } from "@tanstack/react-query";
 import { supabase } from "@/integrations/supabase/client";
 import { motion, AnimatePresence } from "framer-motion";
+import { toast } from "@/hooks/use-toast";
 
-const cards = [
+type CardItem = {
+  id: string;
+  label: string;
+  color: string;
+  isDownload?: boolean;
+  file?: string | null;
+  fileName?: string;
+  href?: string;
+  pending?: boolean;
+};
+
+const cards: CardItem[] = [
   { id: 'lgpd', label: "Política e\nManual de\nBoas práticas\n(LGPD)", color: "bg-[#2D5A41]", isDownload: true, file: manualLGPD, fileName: 'Manual_LGPD_Suina.pdf' },
   { id: 'estatuto', label: "Estatuto\nsocial", color: "bg-[#759580]", isDownload: true, file: estatutoSuina, fileName: 'Estatuto_Suina.pdf' },
-  { id: 'resultados', label: "Relatórios\nde Resultados", color: "bg-[#B45045]" },
-  { id: 'contabeis', label: "Demonstrativos\nContábeis", color: "bg-[#8B5A2B]" },
+  { id: 'portfolio', label: "Portfólio\nde Atividades", color: "bg-[#8B5A2B]", isDownload: true, file: portfolioSuina, fileName: 'Portfolio_Suina.pdf' },
+  { id: 'contabeis', label: "Demonstrativos\nContábeis", color: "bg-[#B45045]" },
+  { id: 'resultados', label: "Relatórios\nde Resultados", color: "bg-[#2D5A41]" },
   { id: 'prestacao', label: "Prestação\nde contas", color: "bg-[#759580]", href: "/prestacao-de-contas" },
 ];
 
@@ -52,9 +66,13 @@ const Transparencia = () => {
     return [];
   };
 
-  const handleCardClick = async (e: React.MouseEvent, card: typeof cards[0]) => {
-    if (card.isDownload && card.file) {
+  const handleCardClick = async (e: React.MouseEvent, card: CardItem) => {
+    if (card.isDownload) {
       e.preventDefault();
+      if (!card.file) {
+        toast({ title: "Em breve", description: "Este documento será disponibilizado em breve." });
+        return;
+      }
       try {
         const response = await fetch(card.file);
         const blob = await response.blob();

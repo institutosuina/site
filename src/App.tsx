@@ -42,6 +42,7 @@ const AdminWorkProjects = lazy(() => import("./pages/admin/AdminWorkProjects"));
 import AdminLayout from "./components/admin/AdminLayout";
 import ProtectedRoute from "./components/admin/ProtectedRoute";
 import { Skeleton } from "@/components/ui/skeleton";
+import { PageTracker } from "@/hooks/usePageTracking";
 
 const queryClient = new QueryClient();
 
@@ -68,6 +69,7 @@ const App = () => (
       <Sonner />
       <AuthProvider>
         <BrowserRouter>
+          <PageTracker />
           <Suspense fallback={<AdminFallback />}>
             <Routes>
               {/* Public routes */}
