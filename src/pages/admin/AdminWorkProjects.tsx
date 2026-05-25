@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
-import { Plus, Trash2, Save } from "lucide-react";
+import { Plus, Trash2, Save, Upload, X } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -57,6 +57,7 @@ const AdminWorkProjects = () => {
   const queryClient = useQueryClient();
   const [activeArea, setActiveArea] = useState<AreaKey>("educacao");
   const [form, setForm] = useState<WorkProjectsContent>(WORK_AREAS_DATA as WorkProjectsContent);
+  const [uploadingIndex, setUploadingIndex] = useState<number | null>(null);
 
   const { isLoading } = useQuery({
     queryKey: ["admin-page-content", "nosso_trabalho"],
@@ -100,16 +101,43 @@ const AdminWorkProjects = () => {
     });
   };
 
-  const updateImages = (index: number, value: string) => {
-    const images = value
-      .split("\n")
-      .map((item) => item.trim())
-      .filter(Boolean);
+  const setProjectImages = (index: number, updater: (current: string[]) => string[]) => {
     setForm((current) => {
       const next = [...current[activeArea]];
-      next[index] = { ...next[index], images };
+      next[index] = { ...next[index], images: updater(next[index].images) };
       return { ...current, [activeArea]: next };
     });
+  };
+
+  const handleImageUpload = async (
+    projectIndex: number,
+    event: React.ChangeEvent<HTMLInputElement>,
+  ) => {
+    const files = Array.from(event.target.files ?? []);
+    if (!files.length) return;
+    setUploadingIndex(projectIndex);
+    try {
+      const uploadedUrls: string[] = [];
+      for (const file of files) {
+        const safeName = file.name.replace(/[^a-zA-Z0-9._-]/g, "_");
+        const path = `projetos/${Date.now()}-${safeName}`;
+        const { error } = await supabase.storage.from("covers").upload(path, file);
+        if (error) throw error;
+        const { data } = supabase.storage.from("covers").getPublicUrl(path);
+        uploadedUrls.push(data.publicUrl);
+      }
+      setProjectImages(projectIndex, (current) => [...current, ...uploadedUrls]);
+      toast({ title: `✅ ${uploadedUrls.length} imagem(ns) enviada(s)!` });
+    } catch (err: any) {
+      toast({ title: "❌ Erro ao enviar imagem", description: err.message, variant: "destructive" });
+    } finally {
+      setUploadingIndex(null);
+      event.target.value = "";
+    }
+  };
+
+  const removeImage = (projectIndex: number, imageIndex: number) => {
+    setProjectImages(projectIndex, (current) => current.filter((_, i) => i !== imageIndex));
   };
 
   const addProject = () => {
@@ -188,13 +216,39 @@ const AdminWorkProjects = () => {
                 className="min-h-28"
               />
               <div className="space-y-2">
-                <label className="text-sm text-zinc-600">URLs das imagens (uma por linha)</label>
-                <Textarea
-                  value={project.images.join("\n")}
-                  onChange={(event) => updateImages(index, event.target.value)}
-                  placeholder="https://..."
-                  className="min-h-20"
-                />
+                <label className="text-sm text-zinc-600">Imagens do projeto</label>
+                <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-3">
+                  {project.images.map((url, imgIndex) => (
+                    <div
+                      key={`${url}-${imgIndex}`}
+                      className="relative group aspect-square rounded-lg overflow-hidden border border-zinc-200 bg-zinc-50"
+                    >
+                      <img src={url} alt={`Imagem ${imgIndex + 1}`} className="w-full h-full object-cover" />
+                      <button
+                        type="button"
+                        onClick={() => removeImage(index, imgIndex)}
+                        className="absolute top-1.5 right-1.5 h-7 w-7 rounded-full bg-white/90 text-zinc-600 hover:text-red-600 hover:bg-white flex items-center justify-center shadow-sm opacity-0 group-hover:opacity-100 transition-opacity"
+                        aria-label="Remover imagem"
+                      >
+                        <X className="h-4 w-4" />
+                      </button>
+                    </div>
+                  ))}
+                  <label className="flex flex-col items-center justify-center gap-1.5 aspect-square rounded-lg border-2 border-dashed border-zinc-200 cursor-pointer hover:border-emerald-400 hover:bg-emerald-50/30 transition-all">
+                    <Upload className="h-5 w-5 text-zinc-400" />
+                    <span className="text-xs text-zinc-500 text-center px-2">
+                      {uploadingIndex === index ? "Enviando..." : "Adicionar imagem"}
+                    </span>
+                    <input
+                      type="file"
+                      accept="image/*"
+                      multiple
+                      className="hidden"
+                      onChange={(event) => handleImageUpload(index, event)}
+                      disabled={uploadingIndex === index}
+                    />
+                  </label>
+                </div>
               </div>
             </div>
           ))}

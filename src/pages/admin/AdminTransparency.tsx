@@ -504,6 +504,132 @@ const ProjectDetail = ({ projectId, onBack }: { projectId: string; onBack: () =>
   );
 };
 
+/* ───── Institutional documents (LGPD, Estatuto, Portfólio) ───── */
+type InstitutionalDocKey = "lgpd" | "estatuto" | "portfolio";
+
+const INSTITUTIONAL_DOCS: { key: InstitutionalDocKey; label: string; color: string; defaultName: string }[] = [
+  { key: "lgpd", label: "Política e Manual de Boas práticas (LGPD)", color: "bg-[#2D5A41]", defaultName: "Manual_LGPD_Suina.pdf" },
+  { key: "estatuto", label: "Estatuto social", color: "bg-[#759580]", defaultName: "Estatuto_Suina.pdf" },
+  { key: "portfolio", label: "Portfólio de Atividades", color: "bg-[#8B5A2B]", defaultName: "Portfolio_Suina.pdf" },
+];
+
+const InstitutionalDocs = () => {
+  const queryClient = useQueryClient();
+  const [uploadingKey, setUploadingKey] = useState<InstitutionalDocKey | null>(null);
+
+  const { data: overrides, isLoading } = useQuery({
+    queryKey: ["admin-transparencia-docs"],
+    queryFn: async () => {
+      const { data, error } = await supabase
+        .from("site_page_content")
+        .select("content")
+        .eq("page_key", "transparencia_docs")
+        .maybeSingle();
+      if (error) throw error;
+      return (data?.content as Partial<Record<InstitutionalDocKey, string>> | null) ?? {};
+    },
+  });
+
+  const handleReplace = async (key: InstitutionalDocKey, event: React.ChangeEvent<HTMLInputElement>) => {
+    const file = event.target.files?.[0];
+    event.target.value = "";
+    if (!file) return;
+    if (file.type !== "application/pdf") {
+      toast({ title: "❌ Envie um arquivo PDF", variant: "destructive" });
+      return;
+    }
+    setUploadingKey(key);
+    try {
+      const safeName = file.name.replace(/[^a-zA-Z0-9._-]/g, "_");
+      const path = `transparencia/${key}-${Date.now()}-${safeName}`;
+      const { error: uploadError } = await supabase.storage.from("reports").upload(path, file);
+      if (uploadError) throw uploadError;
+      const { data: urlData } = supabase.storage.from("reports").getPublicUrl(path);
+
+      const nextContent = { ...(overrides ?? {}), [key]: urlData.publicUrl };
+      const { error } = await supabase.from("site_page_content").upsert(
+        { page_key: "transparencia_docs", content: nextContent, updated_at: new Date().toISOString() },
+        { onConflict: "page_key" },
+      );
+      if (error) throw error;
+
+      queryClient.invalidateQueries({ queryKey: ["admin-transparencia-docs"] });
+      queryClient.invalidateQueries({ queryKey: ["transparencia-docs"] });
+      toast({ title: "✅ PDF atualizado!" });
+    } catch (err: any) {
+      toast({ title: "❌ Erro ao substituir PDF", description: err.message, variant: "destructive" });
+    } finally {
+      setUploadingKey(null);
+    }
+  };
+
+  const fileNameFromUrl = (url?: string, fallback?: string) => {
+    if (!url) return fallback || "—";
+    try {
+      const path = new URL(url).pathname;
+      return decodeURIComponent(path.split("/").pop() || fallback || "—");
+    } catch {
+      return fallback || "—";
+    }
+  };
+
+  return (
+    <div className="space-y-4">
+      <div>
+        <h3 className="font-bold text-zinc-800" style={{ ...s, fontSize: "1.125rem" }}>Documentos institucionais</h3>
+        <p style={{ ...s, fontSize: "0.8125rem" }} className="text-zinc-500 mt-0.5">
+          Substitua os PDFs que aparecem nos 3 cards da página Transparência.
+        </p>
+      </div>
+
+      <div className="bg-white rounded-xl border border-zinc-200 overflow-hidden">
+        {isLoading ? (
+          <div className="p-6 space-y-3">{[1, 2, 3].map((i) => <Skeleton key={i} className="h-16 w-full" />)}</div>
+        ) : (
+          <div className="divide-y divide-zinc-100">
+            {INSTITUTIONAL_DOCS.map((doc) => {
+              const currentUrl = overrides?.[doc.key];
+              const isUploading = uploadingKey === doc.key;
+              return (
+                <div key={doc.key} className="flex items-center gap-4 px-6 py-4">
+                  <div className={`${doc.color} w-12 h-12 rounded-lg flex items-center justify-center shrink-0`}>
+                    <FileText className="h-5 w-5 text-white" />
+                  </div>
+                  <div className="flex-1 min-w-0">
+                    <p style={{ ...s, fontSize: "0.9375rem" }} className="font-semibold text-zinc-800 truncate">{doc.label}</p>
+                    <p style={{ ...s, fontSize: "0.75rem" }} className="text-zinc-400 truncate">
+                      {currentUrl ? fileNameFromUrl(currentUrl, doc.defaultName) : `${doc.defaultName} (padrão)`}
+                    </p>
+                  </div>
+                  <div className="flex gap-1">
+                    {currentUrl && (
+                      <Button variant="ghost" size="icon" className="h-8 w-8 text-zinc-400 hover:text-blue-600" asChild>
+                        <a href={currentUrl} target="_blank" rel="noopener noreferrer" aria-label="Ver PDF atual">
+                          <Eye className="h-4 w-4" />
+                        </a>
+                      </Button>
+                    )}
+                    <label className={`inline-flex items-center justify-center h-8 w-8 rounded-md cursor-pointer transition-colors ${isUploading ? "text-zinc-300 cursor-wait" : "text-zinc-400 hover:text-emerald-600 hover:bg-zinc-100"}`}>
+                      <Pencil className="h-4 w-4" />
+                      <input
+                        type="file"
+                        accept="application/pdf"
+                        className="hidden"
+                        disabled={isUploading}
+                        onChange={(event) => handleReplace(doc.key, event)}
+                      />
+                    </label>
+                  </div>
+                </div>
+              );
+            })}
+          </div>
+        )}
+      </div>
+    </div>
+  );
+};
+
 /* ───── Page access logs component ───── */
 const PageAccessLogs = () => {
   const { data: logs, isLoading } = useQuery({
@@ -598,6 +724,7 @@ const AdminTransparency = () => {
 
   return (
     <div className="font-['Inter',sans-serif] space-y-10">
+      <InstitutionalDocs />
       <ProjectList onSelect={setSelectedProject} />
       <PageAccessLogs />
     </div>

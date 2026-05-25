@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import { supabase } from "@/integrations/supabase/client";
-import { Plus, Trash2, Upload, GripVertical } from "lucide-react";
+import { Plus, Trash2, Upload, GripVertical, Pencil, Check, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { toast } from "@/hooks/use-toast";
@@ -22,6 +22,8 @@ const EditalAnexosManager = ({ editalId, editalTitle, open, onOpenChange }: Prop
   const queryClient = useQueryClient();
   const [newTitle, setNewTitle] = useState("");
   const [uploading, setUploading] = useState(false);
+  const [editingId, setEditingId] = useState<string | null>(null);
+  const [editingTitle, setEditingTitle] = useState("");
 
   const { data: anexos, isLoading } = useQuery({
     queryKey: ["edital-anexos-admin", editalId],
@@ -47,6 +49,37 @@ const EditalAnexosManager = ({ editalId, editalTitle, open, onOpenChange }: Prop
       toast({ title: "✅ Anexo removido." });
     },
   });
+
+  const updateTitleMutation = useMutation({
+    mutationFn: async ({ id, title }: { id: string; title: string }) => {
+      const clean = title.trim();
+      if (!clean) throw new Error("Título obrigatório");
+      const { error } = await supabase.from("edital_anexos").update({ title: clean }).eq("id", id);
+      if (error) throw error;
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["edital-anexos-admin", editalId] });
+      toast({ title: "✅ Título atualizado." });
+      setEditingId(null);
+      setEditingTitle("");
+    },
+    onError: (err: Error) => toast({ title: "❌ Erro ao atualizar", description: err.message, variant: "destructive" }),
+  });
+
+  const startEdit = (id: string, currentTitle: string) => {
+    setEditingId(id);
+    setEditingTitle(currentTitle);
+  };
+
+  const cancelEdit = () => {
+    setEditingId(null);
+    setEditingTitle("");
+  };
+
+  const saveEdit = () => {
+    if (!editingId) return;
+    updateTitleMutation.mutate({ id: editingId, title: editingTitle });
+  };
 
   const handleFileUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
@@ -106,22 +139,74 @@ const EditalAnexosManager = ({ editalId, editalTitle, open, onOpenChange }: Prop
           ) : !anexos?.length ? (
             <p style={s} className="text-zinc-400 text-sm text-center py-4">Nenhum anexo adicionado.</p>
           ) : (
-            anexos.map((a, i) => (
-              <div key={a.id} className="flex items-center gap-2 p-2 rounded-lg border border-zinc-200 bg-zinc-50">
-                <GripVertical className="h-4 w-4 text-zinc-300 flex-shrink-0" />
-                <span style={{ ...s, fontSize: "0.8125rem" }} className="flex-1 text-zinc-700 truncate">
-                  {i + 1}. {a.title}
-                </span>
-                <Button
-                  variant="ghost"
-                  size="icon"
-                  className="h-7 w-7 text-zinc-400 hover:text-red-600"
-                  onClick={() => deleteMutation.mutate(a.id)}
-                >
-                  <Trash2 className="h-3.5 w-3.5" />
-                </Button>
-              </div>
-            ))
+            anexos.map((a, i) => {
+              const isEditing = editingId === a.id;
+              return (
+                <div key={a.id} className="flex items-center gap-2 p-2 rounded-lg border border-zinc-200 bg-zinc-50">
+                  <GripVertical className="h-4 w-4 text-zinc-300 flex-shrink-0" />
+                  {isEditing ? (
+                    <>
+                      <span style={{ ...s, fontSize: "0.8125rem" }} className="text-zinc-500 flex-shrink-0">
+                        {i + 1}.
+                      </span>
+                      <Input
+                        value={editingTitle}
+                        onChange={(e) => setEditingTitle(e.target.value)}
+                        onKeyDown={(e) => {
+                          if (e.key === "Enter") { e.preventDefault(); saveEdit(); }
+                          if (e.key === "Escape") { e.preventDefault(); cancelEdit(); }
+                        }}
+                        className="!text-sm h-7 flex-1"
+                        autoFocus
+                      />
+                      <Button
+                        variant="ghost"
+                        size="icon"
+                        className="h-7 w-7 text-zinc-400 hover:text-emerald-600"
+                        onClick={saveEdit}
+                        disabled={updateTitleMutation.isPending || !editingTitle.trim()}
+                        aria-label="Salvar título"
+                      >
+                        <Check className="h-3.5 w-3.5" />
+                      </Button>
+                      <Button
+                        variant="ghost"
+                        size="icon"
+                        className="h-7 w-7 text-zinc-400 hover:text-zinc-700"
+                        onClick={cancelEdit}
+                        aria-label="Cancelar edição"
+                      >
+                        <X className="h-3.5 w-3.5" />
+                      </Button>
+                    </>
+                  ) : (
+                    <>
+                      <span style={{ ...s, fontSize: "0.8125rem" }} className="flex-1 text-zinc-700 truncate">
+                        {i + 1}. {a.title}
+                      </span>
+                      <Button
+                        variant="ghost"
+                        size="icon"
+                        className="h-7 w-7 text-zinc-400 hover:text-blue-600"
+                        onClick={() => startEdit(a.id, a.title)}
+                        aria-label="Editar título"
+                      >
+                        <Pencil className="h-3.5 w-3.5" />
+                      </Button>
+                      <Button
+                        variant="ghost"
+                        size="icon"
+                        className="h-7 w-7 text-zinc-400 hover:text-red-600"
+                        onClick={() => deleteMutation.mutate(a.id)}
+                        aria-label="Remover anexo"
+                      >
+                        <Trash2 className="h-3.5 w-3.5" />
+                      </Button>
+                    </>
+                  )}
+                </div>
+              );
+            })
           )}
         </div>
 

@@ -30,6 +30,7 @@ const AdminEmailMarketing = () => {
   const [customAudience, setCustomAudience] = useState("");
   const [recipients, setRecipients] = useState<string[]>([]);
   const [recipientInput, setRecipientInput] = useState("");
+  const [selectedListId, setSelectedListId] = useState<string>("");
   const [saveListName, setSaveListName] = useState("");
   const [saveListOpen, setSaveListOpen] = useState(false);
   const queryClient = useQueryClient();
@@ -123,6 +124,7 @@ const AdminEmailMarketing = () => {
     setCustomAudience("");
     setRecipients([]);
     setRecipientInput("");
+    setSelectedListId("");
   };
 
   const addRecipient = () => {
@@ -134,14 +136,16 @@ const AdminEmailMarketing = () => {
     if (recipients.includes(email)) return;
     setRecipients([...recipients, email]);
     setRecipientInput("");
+    setSelectedListId("");
   };
 
   const loadSavedList = (listId: string) => {
     const list = savedLists?.find((l) => l.id === listId);
     if (!list) return;
-    const merged = Array.from(new Set([...recipients, ...list.emails]));
-    setRecipients(merged);
-    toast({ title: `✅ Lista "${list.name}" carregada (${list.emails.length} e-mails)` });
+    const unique = Array.from(new Set(list.emails.map((em) => em.toLowerCase())));
+    setRecipients(unique);
+    setSelectedListId(listId);
+    toast({ title: `✅ Lista "${list.name}" carregada (${unique.length} e-mails)` });
   };
 
   const handleImportCSV = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -154,6 +158,7 @@ const AdminEmailMarketing = () => {
       const found = text.match(emailRegex) || [];
       const unique = Array.from(new Set([...recipients, ...found.map((em) => em.toLowerCase())]));
       setRecipients(unique);
+      setSelectedListId("");
       toast({ title: `✅ ${found.length} e-mail(s) importado(s)` });
     };
     reader.readAsText(file);
@@ -314,7 +319,7 @@ const AdminEmailMarketing = () => {
               {/* Load saved list */}
               {savedLists && savedLists.length > 0 && (
                 <div className="flex items-center gap-2">
-                  <Select onValueChange={loadSavedList}>
+                  <Select value={selectedListId} onValueChange={loadSavedList}>
                     <SelectTrigger className="!text-sm flex-1">
                       <SelectValue placeholder="Carregar lista salva..." />
                     </SelectTrigger>
@@ -360,7 +365,7 @@ const AdminEmailMarketing = () => {
                     <span key={email} className="inline-flex items-center gap-1 px-2 py-0.5 bg-white border border-zinc-200 rounded-full text-zinc-600"
                       style={{ ...s, fontSize: "0.6875rem" }}>
                       {email}
-                      <button onClick={() => setRecipients(recipients.filter((r) => r !== email))} className="text-zinc-400 hover:text-red-500">
+                      <button onClick={() => { setRecipients(recipients.filter((r) => r !== email)); setSelectedListId(""); }} className="text-zinc-400 hover:text-red-500">
                         <X className="h-3 w-3" />
                       </button>
                     </span>

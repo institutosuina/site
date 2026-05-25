@@ -77,9 +77,10 @@ const EditalDetail = () => {
                   <span className="w-6 h-6 rounded-full bg-secondary/20 flex items-center justify-center text-[10px]">i</span>
                   Objeto do Edital
                 </h3>
-                <p className="font-body text-base md:text-lg text-foreground/80 leading-relaxed italic">
-                  {edital.content}
-                </p>
+                <div
+                  className="prose prose-base md:prose-lg max-w-none font-body text-foreground/80 leading-relaxed italic prose-p:my-3"
+                  dangerouslySetInnerHTML={{ __html: edital.content || "" }}
+                />
               </div>
 
               {/* Downloads Section */}

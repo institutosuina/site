@@ -21,7 +21,13 @@ type CardItem = {
   pending?: boolean;
 };
 
-const cards: CardItem[] = [
+type TransparenciaDocsOverride = {
+  lgpd?: string;
+  estatuto?: string;
+  portfolio?: string;
+};
+
+const defaultCards: CardItem[] = [
   { id: 'lgpd', label: "Política e\nManual de\nBoas práticas\n(LGPD)", color: "bg-[#2D5A41]", isDownload: true, file: manualLGPD, fileName: 'Manual_LGPD_Suina.pdf' },
   { id: 'estatuto', label: "Estatuto\nsocial", color: "bg-[#759580]", isDownload: true, file: estatutoSuina, fileName: 'Estatuto_Suina.pdf' },
   { id: 'portfolio', label: "Portfólio\nde Atividades", color: "bg-[#8B5A2B]", isDownload: true, file: portfolioSuina, fileName: 'Portfolio_Suina.pdf' },
@@ -32,6 +38,26 @@ const cards: CardItem[] = [
 
 const Transparencia = () => {
   const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
+
+  const { data: docsOverride } = useQuery({
+    queryKey: ["transparencia-docs"],
+    queryFn: async () => {
+      const { data, error } = await supabase
+        .from("site_page_content")
+        .select("content")
+        .eq("page_key", "transparencia_docs")
+        .maybeSingle();
+      if (error) throw error;
+      return (data?.content as TransparenciaDocsOverride | null) ?? {};
+    },
+  });
+
+  const cards: CardItem[] = defaultCards.map((card) => {
+    const override = docsOverride?.[card.id as keyof TransparenciaDocsOverride];
+    if (!override) return card;
+    const fileName = override.split('/').pop()?.split('?')[0] || card.fileName;
+    return { ...card, file: override, fileName };
+  });
 
   const { data: allRelatorios } = useQuery({
     queryKey: ["relatorios-transparencia"],
