@@ -2,7 +2,15 @@
   "permissions": {
     "allow": [
       "Bash(npm run *)",
-      "Bash(git commit -m ' *)"
+      "Bash(git commit -m ' *)",
+      "Bash(git credential-manager *)",
+      "PowerShell(cmdkey /delete:\"LegacyGeneric:target=gh:github.com:wJPeeh\")",
+      "PowerShell(cmdkey /delete:\"LegacyGeneric:target=gh:github.com:\")",
+      "PowerShell(cmdkey /delete:\"LegacyGeneric:target=GitHub - https://api.github.com/wJPeeh\")",
+      "Bash(npx supabase *)",
+      "Bash(git add *)",
+      "Bash(git push *)",
+      "PowerShell(cmdkey /delete:\"LegacyGeneric:target=gh:github.com:wJPeeh\"; cmdkey /delete:\"LegacyGeneric:target=gh:github.com:\"; Add-Type -Namespace CM -Name U -MemberDefinition '[DllImport\\(\"Advapi32.dll\", SetLastError=true, CharSet=CharSet.Unicode\\)] public static extern bool CredDelete\\(string target, uint type, int flags\\);'; $ok = [CM.U]::CredDelete\\('LegacyGeneric:target=GitHub - https://api.github.com/wJPeeh', 1, 0\\); Write-Host \"Terceira apagada: $ok\")"
     ]
   }
 }
