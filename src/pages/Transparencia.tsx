@@ -9,6 +9,7 @@ import { useQuery } from "@tanstack/react-query";
 import { supabase } from "@/integrations/supabase/client";
 import { motion, AnimatePresence } from "framer-motion";
 import { toast } from "@/hooks/use-toast";
+import { defaultTransparenciaPageContent, type TransparenciaPageContent } from "@/data/transparenciaPageDefaults";
 
 type CardItem = {
   id: string;
@@ -25,6 +26,12 @@ type TransparenciaDocsOverride = {
   lgpd?: string;
   estatuto?: string;
   portfolio?: string;
+};
+
+type ListaDoc = { id: string; title: string; file_url: string; created_at?: string };
+type TransparenciaListasOverride = {
+  contabeis?: ListaDoc[];
+  resultados?: ListaDoc[];
 };
 
 const defaultCards: CardItem[] = [
@@ -52,11 +59,61 @@ const Transparencia = () => {
     },
   });
 
+  const { data: listasOverride } = useQuery({
+    queryKey: ["transparencia-listas"],
+    queryFn: async () => {
+      const { data, error } = await supabase
+        .from("site_page_content")
+        .select("content")
+        .eq("page_key", "transparencia_listas")
+        .maybeSingle();
+      if (error) throw error;
+      return (data?.content as TransparenciaListasOverride | null) ?? {};
+    },
+  });
+
+  const { data: pageTexts } = useQuery({
+    queryKey: ["transparencia-page-content"],
+    queryFn: async () => {
+      const { data, error } = await supabase
+        .from("site_page_content")
+        .select("content")
+        .eq("page_key", "transparencia_page")
+        .maybeSingle();
+      if (error) throw error;
+      const raw = (data?.content as Partial<TransparenciaPageContent> | null) ?? {};
+      const pick = (key: keyof TransparenciaPageContent) =>
+        typeof raw[key] === "string" && raw[key]!.trim().length > 0 ? raw[key]! : defaultTransparenciaPageContent[key];
+      return {
+        heroTitle: pick("heroTitle"),
+        heroSubtitle: pick("heroSubtitle"),
+        cardLgpd: pick("cardLgpd"),
+        cardEstatuto: pick("cardEstatuto"),
+        cardPortfolio: pick("cardPortfolio"),
+        cardContabeis: pick("cardContabeis"),
+        cardResultados: pick("cardResultados"),
+        cardPrestacao: pick("cardPrestacao"),
+      } as TransparenciaPageContent;
+    },
+  });
+
+  const texts = pageTexts ?? defaultTransparenciaPageContent;
+  const cardLabelByCard: Record<string, keyof TransparenciaPageContent> = {
+    lgpd: "cardLgpd",
+    estatuto: "cardEstatuto",
+    portfolio: "cardPortfolio",
+    contabeis: "cardContabeis",
+    resultados: "cardResultados",
+    prestacao: "cardPrestacao",
+  };
+
   const cards: CardItem[] = defaultCards.map((card) => {
-    const override = docsOverride?.[card.id as keyof TransparenciaDocsOverride];
-    if (!override) return card;
-    const fileName = override.split('/').pop()?.split('?')[0] || card.fileName;
-    return { ...card, file: override, fileName };
+    const labelKey = cardLabelByCard[card.id];
+    const label = labelKey ? texts[labelKey] : card.label;
+    const fileOverride = docsOverride?.[card.id as keyof TransparenciaDocsOverride];
+    if (!fileOverride) return { ...card, label };
+    const fileName = fileOverride.split('/').pop()?.split('?')[0] || card.fileName;
+    return { ...card, label, file: fileOverride, fileName };
   });
 
   const { data: allRelatorios } = useQuery({
@@ -71,23 +128,39 @@ const Transparencia = () => {
     },
   });
 
-  const getFilteredDocs = (categoryId: string) => {
+  const getFilteredDocs = (categoryId: string): ListaDoc[] => {
+    const override = listasOverride?.[categoryId as keyof TransparenciaListasOverride];
+    if (override && override.length > 0) {
+      return override;
+    }
+
     if (!allRelatorios) return [];
-    
-    const normalize = (str: string) => 
+
+    const normalize = (str: string) =>
       str.normalize('NFD').replace(/[\u0300-\u036f]/g, "").toLowerCase();
 
+    const mapRelatorio = (d: typeof allRelatorios[number]): ListaDoc => ({
+      id: d.id,
+      title: d.title,
+      file_url: d.file_url,
+      created_at: d.created_at,
+    });
+
     if (categoryId === 'resultados') {
-      return allRelatorios.filter(d => {
-        const t = normalize(d.title);
-        return t.includes('relat') || t.includes('portf') || t.includes('resultado');
-      });
+      return allRelatorios
+        .filter(d => {
+          const t = normalize(d.title);
+          return t.includes('relat') || t.includes('portf') || t.includes('resultado');
+        })
+        .map(mapRelatorio);
     }
     if (categoryId === 'contabeis') {
-      return allRelatorios.filter(d => {
-        const t = normalize(d.title);
-        return t.includes('balan') || t.includes('demonstrat') || t.includes('cont');
-      });
+      return allRelatorios
+        .filter(d => {
+          const t = normalize(d.title);
+          return t.includes('balan') || t.includes('demonstrat') || t.includes('cont');
+        })
+        .map(mapRelatorio);
     }
     return [];
   };
@@ -141,16 +214,16 @@ const Transparencia = () => {
         <div className="container mx-auto max-w-5xl relative z-10">
           {/* Cabeçalho */}
           <div className="text-center mb-16">
-            <motion.h1 
+            <motion.h1
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               className="font-display text-4xl md:text-6xl font-bold text-[#8B5A2B] uppercase tracking-tighter mb-4"
             >
-              Transparência
+              {texts.heroTitle}
             </motion.h1>
             <div className="w-24 h-1 bg-[#8B5A2B] mx-auto mb-8"></div>
             <h2 className="font-display text-2xl md:text-3xl font-bold text-[#2D2D2D]">
-              Resultados e compromissos:
+              {texts.heroSubtitle}
             </h2>
           </div>
 

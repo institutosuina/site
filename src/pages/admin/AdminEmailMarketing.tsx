@@ -72,7 +72,11 @@ const AdminEmailMarketing = () => {
       toast({ title: "✅ E-mail marketing enviado com sucesso!" });
       closeCompose();
     },
-    onError: () => toast({ title: "❌ Erro ao enviar e-mail.", variant: "destructive" }),
+    onError: (err: any) => toast({
+      title: "❌ Erro ao enviar e-mail.",
+      description: err?.message || JSON.stringify(err),
+      variant: "destructive",
+    }),
   });
 
   const deleteMutation = useMutation({

@@ -28,12 +28,7 @@ const PrestacaoContas = () => {
   const [selectedProject, setSelectedProject] = useState<string | null>(null);
 
   useEffect(() => {
-    const authorized = localStorage.getItem("suina_accountability_auth");
-    if (authorized) {
-      setIsAuthorized(true);
-    } else {
-      setShowModal(true);
-    }
+    setShowModal(true);
   }, []);
 
   const { data: projects } = useQuery({
@@ -66,10 +61,6 @@ const PrestacaoContas = () => {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (formData.name && formData.email) {
-      localStorage.setItem("suina_accountability_auth", "true");
-      localStorage.setItem("suina_user_name", formData.name);
-      localStorage.setItem("suina_user_email", formData.email);
-
       // Log page access
       await supabase.from("acessos_pagina").insert({
         user_name: formData.name,
@@ -83,14 +74,11 @@ const PrestacaoContas = () => {
   };
 
   const handleAccessReport = async (report: any) => {
-    const userName = localStorage.getItem("suina_user_name") || formData.name;
-    const userEmail = localStorage.getItem("suina_user_email") || formData.email;
-
     // Log access
     await supabase.from("acessos_relatorios").insert({
       report_id: report.id,
-      user_name: userName,
-      user_email: userEmail,
+      user_name: formData.name,
+      user_email: formData.email,
     });
 
     window.open(report.file_url, "_blank");

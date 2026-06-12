@@ -9,6 +9,7 @@ import { Skeleton } from "@/components/ui/skeleton";
 import { toast } from "@/hooks/use-toast";
 import { defaultHomePageContent, type HomePageContent, type TimelineItem } from "@/data/pageContentDefaults";
 import { defaultSocialLinks, type SocialLinksContent } from "@/data/socialLinksDefaults";
+import { defaultTransparenciaPageContent, type TransparenciaPageContent } from "@/data/transparenciaPageDefaults";
 
 const s = { fontFamily: "'Inter', sans-serif" } as const;
 
@@ -38,10 +39,29 @@ const normalizeHomeContent = (raw: unknown): HomePageContent => {
   };
 };
 
+const normalizeTransparenciaContent = (raw: unknown): TransparenciaPageContent => {
+  const fallback = defaultTransparenciaPageContent;
+  if (!raw || typeof raw !== "object") return fallback;
+  const source = raw as Partial<TransparenciaPageContent>;
+  const pick = (key: keyof TransparenciaPageContent) =>
+    typeof source[key] === "string" && source[key]!.trim().length > 0 ? source[key]! : fallback[key];
+  return {
+    heroTitle: pick("heroTitle"),
+    heroSubtitle: pick("heroSubtitle"),
+    cardLgpd: pick("cardLgpd"),
+    cardEstatuto: pick("cardEstatuto"),
+    cardPortfolio: pick("cardPortfolio"),
+    cardContabeis: pick("cardContabeis"),
+    cardResultados: pick("cardResultados"),
+    cardPrestacao: pick("cardPrestacao"),
+  };
+};
+
 const AdminPagesContent = () => {
   const queryClient = useQueryClient();
   const [form, setForm] = useState<HomePageContent>(defaultHomePageContent);
   const [socialForm, setSocialForm] = useState<SocialLinksContent>(defaultSocialLinks);
+  const [transparenciaForm, setTransparenciaForm] = useState<TransparenciaPageContent>(defaultTransparenciaPageContent);
 
   const { isLoading: loadingHome } = useQuery({
     queryKey: ["admin-page-content", "home"],
@@ -81,7 +101,22 @@ const AdminPagesContent = () => {
     },
   });
 
-  const isLoading = loadingHome || loadingSocial;
+  const { isLoading: loadingTransparencia } = useQuery({
+    queryKey: ["admin-page-content", "transparencia_page"],
+    queryFn: async () => {
+      const { data, error } = await supabase
+        .from("site_page_content")
+        .select("content")
+        .eq("page_key", "transparencia_page")
+        .maybeSingle();
+      if (error) throw error;
+      const normalized = normalizeTransparenciaContent(data?.content);
+      setTransparenciaForm(normalized);
+      return normalized;
+    },
+  });
+
+  const isLoading = loadingHome || loadingSocial || loadingTransparencia;
 
   const sortedTimeline = useMemo(
     () =>
@@ -109,20 +144,29 @@ const AdminPagesContent = () => {
         content: socialForm,
         updated_at: new Date().toISOString(),
       };
+      const transparenciaPayload = {
+        page_key: "transparencia_page",
+        content: transparenciaForm,
+        updated_at: new Date().toISOString(),
+      };
 
-      const [homeResult, socialResult] = await Promise.all([
+      const [homeResult, socialResult, transparenciaResult] = await Promise.all([
         supabase.from("site_page_content").upsert(homePayload, { onConflict: "page_key" }),
         supabase.from("site_page_content").upsert(socialPayload, { onConflict: "page_key" }),
+        supabase.from("site_page_content").upsert(transparenciaPayload, { onConflict: "page_key" }),
       ]);
       if (homeResult.error) throw homeResult.error;
       if (socialResult.error) throw socialResult.error;
+      if (transparenciaResult.error) throw transparenciaResult.error;
     },
     onSuccess: () => {
       toast({ title: "✅ Conteúdos de páginas atualizados!" });
       queryClient.invalidateQueries({ queryKey: ["admin-page-content", "home"] });
       queryClient.invalidateQueries({ queryKey: ["admin-page-content", "social_links"] });
+      queryClient.invalidateQueries({ queryKey: ["admin-page-content", "transparencia_page"] });
       queryClient.invalidateQueries({ queryKey: ["home-page-content"] });
       queryClient.invalidateQueries({ queryKey: ["social-links-content"] });
+      queryClient.invalidateQueries({ queryKey: ["transparencia-page-content"] });
     },
     onError: (error: Error) => {
       toast({ title: "❌ Erro ao salvar", description: error.message, variant: "destructive" });
@@ -270,6 +314,52 @@ const AdminPagesContent = () => {
                   </div>
                 );
               })}
+            </div>
+          </section>
+
+          <section className="bg-white border border-zinc-200 rounded-xl p-6 space-y-4">
+            <div>
+              <h3 className="font-semibold text-zinc-800" style={s}>Página Transparência</h3>
+              <p className="text-xs text-zinc-500 mt-1">
+                Edite os textos da página Transparência. Nos títulos dos cards, cada nova linha (Enter) aparece como linha separada no card.
+              </p>
+            </div>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <div className="space-y-2">
+                <label className="text-sm text-zinc-600">Título principal</label>
+                <Input
+                  value={transparenciaForm.heroTitle}
+                  onChange={(event) => setTransparenciaForm((current) => ({ ...current, heroTitle: event.target.value }))}
+                  placeholder="Transparência"
+                />
+              </div>
+              <div className="space-y-2">
+                <label className="text-sm text-zinc-600">Subtítulo</label>
+                <Input
+                  value={transparenciaForm.heroSubtitle}
+                  onChange={(event) => setTransparenciaForm((current) => ({ ...current, heroSubtitle: event.target.value }))}
+                  placeholder="Resultados e compromissos:"
+                />
+              </div>
+            </div>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              {([
+                { key: "cardLgpd", label: "Card — LGPD" },
+                { key: "cardEstatuto", label: "Card — Estatuto" },
+                { key: "cardPortfolio", label: "Card — Portfólio" },
+                { key: "cardContabeis", label: "Card — Demonstrativos Contábeis" },
+                { key: "cardResultados", label: "Card — Relatórios de Resultados" },
+                { key: "cardPrestacao", label: "Card — Prestação de Contas" },
+              ] as { key: keyof TransparenciaPageContent; label: string }[]).map(({ key, label }) => (
+                <div key={key} className="space-y-2">
+                  <label className="text-sm text-zinc-600">{label}</label>
+                  <Textarea
+                    value={transparenciaForm[key]}
+                    onChange={(event) => setTransparenciaForm((current) => ({ ...current, [key]: event.target.value }))}
+                    className="min-h-24"
+                  />
+                </div>
+              ))}
             </div>
           </section>
 

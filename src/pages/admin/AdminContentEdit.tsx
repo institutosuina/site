@@ -40,6 +40,7 @@ const AdminContentEdit = () => {
     content: "",
     status: "Rascunho",
     cover_image: "",
+    published_at: "",
   });
   const [showAnexos, setShowAnexos] = useState(false);
 
@@ -65,6 +66,7 @@ const AdminContentEdit = () => {
         content: item.content || "",
         status: item.status,
         cover_image: item.cover_image || "",
+        published_at: item.published_at ? new Date(item.published_at).toISOString().slice(0, 10) : "",
       });
     }
   }, [item]);
@@ -124,13 +126,18 @@ const AdminContentEdit = () => {
       return;
     }
     const slug = form.slug || slugify(form.title);
+    const resolvePublishedAt = () => {
+      if (form.status !== "Publicado") return null;
+      if (form.published_at) return new Date(`${form.published_at}T12:00:00`).toISOString();
+      return item?.published_at || new Date().toISOString();
+    };
     const payload: any = {
       title: form.title.trim(),
       slug,
       content: form.content,
       status: form.status,
       cover_image: form.cover_image || null,
-      published_at: form.status === "Publicado" ? (item?.published_at || new Date().toISOString()) : null,
+      published_at: resolvePublishedAt(),
       updated_at: new Date().toISOString(),
     };
     upsertMutation.mutate(payload);
@@ -216,6 +223,22 @@ const AdminContentEdit = () => {
                   <SelectItem value="Publicado">Publicado</SelectItem>
                 </SelectContent>
               </Select>
+            </div>
+
+            <div className="space-y-2">
+              <label style={{ ...s, fontSize: "0.8125rem" }} className="font-bold text-zinc-700 uppercase tracking-wider">Data de Publicação</label>
+              <Input
+                type="date"
+                value={form.published_at}
+                onChange={(e) => setForm({ ...form, published_at: e.target.value })}
+                className="bg-white border-zinc-200 text-sm"
+                disabled={form.status !== "Publicado"}
+              />
+              <p style={{ ...s, fontSize: "0.6875rem" }} className="text-zinc-400">
+                {form.status === "Publicado"
+                  ? "Deixe em branco para usar a data atual."
+                  : "Disponível quando o status estiver como Publicado."}
+              </p>
             </div>
 
             <div className="space-y-2">

@@ -1,7 +1,7 @@
 import { useState, useRef } from "react";
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import { supabase } from "@/integrations/supabase/client";
-import { Upload, FileText, Trash2, Eye, Download, FolderOpen, Plus, ArrowLeft, Pencil } from "lucide-react";
+import { Upload, FileText, Trash2, Eye, Download, FolderOpen, Plus, ArrowLeft, Pencil, Check, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Skeleton } from "@/components/ui/skeleton";
@@ -630,6 +630,242 @@ const InstitutionalDocs = () => {
   );
 };
 
+/* ───── Transparency category lists (Contábeis, Resultados) ───── */
+type ListCategoryKey = "contabeis" | "resultados";
+type ListDoc = { id: string; title: string; file_url: string; created_at: string };
+
+const LIST_CATEGORIES: { key: ListCategoryKey; label: string; color: string }[] = [
+  { key: "contabeis", label: "Demonstrativos Contábeis", color: "bg-[#B45045]" },
+  { key: "resultados", label: "Relatórios de Resultados", color: "bg-[#2D5A41]" },
+];
+
+const TransparenciaListas = () => {
+  const queryClient = useQueryClient();
+  const [activeCategory, setActiveCategory] = useState<ListCategoryKey>("contabeis");
+  const [newTitle, setNewTitle] = useState("");
+  const [uploading, setUploading] = useState(false);
+  const [editingId, setEditingId] = useState<string | null>(null);
+  const [editingTitle, setEditingTitle] = useState("");
+
+  const { data: listas, isLoading } = useQuery({
+    queryKey: ["admin-transparencia-listas"],
+    queryFn: async () => {
+      const { data, error } = await supabase
+        .from("site_page_content")
+        .select("content")
+        .eq("page_key", "transparencia_listas")
+        .maybeSingle();
+      if (error) throw error;
+      return (data?.content as Partial<Record<ListCategoryKey, ListDoc[]>> | null) ?? {};
+    },
+  });
+
+  const currentList: ListDoc[] = listas?.[activeCategory] ?? [];
+
+  const persistListas = async (next: Partial<Record<ListCategoryKey, ListDoc[]>>) => {
+    const { error } = await supabase.from("site_page_content").upsert(
+      { page_key: "transparencia_listas", content: next, updated_at: new Date().toISOString() },
+      { onConflict: "page_key" },
+    );
+    if (error) throw error;
+    queryClient.invalidateQueries({ queryKey: ["admin-transparencia-listas"] });
+    queryClient.invalidateQueries({ queryKey: ["transparencia-listas"] });
+  };
+
+  const handleUpload = async (event: React.ChangeEvent<HTMLInputElement>) => {
+    const file = event.target.files?.[0];
+    event.target.value = "";
+    if (!file) return;
+    if (!newTitle.trim()) {
+      toast({ title: "Preencha o título antes de enviar o PDF.", variant: "destructive" });
+      return;
+    }
+    if (file.type !== "application/pdf") {
+      toast({ title: "❌ Envie um arquivo PDF", variant: "destructive" });
+      return;
+    }
+    setUploading(true);
+    try {
+      const safeName = file.name.replace(/[^a-zA-Z0-9._-]/g, "_");
+      const path = `transparencia-listas/${activeCategory}/${Date.now()}-${safeName}`;
+      const { error: uploadError } = await supabase.storage.from("reports").upload(path, file);
+      if (uploadError) throw uploadError;
+      const { data: urlData } = supabase.storage.from("reports").getPublicUrl(path);
+
+      const newDoc: ListDoc = {
+        id: crypto.randomUUID(),
+        title: newTitle.trim(),
+        file_url: urlData.publicUrl,
+        created_at: new Date().toISOString(),
+      };
+      const nextList = [newDoc, ...currentList];
+      await persistListas({ ...(listas ?? {}), [activeCategory]: nextList });
+      toast({ title: "✅ Documento adicionado!" });
+      setNewTitle("");
+    } catch (err: any) {
+      toast({ title: "❌ Erro ao enviar PDF", description: err.message, variant: "destructive" });
+    } finally {
+      setUploading(false);
+    }
+  };
+
+  const handleDelete = async (id: string) => {
+    try {
+      const nextList = currentList.filter((d) => d.id !== id);
+      await persistListas({ ...(listas ?? {}), [activeCategory]: nextList });
+      toast({ title: "✅ Documento removido." });
+    } catch (err: any) {
+      toast({ title: "❌ Erro ao remover", description: err.message, variant: "destructive" });
+    }
+  };
+
+  const startEdit = (doc: ListDoc) => {
+    setEditingId(doc.id);
+    setEditingTitle(doc.title);
+  };
+
+  const cancelEdit = () => {
+    setEditingId(null);
+    setEditingTitle("");
+  };
+
+  const saveEdit = async () => {
+    if (!editingId || !editingTitle.trim()) return;
+    try {
+      const nextList = currentList.map((d) =>
+        d.id === editingId ? { ...d, title: editingTitle.trim() } : d,
+      );
+      await persistListas({ ...(listas ?? {}), [activeCategory]: nextList });
+      toast({ title: "✅ Título atualizado." });
+      setEditingId(null);
+      setEditingTitle("");
+    } catch (err: any) {
+      toast({ title: "❌ Erro ao atualizar", description: err.message, variant: "destructive" });
+    }
+  };
+
+  return (
+    <div className="space-y-4">
+      <div>
+        <h3 className="font-bold text-zinc-800" style={{ ...s, fontSize: "1.125rem" }}>Listas de documentos</h3>
+        <p style={{ ...s, fontSize: "0.8125rem" }} className="text-zinc-500 mt-0.5">
+          Gerencie os PDFs que aparecem ao clicar em Demonstrativos Contábeis e Relatórios de Resultados na página Transparência.
+        </p>
+      </div>
+
+      <div className="flex flex-wrap gap-2">
+        {LIST_CATEGORIES.map((cat) => (
+          <Button
+            key={cat.key}
+            variant={activeCategory === cat.key ? "default" : "outline"}
+            onClick={() => { setActiveCategory(cat.key); cancelEdit(); }}
+            className={activeCategory === cat.key ? "bg-emerald-500 hover:bg-emerald-600 text-white !text-sm" : "!text-sm"}
+          >
+            {cat.label}
+          </Button>
+        ))}
+      </div>
+
+      <div className="bg-white rounded-xl border border-zinc-200 overflow-hidden">
+        {isLoading ? (
+          <div className="p-6 space-y-3">{[1, 2].map((i) => <Skeleton key={i} className="h-14 w-full" />)}</div>
+        ) : (
+          <>
+            <div className="divide-y divide-zinc-100">
+              {currentList.length === 0 ? (
+                <div className="text-center py-10">
+                  <FileText className="h-10 w-10 text-zinc-300 mx-auto mb-3" />
+                  <p style={{ ...s, fontSize: "0.875rem" }} className="text-zinc-400">
+                    Nenhum documento nesta categoria. Adicione abaixo.
+                  </p>
+                </div>
+              ) : (
+                currentList.map((doc) => {
+                  const isEditing = editingId === doc.id;
+                  const cat = LIST_CATEGORIES.find((c) => c.key === activeCategory)!;
+                  return (
+                    <div key={doc.id} className="flex items-center gap-3 px-6 py-3">
+                      <div className={`${cat.color} w-10 h-10 rounded-lg flex items-center justify-center shrink-0`}>
+                        <FileText className="h-4 w-4 text-white" />
+                      </div>
+                      {isEditing ? (
+                        <>
+                          <Input
+                            value={editingTitle}
+                            onChange={(e) => setEditingTitle(e.target.value)}
+                            onKeyDown={(e) => {
+                              if (e.key === "Enter") { e.preventDefault(); saveEdit(); }
+                              if (e.key === "Escape") { e.preventDefault(); cancelEdit(); }
+                            }}
+                            className="!text-sm flex-1"
+                            autoFocus
+                          />
+                          <Button variant="ghost" size="icon" className="h-8 w-8 text-zinc-400 hover:text-emerald-600" onClick={saveEdit} disabled={!editingTitle.trim()} aria-label="Salvar">
+                            <Check className="h-4 w-4" />
+                          </Button>
+                          <Button variant="ghost" size="icon" className="h-8 w-8 text-zinc-400 hover:text-zinc-700" onClick={cancelEdit} aria-label="Cancelar">
+                            <X className="h-4 w-4" />
+                          </Button>
+                        </>
+                      ) : (
+                        <>
+                          <div className="flex-1 min-w-0">
+                            <p style={{ ...s, fontSize: "0.9375rem" }} className="font-semibold text-zinc-800 truncate">{doc.title}</p>
+                            <p style={{ ...s, fontSize: "0.75rem" }} className="text-zinc-400 truncate">
+                              Adicionado em {new Date(doc.created_at).toLocaleDateString("pt-BR")}
+                            </p>
+                          </div>
+                          <Button variant="ghost" size="icon" className="h-8 w-8 text-zinc-400 hover:text-blue-600" asChild>
+                            <a href={doc.file_url} target="_blank" rel="noopener noreferrer" aria-label="Ver PDF">
+                              <Eye className="h-4 w-4" />
+                            </a>
+                          </Button>
+                          <Button variant="ghost" size="icon" className="h-8 w-8 text-zinc-400 hover:text-emerald-600" onClick={() => startEdit(doc)} aria-label="Editar título">
+                            <Pencil className="h-4 w-4" />
+                          </Button>
+                          <Button variant="ghost" size="icon" className="h-8 w-8 text-zinc-400 hover:text-red-600" onClick={() => handleDelete(doc.id)} aria-label="Remover">
+                            <Trash2 className="h-4 w-4" />
+                          </Button>
+                        </>
+                      )}
+                    </div>
+                  );
+                })
+              )}
+            </div>
+
+            <div className="border-t border-zinc-100 p-4 bg-zinc-50/50 space-y-3">
+              <label style={{ ...s, fontSize: "0.8125rem" }} className="font-medium text-zinc-700 block">
+                Adicionar documento nesta categoria
+              </label>
+              <Input
+                value={newTitle}
+                onChange={(e) => setNewTitle(e.target.value)}
+                placeholder="Título do documento (ex: Balanço Patrimonial 2024)"
+                className="!text-sm"
+                disabled={uploading}
+              />
+              <label className="flex items-center justify-center gap-2 px-4 py-2 rounded-lg border-2 border-dashed border-zinc-300 cursor-pointer hover:border-emerald-400 transition-colors">
+                <Upload className="h-4 w-4 text-zinc-500" />
+                <span style={{ ...s, fontSize: "0.8125rem" }} className="text-zinc-600">
+                  {uploading ? "Enviando..." : "Selecionar PDF"}
+                </span>
+                <input
+                  type="file"
+                  className="hidden"
+                  accept="application/pdf"
+                  onChange={handleUpload}
+                  disabled={uploading}
+                />
+              </label>
+            </div>
+          </>
+        )}
+      </div>
+    </div>
+  );
+};
+
 /* ───── Page access logs component ───── */
 const PageAccessLogs = () => {
   const { data: logs, isLoading } = useQuery({
@@ -725,6 +961,7 @@ const AdminTransparency = () => {
   return (
     <div className="font-['Inter',sans-serif] space-y-10">
       <InstitutionalDocs />
+      <TransparenciaListas />
       <ProjectList onSelect={setSelectedProject} />
       <PageAccessLogs />
     </div>
