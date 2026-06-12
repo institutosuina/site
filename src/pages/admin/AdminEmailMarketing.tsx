@@ -60,16 +60,24 @@ const AdminEmailMarketing = () => {
     mutationFn: async () => {
       const finalAudience = audience === "__custom" ? customAudience.trim() : audience;
       if (!subject.trim() || !body.trim() || !finalAudience) throw new Error("Preencha todos os campos");
-      const { error } = await supabase.from("emails_enviados").insert({
-        subject: subject.trim(),
-        body: body.trim(),
-        target_audience: finalAudience,
+      if (!recipients.length) throw new Error("Adicione ao menos um destinatário");
+
+      const { data, error } = await supabase.functions.invoke("send-email", {
+        body: {
+          subject: subject.trim(),
+          body: body.trim(),
+          emails: recipients,
+          target_audience: finalAudience,
+        },
       });
       if (error) throw error;
+      if (data?.error) throw new Error(data.error);
+      return data as { ok: boolean; count: number; resend_id?: string };
     },
-    onSuccess: () => {
+    onSuccess: (data) => {
       queryClient.invalidateQueries({ queryKey: ["admin-emails-sent"] });
-      toast({ title: "✅ E-mail marketing enviado com sucesso!" });
+      const count = data?.count ?? recipients.length;
+      toast({ title: `✅ E-mail enviado para ${count} destinatário(s)!` });
       closeCompose();
     },
     onError: (err: any) => toast({

@@ -10,7 +10,8 @@
       "Bash(npx supabase *)",
       "Bash(git add *)",
       "Bash(git push *)",
-      "PowerShell(cmdkey /delete:\"LegacyGeneric:target=gh:github.com:wJPeeh\"; cmdkey /delete:\"LegacyGeneric:target=gh:github.com:\"; Add-Type -Namespace CM -Name U -MemberDefinition '[DllImport\\(\"Advapi32.dll\", SetLastError=true, CharSet=CharSet.Unicode\\)] public static extern bool CredDelete\\(string target, uint type, int flags\\);'; $ok = [CM.U]::CredDelete\\('LegacyGeneric:target=GitHub - https://api.github.com/wJPeeh', 1, 0\\); Write-Host \"Terceira apagada: $ok\")"
+      "PowerShell(cmdkey /delete:\"LegacyGeneric:target=gh:github.com:wJPeeh\"; cmdkey /delete:\"LegacyGeneric:target=gh:github.com:\"; Add-Type -Namespace CM -Name U -MemberDefinition '[DllImport\\(\"Advapi32.dll\", SetLastError=true, CharSet=CharSet.Unicode\\)] public static extern bool CredDelete\\(string target, uint type, int flags\\);'; $ok = [CM.U]::CredDelete\\('LegacyGeneric:target=GitHub - https://api.github.com/wJPeeh', 1, 0\\); Write-Host \"Terceira apagada: $ok\")",
+      "Bash(git ls-remote *)"
     ]
   }
 }

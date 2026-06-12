@@ -146,3 +146,4 @@ downloads_transparencia/relat-rio-de-atividades-2023.pdf
 downloads_transparencia/relat-rio-de-atividades-2024.pdf
 scratch/find_large_files.py
 supabase/migrations/20260507135000_create_site_page_content.sql
+.claude/settings.local.json

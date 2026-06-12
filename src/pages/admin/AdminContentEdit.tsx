@@ -74,8 +74,9 @@ const AdminContentEdit = () => {
   const upsertMutation = useMutation({
     mutationFn: async (payload: TablesInsert<ContentTable>) => {
       if (!isNew) {
-        const { error } = await supabase.from(activeTab).update(payload).eq("id", id!);
+        const { data, error } = await supabase.from(activeTab).update(payload).eq("id", id!).select().single();
         if (error) throw error;
+        return data;
       } else {
         const { data, error } = await supabase.from(activeTab).insert(payload).select().single();
         if (error) throw error;
@@ -84,11 +85,16 @@ const AdminContentEdit = () => {
     },
     onSuccess: (data: any) => {
       queryClient.invalidateQueries({ queryKey: ["admin-content", activeTab] });
+      queryClient.invalidateQueries({ queryKey: ["admin-content-detail", activeTab, id] });
       if (activeTab === "posts_blog") {
         queryClient.invalidateQueries({ queryKey: ["blog-public"] });
       }
       if (activeTab === "noticias") {
         queryClient.invalidateQueries({ queryKey: ["noticias-public"] });
+      }
+      if (activeTab === "editais") {
+        queryClient.invalidateQueries({ queryKey: ["editais-public"] });
+        queryClient.invalidateQueries({ queryKey: ["edital-detail"] });
       }
       queryClient.invalidateQueries({ queryKey: ["post-detail"] });
       toast({ title: `✅ ${config.singular} salvo com sucesso!` });
@@ -96,7 +102,11 @@ const AdminContentEdit = () => {
         navigate(`/admin/content/${activeTab}/${data.id}/edit`, { replace: true });
       }
     },
-    onError: () => toast({ title: "❌ Erro ao salvar conteúdo.", variant: "destructive" }),
+    onError: (err: any) => toast({
+      title: "❌ Erro ao salvar conteúdo.",
+      description: err?.message || JSON.stringify(err),
+      variant: "destructive",
+    }),
   });
 
   const [uploadingCover, setUploadingCover] = useState(false);
