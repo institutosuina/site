@@ -2,9 +2,8 @@ import { useParams, useNavigate } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
 import { supabase } from "@/integrations/supabase/client";
 import Layout from "@/components/Layout";
-import { ArrowLeft, Download } from "lucide-react";
+import { ArrowLeft, Download, Plus } from "lucide-react";
 import { Skeleton } from "@/components/ui/skeleton";
-import formaInformativo from "@/assets/forma-informativo.svg";
 
 const InformativosAno = () => {
   const { ano } = useParams<{ ano: string }>();
@@ -65,7 +64,7 @@ const InformativosAno = () => {
               Nenhum informativo cadastrado para {ano}.
             </p>
           ) : (
-            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8">
+            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8 pr-6 sm:pr-0">
               {informativos.map((info) => (
                 <a
                   key={info.id}
@@ -74,20 +73,20 @@ const InformativosAno = () => {
                   rel="noopener noreferrer"
                   className="group relative flex flex-col items-center"
                 >
-                  {/* SVG shape as background */}
-                  <div className="relative w-full flex items-center justify-center">
-                    <img src={formaInformativo} alt="" className="w-full h-auto" />
-                    {/* Text overlay on the rounded rectangle part */}
-                    <div className="absolute inset-0 flex items-center">
-                      <div className="flex-1 flex flex-col items-center justify-center pr-[15%]">
-                        <span className="font-display text-sm md:text-base text-primary-foreground uppercase tracking-wider opacity-90">
-                          Informativo
-                        </span>
-                        <span className="font-display text-2xl md:text-3xl font-bold text-primary-foreground leading-tight">
-                          {info.numero}/{ano}
-                        </span>
-                      </div>
-                      {/* The "+" circle is already in the SVG */}
+                  <div className="relative w-full pr-10 md:pr-12">
+                    <div className="bg-suina-brown rounded-[1.75rem] border-[3px] border-white shadow-md py-5 md:py-6 pl-5 pr-8 flex flex-col items-center justify-center min-h-[96px] md:min-h-[110px]">
+                      <span className="font-display text-xs md:text-sm text-primary-foreground uppercase tracking-wider opacity-90 leading-none">
+                        Informativo
+                      </span>
+                      <span className="font-display text-xl md:text-2xl font-bold text-primary-foreground leading-tight mt-1 break-all text-center">
+                        {info.numero}/{ano}
+                      </span>
+                    </div>
+                    <div
+                      className="absolute top-1/2 right-0 -translate-y-1/2 bg-suina-brown border-[3px] border-white rounded-full shadow-md flex items-center justify-center w-16 h-16 md:w-20 md:h-20"
+                      aria-hidden="true"
+                    >
+                      <Plus className="w-7 h-7 md:w-9 md:h-9 text-primary-foreground" strokeWidth={2.5} />
                     </div>
                   </div>
 

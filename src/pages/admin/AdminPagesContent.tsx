@@ -10,6 +10,7 @@ import { toast } from "@/hooks/use-toast";
 import { defaultHomePageContent, type HomePageContent, type TimelineItem } from "@/data/pageContentDefaults";
 import { defaultSocialLinks, type SocialLinksContent } from "@/data/socialLinksDefaults";
 import { defaultTransparenciaPageContent, type TransparenciaPageContent } from "@/data/transparenciaPageDefaults";
+import { defaultConselhoContent, type ConselhoContent, type ConselhoMembro } from "@/data/conselhoDefaults";
 
 const s = { fontFamily: "'Inter', sans-serif" } as const;
 
@@ -57,11 +58,40 @@ const normalizeTransparenciaContent = (raw: unknown): TransparenciaPageContent =
   };
 };
 
+const normalizeConselhoContent = (raw: unknown): ConselhoContent => {
+  const fallback = defaultConselhoContent;
+  if (!raw || typeof raw !== "object") return fallback;
+  const source = raw as Partial<ConselhoContent>;
+  const fiscal = Array.isArray(source.fiscal)
+    ? source.fiscal.filter((item): item is string => typeof item === "string")
+    : [];
+  const diretores = Array.isArray(source.diretores)
+    ? source.diretores
+        .filter(
+          (item): item is ConselhoMembro =>
+            !!item &&
+            typeof item === "object" &&
+            typeof (item as ConselhoMembro).cargo === "string" &&
+            typeof (item as ConselhoMembro).nome === "string",
+        )
+        .map((item) => ({ cargo: item.cargo, nome: item.nome }))
+    : [];
+
+  return {
+    presidente: typeof source.presidente === "string" ? source.presidente : fallback.presidente,
+    vicePresidente: typeof source.vicePresidente === "string" ? source.vicePresidente : fallback.vicePresidente,
+    fiscal: fiscal.length ? fiscal : fallback.fiscal,
+    mandato: typeof source.mandato === "string" ? source.mandato : fallback.mandato,
+    diretores: diretores.length ? diretores : fallback.diretores,
+  };
+};
+
 const AdminPagesContent = () => {
   const queryClient = useQueryClient();
   const [form, setForm] = useState<HomePageContent>(defaultHomePageContent);
   const [socialForm, setSocialForm] = useState<SocialLinksContent>(defaultSocialLinks);
   const [transparenciaForm, setTransparenciaForm] = useState<TransparenciaPageContent>(defaultTransparenciaPageContent);
+  const [conselhoForm, setConselhoForm] = useState<ConselhoContent>(defaultConselhoContent);
 
   const { isLoading: loadingHome } = useQuery({
     queryKey: ["admin-page-content", "home"],
@@ -116,7 +146,22 @@ const AdminPagesContent = () => {
     },
   });
 
-  const isLoading = loadingHome || loadingSocial || loadingTransparencia;
+  const { isLoading: loadingConselho } = useQuery({
+    queryKey: ["admin-page-content", "conselho"],
+    queryFn: async () => {
+      const { data, error } = await supabase
+        .from("site_page_content")
+        .select("content")
+        .eq("page_key", "conselho")
+        .maybeSingle();
+      if (error) throw error;
+      const normalized = normalizeConselhoContent(data?.content);
+      setConselhoForm(normalized);
+      return normalized;
+    },
+  });
+
+  const isLoading = loadingHome || loadingSocial || loadingTransparencia || loadingConselho;
 
   const sortedTimeline = useMemo(
     () =>
@@ -149,24 +194,39 @@ const AdminPagesContent = () => {
         content: transparenciaForm,
         updated_at: new Date().toISOString(),
       };
+      const conselhoPayload = {
+        page_key: "conselho",
+        content: {
+          ...conselhoForm,
+          fiscal: conselhoForm.fiscal.map((s) => s.trim()).filter(Boolean),
+          diretores: conselhoForm.diretores
+            .map((d) => ({ cargo: d.cargo.trim(), nome: d.nome.trim() }))
+            .filter((d) => d.cargo && d.nome),
+        },
+        updated_at: new Date().toISOString(),
+      };
 
-      const [homeResult, socialResult, transparenciaResult] = await Promise.all([
+      const [homeResult, socialResult, transparenciaResult, conselhoResult] = await Promise.all([
         supabase.from("site_page_content").upsert(homePayload, { onConflict: "page_key" }),
         supabase.from("site_page_content").upsert(socialPayload, { onConflict: "page_key" }),
         supabase.from("site_page_content").upsert(transparenciaPayload, { onConflict: "page_key" }),
+        supabase.from("site_page_content").upsert(conselhoPayload, { onConflict: "page_key" }),
       ]);
       if (homeResult.error) throw homeResult.error;
       if (socialResult.error) throw socialResult.error;
       if (transparenciaResult.error) throw transparenciaResult.error;
+      if (conselhoResult.error) throw conselhoResult.error;
     },
     onSuccess: () => {
       toast({ title: "✅ Conteúdos de páginas atualizados!" });
       queryClient.invalidateQueries({ queryKey: ["admin-page-content", "home"] });
       queryClient.invalidateQueries({ queryKey: ["admin-page-content", "social_links"] });
       queryClient.invalidateQueries({ queryKey: ["admin-page-content", "transparencia_page"] });
+      queryClient.invalidateQueries({ queryKey: ["admin-page-content", "conselho"] });
       queryClient.invalidateQueries({ queryKey: ["home-page-content"] });
       queryClient.invalidateQueries({ queryKey: ["social-links-content"] });
       queryClient.invalidateQueries({ queryKey: ["transparencia-page-content"] });
+      queryClient.invalidateQueries({ queryKey: ["conselho-content"] });
     },
     onError: (error: Error) => {
       toast({ title: "❌ Erro ao salvar", description: error.message, variant: "destructive" });
@@ -360,6 +420,151 @@ const AdminPagesContent = () => {
                   />
                 </div>
               ))}
+            </div>
+          </section>
+
+          <section className="bg-white border border-zinc-200 rounded-xl p-6 space-y-4">
+            <div>
+              <h3 className="font-semibold text-zinc-800" style={s}>Conselho</h3>
+              <p className="text-xs text-zinc-500 mt-1">
+                Edite os membros do conselho exibidos na página inicial.
+              </p>
+            </div>
+
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <div className="space-y-2">
+                <label className="text-sm text-zinc-600">Presidente</label>
+                <Input
+                  value={conselhoForm.presidente}
+                  onChange={(event) => setConselhoForm((current) => ({ ...current, presidente: event.target.value }))}
+                  placeholder="Nome do(a) presidente"
+                />
+              </div>
+              <div className="space-y-2">
+                <label className="text-sm text-zinc-600">Vice-Presidente</label>
+                <Input
+                  value={conselhoForm.vicePresidente}
+                  onChange={(event) => setConselhoForm((current) => ({ ...current, vicePresidente: event.target.value }))}
+                  placeholder="Nome do(a) vice-presidente"
+                />
+              </div>
+            </div>
+
+            <div className="space-y-3">
+              <div className="flex items-center justify-between gap-3">
+                <label className="text-sm text-zinc-600 font-medium">Conselho Fiscal</label>
+                <Button
+                  variant="outline"
+                  size="sm"
+                  className="!text-xs"
+                  onClick={() =>
+                    setConselhoForm((current) => ({ ...current, fiscal: [...current.fiscal, ""] }))
+                  }
+                >
+                  <Plus className="h-3 w-3 mr-1" /> Adicionar membro
+                </Button>
+              </div>
+              <div className="space-y-2">
+                {conselhoForm.fiscal.map((nome, i) => (
+                  <div key={i} className="flex items-center gap-2">
+                    <Input
+                      value={nome}
+                      onChange={(event) =>
+                        setConselhoForm((current) => {
+                          const next = [...current.fiscal];
+                          next[i] = event.target.value;
+                          return { ...current, fiscal: next };
+                        })
+                      }
+                      placeholder="Nome do(a) conselheiro(a)"
+                    />
+                    <Button
+                      variant="ghost"
+                      size="icon"
+                      className="text-zinc-400 hover:text-red-600 shrink-0"
+                      onClick={() =>
+                        setConselhoForm((current) => ({
+                          ...current,
+                          fiscal: current.fiscal.filter((_, idx) => idx !== i),
+                        }))
+                      }
+                    >
+                      <Trash2 className="h-4 w-4" />
+                    </Button>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            <div className="space-y-2">
+              <label className="text-sm text-zinc-600">Mandato</label>
+              <Input
+                value={conselhoForm.mandato}
+                onChange={(event) => setConselhoForm((current) => ({ ...current, mandato: event.target.value }))}
+                placeholder="Ex: 09/03/2026 a 08/03/2029"
+              />
+            </div>
+
+            <div className="space-y-3">
+              <div className="flex items-center justify-between gap-3">
+                <label className="text-sm text-zinc-600 font-medium">Diretoria</label>
+                <Button
+                  variant="outline"
+                  size="sm"
+                  className="!text-xs"
+                  onClick={() =>
+                    setConselhoForm((current) => ({
+                      ...current,
+                      diretores: [...current.diretores, { cargo: "", nome: "" }],
+                    }))
+                  }
+                >
+                  <Plus className="h-3 w-3 mr-1" /> Adicionar diretor(a)
+                </Button>
+              </div>
+              <div className="space-y-3">
+                {conselhoForm.diretores.map((diretor, i) => (
+                  <div key={i} className="border border-zinc-200 rounded-lg p-3 space-y-2">
+                    <div className="flex items-center gap-2">
+                      <Input
+                        value={diretor.cargo}
+                        onChange={(event) =>
+                          setConselhoForm((current) => {
+                            const next = [...current.diretores];
+                            next[i] = { ...next[i], cargo: event.target.value };
+                            return { ...current, diretores: next };
+                          })
+                        }
+                        placeholder="Cargo (ex: Diretora Técnica)"
+                      />
+                      <Button
+                        variant="ghost"
+                        size="icon"
+                        className="text-zinc-400 hover:text-red-600 shrink-0"
+                        onClick={() =>
+                          setConselhoForm((current) => ({
+                            ...current,
+                            diretores: current.diretores.filter((_, idx) => idx !== i),
+                          }))
+                        }
+                      >
+                        <Trash2 className="h-4 w-4" />
+                      </Button>
+                    </div>
+                    <Input
+                      value={diretor.nome}
+                      onChange={(event) =>
+                        setConselhoForm((current) => {
+                          const next = [...current.diretores];
+                          next[i] = { ...next[i], nome: event.target.value };
+                          return { ...current, diretores: next };
+                        })
+                      }
+                      placeholder="Nome completo"
+                    />
+                  </div>
+                ))}
+              </div>
             </div>
           </section>
 

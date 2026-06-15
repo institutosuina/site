@@ -1,5 +1,6 @@
 import { useParams, Link, Navigate } from "react-router-dom";
-import { ArrowLeft } from "lucide-react";
+import { ArrowLeft, X, ChevronLeft, ChevronRight } from "lucide-react";
+import { useEffect, useState } from "react";
 import Layout from "@/components/Layout";
 import { WORK_AREAS_DATA } from "@/data/nossoTrabalho";
 import { useQuery } from "@tanstack/react-query";
@@ -30,6 +31,8 @@ const areaMeta = {
 
 const NossoTrabalhoDetail = () => {
   const { slug } = useParams<{ slug: string }>();
+  const [lightbox, setLightbox] = useState<{ images: string[]; index: number; title: string } | null>(null);
+
   const { data: dynamicContent } = useQuery({
     queryKey: ["work-projects-content"],
     queryFn: async () => {
@@ -43,6 +46,21 @@ const NossoTrabalhoDetail = () => {
     },
   });
 
+  useEffect(() => {
+    if (!lightbox) return;
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === "Escape") setLightbox(null);
+      if (e.key === "ArrowLeft") setLightbox((prev) => prev ? { ...prev, index: (prev.index - 1 + prev.images.length) % prev.images.length } : prev);
+      if (e.key === "ArrowRight") setLightbox((prev) => prev ? { ...prev, index: (prev.index + 1) % prev.images.length } : prev);
+    };
+    window.addEventListener("keydown", onKey);
+    document.body.style.overflow = "hidden";
+    return () => {
+      window.removeEventListener("keydown", onKey);
+      document.body.style.overflow = "";
+    };
+  }, [lightbox]);
+
   if (!slug || !(slug in WORK_AREAS_DATA)) {
     return <Navigate to="/nosso-trabalho" replace />;
   }
@@ -50,6 +68,13 @@ const NossoTrabalhoDetail = () => {
   const areaId = slug as keyof typeof WORK_AREAS_DATA;
   const projects = (dynamicContent?.[areaId] && Array.isArray(dynamicContent[areaId]) ? dynamicContent[areaId] : WORK_AREAS_DATA[areaId]);
   const meta = areaMeta[areaId];
+
+  const openLightbox = (images: string[], index: number, title: string) => {
+    setLightbox({ images, index, title });
+  };
+  const closeLightbox = () => setLightbox(null);
+  const goPrev = () => setLightbox((prev) => prev ? { ...prev, index: (prev.index - 1 + prev.images.length) % prev.images.length } : prev);
+  const goNext = () => setLightbox((prev) => prev ? { ...prev, index: (prev.index + 1) % prev.images.length } : prev);
 
   return (
     <Layout>
@@ -90,52 +115,123 @@ const NossoTrabalhoDetail = () => {
 
       {/* Projects List */}
       <section className="py-16 bg-background">
-        <div className="container mx-auto max-w-4xl px-4 space-y-12">
-          {projects.map((project, idx) => (
-            <div 
-              key={idx} 
-              className="group flex flex-col md:flex-row gap-8 items-start bg-card p-6 md:p-8 rounded-3xl border border-border shadow-sm hover:shadow-xl transition-all duration-300"
-            >
-              {project.images && project.images.length > 0 && project.images[0] !== "" && (
-                <div className={`w-full md:w-2/5 flex-shrink-0 grid gap-4 ${project.images.length > 1 ? 'grid-cols-2' : 'grid-cols-1'}`}>
-                  {project.images.map((imgUrl, imgIdx) => (
-                    imgUrl ? (
-                      <div key={imgIdx} className={`aspect-video md:aspect-[4/3] overflow-hidden rounded-2xl relative bg-muted ${project.images.length === 3 && imgIdx === 2 ? 'col-span-2' : ''}`}>
-                        <img 
-                          src={imgUrl} 
-                          alt={`${project.title} - Imagem ${imgIdx + 1}`}
-                          className="absolute inset-0 w-full h-full object-cover blur-xl opacity-40 group-hover:scale-110 transition-transform duration-700" 
-                        />
-                        <img 
-                          src={imgUrl} 
-                          alt={`${project.title} - Imagem ${imgIdx + 1}`}
-                          className="relative z-10 w-full h-full object-contain p-2 drop-shadow-md group-hover:scale-105 transition-transform duration-500 cursor-pointer hover:object-cover"
-                        />
-                      </div>
-                    ) : null
-                  ))}
+        <div className="container mx-auto max-w-5xl px-4 space-y-12">
+          {projects.map((project, idx) => {
+            const validImages = (project.images || []).filter((u) => typeof u === "string" && u.trim() !== "");
+            const hasImages = validImages.length > 0;
+            const multiImages = validImages.length > 1;
+            return (
+              <div
+                key={idx}
+                className="bg-card p-6 md:p-8 rounded-3xl border border-border shadow-sm hover:shadow-xl transition-all duration-300 space-y-6"
+              >
+                <div className="space-y-4">
+                  <h3 className="font-display text-2xl md:text-3xl font-bold text-primary leading-tight">
+                    {project.title}
+                  </h3>
+                  {project.text && project.text !== "Projeto em andamento." ? (
+                    <div className="font-body text-muted-foreground leading-relaxed whitespace-pre-line text-lg">
+                      {project.text.split('**').map((part, i) => (
+                        i % 2 === 1 ? <strong key={i} className="text-foreground">{part}</strong> : part
+                      ))}
+                    </div>
+                  ) : (
+                    <p className="font-body text-muted-foreground/60 italic">
+                      Projeto em andamento ou mais informações em breve.
+                    </p>
+                  )}
                 </div>
-              )}
-              <div className="flex-1 space-y-4">
-                <h3 className="font-display text-2xl md:text-3xl font-bold text-primary leading-tight">
-                  {project.title}
-                </h3>
-                {project.text && project.text !== "Projeto em andamento." ? (
-                  <div className="font-body text-muted-foreground leading-relaxed whitespace-pre-line text-lg">
-                    {project.text.split('**').map((part, i) => (
-                      i % 2 === 1 ? <strong key={i} className="text-foreground">{part}</strong> : part
+
+                {hasImages && (
+                  <div
+                    className={
+                      multiImages
+                        ? "grid gap-4 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3"
+                        : "grid gap-4 grid-cols-1"
+                    }
+                  >
+                    {validImages.map((imgUrl, imgIdx) => (
+                      <button
+                        key={imgIdx}
+                        type="button"
+                        onClick={() => openLightbox(validImages, imgIdx, project.title)}
+                        className={
+                          (multiImages ? "aspect-[4/3]" : "aspect-video md:aspect-[16/9] max-h-[60vh]") +
+                          " group relative overflow-hidden rounded-2xl bg-muted cursor-zoom-in"
+                        }
+                        aria-label={`Ampliar ${project.title} — imagem ${imgIdx + 1}`}
+                      >
+                        <img
+                          src={imgUrl}
+                          alt=""
+                          aria-hidden="true"
+                          className="absolute inset-0 w-full h-full object-cover blur-xl opacity-40"
+                        />
+                        <img
+                          src={imgUrl}
+                          alt={`${project.title} - Imagem ${imgIdx + 1}`}
+                          className="relative z-10 w-full h-full object-cover drop-shadow-md group-hover:scale-[1.03] transition-transform duration-500"
+                        />
+                      </button>
                     ))}
                   </div>
-                ) : (
-                  <p className="font-body text-muted-foreground/60 italic">
-                    Projeto em andamento ou mais informações em breve.
-                  </p>
                 )}
               </div>
-            </div>
-          ))}
+            );
+          })}
         </div>
       </section>
+
+      {/* Lightbox */}
+      {lightbox && (
+        <div
+          className="fixed inset-0 z-[100] bg-black/90 flex items-center justify-center p-4 md:p-8"
+          onClick={closeLightbox}
+        >
+          <button
+            type="button"
+            onClick={(e) => { e.stopPropagation(); closeLightbox(); }}
+            className="absolute top-4 right-4 md:top-6 md:right-6 w-11 h-11 rounded-full bg-white/10 hover:bg-white/20 text-white flex items-center justify-center transition-colors"
+            aria-label="Fechar"
+          >
+            <X className="w-6 h-6" />
+          </button>
+
+          {lightbox.images.length > 1 && (
+            <>
+              <button
+                type="button"
+                onClick={(e) => { e.stopPropagation(); goPrev(); }}
+                className="absolute left-3 md:left-6 top-1/2 -translate-y-1/2 w-11 h-11 md:w-12 md:h-12 rounded-full bg-white/10 hover:bg-white/20 text-white flex items-center justify-center transition-colors"
+                aria-label="Imagem anterior"
+              >
+                <ChevronLeft className="w-6 h-6" />
+              </button>
+              <button
+                type="button"
+                onClick={(e) => { e.stopPropagation(); goNext(); }}
+                className="absolute right-3 md:right-6 top-1/2 -translate-y-1/2 w-11 h-11 md:w-12 md:h-12 rounded-full bg-white/10 hover:bg-white/20 text-white flex items-center justify-center transition-colors"
+                aria-label="Próxima imagem"
+              >
+                <ChevronRight className="w-6 h-6" />
+              </button>
+            </>
+          )}
+
+          <img
+            src={lightbox.images[lightbox.index]}
+            alt={`${lightbox.title} - Imagem ${lightbox.index + 1}`}
+            onClick={(e) => e.stopPropagation()}
+            className="max-w-full max-h-full object-contain select-none"
+          />
+
+          {lightbox.images.length > 1 && (
+            <div className="absolute bottom-4 left-1/2 -translate-x-1/2 px-3 py-1 rounded-full bg-white/10 text-white text-sm font-body">
+              {lightbox.index + 1} / {lightbox.images.length}
+            </div>
+          )}
+        </div>
+      )}
     </Layout>
   );
 };

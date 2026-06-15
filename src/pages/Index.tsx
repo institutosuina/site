@@ -31,6 +31,7 @@ import { useQuery } from "@tanstack/react-query";
 import { supabase } from "@/integrations/supabase/client";
 import { useLocation } from "react-router-dom";
 import { defaultHomePageContent, type HomePageContent } from "@/data/pageContentDefaults";
+import { defaultConselhoContent, type ConselhoContent } from "@/data/conselhoDefaults";
 
 
 const teamMembers = [
@@ -43,14 +44,34 @@ const teamMembers = [
   { name: "Tatiane", role: "ANALISTA SOCIOAMBIENTAL PLENO", image: photoTatiane },
 ];
 
-const conselho = [
-  { role: "PRESIDENTE", name: "Maria José de Brito Zákia" },
-  { role: "VICE-PRESIDENTE", name: "Maria Santini de Castro Morini" },
-  { role: "CONSELHO FISCAL", name: "Lucila Manzatti" },
-  { role: "CONSELHO FISCAL", name: "Paulo Valadares Soares" },
-];
-
 // Static partners removed. Now fetching from Supabase.
+
+const parseConselhoContent = (raw: unknown): ConselhoContent => {
+  if (!raw || typeof raw !== "object") return defaultConselhoContent;
+  const source = raw as Partial<ConselhoContent>;
+  const fiscal = Array.isArray(source.fiscal)
+    ? source.fiscal.filter((item): item is string => typeof item === "string" && item.trim().length > 0)
+    : [];
+  const diretores = Array.isArray(source.diretores)
+    ? source.diretores
+        .filter(
+          (item): item is { cargo: string; nome: string } =>
+            !!item &&
+            typeof item === "object" &&
+            typeof (item as any).cargo === "string" &&
+            typeof (item as any).nome === "string",
+        )
+        .map((item) => ({ cargo: item.cargo.trim(), nome: item.nome.trim() }))
+    : [];
+
+  return {
+    presidente: typeof source.presidente === "string" && source.presidente.trim() ? source.presidente : defaultConselhoContent.presidente,
+    vicePresidente: typeof source.vicePresidente === "string" && source.vicePresidente.trim() ? source.vicePresidente : defaultConselhoContent.vicePresidente,
+    fiscal: fiscal.length ? fiscal : defaultConselhoContent.fiscal,
+    mandato: typeof source.mandato === "string" && source.mandato.trim() ? source.mandato : defaultConselhoContent.mandato,
+    diretores: diretores.length ? diretores : defaultConselhoContent.diretores,
+  };
+};
 
 const parseHomeContent = (raw: unknown): HomePageContent => {
   if (!raw || typeof raw !== "object") return defaultHomePageContent;
@@ -119,7 +140,21 @@ const Index = () => {
     },
   });
 
+  const { data: conselhoContent } = useQuery({
+    queryKey: ["conselho-content"],
+    queryFn: async () => {
+      const { data, error } = await supabase
+        .from("site_page_content")
+        .select("content")
+        .eq("page_key", "conselho")
+        .maybeSingle();
+      if (error) throw error;
+      return parseConselhoContent(data?.content);
+    },
+  });
+
   const content = homePageContent || defaultHomePageContent;
+  const conselho = conselhoContent || defaultConselhoContent;
   const modalContent = {
     Mission: content.mission,
     Vision: content.vision,
@@ -131,7 +166,10 @@ const Index = () => {
       const firstItem = scrollRef.current.querySelector('.timeline-item');
       if (firstItem) {
         const itemWidth = firstItem.clientWidth;
-        const amount = itemWidth * 2;
+        const containerWidth = scrollRef.current.clientWidth;
+        const itemsVisible = Math.max(1, Math.round(containerWidth / itemWidth));
+        const step = Math.max(1, itemsVisible - 1);
+        const amount = itemWidth * step;
         scrollRef.current.scrollBy({ left: direction === "left" ? -amount : amount, behavior: "smooth" });
       } else {
         const amount = 300;
@@ -380,39 +418,37 @@ const Index = () => {
             {/* Presidente */}
             <div>
               <p className="caption-text text-card/70 mb-1 uppercase tracking-widest text-sm">Presidente</p>
-              <p className="font-display text-xl md:text-3xl font-bold text-card">Paulo Valladares Soares</p>
+              <p className="font-display text-xl md:text-3xl font-bold text-card">{conselho.presidente}</p>
             </div>
 
             {/* Vice-Presidente */}
             <div>
               <p className="caption-text text-card/70 mb-1 uppercase tracking-widest text-sm">Vice-Presidente</p>
-              <p className="font-display text-xl md:text-3xl font-bold text-card">Maria Santini de Castro Morini</p>
+              <p className="font-display text-xl md:text-3xl font-bold text-card">{conselho.vicePresidente}</p>
             </div>
 
             {/* Conselho Fiscal (Agrupado) */}
             <div>
               <p className="caption-text text-card/70 mb-2 uppercase tracking-widest text-sm">Conselho Fiscal</p>
               <div className="space-y-3">
-                <p className="font-display text-xl md:text-3xl font-bold text-card">Lucila Manzatti</p>
-                <p className="font-display text-xl md:text-3xl font-bold text-card">Fausto Rodrigues Alves de Camargo</p>
+                {conselho.fiscal.map((nome, i) => (
+                  <p key={i} className="font-display text-xl md:text-3xl font-bold text-card">{nome}</p>
+                ))}
               </div>
             </div>
           </div>
 
           <p className="caption-text text-card/60 mt-16 border-t border-card/20 pt-8 inline-block text-xs tracking-widest uppercase">
-            MANDATO: 09/03/2026 a 08/03/2029
+            MANDATO: {conselho.mandato}
           </p>
 
           <div className="space-y-10 mt-16">
-            <div>
-              <p className="caption-text text-card/70 mb-1 uppercase tracking-widest text-sm">Diretora Técnica</p>
-              <p className="font-display text-xl md:text-3xl font-bold text-card">Maria de Fátima de Oliveira</p>
-            </div>
-
-            <div>
-              <p className="caption-text text-card/70 mb-1 uppercase tracking-widest text-sm">Diretora Institucional</p>
-              <p className="font-display text-xl md:text-3xl font-bold text-card">Fernanda de Moraes Alvarenga Scalambrino</p>
-            </div>
+            {conselho.diretores.map((diretor, i) => (
+              <div key={i}>
+                <p className="caption-text text-card/70 mb-1 uppercase tracking-widest text-sm">{diretor.cargo}</p>
+                <p className="font-display text-xl md:text-3xl font-bold text-card">{diretor.nome}</p>
+              </div>
+            ))}
           </div>
         </div>
       </section>
