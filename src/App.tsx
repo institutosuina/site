@@ -31,6 +31,7 @@ const AdminContent = lazy(() => import("./pages/admin/AdminContent"));
 const AdminContentEdit = lazy(() => import("./pages/admin/AdminContentEdit"));
 const AdminTransparency = lazy(() => import("./pages/admin/AdminTransparency"));
 const AdminNewsletter = lazy(() => import("./pages/admin/AdminNewsletter"));
+const AdminContatos = lazy(() => import("./pages/admin/AdminContatos"));
 const AdminEmailMarketing = lazy(() => import("./pages/admin/AdminEmailMarketing"));
 const AdminInformativos = lazy(() => import("./pages/admin/AdminInformativos"));
 const AdminPartners = lazy(() => import("./pages/admin/AdminPartners"));
@@ -104,6 +105,7 @@ const App = () => (
               <Route path="/admin/content/:type/new" element={<AdminPage><AdminContentEdit /></AdminPage>} />
               <Route path="/admin/transparency" element={<AdminPage><AdminTransparency /></AdminPage>} />
               <Route path="/admin/newsletter" element={<AdminPage><AdminNewsletter /></AdminPage>} />
+              <Route path="/admin/contatos" element={<AdminPage><AdminContatos /></AdminPage>} />
               <Route path="/admin/email-marketing" element={<AdminPage><AdminEmailMarketing /></AdminPage>} />
               <Route path="/admin/informativos" element={<AdminPage><AdminInformativos /></AdminPage>} />
               <Route path="/admin/partners" element={<AdminPage><AdminPartners /></AdminPage>} />
