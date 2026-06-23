@@ -1,14 +1,14 @@
 import { useEffect } from 'react'
 import { useEditor, EditorContent } from '@tiptap/react'
 import StarterKit from '@tiptap/starter-kit'
-import Image from '@tiptap/extension-image'
 import Link from '@tiptap/extension-link'
 import Underline from '@tiptap/extension-underline'
-import { 
-  Bold, Italic, Underline as UnderlineIcon, 
-  List, ListOrdered, Heading2, Heading3, 
-  Link as LinkIcon, Image as ImageIcon, 
-  Undo, Redo, Type,
+import ResizableImage from './ResizableImageExtension'
+import {
+  Bold, Italic, Underline as UnderlineIcon,
+  List, ListOrdered, Heading2, Heading3,
+  Link as LinkIcon, Image as ImageIcon,
+  Undo, Redo, Type, FileText,
   AlignLeft, AlignCenter, AlignRight, AlignJustify
 } from 'lucide-react'
 import { Button } from '@/components/ui/button'
@@ -40,6 +40,29 @@ const MenuBar = ({ editor, storageBucket = 'covers' }: { editor: any, storageBuc
           editor.chain().focus().setImage({ src: data.publicUrl }).run()
         } catch (err: any) {
           toast({ title: 'Erro ao subir imagem', description: err.message, variant: 'destructive' })
+        }
+      }
+    }
+    input.click()
+  }
+
+  const addDocument = async () => {
+    const input = document.createElement('input')
+    input.type = 'file'
+    input.accept = '.pdf,.doc,.docx,.xls,.xlsx,.zip'
+    input.onchange = async () => {
+      const file = input.files?.[0]
+      if (file) {
+        try {
+          const path = `editor/${Date.now()}-${file.name}`
+          const { error } = await supabase.storage.from(storageBucket).upload(path, file)
+          if (error) throw error
+          const { data } = supabase.storage.from(storageBucket).getPublicUrl(path)
+          editor.chain().focus().insertContent(
+            `<a href="${data.publicUrl}" target="_blank" rel="noopener noreferrer" class="suina-doc-link">📄 ${file.name}</a> `
+          ).run()
+        } catch (err: any) {
+          toast({ title: 'Erro ao subir documento', description: err.message, variant: 'destructive' })
         }
       }
     }
@@ -166,6 +189,9 @@ const MenuBar = ({ editor, storageBucket = 'covers' }: { editor: any, storageBuc
       <Button variant="ghost" size="sm" onClick={addImage} title="Inserir Imagem">
         <ImageIcon className="h-4 w-4" />
       </Button>
+      <Button variant="ghost" size="sm" onClick={addDocument} title="Inserir Documento (PDF, Word, etc.)">
+        <FileText className="h-4 w-4" />
+      </Button>
 
       <div className="w-px h-6 bg-zinc-300 mx-1 self-center" />
 
@@ -198,7 +224,7 @@ const TiptapEditor = ({ content, onChange, storageBucket }: TiptapEditorProps) =
       TextAlign.configure({
         types: ['heading', 'paragraph'],
       }),
-      Image.configure({
+      ResizableImage.configure({
         HTMLAttributes: {
           class: 'rounded-2xl max-w-full h-auto mx-auto my-8 border border-zinc-100 shadow-sm',
         },
@@ -249,6 +275,23 @@ const TiptapEditor = ({ content, onChange, storageBucket }: TiptapEditorProps) =
         .suina-button-link:hover {
           opacity: 0.9 !important;
           transform: translateY(-1px) !important;
+        }
+        .prose .suina-doc-link,
+        .suina-doc-link {
+          display: inline-flex !important;
+          align-items: center !important;
+          gap: 6px !important;
+          background-color: #f4f4f5 !important;
+          color: #18181b !important;
+          padding: 8px 16px !important;
+          border-radius: 9999px !important;
+          text-decoration: none !important;
+          font-weight: 600 !important;
+          border: 1px solid #e4e4e7 !important;
+        }
+        .prose .suina-doc-link:hover,
+        .suina-doc-link:hover {
+          background-color: #e4e4e7 !important;
         }
         .prose ul, .prose ol {
           padding-left: 1.5rem !important;

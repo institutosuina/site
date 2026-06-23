@@ -70,6 +70,33 @@ export type Database = {
           },
         ]
       }
+      contatos: {
+        Row: {
+          created_at: string
+          email: string
+          id: string
+          lido: boolean
+          mensagem: string
+          nome: string
+        }
+        Insert: {
+          created_at?: string
+          email: string
+          id?: string
+          lido?: boolean
+          mensagem: string
+          nome: string
+        }
+        Update: {
+          created_at?: string
+          email?: string
+          id?: string
+          lido?: boolean
+          mensagem?: string
+          nome?: string
+        }
+        Relationships: []
+      }
       editais: {
         Row: {
           content: string | null
