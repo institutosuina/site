@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import { supabase } from "@/integrations/supabase/client";
-import { Search, Mail, Trash2, MailOpen } from "lucide-react";
+import { Search, Mail, Trash2, MailOpen, Reply } from "lucide-react";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Skeleton } from "@/components/ui/skeleton";
@@ -10,7 +10,7 @@ import {
   Table, TableBody, TableCell, TableHead, TableHeader, TableRow,
 } from "@/components/ui/table";
 import {
-  Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription,
+  Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription, DialogFooter,
 } from "@/components/ui/dialog";
 import type { Tables } from "@/integrations/supabase/types";
 
@@ -53,6 +53,13 @@ const AdminContatos = () => {
   const openMessage = (contato: Contato) => {
     setSelected(contato);
     if (!contato.lido) markReadMutation.mutate({ id: contato.id, lido: true });
+  };
+
+  const replyMailto = (contato: Contato) => {
+    const subject = `Re: Sua mensagem para o Instituto Suinã`;
+    const quoted = contato.mensagem.split("\n").map((l) => `> ${l}`).join("\n");
+    const body = `Olá, ${contato.nome}!\n\n\n\n---\nEm ${new Date(contato.created_at).toLocaleString("pt-BR")}, você escreveu:\n${quoted}`;
+    window.location.href = `mailto:${contato.email}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
   };
 
   const filtered = contatos?.filter((c) =>
@@ -109,6 +116,10 @@ const AdminContatos = () => {
                     {new Date(c.created_at).toLocaleDateString("pt-BR")}
                   </TableCell>
                   <TableCell className="text-right" onClick={(e) => e.stopPropagation()}>
+                    <Button variant="ghost" size="icon" className="h-8 w-8 text-zinc-400 hover:text-blue-600"
+                      onClick={() => replyMailto(c)} title="Responder por e-mail">
+                      <Reply className="h-4 w-4" />
+                    </Button>
                     <Button variant="ghost" size="icon" className="h-8 w-8 text-zinc-400 hover:text-emerald-600"
                       onClick={() => markReadMutation.mutate({ id: c.id, lido: !c.lido })} title={c.lido ? "Marcar como não lida" : "Marcar como lida"}>
                       <MailOpen className="h-4 w-4" />
@@ -133,6 +144,11 @@ const AdminContatos = () => {
             </DialogDescription>
           </DialogHeader>
           <p style={{ ...s, fontSize: "0.875rem" }} className="text-zinc-700 whitespace-pre-wrap">{selected?.mensagem}</p>
+          <DialogFooter>
+            <Button onClick={() => selected && replyMailto(selected)} className="bg-blue-600 hover:bg-blue-700 text-white !text-sm">
+              <Reply className="h-4 w-4 mr-2" /> Responder por e-mail
+            </Button>
+          </DialogFooter>
         </DialogContent>
       </Dialog>
     </div>
