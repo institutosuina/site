@@ -80,15 +80,17 @@ const QR_CODE_NAMES = [
   "sangra-d'água",
 ];
 
-/** Set of valid QR code slugs for fast lookup */
-const validSlugs = new Set(QR_CODE_NAMES);
+/** Maps lowercased name -> canonical name, so links are case-insensitive */
+const slugsByLowerCase = new Map(
+  QR_CODE_NAMES.map((name) => [name.toLowerCase(), name])
+);
 
 const QrCodePage = () => {
   const { slug } = useParams<{ slug: string }>();
   // React Router automatically decodes URL parameters
   const decodedSlug = slug || "";
 
-  const imageName = validSlugs.has(decodedSlug) ? decodedSlug : null;
+  const imageName = slugsByLowerCase.get(decodedSlug.toLowerCase()) ?? null;
 
   if (!imageName) {
     return <NotFound />;
