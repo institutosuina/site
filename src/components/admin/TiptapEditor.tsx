@@ -46,27 +46,38 @@ const MenuBar = ({ editor, storageBucket = 'covers' }: { editor: any, storageBuc
     input.click()
   }
 
-  const addDocument = async () => {
-    const input = document.createElement('input')
-    input.type = 'file'
-    input.accept = '.pdf,.doc,.docx,.xls,.xlsx,.zip'
-    input.onchange = async () => {
-      const file = input.files?.[0]
-      if (file) {
+  const pickAndUploadFile = (accept: string): Promise<{ file: File; url: string } | null> => {
+    return new Promise((resolve) => {
+      const input = document.createElement('input')
+      input.type = 'file'
+      input.accept = accept
+      input.onchange = async () => {
+        const file = input.files?.[0]
+        if (!file) {
+          resolve(null)
+          return
+        }
         try {
           const path = `editor/${Date.now()}-${file.name}`
           const { error } = await supabase.storage.from(storageBucket).upload(path, file)
           if (error) throw error
           const { data } = supabase.storage.from(storageBucket).getPublicUrl(path)
-          editor.chain().focus().insertContent(
-            `<a href="${data.publicUrl}" target="_blank" rel="noopener noreferrer" class="suina-doc-link">📄 ${file.name}</a> `
-          ).run()
+          resolve({ file, url: data.publicUrl })
         } catch (err: any) {
-          toast({ title: 'Erro ao subir documento', description: err.message, variant: 'destructive' })
+          toast({ title: 'Erro ao subir arquivo', description: err.message, variant: 'destructive' })
+          resolve(null)
         }
       }
-    }
-    input.click()
+      input.click()
+    })
+  }
+
+  const addDocument = async () => {
+    const uploaded = await pickAndUploadFile('.pdf,.doc,.docx,.xls,.xlsx,.zip')
+    if (!uploaded) return
+    editor.chain().focus().insertContent(
+      `<a href="${uploaded.url}" target="_blank" rel="noopener noreferrer" class="suina-doc-link">📄 ${uploaded.file.name}</a> `
+    ).run()
   }
 
   const setLink = () => {
@@ -80,7 +91,7 @@ const MenuBar = ({ editor, storageBucket = 'covers' }: { editor: any, storageBuc
     editor.chain().focus().extendMarkRange('link').setLink({ href: url }).run()
   }
 
-  const setButton = () => {
+  const setButton = async () => {
     const { from, to } = editor.state.selection;
     const isNoSelection = from === to;
 
@@ -90,13 +101,24 @@ const MenuBar = ({ editor, storageBucket = 'covers' }: { editor: any, storageBuc
       if (!buttonText) return;
     }
 
-    const url = window.prompt('Para qual site/página o botão deve levar?', '');
-    if (!url) return;
+    const wantsUpload = window.confirm(
+      'O botão deve abrir um arquivo (PDF, Word, etc.)?\n\nOK = enviar um arquivo do computador\nCancelar = colar o link de um site/página'
+    );
+
+    let url: string | null;
+    if (wantsUpload) {
+      const uploaded = await pickAndUploadFile('.pdf,.doc,.docx,.xls,.xlsx,.zip')
+      if (!uploaded) return;
+      url = uploaded.url;
+    } else {
+      url = window.prompt('Para qual site/página o botão deve levar?', '');
+      if (!url) return;
+    }
 
     if (isNoSelection) {
-      editor.chain().focus().insertContent(`<a href="${url}" class="suina-button-link">${buttonText}</a> `).run();
+      editor.chain().focus().insertContent(`<a href="${url}" target="_blank" rel="noopener noreferrer" class="suina-button-link">${buttonText}</a> `).run();
     } else {
-      editor.chain().focus().extendMarkRange('link').setLink({ href: url, class: 'suina-button-link' }).run();
+      editor.chain().focus().extendMarkRange('link').setLink({ href: url, target: '_blank', class: 'suina-button-link' }).run();
     }
   }
 

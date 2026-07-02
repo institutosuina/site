@@ -41,30 +41,57 @@ serve(async (req) => {
       throw new Error("Adicione ao menos um destinatário");
     }
 
-    const resendRes = await fetch("https://api.resend.com/emails", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${RESEND_API_KEY}`,
-      },
-      body: JSON.stringify({
-        from: FROM_ADDRESS,
-        to: [ARCHIVE_TO],
-        bcc: emails,
-        subject: subject.trim(),
-        html: body,
-      }),
-    });
-
-    const resendData = await resendRes.json().catch(() => ({}));
-
-    if (!resendRes.ok) {
-      const msg =
-        resendData?.message ||
-        resendData?.error ||
-        `Resend retornou status ${resendRes.status}`;
-      throw new Error(msg);
+    // Resend aceita no máximo 50 destinatários (to+cc+bcc) por chamada,
+    // então listas maiores precisam ser divididas em lotes.
+    const BATCH_SIZE = 45;
+    const batches: string[][] = [];
+    for (let i = 0; i < emails.length; i += BATCH_SIZE) {
+      batches.push(emails.slice(i, i + BATCH_SIZE));
     }
+
+    let sentCount = 0;
+    let lastResendId: string | undefined;
+
+    for (let i = 0; i < batches.length; i++) {
+      const batch = batches[i];
+
+      const resendRes = await fetch("https://api.resend.com/emails", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${RESEND_API_KEY}`,
+        },
+        body: JSON.stringify({
+          from: FROM_ADDRESS,
+          to: [ARCHIVE_TO],
+          bcc: batch,
+          subject: subject.trim(),
+          html: body,
+        }),
+      });
+
+      const resendData = await resendRes.json().catch(() => ({}));
+
+      if (!resendRes.ok) {
+        const msg =
+          resendData?.message ||
+          resendData?.error ||
+          `Resend retornou status ${resendRes.status}`;
+        throw new Error(
+          `Falha no lote ${i + 1}/${batches.length}: ${msg}. ${sentCount} destinatário(s) já receberam com sucesso antes da falha.`,
+        );
+      }
+
+      sentCount += batch.length;
+      lastResendId = resendData?.id;
+
+      // Respeita o rate limit do Resend (2 req/s) entre lotes.
+      if (i < batches.length - 1) {
+        await new Promise((resolve) => setTimeout(resolve, 550));
+      }
+    }
+
+    const resendData = { id: lastResendId };
 
     // Grava histórico (não bloqueia o sucesso do envio se falhar)
     if (SUPABASE_URL && SUPABASE_SERVICE_ROLE_KEY) {
