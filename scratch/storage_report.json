@@ -1,0 +1,3518 @@
+{
+  "covers": {
+    "count": 234,
+    "totalMB": "442.55",
+    "files": [
+      {
+        "path": "047b93a0-290c-48c9-890d-2c3e93a979e3/1781887761866-santa_branca.pdf",
+        "size": 13470835,
+        "mimetype": "application/pdf",
+        "eTag": "\"7da0b08edb4539b61976af3325b9557f\"",
+        "created_at": "2026-06-19T16:49:27.761Z"
+      },
+      {
+        "path": "047b93a0-290c-48c9-890d-2c3e93a979e3/1781887791827-jacarei.pdf",
+        "size": 16187985,
+        "mimetype": "application/pdf",
+        "eTag": "\"22b1535b912c6d6c2816337bd3008d3c\"",
+        "created_at": "2026-06-19T16:49:58.593Z"
+      },
+      {
+        "path": "047b93a0-290c-48c9-890d-2c3e93a979e3/1781887812262-jacarei.pdf",
+        "size": 16187985,
+        "mimetype": "application/pdf",
+        "eTag": "\"22b1535b912c6d6c2816337bd3008d3c\"",
+        "created_at": "2026-06-19T16:50:19.088Z"
+      },
+      {
+        "path": "047b93a0-290c-48c9-890d-2c3e93a979e3/1781887841599-guararema.pdf",
+        "size": 13794096,
+        "mimetype": "application/pdf",
+        "eTag": "\"3683f9585c2e654be38cee94c17d31dc\"",
+        "created_at": "2026-06-19T16:50:47.195Z"
+      },
+      {
+        "path": "047b93a0-290c-48c9-890d-2c3e93a979e3/1781887875623-salesopolis.pdf",
+        "size": 12764010,
+        "mimetype": "application/pdf",
+        "eTag": "\"d6a8bc73883d12b4e6c222849a59d7cf\"",
+        "created_at": "2026-06-19T16:51:20.988Z"
+      },
+      {
+        "path": "5a8b2bc5-3e47-4dbd-96fe-0672ebd47465/1781889238573-PLANO_DE_MANEJO_FINAL.pdf",
+        "size": 24932137,
+        "mimetype": "application/pdf",
+        "eTag": "\"92b277ea8e3e065436a365af9f87de64-2\"",
+        "created_at": "2026-06-19T17:14:09.472Z"
+      },
+      {
+        "path": "6af44982-99a9-459c-a0d9-3da4cf38169b/1781888945490-Cartilha_2_compressed.pdf",
+        "size": 9114953,
+        "mimetype": "application/pdf",
+        "eTag": "\"24839cec08d9636db282929d8c619f64\"",
+        "created_at": "2026-06-19T17:09:10.845Z"
+      },
+      {
+        "path": "6af44982-99a9-459c-a0d9-3da4cf38169b/1781888997177-folder-arvores-raras-na-paisagem.pdf",
+        "size": 6252462,
+        "mimetype": "application/pdf",
+        "eTag": "\"0ce9942ca1a1a07f924da0f7b00b3df2\"",
+        "created_at": "2026-06-19T17:10:00.146Z"
+      },
+      {
+        "path": "a32c4e07-de5c-4dad-8284-cc9680e9c4cb/1781889396494-Guia_Viver_o_Viveiro_-_V4.pdf",
+        "size": 23511785,
+        "mimetype": "application/pdf",
+        "eTag": "\"fb34b1cd3d6ccae2d40b5e3ec0c31cef-2\"",
+        "created_at": "2026-06-19T17:16:46.548Z"
+      },
+      {
+        "path": "blog/e2b488_18e3245941ad43cb81e0356737d1810a.jpg",
+        "size": 2127832,
+        "mimetype": "image/jpeg",
+        "eTag": "\"baa3c5da97e84fb2f9ba65e7a97ee673\"",
+        "created_at": "2026-05-04T01:45:08.936Z"
+      },
+      {
+        "path": "blog/e2b488_4b648b736c664d9ab8e89983d5ae535f.jpeg",
+        "size": 275378,
+        "mimetype": "image/jpeg",
+        "eTag": "\"f3f99161511ae54c249506c45caa7d24\"",
+        "created_at": "2026-05-04T01:45:06.285Z"
+      },
+      {
+        "path": "blog/e2b488_4cdcadad3035439db8ea3d5121341360.jpeg",
+        "size": 215271,
+        "mimetype": "image/jpeg",
+        "eTag": "\"02fae1d67556f16bfa38ec1210208ca4\"",
+        "created_at": "2026-05-04T01:45:07.337Z"
+      },
+      {
+        "path": "blog/e2b488_5c593bb0311745b0b51ed53af7bcf356.jpeg",
+        "size": 193373,
+        "mimetype": "image/jpeg",
+        "eTag": "\"0d8a3c1472d02e8969959f949a183c7a\"",
+        "created_at": "2026-05-04T01:44:52.799Z"
+      },
+      {
+        "path": "blog/e2b488_6d730560319a4de288dd4ff0ac686019.jpg",
+        "size": 2738332,
+        "mimetype": "image/jpeg",
+        "eTag": "\"d9296d9eebe6d5e53e6531b60f88c049\"",
+        "created_at": "2026-05-04T01:45:00.147Z"
+      },
+      {
+        "path": "blog/e2b488_85ba4c46346347c1afd4276bd8b9ff5f.jpg",
+        "size": 5945481,
+        "mimetype": "image/jpeg",
+        "eTag": "\"1a38bb4bf409f86812068fde1cb4d8e3-2\"",
+        "created_at": "2026-05-04T01:44:57.042Z"
+      },
+      {
+        "path": "blog/e2b488_8e3cfbf6405f43bf96e6705ca842dea8.jpg",
+        "size": 3714205,
+        "mimetype": "image/jpeg",
+        "eTag": "\"d3992e5fa410b026e431239ecf346a5e\"",
+        "created_at": "2026-05-04T01:45:03.226Z"
+      },
+      {
+        "path": "blog/e2b488_9a908e85e3d147109b07b47c4beac1b0.jpg",
+        "size": 1849161,
+        "mimetype": "image/jpeg",
+        "eTag": "\"5b85f8fd93fca38a2d5a709e2d6d6c05\"",
+        "created_at": "2026-05-04T01:44:51.646Z"
+      },
+      {
+        "path": "blog/e2b488_a6ab836960bc45ac990e16c526ab94ac.jpg",
+        "size": 7616280,
+        "mimetype": "image/jpeg",
+        "eTag": "\"13244bf1764e315f19df8cc1c7901ec2-2\"",
+        "created_at": "2026-05-04T01:45:13.963Z"
+      },
+      {
+        "path": "blog/e2b488_ef42cf4ac7304a80919d75ed14753f89.jpg",
+        "size": 281619,
+        "mimetype": "image/jpeg",
+        "eTag": "\"86db8abc0141b07143a563bb4e4cd7d9\"",
+        "created_at": "2026-05-04T01:45:04.437Z"
+      },
+      {
+        "path": "editais/1779286516709-Editais - Capa.png",
+        "size": 96085,
+        "mimetype": "image/png",
+        "eTag": "\"8f6d004189c50ba290798f55808e1893\"",
+        "created_at": "2026-05-20T14:15:17.112Z"
+      },
+      {
+        "path": "editais/1779286555753-Editais - Capa.png",
+        "size": 96085,
+        "mimetype": "image/png",
+        "eTag": "\"8f6d004189c50ba290798f55808e1893\"",
+        "created_at": "2026-05-20T14:15:56.194Z"
+      },
+      {
+        "path": "editais/1779286563104-Editais - Capa.png",
+        "size": 96085,
+        "mimetype": "image/png",
+        "eTag": "\"8f6d004189c50ba290798f55808e1893\"",
+        "created_at": "2026-05-20T14:16:03.121Z"
+      },
+      {
+        "path": "editais/1779286573582-Editais - Capa.png",
+        "size": 96085,
+        "mimetype": "image/png",
+        "eTag": "\"8f6d004189c50ba290798f55808e1893\"",
+        "created_at": "2026-05-20T14:16:14.537Z"
+      },
+      {
+        "path": "editais/1779286585385-Editais - Capa.png",
+        "size": 96085,
+        "mimetype": "image/png",
+        "eTag": "\"8f6d004189c50ba290798f55808e1893\"",
+        "created_at": "2026-05-20T14:16:26.982Z"
+      },
+      {
+        "path": "editais/1779286598351-Editais - Capa.png",
+        "size": 96085,
+        "mimetype": "image/png",
+        "eTag": "\"8f6d004189c50ba290798f55808e1893\"",
+        "created_at": "2026-05-20T14:16:38.428Z"
+      },
+      {
+        "path": "editais/1779286608956-Editais - Capa.png",
+        "size": 96085,
+        "mimetype": "image/png",
+        "eTag": "\"8f6d004189c50ba290798f55808e1893\"",
+        "created_at": "2026-05-20T14:16:49.009Z"
+      },
+      {
+        "path": "editais/1779286620930-Editais - Capa.png",
+        "size": 96085,
+        "mimetype": "image/png",
+        "eTag": "\"8f6d004189c50ba290798f55808e1893\"",
+        "created_at": "2026-05-20T14:17:00.970Z"
+      },
+      {
+        "path": "editais/1779286634752-Editais - Capa.png",
+        "size": 96085,
+        "mimetype": "image/png",
+        "eTag": "\"8f6d004189c50ba290798f55808e1893\"",
+        "created_at": "2026-05-20T14:17:14.754Z"
+      },
+      {
+        "path": "editais/1779286660960-Editais - Capa.png",
+        "size": 96085,
+        "mimetype": "image/png",
+        "eTag": "\"8f6d004189c50ba290798f55808e1893\"",
+        "created_at": "2026-05-20T14:17:40.980Z"
+      },
+      {
+        "path": "editais/1779287344398-Editais - Capa.png",
+        "size": 96085,
+        "mimetype": "image/png",
+        "eTag": "\"8f6d004189c50ba290798f55808e1893\"",
+        "created_at": "2026-05-20T14:29:04.469Z"
+      },
+      {
+        "path": "editais/1779288192411-Editais - Capa (1).png",
+        "size": 117838,
+        "mimetype": "image/png",
+        "eTag": "\"c1b731d170f779831aed10405a51b88b\"",
+        "created_at": "2026-05-20T14:43:12.812Z"
+      },
+      {
+        "path": "editais/1779288377805-Editais - Capa (1).png",
+        "size": 117838,
+        "mimetype": "image/png",
+        "eTag": "\"c1b731d170f779831aed10405a51b88b\"",
+        "created_at": "2026-05-20T14:46:18.101Z"
+      },
+      {
+        "path": "editais/1779288516294-Editais - Capa (1).png",
+        "size": 117838,
+        "mimetype": "image/png",
+        "eTag": "\"c1b731d170f779831aed10405a51b88b\"",
+        "created_at": "2026-05-20T14:48:36.415Z"
+      },
+      {
+        "path": "editais/1779288669990-Editais - Capa (1).png",
+        "size": 117838,
+        "mimetype": "image/png",
+        "eTag": "\"c1b731d170f779831aed10405a51b88b\"",
+        "created_at": "2026-05-20T14:51:10.206Z"
+      },
+      {
+        "path": "editais/1779288781440-Editais - Capa.png",
+        "size": 96085,
+        "mimetype": "image/png",
+        "eTag": "\"8f6d004189c50ba290798f55808e1893\"",
+        "created_at": "2026-05-20T14:53:01.790Z"
+      },
+      {
+        "path": "editais/1779298380545-Editais - Capa.png",
+        "size": 96085,
+        "mimetype": "image/png",
+        "eTag": "\"8f6d004189c50ba290798f55808e1893\"",
+        "created_at": "2026-05-20T17:33:00.260Z"
+      },
+      {
+        "path": "editais/1779298811190-Editais - Capa.png",
+        "size": 96085,
+        "mimetype": "image/png",
+        "eTag": "\"8f6d004189c50ba290798f55808e1893\"",
+        "created_at": "2026-05-20T17:40:10.959Z"
+      },
+      {
+        "path": "editais/1779298824081-Editais - Capa (1).png",
+        "size": 117838,
+        "mimetype": "image/png",
+        "eTag": "\"c1b731d170f779831aed10405a51b88b\"",
+        "created_at": "2026-05-20T17:40:23.769Z"
+      },
+      {
+        "path": "editais/1779298990559-Editais - Capa.png",
+        "size": 96085,
+        "mimetype": "image/png",
+        "eTag": "\"8f6d004189c50ba290798f55808e1893\"",
+        "created_at": "2026-05-20T17:43:10.220Z"
+      },
+      {
+        "path": "editais/1779299139195-Editais - Capa.png",
+        "size": 96085,
+        "mimetype": "image/png",
+        "eTag": "\"8f6d004189c50ba290798f55808e1893\"",
+        "created_at": "2026-05-20T17:45:38.880Z"
+      },
+      {
+        "path": "editor/1776190766911-equipe.png",
+        "size": 10327191,
+        "mimetype": "image/png",
+        "eTag": "\"6f1cfe2a130e959816ce092c411b9cf5-2\"",
+        "created_at": "2026-04-14T18:19:32.876Z"
+      },
+      {
+        "path": "editor/1776190773788-equipe.png",
+        "size": 10327191,
+        "mimetype": "image/png",
+        "eTag": "\"6f1cfe2a130e959816ce092c411b9cf5-2\"",
+        "created_at": "2026-04-14T18:19:39.311Z"
+      },
+      {
+        "path": "editor/1776191039645-equipe.png",
+        "size": 10327191,
+        "mimetype": "image/png",
+        "eTag": "\"6f1cfe2a130e959816ce092c411b9cf5-2\"",
+        "created_at": "2026-04-14T18:24:07.447Z"
+      },
+      {
+        "path": "editor/1776196863132-Gemini_Generated_Image_vyskyhvyskyhvysk.png",
+        "size": 6791367,
+        "mimetype": "image/png",
+        "eTag": "\"0e7aa153e78b6fea1d0bcbb1ff8956cc-2\"",
+        "created_at": "2026-04-14T20:01:09.913Z"
+      },
+      {
+        "path": "editor/1776196871041-icone.ico",
+        "size": 5596,
+        "mimetype": "image/x-icon",
+        "eTag": "\"807d729776abf6aa2506749fe2715050\"",
+        "created_at": "2026-04-14T20:01:11.846Z"
+      },
+      {
+        "path": "editor/1779820544576-IMG_9365.jpg",
+        "size": 1701449,
+        "mimetype": "image/jpeg",
+        "eTag": "\"1244e853c65824ddbb51bfdba8c32601\"",
+        "created_at": "2026-05-26T18:35:45.890Z"
+      },
+      {
+        "path": "editor/1779899782353-e2b488_4b648b736c664d9ab8e89983d5ae535f_mv2.png",
+        "size": 510372,
+        "mimetype": "image/png",
+        "eTag": "\"4483a7607c449764c4e7007d83752803\"",
+        "created_at": "2026-05-27T16:36:23.146Z"
+      },
+      {
+        "path": "editor/1781282158830-Paulo 2709.png",
+        "size": 3777478,
+        "mimetype": "image/png",
+        "eTag": "\"97321a2728e35d2c448ea4eb964d7300\"",
+        "created_at": "2026-06-12T16:35:59.021Z"
+      },
+      {
+        "path": "editor/1781282180757-Oficina 14_06 (2).png",
+        "size": 997509,
+        "mimetype": "image/png",
+        "eTag": "\"c98331dc2590225f07f56ec926e3431f\"",
+        "created_at": "2026-06-12T16:36:20.468Z"
+      },
+      {
+        "path": "editor/1781282205663-Paulo 2709.png",
+        "size": 3777478,
+        "mimetype": "image/png",
+        "eTag": "\"97321a2728e35d2c448ea4eb964d7300\"",
+        "created_at": "2026-06-12T16:36:46.096Z"
+      },
+      {
+        "path": "editor/1782236003427-Maio 2026.png",
+        "size": 630122,
+        "mimetype": "image/png",
+        "eTag": "\"18e650e7e057e8f0ef5c8695ce83685a\"",
+        "created_at": "2026-06-23T17:33:23.503Z"
+      },
+      {
+        "path": "editor/1782236609223-WhatsApp Image 2026-06-23 at 14.43.17.jpeg",
+        "size": 87683,
+        "mimetype": "image/jpeg",
+        "eTag": "\"bd37a6160c4647567fa6b8ec8d7397c0\"",
+        "created_at": "2026-06-23T17:43:28.986Z"
+      },
+      {
+        "path": "editor/1782244214550-Perfectly_centered_Facebook_banner_for_202606221044.jpeg",
+        "size": 694818,
+        "mimetype": "image/jpeg",
+        "eTag": "\"d27557dbf3b43e9a5531514856ab7cdf\"",
+        "created_at": "2026-06-23T19:49:57.243Z"
+      },
+      {
+        "path": "editor/1782313968933-Placas tecnologias sociais (55x70cm) V2.pdf",
+        "size": 14696810,
+        "mimetype": "application/pdf",
+        "eTag": "\"c566251a7b45d897b1ae5cc393922676\"",
+        "created_at": "2026-06-24T15:12:52.255Z"
+      },
+      {
+        "path": "editor/1782313983991-story.png",
+        "size": 1191230,
+        "mimetype": "image/png",
+        "eTag": "\"ed7d82f30f286926182c8bdf963b6759\"",
+        "created_at": "2026-06-24T15:13:04.792Z"
+      },
+      {
+        "path": "editor/1782479227136-Maio (1).png",
+        "size": 447527,
+        "mimetype": "image/png",
+        "eTag": "\"da7bc712204fa92b57d0ee7d4097b36f\"",
+        "created_at": "2026-06-26T13:07:07.148Z"
+      },
+      {
+        "path": "editor/1782826475927-Lima Clicks Fotografia.JPG",
+        "size": 3224765,
+        "mimetype": "image/jpeg",
+        "eTag": "\"59213b3e61bdc58fc96b6651e16d2fea\"",
+        "created_at": "2026-06-30T13:34:37.015Z"
+      },
+      {
+        "path": "editor/1782826491400-Lima Clicks Fotografia (1).JPG",
+        "size": 4842383,
+        "mimetype": "image/jpeg",
+        "eTag": "\"0ae9b6ce0e4ac1bc0651fa6a77fad509\"",
+        "created_at": "2026-06-30T13:34:53.013Z"
+      },
+      {
+        "path": "editor/1782826509809-Lima Clicks Fotografia.JPG",
+        "size": 3224765,
+        "mimetype": "image/jpeg",
+        "eTag": "\"59213b3e61bdc58fc96b6651e16d2fea\"",
+        "created_at": "2026-06-30T13:35:11.341Z"
+      },
+      {
+        "path": "editor/1782830322187-Informativo Mensal - Site.pdf",
+        "size": 4067018,
+        "mimetype": "application/pdf",
+        "eTag": "\"f5931fb7e93a268ec1f1ec3a0e7f7d0d\"",
+        "created_at": "2026-06-30T14:38:43.762Z"
+      },
+      {
+        "path": "editor/1782830365628-WhatsApp Image 2026-06-30 at 10.32.59.jpeg",
+        "size": 87683,
+        "mimetype": "image/jpeg",
+        "eTag": "\"bd37a6160c4647567fa6b8ec8d7397c0\"",
+        "created_at": "2026-06-30T14:39:25.811Z"
+      },
+      {
+        "path": "editor/1782830437504-Informativo Mensal - Junho 2026.pdf",
+        "size": 4067018,
+        "mimetype": "application/pdf",
+        "eTag": "\"f5931fb7e93a268ec1f1ec3a0e7f7d0d\"",
+        "created_at": "2026-06-30T14:40:39.085Z"
+      },
+      {
+        "path": "editor/1782838756096-WhatsApp Image 2026-06-30 at 10.32.59 (1).jpeg",
+        "size": 87683,
+        "mimetype": "image/jpeg",
+        "eTag": "\"bd37a6160c4647567fa6b8ec8d7397c0\"",
+        "created_at": "2026-06-30T16:59:16.082Z"
+      },
+      {
+        "path": "editor/1782838851598-Informativo Mensal - Junho 2026.pdf",
+        "size": 4067018,
+        "mimetype": "application/pdf",
+        "eTag": "\"f5931fb7e93a268ec1f1ec3a0e7f7d0d\"",
+        "created_at": "2026-06-30T17:00:52.697Z"
+      },
+      {
+        "path": "editor/1782839060205-junho 2026.png",
+        "size": 916271,
+        "mimetype": "image/png",
+        "eTag": "\"d9f085301ec5f0f2587535ab5fea01cf\"",
+        "created_at": "2026-06-30T17:04:20.881Z"
+      },
+      {
+        "path": "editor/1782839069327-junho 2026 (2).png",
+        "size": 2547173,
+        "mimetype": "image/png",
+        "eTag": "\"4464717c28012dfe7b383dd436ce3600\"",
+        "created_at": "2026-06-30T17:04:30.151Z"
+      },
+      {
+        "path": "editor/1782839083000-junho 2026.png",
+        "size": 916271,
+        "mimetype": "image/png",
+        "eTag": "\"d9f085301ec5f0f2587535ab5fea01cf\"",
+        "created_at": "2026-06-30T17:04:43.079Z"
+      },
+      {
+        "path": "editor/1782839097614-junho 2026 (3).png",
+        "size": 1731818,
+        "mimetype": "image/png",
+        "eTag": "\"227677931f4422a76c5c219e15b2b819\"",
+        "created_at": "2026-06-30T17:04:57.871Z"
+      },
+      {
+        "path": "editor/1782839239234-junho 2026.png",
+        "size": 916271,
+        "mimetype": "image/png",
+        "eTag": "\"d9f085301ec5f0f2587535ab5fea01cf\"",
+        "created_at": "2026-06-30T17:07:19.652Z"
+      },
+      {
+        "path": "editor/1782839255296-junho 2026 (2).png",
+        "size": 2547173,
+        "mimetype": "image/png",
+        "eTag": "\"4464717c28012dfe7b383dd436ce3600\"",
+        "created_at": "2026-06-30T17:07:36.076Z"
+      },
+      {
+        "path": "editor/1782839267005-junho 2026 (3).png",
+        "size": 1731818,
+        "mimetype": "image/png",
+        "eTag": "\"227677931f4422a76c5c219e15b2b819\"",
+        "created_at": "2026-06-30T17:07:47.258Z"
+      },
+      {
+        "path": "editor/1782839435699-WhatsApp Image 2026-06-30 at 10.32.59.jpeg",
+        "size": 87683,
+        "mimetype": "image/jpeg",
+        "eTag": "\"bd37a6160c4647567fa6b8ec8d7397c0\"",
+        "created_at": "2026-06-30T17:10:35.683Z"
+      },
+      {
+        "path": "editor/1782839479800-WhatsApp Image 2026-06-30 at 10.32.59.jpeg",
+        "size": 87683,
+        "mimetype": "image/jpeg",
+        "eTag": "\"bd37a6160c4647567fa6b8ec8d7397c0\"",
+        "created_at": "2026-06-30T17:11:20.372Z"
+      },
+      {
+        "path": "editor/1782839563345-WhatsApp Image 2026-06-30 at 14.12.11.jpeg",
+        "size": 186797,
+        "mimetype": "image/jpeg",
+        "eTag": "\"acf4af041f3325fe91f7f2d3b2eef6c9\"",
+        "created_at": "2026-06-30T17:12:43.438Z"
+      },
+      {
+        "path": "editor/1782839582647-WhatsApp Image 2026-06-30 at 14.12.11 (1).jpeg",
+        "size": 124169,
+        "mimetype": "image/jpeg",
+        "eTag": "\"cef311fd9b3562557c84e5b605c57eed\"",
+        "created_at": "2026-06-30T17:13:02.612Z"
+      },
+      {
+        "path": "editor/1782839677193-WhatsApp Image 2026-06-30 at 10.32.59 (1).jpeg",
+        "size": 87683,
+        "mimetype": "image/jpeg",
+        "eTag": "\"bd37a6160c4647567fa6b8ec8d7397c0\"",
+        "created_at": "2026-06-30T17:14:37.150Z"
+      },
+      {
+        "path": "editor/1782839692805-WhatsApp Image 2026-06-30 at 14.14.13 (1).jpeg",
+        "size": 156552,
+        "mimetype": "image/jpeg",
+        "eTag": "\"4b512b52673814260404f331ced78a0d\"",
+        "created_at": "2026-06-30T17:14:53.010Z"
+      },
+      {
+        "path": "editor/1782839701794-WhatsApp Image 2026-06-30 at 14.14.13.jpeg",
+        "size": 116038,
+        "mimetype": "image/jpeg",
+        "eTag": "\"859251f6d017f85cf43a533046faf43f\"",
+        "created_at": "2026-06-30T17:15:01.723Z"
+      },
+      {
+        "path": "editor/1782841708429-WhatsApp Image 2026-06-30 at 10.32.59 (1).jpeg",
+        "size": 87683,
+        "mimetype": "image/jpeg",
+        "eTag": "\"bd37a6160c4647567fa6b8ec8d7397c0\"",
+        "created_at": "2026-06-30T17:48:28.462Z"
+      },
+      {
+        "path": "editor/1782845472640-WhatsApp Image 2026-06-30 at 14.14.13 (1).jpeg",
+        "size": 156552,
+        "mimetype": "image/jpeg",
+        "eTag": "\"4b512b52673814260404f331ced78a0d\"",
+        "created_at": "2026-06-30T18:51:12.681Z"
+      },
+      {
+        "path": "editor/1782845506993-WhatsApp Image 2026-06-30 at 14.14.13.jpeg",
+        "size": 116038,
+        "mimetype": "image/jpeg",
+        "eTag": "\"859251f6d017f85cf43a533046faf43f\"",
+        "created_at": "2026-06-30T18:51:47.072Z"
+      },
+      {
+        "path": "editor/1782848208869-WhatsApp Image 2026-06-30 at 10.32.59.jpeg",
+        "size": 87683,
+        "mimetype": "image/jpeg",
+        "eTag": "\"bd37a6160c4647567fa6b8ec8d7397c0\"",
+        "created_at": "2026-06-30T19:36:49.189Z"
+      },
+      {
+        "path": "editor/1782848253411-Informativo Mensal - Junho 2026.pdf",
+        "size": 4067018,
+        "mimetype": "application/pdf",
+        "eTag": "\"f5931fb7e93a268ec1f1ec3a0e7f7d0d\"",
+        "created_at": "2026-06-30T19:37:34.508Z"
+      },
+      {
+        "path": "editor/1782848443295-WhatsApp Image 2026-06-30 at 10.32.59.jpeg",
+        "size": 87683,
+        "mimetype": "image/jpeg",
+        "eTag": "\"bd37a6160c4647567fa6b8ec8d7397c0\"",
+        "created_at": "2026-06-30T19:40:43.327Z"
+      },
+      {
+        "path": "editor/1782848469818-Informativo Mensal - Junho 2026.pdf",
+        "size": 4067018,
+        "mimetype": "application/pdf",
+        "eTag": "\"f5931fb7e93a268ec1f1ec3a0e7f7d0d\"",
+        "created_at": "2026-06-30T19:41:10.789Z"
+      },
+      {
+        "path": "f3c1dd05-0b7e-4465-a290-267b8d4681b0/1776191580767-5530740239.pdf",
+        "size": 63713,
+        "mimetype": "application/pdf",
+        "eTag": "\"ca240f508ac14f460fb2989ccd5de64a\"",
+        "created_at": "2026-04-14T18:33:01.901Z"
+      },
+      {
+        "path": "informativos/1776174863625-5530740239.pdf",
+        "size": 63713,
+        "mimetype": "application/pdf",
+        "eTag": "\"ca240f508ac14f460fb2989ccd5de64a\"",
+        "created_at": "2026-04-14T13:54:23.967Z"
+      },
+      {
+        "path": "informativos/1776175414625-5530740239.pdf",
+        "size": 63713,
+        "mimetype": "application/pdf",
+        "eTag": "\"ca240f508ac14f460fb2989ccd5de64a\"",
+        "created_at": "2026-04-14T14:03:35.044Z"
+      },
+      {
+        "path": "informativos/1776175431474-5530740239.pdf",
+        "size": 63713,
+        "mimetype": "application/pdf",
+        "eTag": "\"ca240f508ac14f460fb2989ccd5de64a\"",
+        "created_at": "2026-04-14T14:03:51.977Z"
+      },
+      {
+        "path": "informativos/1780420209946-Informativo_Mensal_-_Site.pdf",
+        "size": 12726480,
+        "mimetype": "application/pdf",
+        "eTag": "\"1f32baafcf5259c5e33924a57f694d7c\"",
+        "created_at": "2026-06-02T17:10:13.503Z"
+      },
+      {
+        "path": "informativos/1780420265214-Informativo_Mensal_-_Site.pdf",
+        "size": 12726480,
+        "mimetype": "application/pdf",
+        "eTag": "\"1f32baafcf5259c5e33924a57f694d7c\"",
+        "created_at": "2026-06-02T17:11:08.425Z"
+      },
+      {
+        "path": "material/material_arvores-raras-na-paisagem.jpg",
+        "size": 4099566,
+        "mimetype": "image/jpeg",
+        "eTag": "\"8b73c80b1f4fd802af5e0e8d8a35d2a0\"",
+        "created_at": "2026-05-04T01:53:00.433Z"
+      },
+      {
+        "path": "material/material_guia-das-trilhas-interpretativas---viveiro-municipal.jpg",
+        "size": 1158362,
+        "mimetype": "image/jpeg",
+        "eTag": "\"93ebe0fd65bd005a96c06f7832450c0a\"",
+        "created_at": "2026-05-04T01:53:35.283Z"
+      },
+      {
+        "path": "material/material_plano-de-manejo---refugio-de-vida-silvestre-do-bicudinho.jpg",
+        "size": 874782,
+        "mimetype": "image/jpeg",
+        "eTag": "\"f5c7a6c03d938562d2dc3a285bcece96\"",
+        "created_at": "2026-05-04T01:53:31.579Z"
+      },
+      {
+        "path": "material/material_planos-municipais-da-mata-atlantica-pmma.jpg",
+        "size": 600507,
+        "mimetype": "image/jpeg",
+        "eTag": "\"303a8636d1c0b94126f568bd7aa97172\"",
+        "created_at": "2026-05-04T01:53:02.477Z"
+      },
+      {
+        "path": "material/material_relatorio-de-fauna-silvestre---rvs-do-bicudinho.jpg",
+        "size": 776851,
+        "mimetype": "image/jpeg",
+        "eTag": "\"81d57f79a093085f4af65ae1ebb1aa2c\"",
+        "created_at": "2026-05-04T01:53:36.927Z"
+      },
+      {
+        "path": "material_tecnico/1779305322437-image (13).png",
+        "size": 164879,
+        "mimetype": "image/png",
+        "eTag": "\"793e9acda8115832c8e85bd4fd915093\"",
+        "created_at": "2026-05-20T19:28:42.204Z"
+      },
+      {
+        "path": "noticias/1777999930289-grupo.jpg",
+        "size": 531954,
+        "mimetype": "image/jpeg",
+        "eTag": "\"8784e7fcac0104859551efb816b4aeb2\"",
+        "created_at": "2026-05-05T16:52:13.936Z"
+      },
+      {
+        "path": "noticias/1779301095201-Criancas_3-550x393.jpg",
+        "size": 66720,
+        "mimetype": "image/jpeg",
+        "eTag": "\"6e1b5472edd198b4856d856eef94917f\"",
+        "created_at": "2026-05-20T18:18:14.890Z"
+      },
+      {
+        "path": "noticias/1779301408361-image2-14.jpeg",
+        "size": 37063,
+        "mimetype": "image/jpeg",
+        "eTag": "\"7db6087c22d202349d420189de0a8401\"",
+        "created_at": "2026-05-20T18:23:28.027Z"
+      },
+      {
+        "path": "noticias/1779301592841-WhatsApp Image 2026-05-20 at 15.26.22.jpeg",
+        "size": 81420,
+        "mimetype": "image/jpeg",
+        "eTag": "\"fed4fe6183438ee3e9d8890887a6bf0f\"",
+        "created_at": "2026-05-20T18:26:32.887Z"
+      },
+      {
+        "path": "noticias/1779301751998-2021062812121860d9e6d27967c.jpg",
+        "size": 526939,
+        "mimetype": "image/jpeg",
+        "eTag": "\"f68dd2989c59091450c781e811a418ef\"",
+        "created_at": "2026-05-20T18:29:12.447Z"
+      },
+      {
+        "path": "noticias/1779301847722-apl-do-mel-10.jpeg",
+        "size": 74975,
+        "mimetype": "image/jpeg",
+        "eTag": "\"f7303f63140feb7e727469c40239fb73\"",
+        "created_at": "2026-05-20T18:30:47.388Z"
+      },
+      {
+        "path": "noticias/1779301944325-WhatsApp Image 2026-05-20 at 15.31.54.jpeg",
+        "size": 52321,
+        "mimetype": "image/jpeg",
+        "eTag": "\"cbb687fbb72f1656286592e9730ad7ee\"",
+        "created_at": "2026-05-20T18:32:23.917Z"
+      },
+      {
+        "path": "noticias/1779302056905-20220531_62961e952653b.png",
+        "size": 1636271,
+        "mimetype": "image/png",
+        "eTag": "\"d62757300b1fcb2784a9878db26a5c58\"",
+        "created_at": "2026-05-20T18:34:17.000Z"
+      },
+      {
+        "path": "noticias/1779302180308-WhatsApp Image 2026-05-20 at 15.36.12.jpeg",
+        "size": 68864,
+        "mimetype": "image/jpeg",
+        "eTag": "\"ccdf203c9cce8359ae69e3268479799c\"",
+        "created_at": "2026-05-20T18:36:20.230Z"
+      },
+      {
+        "path": "noticias/1779302254107-Pinda-300x225.jpg",
+        "size": 18098,
+        "mimetype": "image/jpeg",
+        "eTag": "\"86dbd8962929c4b686d647224b2accb6\"",
+        "created_at": "2026-05-20T18:37:33.632Z"
+      },
+      {
+        "path": "noticias/1779302523589-WhatsApp Image 2026-05-20 at 15.39.22.jpeg",
+        "size": 140332,
+        "mimetype": "image/jpeg",
+        "eTag": "\"8cec5e3eeaf0483b9c0f6e378e189d2c\"",
+        "created_at": "2026-05-20T18:42:03.801Z"
+      },
+      {
+        "path": "noticias/1779303316125-WhatsApp Image 2026-05-20 at 15.55.07.jpeg",
+        "size": 52788,
+        "mimetype": "image/jpeg",
+        "eTag": "\"35a20747027ef6ae55e9cc3cf27faf81\"",
+        "created_at": "2026-05-20T18:55:15.765Z"
+      },
+      {
+        "path": "noticias/1779303409551-b2ap3_large_exposio-fotogrfica-suzano-site.jpg",
+        "size": 131852,
+        "mimetype": "image/jpeg",
+        "eTag": "\"d0d707469699b1438da322671177ef93\"",
+        "created_at": "2026-05-20T18:56:49.238Z"
+      },
+      {
+        "path": "noticias/1779303460589-B39DE079-F870-48F7-9029-04DB5037C742.jpeg",
+        "size": 179248,
+        "mimetype": "image/jpeg",
+        "eTag": "\"6c65c19da1efa622d5073de6764f5bba\"",
+        "created_at": "2026-05-20T18:57:40.454Z"
+      },
+      {
+        "path": "noticias/1779303501595-b2ap3_large_exposio-fotogrfica-suzano-site.jpg",
+        "size": 131852,
+        "mimetype": "image/jpeg",
+        "eTag": "\"d0d707469699b1438da322671177ef93\"",
+        "created_at": "2026-05-20T18:58:21.221Z"
+      },
+      {
+        "path": "noticias/1779303565509-335286856_742953720695539_500251898275723911_n.png",
+        "size": 1482669,
+        "mimetype": "image/png",
+        "eTag": "\"5d8c3edbd2da61ea9f4c8da1f502a518\"",
+        "created_at": "2026-05-20T18:59:26.083Z"
+      },
+      {
+        "path": "noticias/1779303669444-image.png",
+        "size": 83310,
+        "mimetype": "image/png",
+        "eTag": "\"d2fda71ea83f80cfeecede7380218d3f\"",
+        "created_at": "2026-05-20T19:01:09.720Z"
+      },
+      {
+        "path": "noticias/1779303681717-image.png",
+        "size": 83310,
+        "mimetype": "image/png",
+        "eTag": "\"d2fda71ea83f80cfeecede7380218d3f\"",
+        "created_at": "2026-05-20T19:01:21.383Z"
+      },
+      {
+        "path": "noticias/1779303755399-image (1).png",
+        "size": 63615,
+        "mimetype": "image/png",
+        "eTag": "\"b0890c7f86ea18e7e2d54895c6e0ba8d\"",
+        "created_at": "2026-05-20T19:02:35.083Z"
+      },
+      {
+        "path": "noticias/1779303835429-image (2).png",
+        "size": 77541,
+        "mimetype": "image/png",
+        "eTag": "\"d640dbb397ef4657b821937f34bb0bfe\"",
+        "created_at": "2026-05-20T19:03:55.135Z"
+      },
+      {
+        "path": "noticias/1779303882051-B39DE079-F870-48F7-9029-04DB5037C742.jpeg",
+        "size": 179248,
+        "mimetype": "image/jpeg",
+        "eTag": "\"6c65c19da1efa622d5073de6764f5bba\"",
+        "created_at": "2026-05-20T19:04:41.728Z"
+      },
+      {
+        "path": "noticias/1779303963799-image (3).png",
+        "size": 165697,
+        "mimetype": "image/png",
+        "eTag": "\"f825c106f828dd98bdfdb35058f6780b\"",
+        "created_at": "2026-05-20T19:06:04.152Z"
+      },
+      {
+        "path": "noticias/1779304031249-image (4).png",
+        "size": 69742,
+        "mimetype": "image/png",
+        "eTag": "\"fccdb242602cb2a8bd50e6e1b8e630d7\"",
+        "created_at": "2026-05-20T19:07:10.951Z"
+      },
+      {
+        "path": "noticias/1779304076041-Viver-o-Viveiro_01.jpg",
+        "size": 207255,
+        "mimetype": "image/jpeg",
+        "eTag": "\"24265832f0ac01ab483c1f0a2c61fa5a\"",
+        "created_at": "2026-05-20T19:07:56.203Z"
+      },
+      {
+        "path": "noticias/1779304134004-Viver-o-Viveiro_02.jpg",
+        "size": 198187,
+        "mimetype": "image/jpeg",
+        "eTag": "\"d2a7cd5feb60bff33297b7461911262d\"",
+        "created_at": "2026-05-20T19:08:53.747Z"
+      },
+      {
+        "path": "noticias/1779304180769-Viver-o-Viveiro_03.jpg",
+        "size": 228151,
+        "mimetype": "image/jpeg",
+        "eTag": "\"938f10892f2c9f2fa4e62b66bede52b9\"",
+        "created_at": "2026-05-20T19:09:40.787Z"
+      },
+      {
+        "path": "noticias/1779304223576-Viver-o-Viveiro_01.jpg",
+        "size": 207255,
+        "mimetype": "image/jpeg",
+        "eTag": "\"24265832f0ac01ab483c1f0a2c61fa5a\"",
+        "created_at": "2026-05-20T19:10:23.735Z"
+      },
+      {
+        "path": "noticias/1779304279542-20240425141727662a90278a66d.jpg",
+        "size": 326056,
+        "mimetype": "image/jpeg",
+        "eTag": "\"e146213ec1ad7647d212e23365e34b72\"",
+        "created_at": "2026-05-20T19:11:19.262Z"
+      },
+      {
+        "path": "noticias/1779304316814-grupo.jpg",
+        "size": 531954,
+        "mimetype": "image/jpeg",
+        "eTag": "\"8784e7fcac0104859551efb816b4aeb2\"",
+        "created_at": "2026-05-20T19:11:56.659Z"
+      },
+      {
+        "path": "noticias/1779304360342-guia_viveiro.jpg",
+        "size": 277259,
+        "mimetype": "image/jpeg",
+        "eTag": "\"ea458b335ce24f44fa7b931cdb9e1f10\"",
+        "created_at": "2026-05-20T19:12:40.078Z"
+      },
+      {
+        "path": "noticias/1779304400196-avistando.jpg",
+        "size": 46337,
+        "mimetype": "image/jpeg",
+        "eTag": "\"af29d61d67ddb4a34049bc6ac4470036\"",
+        "created_at": "2026-05-20T19:13:19.802Z"
+      },
+      {
+        "path": "noticias/1779304435420-b2ap3_large_Meio-Ambiente-site_7.jpg",
+        "size": 90019,
+        "mimetype": "image/jpeg",
+        "eTag": "\"c0723e88dfc70a5fd39efb27e9c139f8\"",
+        "created_at": "2026-05-20T19:13:55.085Z"
+      },
+      {
+        "path": "noticias/1779304484690-image (5).png",
+        "size": 67175,
+        "mimetype": "image/png",
+        "eTag": "\"8f1dd72a5fd2545a1e4a2f5bdd4c8367\"",
+        "created_at": "2026-05-20T19:14:44.450Z"
+      },
+      {
+        "path": "noticias/1779304541066-image (6).png",
+        "size": 67215,
+        "mimetype": "image/png",
+        "eTag": "\"28aebb34a3dbbb5cb4a3d6eb965bdb67\"",
+        "created_at": "2026-05-20T19:15:40.739Z"
+      },
+      {
+        "path": "noticias/1779304581453-image (7).png",
+        "size": 111672,
+        "mimetype": "image/png",
+        "eTag": "\"64039df7841b5193b587da142ed2e657\"",
+        "created_at": "2026-05-20T19:16:21.239Z"
+      },
+      {
+        "path": "noticias/1779304615390-20250625080640685bd84010a7f.jpg",
+        "size": 434953,
+        "mimetype": "image/jpeg",
+        "eTag": "\"c0beabf1705c28ae46b0eb1307452c10\"",
+        "created_at": "2026-05-20T19:17:02.260Z"
+      },
+      {
+        "path": "noticias/1779304777605-image (8).png",
+        "size": 85836,
+        "mimetype": "image/png",
+        "eTag": "\"1b7389b30689134d584cfeaefc9080cd\"",
+        "created_at": "2026-05-20T19:19:37.659Z"
+      },
+      {
+        "path": "noticias/1779304865630-image (9).png",
+        "size": 95902,
+        "mimetype": "image/png",
+        "eTag": "\"6d22f8abdb0827d5f46f94acb0c94e98\"",
+        "created_at": "2026-05-20T19:21:05.734Z"
+      },
+      {
+        "path": "noticias/1779304954166-image (11).png",
+        "size": 113753,
+        "mimetype": "image/png",
+        "eTag": "\"95bb8a332c963a40b1bd3db331a07071\"",
+        "created_at": "2026-05-20T19:22:33.926Z"
+      },
+      {
+        "path": "noticias/1779305021277-image (12).png",
+        "size": 98368,
+        "mimetype": "image/png",
+        "eTag": "\"0efb9159a9a864028345cab55bbab31e\"",
+        "created_at": "2026-05-20T19:23:41.062Z"
+      },
+      {
+        "path": "noticias/1779305063804-image (9).png",
+        "size": 95902,
+        "mimetype": "image/png",
+        "eTag": "\"6d22f8abdb0827d5f46f94acb0c94e98\"",
+        "created_at": "2026-05-20T19:24:23.535Z"
+      },
+      {
+        "path": "noticias/noticia_condemat-participa-de-apl-para-fortalecer-cadeia-produtiva-do-mel-na-regiao.jpeg",
+        "size": 327665,
+        "mimetype": "image/jpeg",
+        "eTag": "\"d0713134b88b471f027500a204cd3e0b\"",
+        "created_at": "2026-05-04T01:49:27.849Z"
+      },
+      {
+        "path": "noticias/noticia_conferencia-debate-transformacao-ecologica-e-elege-representante-para-etapa-esta.jpg",
+        "size": 90019,
+        "mimetype": "image/jpeg",
+        "eTag": "\"c0723e88dfc70a5fd39efb27e9c139f8\"",
+        "created_at": "2026-05-04T01:48:26.288Z"
+      },
+      {
+        "path": "noticias/noticia_conheca-as-organizacoes-dos-grupos-de-trabalho-do-planos-da-mata-atlantica.png",
+        "size": 230232,
+        "mimetype": "image/png",
+        "eTag": "\"741863e91c0e3fe39968853c11dbc636\"",
+        "created_at": "2026-05-04T01:49:25.139Z"
+      },
+      {
+        "path": "noticias/noticia_educacao-ambiental-em-pauta-nas-escolas-de-jacarei.jpg",
+        "size": 343697,
+        "mimetype": "image/jpeg",
+        "eTag": "\"d2063b4c44ae5b72e0a2b6868947de65\"",
+        "created_at": "2026-05-04T01:48:01.663Z"
+      },
+      {
+        "path": "noticias/noticia_encontro-no-parque-municipal-debate-acoes-conjuntas-para-unidades-de-conservacao.jpg",
+        "size": 180978,
+        "mimetype": "image/jpeg",
+        "eTag": "\"a0321b488f08c64bb798cba23826c1b2\"",
+        "created_at": "2026-05-04T01:48:34.873Z"
+      },
+      {
+        "path": "noticias/noticia_instituto-suina-participa-da-oficina-final-do-projeto-planos-da-mata.png",
+        "size": 1482669,
+        "mimetype": "image/png",
+        "eTag": "\"5d8c3edbd2da61ea9f4c8da1f502a518\"",
+        "created_at": "2026-05-04T01:49:02.413Z"
+      },
+      {
+        "path": "noticias/noticia_jacarei-aprova-plano-para-recuperar-mata-atlantica.jpg",
+        "size": 15162,
+        "mimetype": "image/jpeg",
+        "eTag": "\"4f45ee3b939bdef0b35b5b15302030e5\"",
+        "created_at": "2026-05-04T01:48:45.324Z"
+      },
+      {
+        "path": "noticias/noticia_jacarei-recebe-exposicao-que-retrata-trabalho-de-mulheres-na-pandemia.jpg",
+        "size": 131852,
+        "mimetype": "image/jpeg",
+        "eTag": "\"d0d707469699b1438da322671177ef93\"",
+        "created_at": "2026-05-04T01:49:17.898Z"
+      },
+      {
+        "path": "noticias/noticia_junho-ambiental-tem-balanco-positivo-com-parcerias-firmadas-e-boa-participacao-d.jpg",
+        "size": 257936,
+        "mimetype": "image/jpeg",
+        "eTag": "\"845c4103baaf3dac361e49e364c2297b\"",
+        "created_at": "2026-05-04T01:49:31.708Z"
+      },
+      {
+        "path": "noticias/noticia_junho-ecosustentavel-realiza-palestra-sobre-compostagem-domestica-no-viveiro-de-.jpg",
+        "size": 219594,
+        "mimetype": "image/jpeg",
+        "eTag": "\"c822b6f09d4cbb97bcb2647c0febba17\"",
+        "created_at": "2026-05-04T01:48:17.296Z"
+      },
+      {
+        "path": "noticias/noticia_nj-conselho-do-meio-ambiente-aprova-plano-municipal-da-mata-atlantica.jpg",
+        "size": 173847,
+        "mimetype": "image/jpeg",
+        "eTag": "\"66540bbea90a2154b60f0042d78dfe9b\"",
+        "created_at": "2026-05-04T01:48:50.942Z"
+      },
+      {
+        "path": "noticias/noticia_nj-plano-municipal-de-conservacao-e-recuperacao-da-mata-atlantica.jpg",
+        "size": 250424,
+        "mimetype": "image/jpeg",
+        "eTag": "\"9052f3364059022706f2df79c67e1afd\"",
+        "created_at": "2026-05-04T01:48:42.643Z"
+      },
+      {
+        "path": "noticias/noticia_nj-programa-renascentes---jacarei.jpg",
+        "size": 204295,
+        "mimetype": "image/jpeg",
+        "eTag": "\"7cfea3a36ef8f26c65c23b5beb3c0781\"",
+        "created_at": "2026-05-04T01:48:52.763Z"
+      },
+      {
+        "path": "noticias/noticia_nucleo-de-educacao-ambiental-de-jacarei-divulga-guia-com-as-trilhas-ambientais-d.jpg",
+        "size": 164119,
+        "mimetype": "image/jpeg",
+        "eTag": "\"97edcfe8148acfe1042ac59735a075b9\"",
+        "created_at": "2026-05-04T01:48:30.423Z"
+      },
+      {
+        "path": "noticias/noticia_passeio-guiado-permite-observar-aves-no-jardim-botanico-de-santos.jpg",
+        "size": 98539,
+        "mimetype": "image/jpeg",
+        "eTag": "\"f2af0b78882f31096fca2c9625dd6bd8\"",
+        "created_at": "2026-05-04T01:48:28.195Z"
+      },
+      {
+        "path": "noticias/noticia_plano-municipal-da-mata-atlantica-de-jacarei-e-tema-de-audiencia.jpg",
+        "size": 261041,
+        "mimetype": "image/jpeg",
+        "eTag": "\"8ea4f9d0cd808d9a4114cdf901f9bd95\"",
+        "created_at": "2026-05-04T01:48:49.276Z"
+      },
+      {
+        "path": "noticias/noticia_podcast-cafe-com-will-recebe-a-biologa-fernanda-scalambrino.jpg",
+        "size": 119004,
+        "mimetype": "image/jpeg",
+        "eTag": "\"d5a92238943d04b24aee19df02a60c7a\"",
+        "created_at": "2026-05-04T01:48:18.862Z"
+      },
+      {
+        "path": "noticias/noticia_projeto-de-restauracao-ecologica-e-deliberado-em-jacarei.jpg",
+        "size": 13150,
+        "mimetype": "image/jpeg",
+        "eTag": "\"0cc08c2c23bfc5904091363cfa811be7\"",
+        "created_at": "2026-05-04T01:48:57.531Z"
+      },
+      {
+        "path": "noticias/noticia_projeto-viver-o-viveiro-uma-aventura-em-meio-a-natureza-quarta-show.jpg",
+        "size": 117200,
+        "mimetype": "image/jpeg",
+        "eTag": "\"ab655f8ced4c08c60c317873a5325673\"",
+        "created_at": "2026-05-04T01:48:04.046Z"
+      },
+      {
+        "path": "noticias/noticia_reportagem-band-vale-projeto-viver-o-viveiro-promove-conexao-com-a-natureza.jpg",
+        "size": 105777,
+        "mimetype": "image/jpeg",
+        "eTag": "\"3d7242fc8ca84814c2034052ab4bef45\"",
+        "created_at": "2026-05-04T01:48:05.914Z"
+      },
+      {
+        "path": "noticias/noticia_reportagem-th-noticias-programa-de-restauracao-ecologica.jpg",
+        "size": 53314,
+        "mimetype": "image/jpeg",
+        "eTag": "\"05d2cdaa89150c87a30efed940509df0\"",
+        "created_at": "2026-05-04T01:48:07.242Z"
+      },
+      {
+        "path": "noticias/noticia_reportagem-tv-camera-jacarei-programa-de-restauracao-ecologica.jpg",
+        "size": 263013,
+        "mimetype": "image/jpeg",
+        "eTag": "\"74f5b0bc6a5374c3bd4e10b98a8fb474\"",
+        "created_at": "2026-05-04T01:48:20.999Z"
+      },
+      {
+        "path": "noticias/noticia_reportagem-tv-camera-jacarei-programa-jovens-observadores.jpg",
+        "size": 262472,
+        "mimetype": "image/jpeg",
+        "eTag": "\"7cc13ad774d0801067a7b3cfb9494b84\"",
+        "created_at": "2026-05-04T01:48:22.864Z"
+      },
+      {
+        "path": "noticias/noticia_reuniao-aberta-ao-publico-apresenta-plano-municipal-da-mata-atlantica.jpeg",
+        "size": 179248,
+        "mimetype": "image/jpeg",
+        "eTag": "\"6c65c19da1efa622d5073de6764f5bba\"",
+        "created_at": "2026-05-04T01:49:14.293Z"
+      },
+      {
+        "path": "noticias/noticia_secretaria-de-meio-ambiente-de-jacarei-valida-plano-municipal-da-mata-atlantica.jpg",
+        "size": 152328,
+        "mimetype": "image/jpeg",
+        "eTag": "\"86a54367e4ffcfae7db0027932018c46\"",
+        "created_at": "2026-05-04T01:49:19.967Z"
+      },
+      {
+        "path": "noticias/noticia_suzano-apoia-exposicao-fotografica-pandemina-em-jacarei.jpg",
+        "size": 63522,
+        "mimetype": "image/jpeg",
+        "eTag": "\"5db5d6b3aadc913e915e492203ec4a61\"",
+        "created_at": "2026-05-04T01:49:09.747Z"
+      },
+      {
+        "path": "noticias/noticia_viveiro-municipal-de-jacarei-passa-a-abrir-todo-domingo.jpg",
+        "size": 198187,
+        "mimetype": "image/jpeg",
+        "eTag": "\"d2a7cd5feb60bff33297b7461911262d\"",
+        "created_at": "2026-05-04T01:48:40.802Z"
+      },
+      {
+        "path": "noticias/noticia_viveiro-municipal-de-jacarei-tem-portas-abertas-todos-os-domingos-com-programaca.jpg",
+        "size": 198351,
+        "mimetype": "image/jpeg",
+        "eTag": "\"8471450bcf8ce03c91db444ab2273d9f\"",
+        "created_at": "2026-05-04T01:48:36.818Z"
+      },
+      {
+        "path": "noticias/noticia_viver-o-viveiro-publico-aprova-abertura-do-viveiro-municipal-aos-domingos-em-jac.jpg",
+        "size": 191304,
+        "mimetype": "image/jpeg",
+        "eTag": "\"ae6160f274bfbe4af7e2053c9fb7f0ec\"",
+        "created_at": "2026-05-04T01:48:38.780Z"
+      },
+      {
+        "path": "posts_blog/1776174635712-Gemini_Generated_Image_qcpn3aqcpn3aqcpn.png",
+        "size": 8565734,
+        "mimetype": "image/png",
+        "eTag": "\"74156110a5efbeb07b95e484d18caf1c-2\"",
+        "created_at": "2026-04-14T13:50:43.291Z"
+      },
+      {
+        "path": "posts_blog/1776174655085-5530740239.pdf",
+        "size": 63713,
+        "mimetype": "application/pdf",
+        "eTag": "\"ca240f508ac14f460fb2989ccd5de64a\"",
+        "created_at": "2026-04-14T13:50:55.784Z"
+      },
+      {
+        "path": "posts_blog/1776190063968-a5c65125-6583-400f-86a6-4abd13c8a42f (1).pdf",
+        "size": 112125,
+        "mimetype": "application/pdf",
+        "eTag": "\"abf5ae15f0bdecca9f1eaceb929d7d66\"",
+        "created_at": "2026-04-14T18:07:44.996Z"
+      },
+      {
+        "path": "posts_blog/1780422760009-WhatsApp Image 2026-06-02 at 14.46.21 (1).jpeg",
+        "size": 60756,
+        "mimetype": "image/jpeg",
+        "eTag": "\"1c32c0f57bce0a18eb824ac00423cbee\"",
+        "created_at": "2026-06-02T17:52:40.169Z"
+      },
+      {
+        "path": "projetos/1779895047289-e2b488_fe6363bd59474cbb9e1ebab74745ed16.png",
+        "size": 15098937,
+        "mimetype": "image/png",
+        "eTag": "\"37cac8f9b9e9dd02660d9154bbf3eedc-3\"",
+        "created_at": "2026-05-27T15:17:31.297Z"
+      },
+      {
+        "path": "projetos/1779895210863-e2b488_fe6363bd59474cbb9e1ebab74745ed16.png",
+        "size": 15098937,
+        "mimetype": "image/png",
+        "eTag": "\"37cac8f9b9e9dd02660d9154bbf3eedc-3\"",
+        "created_at": "2026-05-27T15:20:14.804Z"
+      },
+      {
+        "path": "projetos/1781282350065-IMG_8613.avif",
+        "size": 66592,
+        "mimetype": "image/avif",
+        "eTag": "\"e3fd1ce665638195ec376e663ae878d6\"",
+        "created_at": "2026-06-12T16:39:09.479Z"
+      },
+      {
+        "path": "projetos/1781284741597-IMG_8628__2_.avif",
+        "size": 75102,
+        "mimetype": "image/avif",
+        "eTag": "\"cf4bca5dbb9d0f7e4c76c2c4dfaecc77\"",
+        "created_at": "2026-06-12T17:19:01.073Z"
+      },
+      {
+        "path": "projetos/1781284817236-jorna.avif",
+        "size": 36515,
+        "mimetype": "image/avif",
+        "eTag": "\"4c4f18b2000d5da88752cb34d598c69d\"",
+        "created_at": "2026-06-12T17:20:16.584Z"
+      },
+      {
+        "path": "projetos/1781284823032-amb.avif",
+        "size": 28813,
+        "mimetype": "image/avif",
+        "eTag": "\"de45a109a92fda83d63f550b42b82918\"",
+        "created_at": "2026-06-12T17:20:22.345Z"
+      },
+      {
+        "path": "projetos/1781284830000-forma.avif",
+        "size": 23691,
+        "mimetype": "image/avif",
+        "eTag": "\"c7e89b973342774177410c2220ebb744\"",
+        "created_at": "2026-06-12T17:20:29.322Z"
+      },
+      {
+        "path": "projetos/1781284839624-ciclo.avif",
+        "size": 41200,
+        "mimetype": "image/avif",
+        "eTag": "\"0129eb5b7da4cf6b405a3a7d6264430b\"",
+        "created_at": "2026-06-12T17:20:38.943Z"
+      },
+      {
+        "path": "projetos/1781284899866-prat.avif",
+        "size": 25141,
+        "mimetype": "image/avif",
+        "eTag": "\"6ab6be3ec70b349541c1328767d5924a\"",
+        "created_at": "2026-06-12T17:21:39.283Z"
+      },
+      {
+        "path": "projetos/1781284914538-quint.avif",
+        "size": 26042,
+        "mimetype": "image/avif",
+        "eTag": "\"40e05fe02a8b03caac9ca7fe63edab35\"",
+        "created_at": "2026-06-12T17:21:53.878Z"
+      },
+      {
+        "path": "projetos/1781284922011-nuc.avif",
+        "size": 25366,
+        "mimetype": "image/avif",
+        "eTag": "\"5192ebb74e37f00ed63a9a568c0bdcdc\"",
+        "created_at": "2026-06-12T17:22:01.429Z"
+      },
+      {
+        "path": "projetos/1781284932351-de_olho.avif",
+        "size": 42819,
+        "mimetype": "image/avif",
+        "eTag": "\"62afc1d17f0b3c1fb261cc913b8c8433\"",
+        "created_at": "2026-06-12T17:22:11.678Z"
+      },
+      {
+        "path": "projetos/1781284954291-de_olho.avif",
+        "size": 42819,
+        "mimetype": "image/avif",
+        "eTag": "\"62afc1d17f0b3c1fb261cc913b8c8433\"",
+        "created_at": "2026-06-12T17:22:33.607Z"
+      },
+      {
+        "path": "projetos/1781284959597-prat.avif",
+        "size": 25141,
+        "mimetype": "image/avif",
+        "eTag": "\"6ab6be3ec70b349541c1328767d5924a\"",
+        "created_at": "2026-06-12T17:22:38.940Z"
+      },
+      {
+        "path": "projetos/1781284968944-quint.avif",
+        "size": 26042,
+        "mimetype": "image/avif",
+        "eTag": "\"40e05fe02a8b03caac9ca7fe63edab35\"",
+        "created_at": "2026-06-12T17:22:48.348Z"
+      },
+      {
+        "path": "projetos/1781284978209-nuc.avif",
+        "size": 25366,
+        "mimetype": "image/avif",
+        "eTag": "\"5192ebb74e37f00ed63a9a568c0bdcdc\"",
+        "created_at": "2026-06-12T17:22:57.848Z"
+      },
+      {
+        "path": "projetos/1781285061368-pat.avif",
+        "size": 25775,
+        "mimetype": "image/avif",
+        "eTag": "\"f04a523e73a3ff14844129c36bc87400\"",
+        "created_at": "2026-06-12T17:24:20.711Z"
+      },
+      {
+        "path": "projetos/1781285205316-mob.avif",
+        "size": 39266,
+        "mimetype": "image/avif",
+        "eTag": "\"f0b20b6c41a7afc086168082ec51e7f5\"",
+        "created_at": "2026-06-12T17:26:44.662Z"
+      },
+      {
+        "path": "projetos/1781285281856-mob.avif",
+        "size": 39266,
+        "mimetype": "image/avif",
+        "eTag": "\"f0b20b6c41a7afc086168082ec51e7f5\"",
+        "created_at": "2026-06-12T17:28:01.220Z"
+      },
+      {
+        "path": "projetos/1781285929125-inv.avif",
+        "size": 62517,
+        "mimetype": "image/avif",
+        "eTag": "\"1e89246c965628cdf889bc6a0b1b0555\"",
+        "created_at": "2026-06-12T17:38:48.493Z"
+      },
+      {
+        "path": "projetos/1781285956166-arvores_raras.avif",
+        "size": 44498,
+        "mimetype": "image/avif",
+        "eTag": "\"6981a676117e45cc1ea5a8dad8f880c0\"",
+        "created_at": "2026-06-12T17:39:15.529Z"
+      },
+      {
+        "path": "projetos/1781527245967-IMG_8628__2_.avif",
+        "size": 75102,
+        "mimetype": "image/avif",
+        "eTag": "\"cf4bca5dbb9d0f7e4c76c2c4dfaecc77\"",
+        "created_at": "2026-06-15T12:40:46.654Z"
+      },
+      {
+        "path": "projetos/1781614850261-WhatsApp_Image_2019-09-25_at_14.35.25.jpg",
+        "size": 230137,
+        "mimetype": "image/jpeg",
+        "eTag": "\"aaa27db51f85a72c9a154e5995a40dbf\"",
+        "created_at": "2026-06-16T13:00:49.966Z"
+      },
+      {
+        "path": "projetos/1781614862427-WhatsApp_Image_2019-09-25_at_14.35.25.jpg",
+        "size": 230137,
+        "mimetype": "image/jpeg",
+        "eTag": "\"aaa27db51f85a72c9a154e5995a40dbf\"",
+        "created_at": "2026-06-16T13:01:02.471Z"
+      },
+      {
+        "path": "projetos/1781614957309-WhatsApp_Image_2020-08-17_at_13.48.35.jpg",
+        "size": 84196,
+        "mimetype": "image/jpeg",
+        "eTag": "\"05860aa42a7b9a5f438a8dfb94e58837\"",
+        "created_at": "2026-06-16T13:02:36.898Z"
+      },
+      {
+        "path": "projetos/1781614960117-WhatsApp_Image_2019-01-29_at_10.31.00.jpeg",
+        "size": 149001,
+        "mimetype": "image/jpeg",
+        "eTag": "\"393df1a0ae3f950b214a9aa0a8633479\"",
+        "created_at": "2026-06-16T13:02:39.727Z"
+      },
+      {
+        "path": "projetos/1781615001024-image__3_.png",
+        "size": 599502,
+        "mimetype": "image/png",
+        "eTag": "\"8c3a92d6a07172120305a974bc30f486\"",
+        "created_at": "2026-06-16T13:03:20.782Z"
+      },
+      {
+        "path": "projetos/1781615005623-image__5_.png",
+        "size": 3483672,
+        "mimetype": "image/png",
+        "eTag": "\"86cea53330862d771ca02ce1581456af\"",
+        "created_at": "2026-06-16T13:03:26.614Z"
+      },
+      {
+        "path": "projetos/1781615085172-IMG_2943.jpg",
+        "size": 6623150,
+        "mimetype": "image/jpeg",
+        "eTag": "\"f21c9f3f0546859f12937a0478698538\"",
+        "created_at": "2026-06-16T13:04:47.009Z"
+      },
+      {
+        "path": "projetos/1781615090834-image__11_.png",
+        "size": 2557527,
+        "mimetype": "image/png",
+        "eTag": "\"aa9920d631f310da44d6e79db255178a\"",
+        "created_at": "2026-06-16T13:04:52.007Z"
+      },
+      {
+        "path": "projetos/1781615165405-IMG_20200220_144145679.jpg",
+        "size": 4648188,
+        "mimetype": "image/jpeg",
+        "eTag": "\"e440b6edb259685a3f20db6eaee5ef8f\"",
+        "created_at": "2026-06-16T13:06:06.206Z"
+      },
+      {
+        "path": "projetos/1781615167071-Quatro_Ribeiras__5_.jpg",
+        "size": 807349,
+        "mimetype": "image/jpeg",
+        "eTag": "\"e81b4504a0a16b95ec45837de3779b4f\"",
+        "created_at": "2026-06-16T13:06:07.057Z"
+      },
+      {
+        "path": "projetos/1781615263164-Ambiente-se.Presencial.Noite07.11.2023_.jpeg",
+        "size": 110294,
+        "mimetype": "image/jpeg",
+        "eTag": "\"2e10c8662fb7e7f408a4f03c7e68ae10\"",
+        "created_at": "2026-06-16T13:07:42.819Z"
+      },
+      {
+        "path": "projetos/1781615263656-Ambiente-sePresencial07.11.23.tarde.jpeg",
+        "size": 206563,
+        "mimetype": "image/jpeg",
+        "eTag": "\"858cdaf12e0d295b834c73c6956db0ea\"",
+        "created_at": "2026-06-16T13:07:43.370Z"
+      },
+      {
+        "path": "projetos/1781616800910-Escola_Presidente_Medici_-_Professor_Anderson_8.jpeg",
+        "size": 330986,
+        "mimetype": "image/jpeg",
+        "eTag": "\"8b076986ccc05f989f13a166912f1e2e\"",
+        "created_at": "2026-06-16T13:33:20.757Z"
+      },
+      {
+        "path": "projetos/1781616801600-Escola_Presidente_Medici_-_Professor_Anderson_18.jpeg",
+        "size": 299549,
+        "mimetype": "image/jpeg",
+        "eTag": "\"5a5f1674185c5ef2fae53d1ce2d3a401\"",
+        "created_at": "2026-06-16T13:33:21.565Z"
+      },
+      {
+        "path": "projetos/e2b488_0327c5a2084544d88a873249557a30b2.png",
+        "size": 1690259,
+        "mimetype": "image/png",
+        "eTag": "\"d538c71b5c9309d7e536247fd70002f3\"",
+        "created_at": "2026-05-04T02:25:18.993Z"
+      },
+      {
+        "path": "projetos/e2b488_0801937b5c3e4aceaa477c097cea1710.png",
+        "size": 1433340,
+        "mimetype": "image/png",
+        "eTag": "\"83f05c8a63d087abb0ad5404f41d261e\"",
+        "created_at": "2026-05-04T02:43:51.759Z"
+      },
+      {
+        "path": "projetos/e2b488_1c4079d098de4c53a8a4bbabc84e4660.png",
+        "size": 2454989,
+        "mimetype": "image/png",
+        "eTag": "\"93a6f9a3e208dc842e763c70a6e3a5d2\"",
+        "created_at": "2026-05-04T02:26:03.444Z"
+      },
+      {
+        "path": "projetos/e2b488_253bb5a9f1ec4f4db45e315fdb9875dc.jpg",
+        "size": 275204,
+        "mimetype": "image/jpeg",
+        "eTag": "\"dd36edd71a4e7352b8ccc44e25aa4590\"",
+        "created_at": "2026-05-04T02:25:43.584Z"
+      },
+      {
+        "path": "projetos/e2b488_2c06a8cf47164dd99ae4d315d57dca9a.jpg",
+        "size": 39734,
+        "mimetype": "image/jpeg",
+        "eTag": "\"bc4b3d8c93d9b7536d8d3f72cef35075\"",
+        "created_at": "2026-05-04T02:44:28.342Z"
+      },
+      {
+        "path": "projetos/e2b488_2c69eae0ea7d43149baf5b58f3b39156.jpg",
+        "size": 347585,
+        "mimetype": "image/jpeg",
+        "eTag": "\"b44c844a574e4a5dc5ed5ff2e16eaf68\"",
+        "created_at": "2026-05-04T02:25:30.521Z"
+      },
+      {
+        "path": "projetos/e2b488_322298feb0114c5698cf75d567056e8d.jpg",
+        "size": 2275916,
+        "mimetype": "image/jpeg",
+        "eTag": "\"d76d5cd793a38af591b5568cc0f75c3c\"",
+        "created_at": "2026-05-04T02:25:33.507Z"
+      },
+      {
+        "path": "projetos/e2b488_3ef66aff7bbf4faea69ceba4345a83aa.jpg",
+        "size": 179627,
+        "mimetype": "image/jpeg",
+        "eTag": "\"fb5a8150a04ce5803501f6eb2ca3f49b\"",
+        "created_at": "2026-05-04T02:43:53.536Z"
+      },
+      {
+        "path": "projetos/e2b488_406ae3d384bd48d2aaf99b9047aa6862.png",
+        "size": 1561698,
+        "mimetype": "image/png",
+        "eTag": "\"9cb67041659b48547a020a5433e6a92d\"",
+        "created_at": "2026-05-04T02:25:53.113Z"
+      },
+      {
+        "path": "projetos/e2b488_406ffff7405849a0a2b3f33036b64263.jpeg",
+        "size": 2776072,
+        "mimetype": "image/jpeg",
+        "eTag": "\"1ef21fdaa7587e5ace6928345ced12c1\"",
+        "created_at": "2026-05-04T02:26:15.272Z"
+      },
+      {
+        "path": "projetos/e2b488_4bc9d966db5045a89f827b86a1330a17.jpg",
+        "size": 1610974,
+        "mimetype": "image/jpeg",
+        "eTag": "\"0889d13ef1e6610c765de3d93ea42c55\"",
+        "created_at": "2026-05-04T02:25:39.404Z"
+      },
+      {
+        "path": "projetos/e2b488_5489bc440b34473e8ca8af9b8b765354.jpg",
+        "size": 1070198,
+        "mimetype": "image/jpeg",
+        "eTag": "\"72a6baf25e95a6894b7891ccbe415076\"",
+        "created_at": "2026-05-04T02:26:05.960Z"
+      },
+      {
+        "path": "projetos/e2b488_56b963366b5f4f4f916fc0b1c8ef7aee.jpg",
+        "size": 7825226,
+        "mimetype": "image/jpeg",
+        "eTag": "\"ab3bc2ec95e2f74ca3289fcb837cb0f2-2\"",
+        "created_at": "2026-05-04T02:26:21.201Z"
+      },
+      {
+        "path": "projetos/e2b488_66a834a1404f4a3dbe1af6b2c57b81e3.jpeg",
+        "size": 115226,
+        "mimetype": "image/jpeg",
+        "eTag": "\"b3f7792b79ffbfc8d693af4b6e8e4121\"",
+        "created_at": "2026-05-04T02:25:44.870Z"
+      },
+      {
+        "path": "projetos/e2b488_676c9c3c096f475baa78a061a3d7610f.jpg",
+        "size": 9588904,
+        "mimetype": "image/jpeg",
+        "eTag": "\"696ff158c10f22b046d492d02fc46d41-2\"",
+        "created_at": "2026-05-04T02:44:13.444Z"
+      },
+      {
+        "path": "projetos/e2b488_69de16c0a2264e57bd61d51427529fcb.jpg",
+        "size": 382077,
+        "mimetype": "image/jpeg",
+        "eTag": "\"1dfe1719b8454fc891973d232a6acc7d\"",
+        "created_at": "2026-05-04T02:25:41.571Z"
+      },
+      {
+        "path": "projetos/e2b488_7ce116c1e4484c2a81f4643b3aff50cf.png",
+        "size": 1344806,
+        "mimetype": "image/png",
+        "eTag": "\"26e99c2e875c21e02ae98bbbf666ff57\"",
+        "created_at": "2026-05-04T02:39:43.942Z"
+      },
+      {
+        "path": "projetos/e2b488_8ccef27f6dc9428999a3924cf86c7334.jpg",
+        "size": 5605767,
+        "mimetype": "image/jpeg",
+        "eTag": "\"e4c017cfac389f9304fa6bf4350e4bd8-2\"",
+        "created_at": "2026-05-04T02:26:25.411Z"
+      },
+      {
+        "path": "projetos/e2b488_a5d57f689d614a6c99e41993e6dfb865.jpg",
+        "size": 6566455,
+        "mimetype": "image/jpeg",
+        "eTag": "\"b292ab5cfebe080930e1fc3f03e04c14-2\"",
+        "created_at": "2026-05-04T02:25:50.246Z"
+      },
+      {
+        "path": "projetos/e2b488_abfdb0fa6b8a4b3b87d5f7c423f28898.jpg",
+        "size": 2631582,
+        "mimetype": "image/jpeg",
+        "eTag": "\"0515b744d10bf5d8cfa4e0dff30be265\"",
+        "created_at": "2026-05-04T02:26:09.559Z"
+      },
+      {
+        "path": "projetos/e2b488_b24a79566bee45a6b1579bde220f212d.jpg",
+        "size": 1596899,
+        "mimetype": "image/jpeg",
+        "eTag": "\"2bcb83760c5ba7c024e6306551d969fa\"",
+        "created_at": "2026-05-04T02:43:56.453Z"
+      },
+      {
+        "path": "projetos/e2b488_c2f9497136204d778d4dc4c4239858fa.jpg",
+        "size": 274441,
+        "mimetype": "image/jpeg",
+        "eTag": "\"9f68531be2cd4e9b0994e789ac767657\"",
+        "created_at": "2026-05-04T02:43:58.573Z"
+      },
+      {
+        "path": "projetos/e2b488_c750d952f4424dbaabcce5d3cd5e6c69.jpg",
+        "size": 1320401,
+        "mimetype": "image/jpeg",
+        "eTag": "\"aa6706353edf9e15cdacf9803e03492c\"",
+        "created_at": "2026-05-04T02:39:42.053Z"
+      },
+      {
+        "path": "projetos/e2b488_c899f275a4fe4d1a8cbf0a6e1262315e.jpg",
+        "size": 1582774,
+        "mimetype": "image/jpeg",
+        "eTag": "\"cf89aeca170601371416af1520330784\"",
+        "created_at": "2026-05-04T02:25:57.204Z"
+      },
+      {
+        "path": "projetos/e2b488_d333c16d8db145619c95c5f5bfd7a11a.jpg",
+        "size": 10381425,
+        "mimetype": "image/jpeg",
+        "eTag": "\"01b32298d736951a7d077319ae2dfe9a-2\"",
+        "created_at": "2026-05-04T02:44:22.425Z"
+      },
+      {
+        "path": "projetos/e2b488_fca02c7c10604e82bd66d634f7977506.jpg",
+        "size": 823404,
+        "mimetype": "image/jpeg",
+        "eTag": "\"4de60007488c6a51eccacd0700496455\"",
+        "created_at": "2026-05-04T02:44:01.403Z"
+      },
+      {
+        "path": "projetos/e2b488_fe6363bd59474cbb9e1ebab74745ed16.png",
+        "size": 15098937,
+        "mimetype": "image/png",
+        "eTag": "\"37cac8f9b9e9dd02660d9154bbf3eedc-3\"",
+        "created_at": "2026-05-04T02:25:29.060Z"
+      }
+    ]
+  },
+  "editais": {
+    "count": 215,
+    "totalMB": "199.39",
+    "files": [
+      {
+        "path": "339b1a5d-0791-4979-806d-084c9c4053f7/1779299153188-Edital_032025_Fehidro_Sales_polis.pdf",
+        "size": 581108,
+        "mimetype": "application/pdf",
+        "eTag": "\"5de215d54aea58d30bd2b4820aec9783\"",
+        "created_at": "2026-05-20T17:45:53.076Z"
+      },
+      {
+        "path": "339b1a5d-0791-4979-806d-084c9c4053f7/1779299166699-Termo_de_refer_ncia_23_08_Alto_Tiet_.docx.pdf",
+        "size": 2528989,
+        "mimetype": "application/pdf",
+        "eTag": "\"cb05a6dd931b49354384562a02b9b303\"",
+        "created_at": "2026-05-20T17:46:07.478Z"
+      },
+      {
+        "path": "339b1a5d-0791-4979-806d-084c9c4053f7/1779299184548-Relat_rio_Documento_1_JUN_2025__1_.pdf",
+        "size": 2008160,
+        "mimetype": "application/pdf",
+        "eTag": "\"d1962892a837333fe1ba1cad42fa8193\"",
+        "created_at": "2026-05-20T17:46:27.563Z"
+      },
+      {
+        "path": "339b1a5d-0791-4979-806d-084c9c4053f7/1779299208567-Propostas_recebidas__2_.pdf",
+        "size": 136062,
+        "mimetype": "application/pdf",
+        "eTag": "\"1ce421bed9886e611e09369fa5a82573\"",
+        "created_at": "2026-05-20T17:46:48.246Z"
+      },
+      {
+        "path": "339b1a5d-0791-4979-806d-084c9c4053f7/1779299228366-Hierarquiza__o__1_.pdf",
+        "size": 136157,
+        "mimetype": "application/pdf",
+        "eTag": "\"c517f21829ab84052d093d1e481a1cc1\"",
+        "created_at": "2026-05-20T17:47:07.983Z"
+      },
+      {
+        "path": "339b1a5d-0791-4979-806d-084c9c4053f7/1779299244571-Resultado.pdf",
+        "size": 104298,
+        "mimetype": "application/pdf",
+        "eTag": "\"3992ac0b5e9da669025cba6a096a91ef\"",
+        "created_at": "2026-05-20T17:47:24.246Z"
+      },
+      {
+        "path": "339b1a5d-0791-4979-806d-084c9c4053f7/1779299256332-Resultado.pdf",
+        "size": 104298,
+        "mimetype": "application/pdf",
+        "eTag": "\"3992ac0b5e9da669025cba6a096a91ef\"",
+        "created_at": "2026-05-20T17:47:35.972Z"
+      },
+      {
+        "path": "339b1a5d-0791-4979-806d-084c9c4053f7/1779299271276-Homologa__o.pdf",
+        "size": 84021,
+        "mimetype": "application/pdf",
+        "eTag": "\"da3b0be16cdb90adbe738e03055c5e99\"",
+        "created_at": "2026-05-20T17:47:50.876Z"
+      },
+      {
+        "path": "548bb443-d458-41ff-a760-f0d75b6c7752/1779299021629-Edital_022025_-_Fehidro_Guaratingueta.pdf",
+        "size": 4903983,
+        "mimetype": "application/pdf",
+        "eTag": "\"19082e00a50761d55ac7b5c1af637883\"",
+        "created_at": "2026-05-20T17:43:43.786Z"
+      },
+      {
+        "path": "548bb443-d458-41ff-a760-f0d75b6c7752/1779299030033-TR_Enriquecimento_e_monitoramento.28_11.pdf__2_.pdf",
+        "size": 611819,
+        "mimetype": "application/pdf",
+        "eTag": "\"97ec5e148ccdbcc84c918bf156cfd034\"",
+        "created_at": "2026-05-20T17:43:49.920Z"
+      },
+      {
+        "path": "548bb443-d458-41ff-a760-f0d75b6c7752/1779299043688-_Certame_-_EDITAL_022025_FEHIDRO_-_Guara.pdf",
+        "size": 84943,
+        "mimetype": "application/pdf",
+        "eTag": "\"9a9b9ddff64a35291dcf103481139dac\"",
+        "created_at": "2026-05-20T17:44:03.295Z"
+      },
+      {
+        "path": "548bb443-d458-41ff-a760-f0d75b6c7752/1779299072604-_Certame_-_EDITAL_022025_FEHIDRO_-_Guara__1___1_.pdf",
+        "size": 83569,
+        "mimetype": "application/pdf",
+        "eTag": "\"c3cc6d370e916c312a47a1bbf09972ba\"",
+        "created_at": "2026-05-20T17:44:32.271Z"
+      },
+      {
+        "path": "548bb443-d458-41ff-a760-f0d75b6c7752/1779299087537-Resultado_Definitivo-_EDITAL_022025.pdf",
+        "size": 82401,
+        "mimetype": "application/pdf",
+        "eTag": "\"b86ac710f57da1be78436e1789b13024\"",
+        "created_at": "2026-05-20T17:44:47.145Z"
+      },
+      {
+        "path": "548bb443-d458-41ff-a760-f0d75b6c7752/1779299103921-Homologa__o_-_2025.pdf",
+        "size": 67473,
+        "mimetype": "application/pdf",
+        "eTag": "\"be638655585d60ba8c93f6312c6ff76c\"",
+        "created_at": "2026-05-20T17:45:03.568Z"
+      },
+      {
+        "path": "8f2eb285-75d9-4e3d-bbb8-a25eed43b361/1779288900514-Edital_de_Contrata__o_n__06_2024.pdf",
+        "size": 425935,
+        "mimetype": "application/pdf",
+        "eTag": "\"0ae097d7aa7b8e8c64b73f265f18ef4d\"",
+        "created_at": "2026-05-20T14:55:01.401Z"
+      },
+      {
+        "path": "8f2eb285-75d9-4e3d-bbb8-a25eed43b361/1779288923162-Edital_de_Contrata__o_n__06_2024__1_.pdf",
+        "size": 425935,
+        "mimetype": "application/pdf",
+        "eTag": "\"0ae097d7aa7b8e8c64b73f265f18ef4d\"",
+        "created_at": "2026-05-20T14:55:23.798Z"
+      },
+      {
+        "path": "8f2eb285-75d9-4e3d-bbb8-a25eed43b361/1779289000530-Edital_de_Contrata__o_n__06_2024__2_.pdf",
+        "size": 447499,
+        "mimetype": "application/pdf",
+        "eTag": "\"a1029cdac75aa9d1aa1eacbe8ddfaf79\"",
+        "created_at": "2026-05-20T14:56:41.044Z"
+      },
+      {
+        "path": "8f2eb285-75d9-4e3d-bbb8-a25eed43b361/1779289021557-Anexo_I_Termo_de_referencia_4_RIBEIRAS_2022_II.pdf",
+        "size": 7290670,
+        "mimetype": "application/pdf",
+        "eTag": "\"2bbe593b413f9b39b61ea9da18d8607f-2\"",
+        "created_at": "2026-05-20T14:57:06.026Z"
+      },
+      {
+        "path": "8f2eb285-75d9-4e3d-bbb8-a25eed43b361/1779289044572-Errata_1.1_Termo_de_referencia._Restaura__o._Quatro_Ribeiras._fase_II__1_.pdf",
+        "size": 1952141,
+        "mimetype": "application/pdf",
+        "eTag": "\"a9b5546f83d7438f28a07b1e54ef45a9\"",
+        "created_at": "2026-05-20T14:57:25.500Z"
+      },
+      {
+        "path": "8f2eb285-75d9-4e3d-bbb8-a25eed43b361/1779289065384-Errata_1.1_Termo_de_referencia._Restaura__o._Quatro_Ribeiras._fase_II__1___1_.pdf",
+        "size": 1979267,
+        "mimetype": "application/pdf",
+        "eTag": "\"0782d66a8d689a326fe59c0955bdd1f7\"",
+        "created_at": "2026-05-20T14:57:46.690Z"
+      },
+      {
+        "path": "8f2eb285-75d9-4e3d-bbb8-a25eed43b361/1779289082556-FEHIDRO_EDITAL_06_2024_1_.pdf",
+        "size": 171997,
+        "mimetype": "application/pdf",
+        "eTag": "\"9b24bdcca89d1621b21277e9749bed77\"",
+        "created_at": "2026-05-20T14:58:03.033Z"
+      },
+      {
+        "path": "8f2eb285-75d9-4e3d-bbb8-a25eed43b361/1779289095868-RESULTADO_DEFINITIVO.pdf",
+        "size": 88206,
+        "mimetype": "application/pdf",
+        "eTag": "\"99b3803318b9b3f12c2e02bcbfd8cdab\"",
+        "created_at": "2026-05-20T14:58:16.222Z"
+      },
+      {
+        "path": "9943f258-bc9d-4985-86ad-7707132fb1a1/1779298419193-Edital_Fehidro_III_-_T_cnico_em_restaura__o.pdf",
+        "size": 1788973,
+        "mimetype": "application/pdf",
+        "eTag": "\"df1a76cefeb7d32a7790deaeb843eee6\"",
+        "created_at": "2026-05-20T17:33:39.299Z"
+      },
+      {
+        "path": "9943f258-bc9d-4985-86ad-7707132fb1a1/1779298434144-Termo_de_refer_ncia_e_Cronograma_f_sicos_fincanceiro.pdf",
+        "size": 2348798,
+        "mimetype": "application/pdf",
+        "eTag": "\"ed359c3389288de12053a192ae4d339a\"",
+        "created_at": "2026-05-20T17:33:55.762Z"
+      },
+      {
+        "path": "9943f258-bc9d-4985-86ad-7707132fb1a1/1779298544923-Propostas_recebidas_-_EDITAL_072024_FEHIDRO_III_-_060924.pdf",
+        "size": 100064,
+        "mimetype": "application/pdf",
+        "eTag": "\"ac16729f7a53ad69ec026211c450c826\"",
+        "created_at": "2026-05-20T17:35:44.519Z"
+      },
+      {
+        "path": "9943f258-bc9d-4985-86ad-7707132fb1a1/1779298559934-Resultado_Definitivo_-_EDITAL_072024_FEHIDRO_III_-_190924.pdf",
+        "size": 88138,
+        "mimetype": "application/pdf",
+        "eTag": "\"31394981c33cb2280bd335cb69fd2a96\"",
+        "created_at": "2026-05-20T17:35:59.536Z"
+      },
+      {
+        "path": "9943f258-bc9d-4985-86ad-7707132fb1a1/1779298572442-Resultado_Definitivo_-_EDITAL_072024_FEHIDRO_III_-_190924.pdf",
+        "size": 88138,
+        "mimetype": "application/pdf",
+        "eTag": "\"31394981c33cb2280bd335cb69fd2a96\"",
+        "created_at": "2026-05-20T17:36:12.040Z"
+      },
+      {
+        "path": "9943f258-bc9d-4985-86ad-7707132fb1a1/1779298603430-Homologa__o_-_EDITAL_072024_FEHIDRO_III_-_120924.pdf",
+        "size": 80038,
+        "mimetype": "application/pdf",
+        "eTag": "\"f52a207ce66a86829d754bbfd23b8fe8\"",
+        "created_at": "2026-05-20T17:36:43.121Z"
+      },
+      {
+        "path": "b81d838a-5d5c-4431-9d3d-1f3fefd376e2/1779288246682-EDITAL_DE_CONTRATA__O_N__02.2024.pdf",
+        "size": 1485589,
+        "mimetype": "application/pdf",
+        "eTag": "\"c579a07b6ab68548819c2a095c69e481\"",
+        "created_at": "2026-05-20T14:44:08.260Z"
+      },
+      {
+        "path": "b81d838a-5d5c-4431-9d3d-1f3fefd376e2/1779288257792-EDITAL_DE_CONTRATA__O_N__02.2024.pdf",
+        "size": 1485589,
+        "mimetype": "application/pdf",
+        "eTag": "\"c579a07b6ab68548819c2a095c69e481\"",
+        "created_at": "2026-05-20T14:44:19.046Z"
+      },
+      {
+        "path": "b81d838a-5d5c-4431-9d3d-1f3fefd376e2/1779288298554-1.1_Termo_de_referencia._Restaura__o._Quatro_Ribeiras._fase_II.pdf.pdf__1___1_.pdf",
+        "size": 1952141,
+        "mimetype": "application/pdf",
+        "eTag": "\"a9b5546f83d7438f28a07b1e54ef45a9\"",
+        "created_at": "2026-05-20T14:44:59.627Z"
+      },
+      {
+        "path": "b81d838a-5d5c-4431-9d3d-1f3fefd376e2/1779288317972-COMUNICADO_-_EDITAL_N_02.2024__1_.pdf",
+        "size": 92340,
+        "mimetype": "application/pdf",
+        "eTag": "\"97442ea6256d433c67fdcf348b1e35fe\"",
+        "created_at": "2026-05-20T14:45:18.012Z"
+      },
+      {
+        "path": "b81d838a-5d5c-4431-9d3d-1f3fefd376e2/1779288335602-Resultado_Final.pdf",
+        "size": 181823,
+        "mimetype": "application/pdf",
+        "eTag": "\"4eedf66aab8b799419d331e247811e33\"",
+        "created_at": "2026-05-20T14:45:35.648Z"
+      },
+      {
+        "path": "d0251349-6305-4237-a245-5ec969af3779/1779288397829-Edital_03_2024_-__rvores_Raras_V2.pdf",
+        "size": 1436220,
+        "mimetype": "application/pdf",
+        "eTag": "\"60ba3a2c73db3d6c3baad6c13f09f9f7\"",
+        "created_at": "2026-05-20T14:46:38.496Z"
+      },
+      {
+        "path": "d0251349-6305-4237-a245-5ec969af3779/1779288415426-Termo_de_Referencia_Projeto_arvores_Raras_Atualizado.pdf.pdf",
+        "size": 2949206,
+        "mimetype": "application/pdf",
+        "eTag": "\"5406531f24c0c3eb134361595c9b76cb\"",
+        "created_at": "2026-05-20T14:46:57.279Z"
+      },
+      {
+        "path": "d0251349-6305-4237-a245-5ec969af3779/1779288436164-COMUNICADO_03.2024.pdf",
+        "size": 82527,
+        "mimetype": "application/pdf",
+        "eTag": "\"84602a9b40596ae09e5bf4c0910fd6f3\"",
+        "created_at": "2026-05-20T14:47:16.194Z"
+      },
+      {
+        "path": "d8fa6922-496c-4978-977f-6e406c7900ee/1779288675187-Edital_052024_-__rvores_Raras_V2.pdf",
+        "size": 4534457,
+        "mimetype": "application/pdf",
+        "eTag": "\"4a33a8d94e491148c95b921c07e543af\"",
+        "created_at": "2026-05-20T14:51:17.612Z"
+      },
+      {
+        "path": "d8fa6922-496c-4978-977f-6e406c7900ee/1779288691209-Termo_de_Referencia_Projeto_arvores_Raras_Atualizado.pdf__2_.pdf",
+        "size": 2949206,
+        "mimetype": "application/pdf",
+        "eTag": "\"5406531f24c0c3eb134361595c9b76cb\"",
+        "created_at": "2026-05-20T14:51:33.290Z"
+      },
+      {
+        "path": "d8fa6922-496c-4978-977f-6e406c7900ee/1779288720776-Propostas_Recebidas.pdf",
+        "size": 179791,
+        "mimetype": "application/pdf",
+        "eTag": "\"7e9e21483c8297da8a092ef877d83364\"",
+        "created_at": "2026-05-20T14:52:01.055Z"
+      },
+      {
+        "path": "d8fa6922-496c-4978-977f-6e406c7900ee/1779288737628-Resultado_Final__1_.pdf",
+        "size": 182359,
+        "mimetype": "application/pdf",
+        "eTag": "\"e907fccab197a861d061c356ff2a3b8e\"",
+        "created_at": "2026-05-20T14:52:18.145Z"
+      },
+      {
+        "path": "de5f6aed-b64b-4ad4-b488-469767314426/1779287742599-_EDITAL_DE_CONTRATA__O_N__012024_vers_o2_site.pdf",
+        "size": 4758132,
+        "mimetype": "application/pdf",
+        "eTag": "\"76fc1ccd019a31cbea3763ba03d7d4ed\"",
+        "created_at": "2026-05-20T14:35:44.932Z"
+      },
+      {
+        "path": "de5f6aed-b64b-4ad4-b488-469767314426/1779287764911-1.1_Termo_de_referencia._Restaura__o._Quatro_Ribeiras._fase_II.pdf.pdf__1_.pdf",
+        "size": 1952141,
+        "mimetype": "application/pdf",
+        "eTag": "\"a9b5546f83d7438f28a07b1e54ef45a9\"",
+        "created_at": "2026-05-20T14:36:05.901Z"
+      },
+      {
+        "path": "de5f6aed-b64b-4ad4-b488-469767314426/1779287785677-COMUNICADO_-_EDITAL_01.2024_1_.pdf",
+        "size": 155592,
+        "mimetype": "application/pdf",
+        "eTag": "\"972e63987dbb999b0922a38a33d5a999\"",
+        "created_at": "2026-05-20T14:36:26.001Z"
+      },
+      {
+        "path": "de5f6aed-b64b-4ad4-b488-469767314426/1779287819180-RESULTADO_FINAL_1___1_.pdf",
+        "size": 156260,
+        "mimetype": "application/pdf",
+        "eTag": "\"6b34da204334335186637b30746c9280\"",
+        "created_at": "2026-05-20T14:36:59.207Z"
+      },
+      {
+        "path": "df03c420-ac57-496d-aab1-56233341caea/1779286883085-Edital_de_contrata__o_-_012023_-_Atualizado.pdf",
+        "size": 280046,
+        "mimetype": "application/pdf",
+        "eTag": "\"21032f309d2b344fb0b2c66466f122a4\"",
+        "created_at": "2026-05-20T14:21:23.415Z"
+      },
+      {
+        "path": "df03c420-ac57-496d-aab1-56233341caea/1779286909744-TR_Projeto_de_Comunica__o_CBH-PS_012021_Suin__atualizado.pdf",
+        "size": 234251,
+        "mimetype": "application/pdf",
+        "eTag": "\"478c775b19211ea438d20818db07cc93\"",
+        "created_at": "2026-05-20T14:21:50.023Z"
+      },
+      {
+        "path": "df03c420-ac57-496d-aab1-56233341caea/1779286937970-Chamamento_p_blico_-_Suin__012022.pdf",
+        "size": 100044,
+        "mimetype": "application/pdf",
+        "eTag": "\"d6d9652dadccec8fb372fdf6380fa6f6\"",
+        "created_at": "2026-05-20T14:22:17.998Z"
+      },
+      {
+        "path": "df03c420-ac57-496d-aab1-56233341caea/1779286966457-Edital_de_contrata__o_-_012023_-_Atualizado.pdf",
+        "size": 280046,
+        "mimetype": "application/pdf",
+        "eTag": "\"21032f309d2b344fb0b2c66466f122a4\"",
+        "created_at": "2026-05-20T14:22:46.980Z"
+      },
+      {
+        "path": "df03c420-ac57-496d-aab1-56233341caea/1779286978462-TR_Projeto_de_Comunica__o_CBH-PS_012021_Suin__atualizado.pdf",
+        "size": 234251,
+        "mimetype": "application/pdf",
+        "eTag": "\"478c775b19211ea438d20818db07cc93\"",
+        "created_at": "2026-05-20T14:22:58.612Z"
+      },
+      {
+        "path": "df03c420-ac57-496d-aab1-56233341caea/1779287007064-Edital_de_contrata__o_-_012023_-_Atualizado.pdf",
+        "size": 280046,
+        "mimetype": "application/pdf",
+        "eTag": "\"21032f309d2b344fb0b2c66466f122a4\"",
+        "created_at": "2026-05-20T14:23:28.004Z"
+      },
+      {
+        "path": "df03c420-ac57-496d-aab1-56233341caea/1779287016498-Edital_de_contrata__o_-_012023_-_Atualizado.pdf",
+        "size": 280046,
+        "mimetype": "application/pdf",
+        "eTag": "\"21032f309d2b344fb0b2c66466f122a4\"",
+        "created_at": "2026-05-20T14:23:36.556Z"
+      },
+      {
+        "path": "df03c420-ac57-496d-aab1-56233341caea/1779287026981-TR_Projeto_de_Comunica__o_CBH-PS_012021_Suin__atualizado.pdf",
+        "size": 234251,
+        "mimetype": "application/pdf",
+        "eTag": "\"478c775b19211ea438d20818db07cc93\"",
+        "created_at": "2026-05-20T14:23:47.219Z"
+      },
+      {
+        "path": "df03c420-ac57-496d-aab1-56233341caea/1779287043645-Chamamento_p_blico_-_Suin__012022.pdf",
+        "size": 100044,
+        "mimetype": "application/pdf",
+        "eTag": "\"d6d9652dadccec8fb372fdf6380fa6f6\"",
+        "created_at": "2026-05-20T14:24:03.657Z"
+      },
+      {
+        "path": "df03c420-ac57-496d-aab1-56233341caea/1779287121116-Chamamento_p_blico_-_Suin__012022__1_.pdf",
+        "size": 100044,
+        "mimetype": "application/pdf",
+        "eTag": "\"d6d9652dadccec8fb372fdf6380fa6f6\"",
+        "created_at": "2026-05-20T14:25:21.519Z"
+      },
+      {
+        "path": "e3290cae-9153-48e6-9b48-be7efb17571b/1779288534789-Edital_042024_-__rvores_Raras_V2.pdf",
+        "size": 1493859,
+        "mimetype": "application/pdf",
+        "eTag": "\"f35f1713b8b98c3d35fd21ae5f216fd4\"",
+        "created_at": "2026-05-20T14:48:55.277Z"
+      },
+      {
+        "path": "e3290cae-9153-48e6-9b48-be7efb17571b/1779288555500-Termo_de_Referencia_Projeto_arvores_Raras_Atualizado.pdf__1_.pdf",
+        "size": 2949206,
+        "mimetype": "application/pdf",
+        "eTag": "\"5406531f24c0c3eb134361595c9b76cb\"",
+        "created_at": "2026-05-20T14:49:16.686Z"
+      },
+      {
+        "path": "e3290cae-9153-48e6-9b48-be7efb17571b/1779288615891-COMUNICADO_04.2024.pdf",
+        "size": 82682,
+        "mimetype": "application/pdf",
+        "eTag": "\"1ac59b61e738c8b1da66011f76194d92\"",
+        "created_at": "2026-05-20T14:50:15.949Z"
+      },
+      {
+        "path": "edb58a7f-9720-4765-a5ae-1f362540ff44/1779298843107-Edital_012025_-_Fehidro_Sales_polis.pdf",
+        "size": 4745181,
+        "mimetype": "application/pdf",
+        "eTag": "\"7615b894abdf82180ba1bd973707c58f\"",
+        "created_at": "2026-05-20T17:40:44.840Z"
+      },
+      {
+        "path": "edb58a7f-9720-4765-a5ae-1f362540ff44/1779298885801-Termo_de_refer_ncia_23_08_Alto_Tiete.docx.pdf",
+        "size": 2231695,
+        "mimetype": "application/pdf",
+        "eTag": "\"76da2c236be88932d6154651ac95986a\"",
+        "created_at": "2026-05-20T17:41:27.071Z"
+      },
+      {
+        "path": "edb58a7f-9720-4765-a5ae-1f362540ff44/1779298907726-Propostas_recebidas.pdf",
+        "size": 83002,
+        "mimetype": "application/pdf",
+        "eTag": "\"42e6e168170c65b50e877cf287168eeb\"",
+        "created_at": "2026-05-20T17:41:47.308Z"
+      },
+      {
+        "path": "edb58a7f-9720-4765-a5ae-1f362540ff44/1779298923983-HIERARQUIZA__O.pdf",
+        "size": 107720,
+        "mimetype": "application/pdf",
+        "eTag": "\"b184f311f7c0f463c6143e545fecd308\"",
+        "created_at": "2026-05-20T17:42:03.679Z"
+      },
+      {
+        "path": "edb58a7f-9720-4765-a5ae-1f362540ff44/1779298943851-Resultado_Definitivo.pdf",
+        "size": 83381,
+        "mimetype": "application/pdf",
+        "eTag": "\"2576bcfa84e90a6d03e2dc051a3f32f8\"",
+        "created_at": "2026-05-20T17:42:23.503Z"
+      },
+      {
+        "path": "edb58a7f-9720-4765-a5ae-1f362540ff44/1779298958082-Termo_de_Homologa__o.pdf",
+        "size": 73847,
+        "mimetype": "application/pdf",
+        "eTag": "\"b50337bf6cbd227aba8d629db32225ef\"",
+        "created_at": "2026-05-20T17:42:37.732Z"
+      },
+      {
+        "path": "edital-de-contrata-o-n-01-2023-.pdf",
+        "size": 103493,
+        "mimetype": "application/pdf",
+        "eTag": "\"e355bd0cc284749c8d6ad339995644c1\"",
+        "created_at": "2026-04-28T18:08:37.479Z"
+      },
+      {
+        "path": "edital-de-contrata-o-n-01-2023-0b8508cadc25406a82d6870f1f6553cc.pdf",
+        "size": 234251,
+        "mimetype": "application/pdf",
+        "eTag": "\"478c775b19211ea438d20818db07cc93\"",
+        "created_at": "2026-04-28T18:26:40.773Z"
+      },
+      {
+        "path": "edital-de-contrata-o-n-01-2023-145a34ac79d342668f8a36f54ca745f5.pdf",
+        "size": 280046,
+        "mimetype": "application/pdf",
+        "eTag": "\"21032f309d2b344fb0b2c66466f122a4\"",
+        "created_at": "2026-04-28T18:26:39.284Z"
+      },
+      {
+        "path": "edital-de-contrata-o-n-01-2023-1a20163403784e488fc89277f55aadaa.pdf",
+        "size": 103493,
+        "mimetype": "application/pdf",
+        "eTag": "\"e355bd0cc284749c8d6ad339995644c1\"",
+        "created_at": "2026-04-28T18:26:50.746Z"
+      },
+      {
+        "path": "edital-de-contrata-o-n-01-2023-1ce9eebe379540f584c33757fbad151a.pdf",
+        "size": 993206,
+        "mimetype": "application/pdf",
+        "eTag": "\"701db0614254dc0a623f8fa5d91946a7\"",
+        "created_at": "2026-04-28T18:26:47.627Z"
+      },
+      {
+        "path": "edital-de-contrata-o-n-01-2023-474d169b5c1843debc27c479c48610ca.pdf",
+        "size": 100044,
+        "mimetype": "application/pdf",
+        "eTag": "\"d6d9652dadccec8fb372fdf6380fa6f6\"",
+        "created_at": "2026-04-28T18:26:42.220Z"
+      },
+      {
+        "path": "edital-de-contrata-o-n-01-2023-4c916b69e51040eb89b5eda6a173a851.pdf",
+        "size": 608697,
+        "mimetype": "application/pdf",
+        "eTag": "\"26965c5066d79cf41b5b25359ca59727\"",
+        "created_at": "2026-04-28T18:26:45.479Z"
+      },
+      {
+        "path": "edital-de-contrata-o-n-01-2023-576e8e873cf242d2b023abe69852357c.pdf",
+        "size": 105978,
+        "mimetype": "application/pdf",
+        "eTag": "\"20faa85956668b98b1b70d96a1605ffe\"",
+        "created_at": "2026-04-28T18:26:49.100Z"
+      },
+      {
+        "path": "edital-de-contrata-o-n-01-2023-objeto-contrata-o-de-pessoa-jur-dica-para-atua.pdf",
+        "size": 100044,
+        "mimetype": "application/pdf",
+        "eTag": "\"d6d9652dadccec8fb372fdf6380fa6f6\"",
+        "created_at": "2026-04-28T18:32:32.271Z"
+      },
+      {
+        "path": "edital-de-contrata-o-n-01-2023-tomada-de-pre-os-n-02-2022.pdf",
+        "size": 103493,
+        "mimetype": "application/pdf",
+        "eTag": "\"e355bd0cc284749c8d6ad339995644c1\"",
+        "created_at": "2026-04-28T18:32:37.937Z"
+      },
+      {
+        "path": "edital-de-contrata-o-n-01-2025-.pdf",
+        "size": 73847,
+        "mimetype": "application/pdf",
+        "eTag": "\"b50337bf6cbd227aba8d629db32225ef\"",
+        "created_at": "2026-04-28T18:06:23.397Z"
+      },
+      {
+        "path": "edital-de-contrata-o-n-01-2025-05df97af4c3b47e08f8cfdcdcf75f02b.pdf",
+        "size": 83381,
+        "mimetype": "application/pdf",
+        "eTag": "\"2576bcfa84e90a6d03e2dc051a3f32f8\"",
+        "created_at": "2026-04-28T18:24:38.425Z"
+      },
+      {
+        "path": "edital-de-contrata-o-n-01-2025-7f235bbddd70477b85400497b094503a.pdf",
+        "size": 73847,
+        "mimetype": "application/pdf",
+        "eTag": "\"b50337bf6cbd227aba8d629db32225ef\"",
+        "created_at": "2026-04-28T18:24:39.813Z"
+      },
+      {
+        "path": "edital-de-contrata-o-n-01-2025-anexo-i-termo-de-refer-ncia.pdf",
+        "size": 2231695,
+        "mimetype": "application/pdf",
+        "eTag": "\"76da2c236be88932d6154651ac95986a\"",
+        "created_at": "2026-04-28T18:30:52.407Z"
+      },
+      {
+        "path": "edital-de-contrata-o-n-01-2025-b2f45522f7c6403c834a60f180a87218.pdf",
+        "size": 83002,
+        "mimetype": "application/pdf",
+        "eTag": "\"42e6e168170c65b50e877cf287168eeb\"",
+        "created_at": "2026-04-28T18:24:35.936Z"
+      },
+      {
+        "path": "edital-de-contrata-o-n-01-2025-cee2aa89460b48c0ab175c1d3d734c7e.pdf",
+        "size": 4745181,
+        "mimetype": "application/pdf",
+        "eTag": "\"7615b894abdf82180ba1bd973707c58f\"",
+        "created_at": "2026-04-28T18:24:30.391Z"
+      },
+      {
+        "path": "edital-de-contrata-o-n-01-2025-d0155c5cc90f46438e2d98b62dab285c.pdf",
+        "size": 107720,
+        "mimetype": "application/pdf",
+        "eTag": "\"b184f311f7c0f463c6143e545fecd308\"",
+        "created_at": "2026-04-28T18:24:37.227Z"
+      },
+      {
+        "path": "edital-de-contrata-o-n-01-2025-edital-de-contrata-o-n-01-2025.pdf",
+        "size": 73847,
+        "mimetype": "application/pdf",
+        "eTag": "\"b50337bf6cbd227aba8d629db32225ef\"",
+        "created_at": "2026-04-28T18:30:48.766Z"
+      },
+      {
+        "path": "edital-de-contrata-o-n-01-2025-f2bd178b910b4c8fad5bb9402525e511.pdf",
+        "size": 2231695,
+        "mimetype": "application/pdf",
+        "eTag": "\"76da2c236be88932d6154651ac95986a\"",
+        "created_at": "2026-04-28T18:24:34.560Z"
+      },
+      {
+        "path": "edital-de-contrata-o-n-02-2025-.pdf",
+        "size": 67473,
+        "mimetype": "application/pdf",
+        "eTag": "\"be638655585d60ba8c93f6312c6ff76c\"",
+        "created_at": "2026-04-28T18:06:09.093Z"
+      },
+      {
+        "path": "edital-de-contrata-o-n-02-2025-0ddcacb27c304dedb13a039de517c2a8.pdf",
+        "size": 82401,
+        "mimetype": "application/pdf",
+        "eTag": "\"b86ac710f57da1be78436e1789b13024\"",
+        "created_at": "2026-04-28T18:24:23.420Z"
+      },
+      {
+        "path": "edital-de-contrata-o-n-02-2025-2df34f0078fe4e37a15fd57ae0a838c6.pdf",
+        "size": 611819,
+        "mimetype": "application/pdf",
+        "eTag": "\"97ec5e148ccdbcc84c918bf156cfd034\"",
+        "created_at": "2026-04-28T18:24:18.822Z"
+      },
+      {
+        "path": "edital-de-contrata-o-n-02-2025-79f73a38c529417690ba4a53b769b96e.pdf",
+        "size": 67473,
+        "mimetype": "application/pdf",
+        "eTag": "\"be638655585d60ba8c93f6312c6ff76c\"",
+        "created_at": "2026-04-28T18:24:24.734Z"
+      },
+      {
+        "path": "edital-de-contrata-o-n-02-2025-81c749d5cd194cd1ac084638377a1a79.pdf",
+        "size": 83569,
+        "mimetype": "application/pdf",
+        "eTag": "\"c3cc6d370e916c312a47a1bbf09972ba\"",
+        "created_at": "2026-04-28T18:24:22.177Z"
+      },
+      {
+        "path": "edital-de-contrata-o-n-02-2025-anexo-i-termo-de-refer-ncia.pdf",
+        "size": 611819,
+        "mimetype": "application/pdf",
+        "eTag": "\"97ec5e148ccdbcc84c918bf156cfd034\"",
+        "created_at": "2026-04-28T18:30:38.392Z"
+      },
+      {
+        "path": "edital-de-contrata-o-n-02-2025-c8a459e90cd04952a27c7f5b8114297d.pdf",
+        "size": 4903983,
+        "mimetype": "application/pdf",
+        "eTag": "\"19082e00a50761d55ac7b5c1af637883\"",
+        "created_at": "2026-04-28T18:24:16.146Z"
+      },
+      {
+        "path": "edital-de-contrata-o-n-02-2025-edital-de-contrata-o-n-02-2025.pdf",
+        "size": 67473,
+        "mimetype": "application/pdf",
+        "eTag": "\"be638655585d60ba8c93f6312c6ff76c\"",
+        "created_at": "2026-04-28T18:30:36.705Z"
+      },
+      {
+        "path": "edital-de-contrata-o-n-02-2025-f17d2e0223b241b5b961e057e4dcb2b0.pdf",
+        "size": 84943,
+        "mimetype": "application/pdf",
+        "eTag": "\"9a9b9ddff64a35291dcf103481139dac\"",
+        "created_at": "2026-04-28T18:24:20.438Z"
+      },
+      {
+        "path": "edital-de-contrata-o-n-02-2025-propostas-recebidas.pdf",
+        "size": 84943,
+        "mimetype": "application/pdf",
+        "eTag": "\"9a9b9ddff64a35291dcf103481139dac\"",
+        "created_at": "2026-04-28T18:30:39.602Z"
+      },
+      {
+        "path": "edital-de-contrata-o-n-03-2024-.pdf",
+        "size": 89203,
+        "mimetype": "application/pdf",
+        "eTag": "\"6645dff33f3c6ad8ae513af046184889\"",
+        "created_at": "2026-04-28T18:07:47.419Z"
+      },
+      {
+        "path": "edital-de-contrata-o-n-03-2024-0b8508cadc25406a82d6870f1f6553cc.pdf",
+        "size": 234251,
+        "mimetype": "application/pdf",
+        "eTag": "\"478c775b19211ea438d20818db07cc93\"",
+        "created_at": "2026-04-28T18:26:19.563Z"
+      },
+      {
+        "path": "edital-de-contrata-o-n-03-2024-0bc1505266604e658a7dafc7ba366f87.pdf",
+        "size": 155592,
+        "mimetype": "application/pdf",
+        "eTag": "\"972e63987dbb999b0922a38a33d5a999\"",
+        "created_at": "2026-04-28T18:26:14.977Z"
+      },
+      {
+        "path": "edital-de-contrata-o-n-03-2024-0c3b9f37126f47ddbcd0c9721f8a6c53.pdf",
+        "size": 82527,
+        "mimetype": "application/pdf",
+        "eTag": "\"84602a9b40596ae09e5bf4c0910fd6f3\"",
+        "created_at": "2026-04-28T18:25:54.707Z"
+      },
+      {
+        "path": "edital-de-contrata-o-n-03-2024-145a34ac79d342668f8a36f54ca745f5.pdf",
+        "size": 280046,
+        "mimetype": "application/pdf",
+        "eTag": "\"21032f309d2b344fb0b2c66466f122a4\"",
+        "created_at": "2026-04-28T18:26:18.175Z"
+      },
+      {
+        "path": "edital-de-contrata-o-n-03-2024-1a20163403784e488fc89277f55aadaa.pdf",
+        "size": 103493,
+        "mimetype": "application/pdf",
+        "eTag": "\"e355bd0cc284749c8d6ad339995644c1\"",
+        "created_at": "2026-04-28T18:26:30.556Z"
+      },
+      {
+        "path": "edital-de-contrata-o-n-03-2024-1b2eb31b68974ca8859825db02cdf0a4.pdf",
+        "size": 2949206,
+        "mimetype": "application/pdf",
+        "eTag": "\"5406531f24c0c3eb134361595c9b76cb\"",
+        "created_at": "2026-04-28T18:25:53.324Z"
+      },
+      {
+        "path": "edital-de-contrata-o-n-03-2024-1ce9eebe379540f584c33757fbad151a.pdf",
+        "size": 993206,
+        "mimetype": "application/pdf",
+        "eTag": "\"701db0614254dc0a623f8fa5d91946a7\"",
+        "created_at": "2026-04-28T18:26:27.585Z"
+      },
+      {
+        "path": "edital-de-contrata-o-n-03-2024-2432d643df774a06a7956d3345f58420.pdf",
+        "size": 1485589,
+        "mimetype": "application/pdf",
+        "eTag": "\"c579a07b6ab68548819c2a095c69e481\"",
+        "created_at": "2026-04-28T18:25:57.493Z"
+      },
+      {
+        "path": "edital-de-contrata-o-n-03-2024-474d169b5c1843debc27c479c48610ca.pdf",
+        "size": 100044,
+        "mimetype": "application/pdf",
+        "eTag": "\"d6d9652dadccec8fb372fdf6380fa6f6\"",
+        "created_at": "2026-04-28T18:26:20.850Z"
+      },
+      {
+        "path": "edital-de-contrata-o-n-03-2024-484d99a932794f26bf1982ac5fd638da.pdf",
+        "size": 89203,
+        "mimetype": "application/pdf",
+        "eTag": "\"6645dff33f3c6ad8ae513af046184889\"",
+        "created_at": "2026-04-28T18:26:36.814Z"
+      },
+      {
+        "path": "edital-de-contrata-o-n-03-2024-4c916b69e51040eb89b5eda6a173a851.pdf",
+        "size": 608697,
+        "mimetype": "application/pdf",
+        "eTag": "\"26965c5066d79cf41b5b25359ca59727\"",
+        "created_at": "2026-04-28T18:26:24.978Z"
+      },
+      {
+        "path": "edital-de-contrata-o-n-03-2024-521753176f0f4b21bb93a8cd547d84fb.pdf",
+        "size": 88884,
+        "mimetype": "application/pdf",
+        "eTag": "\"9b460a0efeb00f8154e1b408b83aaaa4\"",
+        "created_at": "2026-04-28T18:26:35.559Z"
+      },
+      {
+        "path": "edital-de-contrata-o-n-03-2024-576e8e873cf242d2b023abe69852357c.pdf",
+        "size": 105978,
+        "mimetype": "application/pdf",
+        "eTag": "\"20faa85956668b98b1b70d96a1605ffe\"",
+        "created_at": "2026-04-28T18:26:29.150Z"
+      },
+      {
+        "path": "edital-de-contrata-o-n-03-2024-5fc5e2884a1a4e9f8659312d4cecb243.pdf",
+        "size": 156260,
+        "mimetype": "application/pdf",
+        "eTag": "\"6b34da204334335186637b30746c9280\"",
+        "created_at": "2026-04-28T18:26:16.592Z"
+      },
+      {
+        "path": "edital-de-contrata-o-n-03-2024-7400c7430c73422fbcaf45e748a27b33.pdf",
+        "size": 528570,
+        "mimetype": "application/pdf",
+        "eTag": "\"959799a067484d431992aacbb0029ba1\"",
+        "created_at": "2026-04-28T18:26:32.675Z"
+      },
+      {
+        "path": "edital-de-contrata-o-n-03-2024-7472a7d03b5e47d99b51d8c1e00393bc.pdf",
+        "size": 181823,
+        "mimetype": "application/pdf",
+        "eTag": "\"4eedf66aab8b799419d331e247811e33\"",
+        "created_at": "2026-04-28T18:26:03.736Z"
+      },
+      {
+        "path": "edital-de-contrata-o-n-03-2024-b4df77404cbc412693f3a3acfbbff382.pdf",
+        "size": 1436220,
+        "mimetype": "application/pdf",
+        "eTag": "\"60ba3a2c73db3d6c3baad6c13f09f9f7\"",
+        "created_at": "2026-04-28T18:25:48.758Z"
+      },
+      {
+        "path": "edital-de-contrata-o-n-03-2024-ec1f25163d8d441ea22333eba65306b2.pdf",
+        "size": 92340,
+        "mimetype": "application/pdf",
+        "eTag": "\"97442ea6256d433c67fdcf348b1e35fe\"",
+        "created_at": "2026-04-28T18:26:02.212Z"
+      },
+      {
+        "path": "edital-de-contrata-o-n-03-2024-edital-de-contrata-o-n-01-2024.pdf",
+        "size": 4758132,
+        "mimetype": "application/pdf",
+        "eTag": "\"76fc1ccd019a31cbea3763ba03d7d4ed\"",
+        "created_at": "2026-04-28T18:32:07.645Z"
+      },
+      {
+        "path": "edital-de-contrata-o-n-03-2024-edital-de-contrata-o-n-03-2024.pdf",
+        "size": 156260,
+        "mimetype": "application/pdf",
+        "eTag": "\"6b34da204334335186637b30746c9280\"",
+        "created_at": "2026-04-28T18:31:53.231Z"
+      },
+      {
+        "path": "edital-de-contrata-o-n-03-2024-efec792aadab4ebbad0196842c41f260.pdf",
+        "size": 4758132,
+        "mimetype": "application/pdf",
+        "eTag": "\"76fc1ccd019a31cbea3763ba03d7d4ed\"",
+        "created_at": "2026-04-28T18:26:09.409Z"
+      },
+      {
+        "path": "edital-de-contrata-o-n-03-2024-f9a9cea09b7c4d12bb8c4bcfb3e43d88.pdf",
+        "size": 1952141,
+        "mimetype": "application/pdf",
+        "eTag": "\"a9b5546f83d7438f28a07b1e54ef45a9\"",
+        "created_at": "2026-04-28T18:26:00.673Z"
+      },
+      {
+        "path": "edital-de-contrata-o-n-03-2024-objeto-contrata-o-de-pessoa-jur-dica-para-atua.pdf",
+        "size": 100044,
+        "mimetype": "application/pdf",
+        "eTag": "\"d6d9652dadccec8fb372fdf6380fa6f6\"",
+        "created_at": "2026-04-28T18:32:14.485Z"
+      },
+      {
+        "path": "edital-de-contrata-o-n-03-2024-tomada-de-pre-os-n-01-2022.pdf",
+        "size": 89203,
+        "mimetype": "application/pdf",
+        "eTag": "\"6645dff33f3c6ad8ae513af046184889\"",
+        "created_at": "2026-04-28T18:32:26.478Z"
+      },
+      {
+        "path": "edital-de-contrata-o-n-03-2024-tomada-de-pre-os-n-02-2022.pdf",
+        "size": 103493,
+        "mimetype": "application/pdf",
+        "eTag": "\"e355bd0cc284749c8d6ad339995644c1\"",
+        "created_at": "2026-04-28T18:32:19.852Z"
+      },
+      {
+        "path": "edital-de-contrata-o-n-03-2025-.pdf",
+        "size": 84021,
+        "mimetype": "application/pdf",
+        "eTag": "\"da3b0be16cdb90adbe738e03055c5e99\"",
+        "created_at": "2026-04-28T18:05:49.578Z"
+      },
+      {
+        "path": "edital-de-contrata-o-n-03-2025-276ee571042544be8f2fc030b9ec8dca.pdf",
+        "size": 581108,
+        "mimetype": "application/pdf",
+        "eTag": "\"5de215d54aea58d30bd2b4820aec9783\"",
+        "created_at": "2026-04-28T18:23:56.973Z"
+      },
+      {
+        "path": "edital-de-contrata-o-n-03-2025-45c0f9bd5c5f4d4b83747cc04686c1f7.pdf",
+        "size": 2528989,
+        "mimetype": "application/pdf",
+        "eTag": "\"cb05a6dd931b49354384562a02b9b303\"",
+        "created_at": "2026-04-28T18:24:00.742Z"
+      },
+      {
+        "path": "edital-de-contrata-o-n-03-2025-5a815c8d75c142bda290c6640a6acc62.pdf",
+        "size": 104298,
+        "mimetype": "application/pdf",
+        "eTag": "\"3992ac0b5e9da669025cba6a096a91ef\"",
+        "created_at": "2026-04-28T18:24:08.058Z"
+      },
+      {
+        "path": "edital-de-contrata-o-n-03-2025-654a77f3398f4ad0aa455ec74a3596bb.pdf",
+        "size": 136062,
+        "mimetype": "application/pdf",
+        "eTag": "\"1ce421bed9886e611e09369fa5a82573\"",
+        "created_at": "2026-04-28T18:24:04.758Z"
+      },
+      {
+        "path": "edital-de-contrata-o-n-03-2025-7ac1d1cc914c49188442fa791dbc1538.pdf",
+        "size": 136157,
+        "mimetype": "application/pdf",
+        "eTag": "\"c517f21829ab84052d093d1e481a1cc1\"",
+        "created_at": "2026-04-28T18:24:06.476Z"
+      },
+      {
+        "path": "edital-de-contrata-o-n-03-2025-a814b0d43ab8453abf6e77cbc01b2c1c.pdf",
+        "size": 84021,
+        "mimetype": "application/pdf",
+        "eTag": "\"da3b0be16cdb90adbe738e03055c5e99\"",
+        "created_at": "2026-04-28T18:24:09.316Z"
+      },
+      {
+        "path": "edital-de-contrata-o-n-03-2025-bb5da44be18345bfa2a8cb5806af227f.pdf",
+        "size": 2008160,
+        "mimetype": "application/pdf",
+        "eTag": "\"d1962892a837333fe1ba1cad42fa8193\"",
+        "created_at": "2026-04-28T18:24:03.529Z"
+      },
+      {
+        "path": "edital-de-contrata-o-n-03-2025-edital-de-contrata-o-n-03-2025.pdf",
+        "size": 84021,
+        "mimetype": "application/pdf",
+        "eTag": "\"da3b0be16cdb90adbe738e03055c5e99\"",
+        "created_at": "2026-04-28T18:30:18.799Z"
+      },
+      {
+        "path": "edital-de-contrata-o-n-04-2024-.pdf",
+        "size": 82682,
+        "mimetype": "application/pdf",
+        "eTag": "\"1ac59b61e738c8b1da66011f76194d92\"",
+        "created_at": "2026-04-28T18:07:37.835Z"
+      },
+      {
+        "path": "edital-de-contrata-o-n-04-2024-1b2eb31b68974ca8859825db02cdf0a4.pdf",
+        "size": 2949206,
+        "mimetype": "application/pdf",
+        "eTag": "\"5406531f24c0c3eb134361595c9b76cb\"",
+        "created_at": "2026-04-28T18:25:43.584Z"
+      },
+      {
+        "path": "edital-de-contrata-o-n-04-2024-a2d1891082d34933bcbd59368a832390.pdf",
+        "size": 82682,
+        "mimetype": "application/pdf",
+        "eTag": "\"1ac59b61e738c8b1da66011f76194d92\"",
+        "created_at": "2026-04-28T18:25:44.857Z"
+      },
+      {
+        "path": "edital-de-contrata-o-n-04-2024-cbdaacd9f9e841ff8a5f39041ad5e793.pdf",
+        "size": 1493859,
+        "mimetype": "application/pdf",
+        "eTag": "\"f35f1713b8b98c3d35fd21ae5f216fd4\"",
+        "created_at": "2026-04-28T18:25:40.162Z"
+      },
+      {
+        "path": "edital-de-contrata-o-n-04-2024-edital-de-contrata-o-n-04-2024.pdf",
+        "size": 82682,
+        "mimetype": "application/pdf",
+        "eTag": "\"1ac59b61e738c8b1da66011f76194d92\"",
+        "created_at": "2026-04-28T18:31:46.248Z"
+      },
+      {
+        "path": "edital-de-contrata-o-n-05-2024-.pdf",
+        "size": 182359,
+        "mimetype": "application/pdf",
+        "eTag": "\"e907fccab197a861d061c356ff2a3b8e\"",
+        "created_at": "2026-04-28T18:07:26.930Z"
+      },
+      {
+        "path": "edital-de-contrata-o-n-05-2024-186a941f867647c3ba63febde02a3262.pdf",
+        "size": 179791,
+        "mimetype": "application/pdf",
+        "eTag": "\"7e9e21483c8297da8a092ef877d83364\"",
+        "created_at": "2026-04-28T18:25:33.982Z"
+      },
+      {
+        "path": "edital-de-contrata-o-n-05-2024-1b2eb31b68974ca8859825db02cdf0a4.pdf",
+        "size": 2949206,
+        "mimetype": "application/pdf",
+        "eTag": "\"5406531f24c0c3eb134361595c9b76cb\"",
+        "created_at": "2026-04-28T18:25:31.979Z"
+      },
+      {
+        "path": "edital-de-contrata-o-n-05-2024-6b8c0aea9c7d40a6bf0de06f3286b822.pdf",
+        "size": 4534457,
+        "mimetype": "application/pdf",
+        "eTag": "\"4a33a8d94e491148c95b921c07e543af\"",
+        "created_at": "2026-04-28T18:25:27.136Z"
+      },
+      {
+        "path": "edital-de-contrata-o-n-05-2024-edital-de-contrata-o-n-05-2024.pdf",
+        "size": 182359,
+        "mimetype": "application/pdf",
+        "eTag": "\"e907fccab197a861d061c356ff2a3b8e\"",
+        "created_at": "2026-04-28T18:31:37.487Z"
+      },
+      {
+        "path": "edital-de-contrata-o-n-05-2024-fcb8796ecc95453fb09a109e19b2f209.pdf",
+        "size": 182359,
+        "mimetype": "application/pdf",
+        "eTag": "\"e907fccab197a861d061c356ff2a3b8e\"",
+        "created_at": "2026-04-28T18:25:35.483Z"
+      },
+      {
+        "path": "edital-de-contrata-o-n-06-2024-.pdf",
+        "size": 212885,
+        "mimetype": "application/pdf",
+        "eTag": "\"96c0ee9161e9019260713f3bdc0d340e\"",
+        "created_at": "2026-04-28T18:06:52.865Z"
+      },
+      {
+        "path": "edital-de-contrata-o-n-06-2024-22df35f30bca4d088e3ef9d86984c8ac.pdf",
+        "size": 88206,
+        "mimetype": "application/pdf",
+        "eTag": "\"99b3803318b9b3f12c2e02bcbfd8cdab\"",
+        "created_at": "2026-04-28T18:25:18.821Z"
+      },
+      {
+        "path": "edital-de-contrata-o-n-06-2024-261ca29acf5f42e89a8ee7acb2be2223.pdf",
+        "size": 1979267,
+        "mimetype": "application/pdf",
+        "eTag": "\"0782d66a8d689a326fe59c0955bdd1f7\"",
+        "created_at": "2026-04-28T18:25:15.755Z"
+      },
+      {
+        "path": "edital-de-contrata-o-n-06-2024-26ae831f5b1a46df97a068f24e5f494b.pdf",
+        "size": 171997,
+        "mimetype": "application/pdf",
+        "eTag": "\"9b24bdcca89d1621b21277e9749bed77\"",
+        "created_at": "2026-04-28T18:25:17.575Z"
+      },
+      {
+        "path": "edital-de-contrata-o-n-06-2024-3a30e23fbd1d4edba62748665736e837.pdf",
+        "size": 1952141,
+        "mimetype": "application/pdf",
+        "eTag": "\"a9b5546f83d7438f28a07b1e54ef45a9\"",
+        "created_at": "2026-04-28T18:25:12.229Z"
+      },
+      {
+        "path": "edital-de-contrata-o-n-06-2024-46cfb85bc45a4c969586e8cd76b75768.pdf",
+        "size": 425935,
+        "mimetype": "application/pdf",
+        "eTag": "\"0ae097d7aa7b8e8c64b73f265f18ef4d\"",
+        "created_at": "2026-04-28T18:24:55.275Z"
+      },
+      {
+        "path": "edital-de-contrata-o-n-06-2024-887710623e2c4b85928a5d4f4e682641.pdf",
+        "size": 7290670,
+        "mimetype": "application/pdf",
+        "eTag": "\"2bbe593b413f9b39b61ea9da18d8607f-2\"",
+        "created_at": "2026-04-28T18:25:08.071Z"
+      },
+      {
+        "path": "edital-de-contrata-o-n-06-2024-anexo-i-termo-de-refer-ncia.pdf",
+        "size": 7290670,
+        "mimetype": "application/pdf",
+        "eTag": "\"2bbe593b413f9b39b61ea9da18d8607f-2\"",
+        "created_at": "2026-04-28T18:31:23.674Z"
+      },
+      {
+        "path": "edital-de-contrata-o-n-06-2024-c37e71e3b4244491a7c06d8f34e6c0c0.pdf",
+        "size": 447499,
+        "mimetype": "application/pdf",
+        "eTag": "\"a1029cdac75aa9d1aa1eacbe8ddfaf79\"",
+        "created_at": "2026-04-28T18:24:59.755Z"
+      },
+      {
+        "path": "edital-de-contrata-o-n-06-2024-e454d740abf24a29be4e38382fcfb003.pdf",
+        "size": 212885,
+        "mimetype": "application/pdf",
+        "eTag": "\"96c0ee9161e9019260713f3bdc0d340e\"",
+        "created_at": "2026-04-28T18:25:20.468Z"
+      },
+      {
+        "path": "edital-de-contrata-o-n-06-2024-edital-de-contrata-o-n-06-2024.pdf",
+        "size": 212885,
+        "mimetype": "application/pdf",
+        "eTag": "\"96c0ee9161e9019260713f3bdc0d340e\"",
+        "created_at": "2026-04-28T18:31:13.526Z"
+      },
+      {
+        "path": "edital-de-contrata-o-n-06-2024-errata-1-edital-de-contrata-o-n-06-2024.pdf",
+        "size": 425935,
+        "mimetype": "application/pdf",
+        "eTag": "\"0ae097d7aa7b8e8c64b73f265f18ef4d\"",
+        "created_at": "2026-04-28T18:31:15.348Z"
+      },
+      {
+        "path": "edital-de-contrata-o-n-06-2024-errata-1-termo-de-refer-ncia.pdf",
+        "size": 1952141,
+        "mimetype": "application/pdf",
+        "eTag": "\"a9b5546f83d7438f28a07b1e54ef45a9\"",
+        "created_at": "2026-04-28T18:31:26.662Z"
+      },
+      {
+        "path": "edital-de-contrata-o-n-06-2024-errata-2-edital-de-contrata-o-n-06-2024.pdf",
+        "size": 447499,
+        "mimetype": "application/pdf",
+        "eTag": "\"a1029cdac75aa9d1aa1eacbe8ddfaf79\"",
+        "created_at": "2026-04-28T18:31:17.113Z"
+      },
+      {
+        "path": "edital-de-contrata-o-n-06-2024-errata-2-termo-de-refer-ncia.pdf",
+        "size": 1979267,
+        "mimetype": "application/pdf",
+        "eTag": "\"0782d66a8d689a326fe59c0955bdd1f7\"",
+        "created_at": "2026-04-28T18:31:29.284Z"
+      },
+      {
+        "path": "edital-de-contrata-o-n-06-2024-propostas-recebidas.pdf",
+        "size": 171997,
+        "mimetype": "application/pdf",
+        "eTag": "\"9b24bdcca89d1621b21277e9749bed77\"",
+        "created_at": "2026-04-28T18:31:30.576Z"
+      },
+      {
+        "path": "edital-de-contrata-o-n-07-2024-.pdf",
+        "size": 80038,
+        "mimetype": "application/pdf",
+        "eTag": "\"f52a207ce66a86829d754bbfd23b8fe8\"",
+        "created_at": "2026-04-28T18:06:38.987Z"
+      },
+      {
+        "path": "edital-de-contrata-o-n-07-2024-07ffa05d55904a7f818409b2eb3976d1.pdf",
+        "size": 100064,
+        "mimetype": "application/pdf",
+        "eTag": "\"ac16729f7a53ad69ec026211c450c826\"",
+        "created_at": "2026-04-28T18:24:49.591Z"
+      },
+      {
+        "path": "edital-de-contrata-o-n-07-2024-1e7e42e640a8438f9d01bca19da53116.pdf",
+        "size": 1788973,
+        "mimetype": "application/pdf",
+        "eTag": "\"df1a76cefeb7d32a7790deaeb843eee6\"",
+        "created_at": "2026-04-28T18:24:44.821Z"
+      },
+      {
+        "path": "edital-de-contrata-o-n-07-2024-9d52442aded74aa49853c6c27fb4d2ae.pdf",
+        "size": 88138,
+        "mimetype": "application/pdf",
+        "eTag": "\"31394981c33cb2280bd335cb69fd2a96\"",
+        "created_at": "2026-04-28T18:24:51.012Z"
+      },
+      {
+        "path": "edital-de-contrata-o-n-07-2024-anexo-i-e-ii-termo-de-refer-ncia.pdf",
+        "size": 2348798,
+        "mimetype": "application/pdf",
+        "eTag": "\"ed359c3389288de12053a192ae4d339a\"",
+        "created_at": "2026-04-28T18:31:06.453Z"
+      },
+      {
+        "path": "edital-de-contrata-o-n-07-2024-edital-de-contrata-o-n-07-2024.pdf",
+        "size": 1788973,
+        "mimetype": "application/pdf",
+        "eTag": "\"df1a76cefeb7d32a7790deaeb843eee6\"",
+        "created_at": "2026-04-28T18:31:02.396Z"
+      },
+      {
+        "path": "edital-de-contrata-o-n-07-2024-f6200edd23a745ca9f3f765e32438a57.pdf",
+        "size": 2348798,
+        "mimetype": "application/pdf",
+        "eTag": "\"ed359c3389288de12053a192ae4d339a\"",
+        "created_at": "2026-04-28T18:24:48.294Z"
+      },
+      {
+        "path": "edital-de-contrata-o-n-07-2024-f6e556cd7d5f46b88883bf91631ac3cc.pdf",
+        "size": 80038,
+        "mimetype": "application/pdf",
+        "eTag": "\"f52a207ce66a86829d754bbfd23b8fe8\"",
+        "created_at": "2026-04-28T18:24:52.495Z"
+      },
+      {
+        "path": "edital-de-contrata-o-n-07-2024-propostas-recebidas.pdf",
+        "size": 100064,
+        "mimetype": "application/pdf",
+        "eTag": "\"ac16729f7a53ad69ec026211c450c826\"",
+        "created_at": "2026-04-28T18:31:07.753Z"
+      },
+      {
+        "path": "edital-de-contrata-o-n-07-2024-resultado-final.pdf",
+        "size": 88138,
+        "mimetype": "application/pdf",
+        "eTag": "\"31394981c33cb2280bd335cb69fd2a96\"",
+        "created_at": "2026-04-28T18:31:09.157Z"
+      },
+      {
+        "path": "edital-de-contrata-o-n-07-2024-termo-de-homologa-o.pdf",
+        "size": 80038,
+        "mimetype": "application/pdf",
+        "eTag": "\"f52a207ce66a86829d754bbfd23b8fe8\"",
+        "created_at": "2026-04-28T18:31:10.663Z"
+      },
+      {
+        "path": "edital-de-contratacao-n-01-2024-objeto-contratacao-de-pessoa-juridica-para-atuacao-em-projeto-emparceria-com-a-fehidro-2022-ps-cob-160-contrato-035-20.pdf",
+        "size": 4758132,
+        "mimetype": "application/pdf",
+        "eTag": "\"76fc1ccd019a31cbea3763ba03d7d4ed\"",
+        "created_at": "2026-04-28T17:58:32.348Z"
+      },
+      {
+        "path": "edital-de-contratacao-n-01-2025-objeto-contratacao-de-pessoa-juridica-para-atuacao-em-projeto-emparceria-com-a-fehidro-2024-at-cob-187-contrato-152-20-1.pdf",
+        "size": 107720,
+        "mimetype": "application/pdf",
+        "eTag": "\"b184f311f7c0f463c6143e545fecd308\"",
+        "created_at": "2026-04-28T17:56:48.619Z"
+      },
+      {
+        "path": "edital-de-contratacao-n-01-2025-objeto-contratacao-de-pessoa-juridica-para-atuacao-em-projeto-emparceria-com-a-fehidro-2024-at-cob-187-contrato-152-20-2.pdf",
+        "size": 83381,
+        "mimetype": "application/pdf",
+        "eTag": "\"2576bcfa84e90a6d03e2dc051a3f32f8\"",
+        "created_at": "2026-04-28T17:56:51.469Z"
+      },
+      {
+        "path": "edital-de-contratacao-n-01-2025-objeto-contratacao-de-pessoa-juridica-para-atuacao-em-projeto-emparceria-com-a-fehidro-2024-at-cob-187-contrato-152-20-3.pdf",
+        "size": 73847,
+        "mimetype": "application/pdf",
+        "eTag": "\"b50337bf6cbd227aba8d629db32225ef\"",
+        "created_at": "2026-04-28T17:56:53.970Z"
+      },
+      {
+        "path": "edital-de-contratacao-n-01-2025-objeto-contratacao-de-pessoa-juridica-para-atuacao-em-projeto-emparceria-com-a-fehidro-2024-at-cob-187-contrato-152-20.pdf",
+        "size": 83002,
+        "mimetype": "application/pdf",
+        "eTag": "\"42e6e168170c65b50e877cf287168eeb\"",
+        "created_at": "2026-04-28T17:56:45.589Z"
+      },
+      {
+        "path": "edital-de-contratacao-n-01-2025.pdf",
+        "size": 4745181,
+        "mimetype": "application/pdf",
+        "eTag": "\"7615b894abdf82180ba1bd973707c58f\"",
+        "created_at": "2026-04-28T17:56:42.476Z"
+      },
+      {
+        "path": "edital-de-contratacao-n-02-2025-objeto-contratacao-de-pessoa-juridica-para-prestacao-de-servicoes-em-projeto-em-parceria-com-a-fehidro-cbh-ps-2024-ps--1.pdf",
+        "size": 82401,
+        "mimetype": "application/pdf",
+        "eTag": "\"b86ac710f57da1be78436e1789b13024\"",
+        "created_at": "2026-04-28T17:56:29.784Z"
+      },
+      {
+        "path": "edital-de-contratacao-n-02-2025-objeto-contratacao-de-pessoa-juridica-para-prestacao-de-servicoes-em-projeto-em-parceria-com-a-fehidro-cbh-ps-2024-ps--2.pdf",
+        "size": 67473,
+        "mimetype": "application/pdf",
+        "eTag": "\"be638655585d60ba8c93f6312c6ff76c\"",
+        "created_at": "2026-04-28T17:56:32.254Z"
+      },
+      {
+        "path": "edital-de-contratacao-n-02-2025-objeto-contratacao-de-pessoa-juridica-para-prestacao-de-servicoes-em-projeto-em-parceria-com-a-fehidro-cbh-ps-2024-ps-.pdf",
+        "size": 83569,
+        "mimetype": "application/pdf",
+        "eTag": "\"c3cc6d370e916c312a47a1bbf09972ba\"",
+        "created_at": "2026-04-28T17:56:27.092Z"
+      },
+      {
+        "path": "edital-de-contratacao-n-02-2025.pdf",
+        "size": 4903983,
+        "mimetype": "application/pdf",
+        "eTag": "\"19082e00a50761d55ac7b5c1af637883\"",
+        "created_at": "2026-04-28T17:56:24.130Z"
+      },
+      {
+        "path": "edital-de-contratacao-n-03-2024-objeto-contratacao-de-pessoa-juridica-para-atuacao-em-projeto-em-parceria-com-a-fehidro-2023-ps-421-contrato-454-2023--1.pdf",
+        "size": 2949206,
+        "mimetype": "application/pdf",
+        "eTag": "\"5406531f24c0c3eb134361595c9b76cb\"",
+        "created_at": "2026-04-28T17:58:02.274Z"
+      },
+      {
+        "path": "edital-de-contratacao-n-03-2024-objeto-contratacao-de-pessoa-juridica-para-atuacao-em-projeto-em-parceria-com-a-fehidro-2023-ps-421-contrato-454-2023--2.pdf",
+        "size": 82527,
+        "mimetype": "application/pdf",
+        "eTag": "\"84602a9b40596ae09e5bf4c0910fd6f3\"",
+        "created_at": "2026-04-28T17:58:05.191Z"
+      },
+      {
+        "path": "edital-de-contratacao-n-03-2024-objeto-contratacao-de-pessoa-juridica-para-atuacao-em-projeto-em-parceria-com-a-fehidro-2023-ps-421-contrato-454-2023--3.pdf",
+        "size": 1485589,
+        "mimetype": "application/pdf",
+        "eTag": "\"c579a07b6ab68548819c2a095c69e481\"",
+        "created_at": "2026-04-28T17:58:10.592Z"
+      },
+      {
+        "path": "edital-de-contratacao-n-03-2024-objeto-contratacao-de-pessoa-juridica-para-atuacao-em-projeto-em-parceria-com-a-fehidro-2023-ps-421-contrato-454-2023--4.pdf",
+        "size": 1952141,
+        "mimetype": "application/pdf",
+        "eTag": "\"a9b5546f83d7438f28a07b1e54ef45a9\"",
+        "created_at": "2026-04-28T17:58:15.981Z"
+      },
+      {
+        "path": "edital-de-contratacao-n-03-2024-objeto-contratacao-de-pessoa-juridica-para-atuacao-em-projeto-em-parceria-com-a-fehidro-2023-ps-421-contrato-454-2023--5.pdf",
+        "size": 92340,
+        "mimetype": "application/pdf",
+        "eTag": "\"97442ea6256d433c67fdcf348b1e35fe\"",
+        "created_at": "2026-04-28T17:58:18.827Z"
+      },
+      {
+        "path": "edital-de-contratacao-n-03-2024-objeto-contratacao-de-pessoa-juridica-para-atuacao-em-projeto-em-parceria-com-a-fehidro-2023-ps-421-contrato-454-2023--6.pdf",
+        "size": 181823,
+        "mimetype": "application/pdf",
+        "eTag": "\"4eedf66aab8b799419d331e247811e33\"",
+        "created_at": "2026-04-28T17:58:22.054Z"
+      },
+      {
+        "path": "edital-de-contratacao-n-03-2024-objeto-contratacao-de-pessoa-juridica-para-atuacao-em-projeto-em-parceria-com-a-fehidro-2023-ps-421-contrato-454-2023--7.pdf",
+        "size": 155592,
+        "mimetype": "application/pdf",
+        "eTag": "\"972e63987dbb999b0922a38a33d5a999\"",
+        "created_at": "2026-04-28T17:58:35.455Z"
+      },
+      {
+        "path": "edital-de-contratacao-n-03-2024-objeto-contratacao-de-pessoa-juridica-para-atuacao-em-projeto-em-parceria-com-a-fehidro-2023-ps-421-contrato-454-2023--8.pdf",
+        "size": 156260,
+        "mimetype": "application/pdf",
+        "eTag": "\"6b34da204334335186637b30746c9280\"",
+        "created_at": "2026-04-28T17:58:38.790Z"
+      },
+      {
+        "path": "edital-de-contratacao-n-03-2024-objeto-contratacao-de-pessoa-juridica-para-atuacao-em-projeto-em-parceria-com-a-fehidro-2023-ps-421-contrato-454-2023-.pdf",
+        "size": 1436220,
+        "mimetype": "application/pdf",
+        "eTag": "\"60ba3a2c73db3d6c3baad6c13f09f9f7\"",
+        "created_at": "2026-04-28T17:57:57.426Z"
+      },
+      {
+        "path": "edital-de-contratacao-n-03-2025-objeto-contratacao-de-pessoa-juridica-para-atuacao-em-projeto-em-parceria-com-a-fehidro-2024-at-cob-187-contrato-152-2-1.pdf",
+        "size": 2528989,
+        "mimetype": "application/pdf",
+        "eTag": "\"cb05a6dd931b49354384562a02b9b303\"",
+        "created_at": "2026-04-28T17:55:56.578Z"
+      },
+      {
+        "path": "edital-de-contratacao-n-03-2025-objeto-contratacao-de-pessoa-juridica-para-atuacao-em-projeto-em-parceria-com-a-fehidro-2024-at-cob-187-contrato-152-2-2.pdf",
+        "size": 2008160,
+        "mimetype": "application/pdf",
+        "eTag": "\"d1962892a837333fe1ba1cad42fa8193\"",
+        "created_at": "2026-04-28T17:56:02.609Z"
+      },
+      {
+        "path": "edital-de-contratacao-n-03-2025-objeto-contratacao-de-pessoa-juridica-para-atuacao-em-projeto-em-parceria-com-a-fehidro-2024-at-cob-187-contrato-152-2-3.pdf",
+        "size": 136062,
+        "mimetype": "application/pdf",
+        "eTag": "\"1ce421bed9886e611e09369fa5a82573\"",
+        "created_at": "2026-04-28T17:56:05.394Z"
+      },
+      {
+        "path": "edital-de-contratacao-n-03-2025-objeto-contratacao-de-pessoa-juridica-para-atuacao-em-projeto-em-parceria-com-a-fehidro-2024-at-cob-187-contrato-152-2-4.pdf",
+        "size": 136157,
+        "mimetype": "application/pdf",
+        "eTag": "\"c517f21829ab84052d093d1e481a1cc1\"",
+        "created_at": "2026-04-28T17:56:08.333Z"
+      },
+      {
+        "path": "edital-de-contratacao-n-03-2025-objeto-contratacao-de-pessoa-juridica-para-atuacao-em-projeto-em-parceria-com-a-fehidro-2024-at-cob-187-contrato-152-2-5.pdf",
+        "size": 104298,
+        "mimetype": "application/pdf",
+        "eTag": "\"3992ac0b5e9da669025cba6a096a91ef\"",
+        "created_at": "2026-04-28T17:56:11.429Z"
+      },
+      {
+        "path": "edital-de-contratacao-n-03-2025-objeto-contratacao-de-pessoa-juridica-para-atuacao-em-projeto-em-parceria-com-a-fehidro-2024-at-cob-187-contrato-152-2-6.pdf",
+        "size": 84021,
+        "mimetype": "application/pdf",
+        "eTag": "\"da3b0be16cdb90adbe738e03055c5e99\"",
+        "created_at": "2026-04-28T17:56:14.033Z"
+      },
+      {
+        "path": "edital-de-contratacao-n-03-2025-objeto-contratacao-de-pessoa-juridica-para-atuacao-em-projeto-em-parceria-com-a-fehidro-2024-at-cob-187-contrato-152-2.pdf",
+        "size": 581108,
+        "mimetype": "application/pdf",
+        "eTag": "\"5de215d54aea58d30bd2b4820aec9783\"",
+        "created_at": "2026-04-28T17:55:51.228Z"
+      },
+      {
+        "path": "edital-de-contratacao-n-04-2024-objeto-contratacao-de-pessoa-juridica-para-atuacao-em-projeto-em-parceria-com-a-fehidro-2023-ps-421-contrato-454-2023--1.pdf",
+        "size": 2949206,
+        "mimetype": "application/pdf",
+        "eTag": "\"5406531f24c0c3eb134361595c9b76cb\"",
+        "created_at": "2026-04-28T17:57:49.384Z"
+      },
+      {
+        "path": "edital-de-contratacao-n-04-2024-objeto-contratacao-de-pessoa-juridica-para-atuacao-em-projeto-em-parceria-com-a-fehidro-2023-ps-421-contrato-454-2023--2.pdf",
+        "size": 82682,
+        "mimetype": "application/pdf",
+        "eTag": "\"1ac59b61e738c8b1da66011f76194d92\"",
+        "created_at": "2026-04-28T17:57:52.277Z"
+      },
+      {
+        "path": "edital-de-contratacao-n-04-2024-objeto-contratacao-de-pessoa-juridica-para-atuacao-em-projeto-em-parceria-com-a-fehidro-2023-ps-421-contrato-454-2023-.pdf",
+        "size": 1493859,
+        "mimetype": "application/pdf",
+        "eTag": "\"f35f1713b8b98c3d35fd21ae5f216fd4\"",
+        "created_at": "2026-04-28T17:57:43.432Z"
+      },
+      {
+        "path": "edital-de-contratacao-n-05-2024-objeto-contratacao-de-pessoa-juridica-para-atuacao-em-projeto-em-parceria-com-a-fehidro-2023-ps-421-contrato-454-2023--1.pdf",
+        "size": 2949206,
+        "mimetype": "application/pdf",
+        "eTag": "\"5406531f24c0c3eb134361595c9b76cb\"",
+        "created_at": "2026-04-28T17:57:32.501Z"
+      },
+      {
+        "path": "edital-de-contratacao-n-05-2024-objeto-contratacao-de-pessoa-juridica-para-atuacao-em-projeto-em-parceria-com-a-fehidro-2023-ps-421-contrato-454-2023--2.pdf",
+        "size": 179791,
+        "mimetype": "application/pdf",
+        "eTag": "\"7e9e21483c8297da8a092ef877d83364\"",
+        "created_at": "2026-04-28T17:57:36.074Z"
+      },
+      {
+        "path": "edital-de-contratacao-n-05-2024-objeto-contratacao-de-pessoa-juridica-para-atuacao-em-projeto-em-parceria-com-a-fehidro-2023-ps-421-contrato-454-2023--3.pdf",
+        "size": 182359,
+        "mimetype": "application/pdf",
+        "eTag": "\"e907fccab197a861d061c356ff2a3b8e\"",
+        "created_at": "2026-04-28T17:57:38.969Z"
+      },
+      {
+        "path": "edital-de-contratacao-n-05-2024-objeto-contratacao-de-pessoa-juridica-para-atuacao-em-projeto-em-parceria-com-a-fehidro-2023-ps-421-contrato-454-2023-.pdf",
+        "size": 4534457,
+        "mimetype": "application/pdf",
+        "eTag": "\"4a33a8d94e491148c95b921c07e543af\"",
+        "created_at": "2026-04-28T17:57:24.665Z"
+      },
+      {
+        "path": "edital-de-contratacao-n-06-2024-objeto-contratacao-de-pessoa-juridica-para-atuacao-em-projeto-em-parceria-com-a-fehidro-2022-ps-cob-160-contrato-035-2-1.pdf",
+        "size": 212885,
+        "mimetype": "application/pdf",
+        "eTag": "\"96c0ee9161e9019260713f3bdc0d340e\"",
+        "created_at": "2026-04-28T17:57:15.171Z"
+      },
+      {
+        "path": "edital-de-contratacao-n-06-2024-objeto-contratacao-de-pessoa-juridica-para-atuacao-em-projeto-em-parceria-com-a-fehidro-2022-ps-cob-160-contrato-035-2.pdf",
+        "size": 88206,
+        "mimetype": "application/pdf",
+        "eTag": "\"99b3803318b9b3f12c2e02bcbfd8cdab\"",
+        "created_at": "2026-04-28T17:57:12.163Z"
+      },
+      {
+        "path": "edital-de-contratacao-n-06-2024.pdf",
+        "size": 425935,
+        "mimetype": "application/pdf",
+        "eTag": "\"0ae097d7aa7b8e8c64b73f265f18ef4d\"",
+        "created_at": "2026-04-28T17:57:02.577Z"
+      },
+      {
+        "path": "edital-de-contratacao-n-07-2024.pdf",
+        "size": 1788973,
+        "mimetype": "application/pdf",
+        "eTag": "\"df1a76cefeb7d32a7790deaeb843eee6\"",
+        "created_at": "2026-04-28T17:56:59.505Z"
+      },
+      {
+        "path": "errata-1-edital-de-contratacao-n-06-2024.pdf",
+        "size": 425935,
+        "mimetype": "application/pdf",
+        "eTag": "\"0ae097d7aa7b8e8c64b73f265f18ef4d\"",
+        "created_at": "2026-04-28T17:57:05.689Z"
+      },
+      {
+        "path": "errata-2-edital-de-contratacao-n-06-2024.pdf",
+        "size": 447499,
+        "mimetype": "application/pdf",
+        "eTag": "\"a1029cdac75aa9d1aa1eacbe8ddfaf79\"",
+        "created_at": "2026-04-28T17:57:09.494Z"
+      },
+      {
+        "path": "objeto-contratacao-de-pessoa-juridica-para-atuacao-em-projeto-em-parceria-com-a-fehidro-contrato-n-2021-ps-cob-15-na-area-de-comunicacao-com-a-finalid-1.pdf",
+        "size": 234251,
+        "mimetype": "application/pdf",
+        "eTag": "\"478c775b19211ea438d20818db07cc93\"",
+        "created_at": "2026-04-28T17:58:44.662Z"
+      },
+      {
+        "path": "objeto-contratacao-de-pessoa-juridica-para-atuacao-em-projeto-em-parceria-com-a-fehidro-contrato-n-2021-ps-cob-15-na-area-de-comunicacao-com-a-finalid-2.pdf",
+        "size": 100044,
+        "mimetype": "application/pdf",
+        "eTag": "\"d6d9652dadccec8fb372fdf6380fa6f6\"",
+        "created_at": "2026-04-28T17:58:47.305Z"
+      },
+      {
+        "path": "objeto-contratacao-de-pessoa-juridica-para-atuacao-em-projeto-em-parceria-com-a-fehidro-contrato-n-2021-ps-cob-15-na-area-de-comunicacao-com-a-finalid.pdf",
+        "size": 280046,
+        "mimetype": "application/pdf",
+        "eTag": "\"21032f309d2b344fb0b2c66466f122a4\"",
+        "created_at": "2026-04-28T17:58:41.830Z"
+      },
+      {
+        "path": "tomada-de-precos-n-01-2022-objeto-contratacao-de-pessoa-juridica-para-atuacao-em-projeto-em-parceria-com-a-fehidro-contrato-n-2021-ps-cob-15-na-area-d-1.pdf",
+        "size": 234251,
+        "mimetype": "application/pdf",
+        "eTag": "\"478c775b19211ea438d20818db07cc93\"",
+        "created_at": "2026-04-28T17:59:08.064Z"
+      },
+      {
+        "path": "tomada-de-precos-n-01-2022-objeto-contratacao-de-pessoa-juridica-para-atuacao-em-projeto-em-parceria-com-a-fehidro-contrato-n-2021-ps-cob-15-na-area-d-2.pdf",
+        "size": 88884,
+        "mimetype": "application/pdf",
+        "eTag": "\"9b460a0efeb00f8154e1b408b83aaaa4\"",
+        "created_at": "2026-04-28T17:59:11.337Z"
+      },
+      {
+        "path": "tomada-de-precos-n-01-2022-objeto-contratacao-de-pessoa-juridica-para-atuacao-em-projeto-em-parceria-com-a-fehidro-contrato-n-2021-ps-cob-15-na-area-d-3.pdf",
+        "size": 89203,
+        "mimetype": "application/pdf",
+        "eTag": "\"6645dff33f3c6ad8ae513af046184889\"",
+        "created_at": "2026-04-28T17:59:13.909Z"
+      },
+      {
+        "path": "tomada-de-precos-n-01-2022-objeto-contratacao-de-pessoa-juridica-para-atuacao-em-projeto-em-parceria-com-a-fehidro-contrato-n-2021-ps-cob-15-na-area-d.pdf",
+        "size": 528570,
+        "mimetype": "application/pdf",
+        "eTag": "\"959799a067484d431992aacbb0029ba1\"",
+        "created_at": "2026-04-28T17:59:05.000Z"
+      },
+      {
+        "path": "tomada-de-precos-n-02-2022-objeto-contratacao-de-pessoa-juridica-para-atuacao-em-projeto-em-parceria-com-a-fehidro-contrato-n-189-2022-na-area-de-rest-1.pdf",
+        "size": 993206,
+        "mimetype": "application/pdf",
+        "eTag": "\"701db0614254dc0a623f8fa5d91946a7\"",
+        "created_at": "2026-04-28T17:58:55.319Z"
+      },
+      {
+        "path": "tomada-de-precos-n-02-2022-objeto-contratacao-de-pessoa-juridica-para-atuacao-em-projeto-em-parceria-com-a-fehidro-contrato-n-189-2022-na-area-de-rest-2.pdf",
+        "size": 105978,
+        "mimetype": "application/pdf",
+        "eTag": "\"20faa85956668b98b1b70d96a1605ffe\"",
+        "created_at": "2026-04-28T17:58:58.573Z"
+      },
+      {
+        "path": "tomada-de-precos-n-02-2022-objeto-contratacao-de-pessoa-juridica-para-atuacao-em-projeto-em-parceria-com-a-fehidro-contrato-n-189-2022-na-area-de-rest-3.pdf",
+        "size": 103493,
+        "mimetype": "application/pdf",
+        "eTag": "\"e355bd0cc284749c8d6ad339995644c1\"",
+        "created_at": "2026-04-28T17:59:01.330Z"
+      },
+      {
+        "path": "tomada-de-precos-n-02-2022-objeto-contratacao-de-pessoa-juridica-para-atuacao-em-projeto-em-parceria-com-a-fehidro-contrato-n-189-2022-na-area-de-rest.pdf",
+        "size": 608697,
+        "mimetype": "application/pdf",
+        "eTag": "\"26965c5066d79cf41b5b25359ca59727\"",
+        "created_at": "2026-04-28T17:58:50.928Z"
+      }
+    ]
+  },
+  "parceiros": {
+    "count": 0,
+    "totalMB": "0.00",
+    "files": []
+  },
+  "reports": {
+    "count": 50,
+    "totalMB": "551.34",
+    "files": [
+      {
+        "path": "1776174462904-5530740239.pdf",
+        "size": 63713,
+        "mimetype": "application/pdf",
+        "eTag": "\"ca240f508ac14f460fb2989ccd5de64a\"",
+        "created_at": "2026-04-14T13:47:43.252Z"
+      },
+      {
+        "path": "1778612311889-PC ANUAL 2023-2024 VIVEIRO (1).pdf",
+        "size": 6930673,
+        "mimetype": "application/pdf",
+        "eTag": "\"9041e199ba0a8b6acd97de713d9c8a2a-2\"",
+        "created_at": "2026-05-12T18:58:39.994Z"
+      },
+      {
+        "path": "edi-o-01-2021.pdf",
+        "size": 872178,
+        "mimetype": "application/pdf",
+        "eTag": "\"3de43f97fdad2451be03bc176d6a41f9\"",
+        "created_at": "2026-04-29T00:37:21.171Z"
+      },
+      {
+        "path": "edi-o-01-2026.pdf",
+        "size": 4760996,
+        "mimetype": "application/pdf",
+        "eTag": "\"d3082eb48195669b59ab13daed0188ac\"",
+        "created_at": "2026-04-29T00:39:49.866Z"
+      },
+      {
+        "path": "edi-o-02-2021.pdf",
+        "size": 16473814,
+        "mimetype": "application/pdf",
+        "eTag": "\"debfa4154adeab01c8305d98d963ee64-4\"",
+        "created_at": "2026-04-29T00:37:51.194Z"
+      },
+      {
+        "path": "edi-o-02-2025.pdf",
+        "size": 8024494,
+        "mimetype": "application/pdf",
+        "eTag": "\"151526cf8dd0df857c3e5833db567cd8-2\"",
+        "created_at": "2026-04-29T00:39:32.950Z"
+      },
+      {
+        "path": "edi-o-03-2021.pdf",
+        "size": 18691113,
+        "mimetype": "application/pdf",
+        "eTag": "\"abdb74f705ba86b49d61c3311f7ee294-4\"",
+        "created_at": "2026-04-29T00:38:19.066Z"
+      },
+      {
+        "path": "edi-o-04-2021.pdf",
+        "size": 19440145,
+        "mimetype": "application/pdf",
+        "eTag": "\"9f3fb60933ea7290c4226156db34425e-4\"",
+        "created_at": "2026-04-29T00:38:47.981Z"
+      },
+      {
+        "path": "edi-o-04-2025.pdf",
+        "size": 9099026,
+        "mimetype": "application/pdf",
+        "eTag": "\"e988234805723c400d5a559607b3ffc1-2\"",
+        "created_at": "2026-04-29T00:37:40.881Z"
+      },
+      {
+        "path": "edi-o-05-2022.pdf",
+        "size": 42710001,
+        "mimetype": "application/pdf",
+        "eTag": "\"310a754f61d1c020816806d5b04ba84a-9\"",
+        "created_at": "2026-04-29T00:39:26.055Z"
+      },
+      {
+        "path": "edi-o-05-2024.pdf",
+        "size": 4047500,
+        "mimetype": "application/pdf",
+        "eTag": "\"a7706b8b9e3c32fb1ad33e14f274b350\"",
+        "created_at": "2026-04-29T00:37:30.058Z"
+      },
+      {
+        "path": "edi-o-07-2024.pdf",
+        "size": 4800713,
+        "mimetype": "application/pdf",
+        "eTag": "\"32cf063efd3ae509fe224920d3319c70\"",
+        "created_at": "2026-04-29T00:37:55.814Z"
+      },
+      {
+        "path": "edi-o-08-2024.pdf",
+        "size": 2359797,
+        "mimetype": "application/pdf",
+        "eTag": "\"ed38e638947c527cd753099761d92942\"",
+        "created_at": "2026-04-29T00:38:22.573Z"
+      },
+      {
+        "path": "edi-o-08-2025.pdf",
+        "size": 7674526,
+        "mimetype": "application/pdf",
+        "eTag": "\"595a3c459f43fa8d042971b6d756046a-2\"",
+        "created_at": "2026-04-29T00:38:02.243Z"
+      },
+      {
+        "path": "edi-o-09-2025.pdf",
+        "size": 10364080,
+        "mimetype": "application/pdf",
+        "eTag": "\"1a8d73e81457138c5b6c55235374a34f-2\"",
+        "created_at": "2026-04-29T00:38:31.359Z"
+      },
+      {
+        "path": "edi-o-10-2024.pdf",
+        "size": 13587335,
+        "mimetype": "application/pdf",
+        "eTag": "\"df8e532f1e1cf2486fb6f0c6b85edf70-3\"",
+        "created_at": "2026-04-29T00:38:58.469Z"
+      },
+      {
+        "path": "edi-o-10-2025.pdf",
+        "size": 5062242,
+        "mimetype": "application/pdf",
+        "eTag": "\"d27d5dcfb9b73eec7b5e24b2048d8eac\"",
+        "created_at": "2026-04-29T00:39:38.085Z"
+      },
+      {
+        "path": "edi-o-11-2025.pdf",
+        "size": 3850870,
+        "mimetype": "application/pdf",
+        "eTag": "\"7bb4ec9cb14486c265e3b4cf9676e13e\"",
+        "created_at": "2026-04-29T00:39:43.181Z"
+      },
+      {
+        "path": "estatuto-social.pdf",
+        "size": 8656572,
+        "mimetype": "application/pdf",
+        "eTag": "\"041344d67e3c5a60b869515a48c1d6dc-2\"",
+        "created_at": "2026-04-29T00:37:18.760Z"
+      },
+      {
+        "path": "informativos.pdf",
+        "size": 8024494,
+        "mimetype": "application/pdf",
+        "eTag": "\"151526cf8dd0df857c3e5833db567cd8-2\"",
+        "created_at": "2026-04-29T00:20:40.082Z"
+      },
+      {
+        "path": "manual-suin.pdf",
+        "size": 16160239,
+        "mimetype": "application/pdf",
+        "eTag": "\"40511068012bf056cf50e34bb6196dee-4\"",
+        "created_at": "2026-04-29T00:32:42.521Z"
+      },
+      {
+        "path": "material/atas-do-condema.pdf",
+        "size": 7817596,
+        "mimetype": "application/pdf",
+        "eTag": "\"de9d27c884b74d0c1b7256b93ce439a0-2\"",
+        "created_at": "2026-05-03T21:56:50.609Z"
+      },
+      {
+        "path": "material/dados-secundarios-de-especies-de-fauna-e-flora.pdf",
+        "size": 1283644,
+        "mimetype": "application/pdf",
+        "eTag": "\"2e293a475178e56d192e00c7a696e4bf\"",
+        "created_at": "2026-05-03T21:56:36.487Z"
+      },
+      {
+        "path": "material/folder-arvores-raras-na-paisagem.pdf",
+        "size": 6252462,
+        "mimetype": "application/pdf",
+        "eTag": "\"fc77ccf685dd50db297cfedf4fc8825b-2\"",
+        "created_at": "2026-05-03T21:55:27.236Z"
+      },
+      {
+        "path": "material/informativo-fauna-ameacada.pdf",
+        "size": 5303042,
+        "mimetype": "application/pdf",
+        "eTag": "\"c165b1a9972d21bd6c17591bd5a30604-2\"",
+        "created_at": "2026-05-03T21:55:39.593Z"
+      },
+      {
+        "path": "material/informativo-refugio-de-vida-silvestre-do-bicudinho.pdf",
+        "size": 3561903,
+        "mimetype": "application/pdf",
+        "eTag": "\"b41fcda9d7f428cc8c77f51b20b08ac4\"",
+        "created_at": "2026-05-03T21:55:33.619Z"
+      },
+      {
+        "path": "material/plano-de-trabalho.pdf",
+        "size": 3095463,
+        "mimetype": "application/pdf",
+        "eTag": "\"e26b1f774960e97aeca4c993d4cba011\"",
+        "created_at": "2026-05-03T21:55:44.208Z"
+      },
+      {
+        "path": "material/pmma-guararemasp.pdf",
+        "size": 16187985,
+        "mimetype": "application/pdf",
+        "eTag": "\"0089d4d8d4c3203661689a6e6a2f41ea-4\"",
+        "created_at": "2026-05-03T22:02:13.721Z"
+      },
+      {
+        "path": "material/pmma-jacareisp.pdf",
+        "size": 13794096,
+        "mimetype": "application/pdf",
+        "eTag": "\"7f558704ee25849be22b22939933b342-3\"",
+        "created_at": "2026-05-03T22:02:36.439Z"
+      },
+      {
+        "path": "material/pmma-salesopolissp.pdf",
+        "size": 13470835,
+        "mimetype": "application/pdf",
+        "eTag": "\"b1ace7dfdbfc60762605d16a43878321-3\"",
+        "created_at": "2026-05-03T22:03:23.284Z"
+      },
+      {
+        "path": "material/pmma-santa-brancasp.pdf",
+        "size": 12764010,
+        "mimetype": "application/pdf",
+        "eTag": "\"e2586c3ef1d450c8633e968029cea939-3\"",
+        "created_at": "2026-05-03T22:02:59.592Z"
+      },
+      {
+        "path": "material/relatorio-da-oficina-de-diagnostico.pdf",
+        "size": 15008674,
+        "mimetype": "application/pdf",
+        "eTag": "\"ed1c2f50415a802b1ed583d2b4b3753e-3\"",
+        "created_at": "2026-05-03T21:55:58.356Z"
+      },
+      {
+        "path": "material/relatorio-da-oficina-de-programas-de-gestao.pdf",
+        "size": 8819129,
+        "mimetype": "application/pdf",
+        "eTag": "\"e6f6c68604820462c57b52c9f0a61876-2\"",
+        "created_at": "2026-05-03T21:56:31.175Z"
+      },
+      {
+        "path": "material/relatorio-da-oficina-de-zoneamento.pdf",
+        "size": 22466123,
+        "mimetype": "application/pdf",
+        "eTag": "\"ae79bf0ff86ddff9115853fcee70ac9d-5\"",
+        "created_at": "2026-05-03T21:56:18.698Z"
+      },
+      {
+        "path": "material/relatorio-levantamento-preliminar-da-fauna-silvestre.pdf",
+        "size": 33221767,
+        "mimetype": "application/pdf",
+        "eTag": "\"947d70544699cace24a1485fe67de447-7\"",
+        "created_at": "2026-05-03T22:04:14.329Z"
+      },
+      {
+        "path": "portf-lio-de-atividades.pdf",
+        "size": 16033404,
+        "mimetype": "application/pdf",
+        "eTag": "\"4c3d9186c9e32518a4396de7d0863491-4\"",
+        "created_at": "2026-04-29T00:32:27.721Z"
+      },
+      {
+        "path": "portf-lio.pdf",
+        "size": 6930673,
+        "mimetype": "application/pdf",
+        "eTag": "\"9041e199ba0a8b6acd97de713d9c8a2a-2\"",
+        "created_at": "2026-04-29T00:16:05.114Z"
+      },
+      {
+        "path": "presta-o-de-contas-projeto-viver-o-viveiro-2023-2024.pdf",
+        "size": 6930673,
+        "mimetype": "application/pdf",
+        "eTag": "\"9041e199ba0a8b6acd97de713d9c8a2a-2\"",
+        "created_at": "2026-04-29T00:40:15.003Z"
+      },
+      {
+        "path": "relat-rio-de-atividades-2018.pdf",
+        "size": 5305896,
+        "mimetype": "application/pdf",
+        "eTag": "\"64d200ab85d8fd783636c2a993923432-2\"",
+        "created_at": "2026-04-29T00:32:48.053Z"
+      },
+      {
+        "path": "relat-rio-de-atividades-2019.pdf",
+        "size": 18496327,
+        "mimetype": "application/pdf",
+        "eTag": "\"582e6d6eeafe745882524b0359d71de7-4\"",
+        "created_at": "2026-04-29T00:33:02.896Z"
+      },
+      {
+        "path": "relat-rio-de-atividades-2020.pdf",
+        "size": 16433493,
+        "mimetype": "application/pdf",
+        "eTag": "\"94738b41839a3fe149b181d8398b5139-4\"",
+        "created_at": "2026-04-29T00:33:20.157Z"
+      },
+      {
+        "path": "transparencia-listas/resultados/1781283772738-Relat_rio-de-atividades-2018.pdf",
+        "size": 5305896,
+        "mimetype": "application/pdf",
+        "eTag": "\"aef438b2b8b8e70916496487f8c39d23\"",
+        "created_at": "2026-06-12T17:02:54.029Z"
+      },
+      {
+        "path": "transparencia-listas/resultados/1781284014479-Relat_rio-de-atividades-2019-__.pdf",
+        "size": 18496327,
+        "mimetype": "application/pdf",
+        "eTag": "\"460145b9a2a71142ffd416805dfeb779-2\"",
+        "created_at": "2026-06-12T17:06:58.790Z"
+      },
+      {
+        "path": "transparencia-listas/resultados/1781284033055-Relat_rio_2020_vers_o_final__1__compressed.pdf",
+        "size": 16433493,
+        "mimetype": "application/pdf",
+        "eTag": "\"ae9b843e3f7d35f154779fc3b851129c\"",
+        "created_at": "2026-06-12T17:07:16.578Z"
+      },
+      {
+        "path": "transparencia-listas/resultados/1781284159488-Relat_rio_2021_-_Vers_o_final_compressed.pdf",
+        "size": 8152049,
+        "mimetype": "application/pdf",
+        "eTag": "\"23ed60d063a595d4c0e83f64c872f856\"",
+        "created_at": "2026-06-12T17:09:20.943Z"
+      },
+      {
+        "path": "transparencia-listas/resultados/1781284266373-Relat_rio_2022_-_Vers_o_inicial_completa___3__compressed__1_.pdf",
+        "size": 4410613,
+        "mimetype": "application/pdf",
+        "eTag": "\"7a1ba862c730e030f8279cd6f7a834b2\"",
+        "created_at": "2026-06-12T17:11:07.002Z"
+      },
+      {
+        "path": "transparencia-listas/resultados/1781284441357-Relat_rio_2023_-_V2_compressed.pdf",
+        "size": 16385197,
+        "mimetype": "application/pdf",
+        "eTag": "\"3994e2f51d2f82ad55ccfa0ab067440b\"",
+        "created_at": "2026-06-12T17:14:05.509Z"
+      },
+      {
+        "path": "transparencia-listas/resultados/1781284454367-Relat_rio_2024_-_V2_compressed.pdf",
+        "size": 5355160,
+        "mimetype": "application/pdf",
+        "eTag": "\"54b4401ee599b3738f01a74972032523\"",
+        "created_at": "2026-06-12T17:14:15.890Z"
+      },
+      {
+        "path": "transparencia/lgpd-1781281294782-Pol_tica_e_Manual_de_Boas_Pr_ticas_e_Governan_a_de_Prote__o_de_Dados_Pessoais.pdf",
+        "size": 6826893,
+        "mimetype": "application/pdf",
+        "eTag": "\"bcd57030928326dc0c3fc00f37d7aaac\"",
+        "created_at": "2026-06-12T16:21:36.409Z"
+      },
+      {
+        "path": "transparencia/portfolio-1781281507698-portf_lio_suin__v2.pdf",
+        "size": 51922460,
+        "mimetype": "application/pdf",
+        "eTag": "\"16abed14db509bb64222388b3cd1037c-4\"",
+        "created_at": "2026-06-12T16:25:17.122Z"
+      }
+    ]
+  }
+}

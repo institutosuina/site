@@ -70,7 +70,22 @@ const AdminEmailMarketing = () => {
           target_audience: finalAudience,
         },
       });
-      if (error) throw error;
+      if (error) {
+        // Quando a função retorna 4xx/5xx, o supabase-js entrega um
+        // FunctionsHttpError com .message genérico ("non-2xx status code").
+        // A mensagem real está no corpo da resposta (error.context).
+        let realMessage = error.message;
+        try {
+          const ctx = (error as any)?.context;
+          if (ctx && typeof ctx.json === "function") {
+            const parsed = await ctx.json();
+            if (parsed?.error) realMessage = parsed.error;
+          }
+        } catch {
+          // corpo não era JSON — mantém a mensagem original
+        }
+        throw new Error(realMessage);
+      }
       if (data?.error) throw new Error(data.error);
       return data as { ok: boolean; count: number; resend_id?: string };
     },
