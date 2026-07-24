@@ -1,11 +1,11 @@
 // Edge Function: send-email
 // Chamada direto do admin via supabase.functions.invoke("send-email", { body: {...} })
-// Envia via Resend e grava histórico em emails_enviados.
+// Envia via Amazon SES e grava histórico em emails_enviados.
 
 import { serve } from "https://deno.land/std@0.190.0/http/server.ts";
 import { createClient } from "https://esm.sh/@supabase/supabase-js@2";
+import { assertSesConfigured, sendEmailViaSes } from "../_shared/ses.ts";
 
-const RESEND_API_KEY = Deno.env.get("RESEND_API_KEY");
 const SUPABASE_URL = Deno.env.get("SUPABASE_URL");
 const SUPABASE_SERVICE_ROLE_KEY = Deno.env.get("SUPABASE_SERVICE_ROLE_KEY");
 
@@ -24,9 +24,7 @@ serve(async (req) => {
   }
 
   try {
-    if (!RESEND_API_KEY) {
-      throw new Error("RESEND_API_KEY não está configurada nos secrets da função");
-    }
+    assertSesConfigured();
 
     const payload = await req.json().catch(() => ({}));
     const { subject, body, emails, target_audience } = payload;
@@ -41,7 +39,7 @@ serve(async (req) => {
       throw new Error("Adicione ao menos um destinatário");
     }
 
-    // Resend aceita no máximo 50 destinatários (to+cc+bcc) por chamada,
+    // O SES aceita no máximo 50 destinatários (to+cc+bcc) por chamada,
     // então listas maiores precisam ser divididas em lotes.
     const BATCH_SIZE = 45;
     const batches: string[][] = [];
@@ -50,48 +48,33 @@ serve(async (req) => {
     }
 
     let sentCount = 0;
-    let lastResendId: string | undefined;
+    let lastMessageId: string | undefined;
 
     for (let i = 0; i < batches.length; i++) {
       const batch = batches[i];
 
-      const resendRes = await fetch("https://api.resend.com/emails", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${RESEND_API_KEY}`,
-        },
-        body: JSON.stringify({
+      try {
+        const { messageId } = await sendEmailViaSes({
           from: FROM_ADDRESS,
           to: [ARCHIVE_TO],
           bcc: batch,
           subject: subject.trim(),
           html: body,
-        }),
-      });
-
-      const resendData = await resendRes.json().catch(() => ({}));
-
-      if (!resendRes.ok) {
-        const msg =
-          resendData?.message ||
-          resendData?.error ||
-          `Resend retornou status ${resendRes.status}`;
+        });
+        lastMessageId = messageId;
+      } catch (batchError: any) {
         throw new Error(
-          `Falha no lote ${i + 1}/${batches.length}: ${msg}. ${sentCount} destinatário(s) já receberam com sucesso antes da falha.`,
+          `Falha no lote ${i + 1}/${batches.length}: ${batchError?.message || batchError}. ${sentCount} destinatário(s) já receberam com sucesso antes da falha.`,
         );
       }
 
       sentCount += batch.length;
-      lastResendId = resendData?.id;
 
-      // Respeita o rate limit do Resend (2 req/s) entre lotes.
+      // Espaça as chamadas entre lotes para respeitar o limite de envio do SES.
       if (i < batches.length - 1) {
         await new Promise((resolve) => setTimeout(resolve, 550));
       }
     }
-
-    const resendData = { id: lastResendId };
 
     // Grava histórico (não bloqueia o sucesso do envio se falhar)
     if (SUPABASE_URL && SUPABASE_SERVICE_ROLE_KEY) {
@@ -113,7 +96,7 @@ serve(async (req) => {
       JSON.stringify({
         ok: true,
         count: emails.length,
-        resend_id: resendData?.id,
+        ses_message_id: lastMessageId,
       }),
       {
         headers: { ...corsHeaders, "Content-Type": "application/json" },

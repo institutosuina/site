@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import { supabase } from "@/integrations/supabase/client";
 import { Send, Mail, Trash2, Upload, Plus, X, Save, FolderOpen } from "lucide-react";
@@ -17,15 +17,31 @@ import {
   Select, SelectContent, SelectItem, SelectTrigger, SelectValue,
 } from "@/components/ui/select";
 import type { Tables } from "@/integrations/supabase/types";
-import TiptapEditor from "@/components/admin/TiptapEditor";
+import EmailBuilder from "@/components/admin/email-builder/EmailBuilder";
+import { renderEmailHtml } from "@/lib/email/render";
+import type { EmailDoc } from "@/lib/email/types";
 
 type EmailSent = Tables<"emails_enviados">;
 const s = { fontFamily: "'Inter', sans-serif" } as const;
 
+const DOX_DEFAULTS_KEY = "dox-email-defaults";
+
+// Configurações do molde DOX que valem a pena reaproveitar entre campanhas
+// (rodapé fixo, link de descadastro, "ver no navegador").
+const loadDoxDefaults = (): Partial<EmailDoc> => {
+  try {
+    return JSON.parse(localStorage.getItem(DOX_DEFAULTS_KEY) || "{}");
+  } catch {
+    return {};
+  }
+};
+
+const emptyDoc = (): EmailDoc => ({ blocks: [], showViewInBrowser: false, ...loadDoxDefaults() });
+
 const AdminEmailMarketing = () => {
   const [composeOpen, setComposeOpen] = useState(false);
   const [subject, setSubject] = useState("");
-  const [body, setBody] = useState("");
+  const [doc, setDoc] = useState<EmailDoc>(emptyDoc);
   const [audience, setAudience] = useState("");
   const [customAudience, setCustomAudience] = useState("");
   const [recipients, setRecipients] = useState<string[]>([]);
@@ -59,13 +75,15 @@ const AdminEmailMarketing = () => {
   const sendMutation = useMutation({
     mutationFn: async () => {
       const finalAudience = audience === "__custom" ? customAudience.trim() : audience;
-      if (!subject.trim() || !body.trim() || !finalAudience) throw new Error("Preencha todos os campos");
+      if (!subject.trim() || !doc.blocks.length || !finalAudience) throw new Error("Preencha todos os campos");
       if (!recipients.length) throw new Error("Adicione ao menos um destinatário");
+
+      const html = renderEmailHtml(doc);
 
       const { data, error } = await supabase.functions.invoke("send-email", {
         body: {
           subject: subject.trim(),
-          body: body.trim(),
+          body: html,
           emails: recipients,
           target_audience: finalAudience,
         },
@@ -87,7 +105,7 @@ const AdminEmailMarketing = () => {
         throw new Error(realMessage);
       }
       if (data?.error) throw new Error(data.error);
-      return data as { ok: boolean; count: number; resend_id?: string };
+      return data as { ok: boolean; count: number; ses_message_id?: string };
     },
     onSuccess: (data) => {
       queryClient.invalidateQueries({ queryKey: ["admin-emails-sent"] });
@@ -146,7 +164,7 @@ const AdminEmailMarketing = () => {
   const closeCompose = () => {
     setComposeOpen(false);
     setSubject("");
-    setBody("");
+    setDoc(emptyDoc());
     setAudience("");
     setCustomAudience("");
     setRecipients([]);
@@ -193,7 +211,18 @@ const AdminEmailMarketing = () => {
   };
 
   const finalAudience = audience === "__custom" ? customAudience.trim() : audience;
-  const canSend = subject.trim() && body.trim() && finalAudience;
+  const canSend = subject.trim() && doc.blocks.length > 0 && finalAudience;
+
+  // Reaproveita as configurações do molde DOX (rodapé, descadastro, "ver no
+  // navegador") na próxima campanha, sem precisar reconfigurar tudo.
+  useEffect(() => {
+    const { footerImageUrl, footerImageHref, unsubscribeUrl, showViewInBrowser } = doc;
+    localStorage.setItem(
+      DOX_DEFAULTS_KEY,
+      JSON.stringify({ footerImageUrl, footerImageHref, unsubscribeUrl, showViewInBrowser }),
+    );
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [doc.footerImageUrl, doc.footerImageHref, doc.unsubscribeUrl, doc.showViewInBrowser]);
 
   return (
     <div className="admin-scope space-y-6 font-['Inter',sans-serif] text-sm">
@@ -310,7 +339,7 @@ const AdminEmailMarketing = () => {
 
       {/* Compose Dialog */}
       <Dialog open={composeOpen} onOpenChange={setComposeOpen}>
-        <DialogContent className="admin-scope max-w-2xl max-h-[90vh] overflow-y-auto text-sm">
+        <DialogContent className="admin-scope max-w-6xl max-h-[92vh] overflow-y-auto text-sm">
           <DialogHeader>
             <DialogTitle style={{ ...s, fontSize: "1.125rem" }}>Nova Campanha</DialogTitle>
             <DialogDescription style={{ ...s, fontSize: "0.8125rem" }}>
@@ -407,14 +436,10 @@ const AdminEmailMarketing = () => {
               <Input value={subject} onChange={(e) => setSubject(e.target.value)} placeholder="Assunto do e-mail" className="!text-sm" />
             </div>
 
-            {/* Body */}
+            {/* Body — construtor de blocos (molde DOX) */}
             <div className="space-y-2">
               <label style={{ ...s, fontSize: "0.8125rem" }} className="font-medium text-zinc-700">Conteúdo</label>
-              <TiptapEditor 
-                content={body} 
-                onChange={(html) => setBody(html)} 
-                storageBucket="covers"
-              />
+              <EmailBuilder doc={doc} onChange={setDoc} />
             </div>
           </div>
           <DialogFooter>

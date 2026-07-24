@@ -1,10 +1,9 @@
 // Edge Function: notify-contact
 // Chamada pelo formulário público de contato (src/pages/Contato.tsx) depois do
-// registro ser salvo na tabela "contatos". Envia um e-mail de aviso via Resend.
+// registro ser salvo na tabela "contatos". Envia um e-mail de aviso via Amazon SES.
 
 import { serve } from "https://deno.land/std@0.190.0/http/server.ts";
-
-const RESEND_API_KEY = Deno.env.get("RESEND_API_KEY");
+import { assertSesConfigured, sendEmailViaSes } from "../_shared/ses.ts";
 
 const FROM_ADDRESS = "Instituto Suinã <contato@institutosuina.org>";
 const NOTIFY_TO = "comunicacao@institutosuina.org";
@@ -27,9 +26,7 @@ serve(async (req) => {
   }
 
   try {
-    if (!RESEND_API_KEY) {
-      throw new Error("RESEND_API_KEY não está configurada nos secrets da função");
-    }
+    assertSesConfigured();
 
     const payload = await req.json().catch(() => ({}));
     const { nome, email, mensagem } = payload;
@@ -52,33 +49,16 @@ serve(async (req) => {
       <p>${escapeHtml(mensagem.trim()).replace(/\n/g, "<br/>")}</p>
     `;
 
-    const resendRes = await fetch("https://api.resend.com/emails", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${RESEND_API_KEY}`,
-      },
-      body: JSON.stringify({
-        from: FROM_ADDRESS,
-        to: [NOTIFY_TO],
-        reply_to: email.trim(),
-        subject: `Novo contato pelo site: ${nome.trim()}`,
-        html,
-      }),
+    const { messageId } = await sendEmailViaSes({
+      from: FROM_ADDRESS,
+      to: [NOTIFY_TO],
+      replyTo: [email.trim()],
+      subject: `Novo contato pelo site: ${nome.trim()}`,
+      html,
     });
 
-    const resendData = await resendRes.json().catch(() => ({}));
-
-    if (!resendRes.ok) {
-      const msg =
-        resendData?.message ||
-        resendData?.error ||
-        `Resend retornou status ${resendRes.status}`;
-      throw new Error(msg);
-    }
-
     return new Response(
-      JSON.stringify({ ok: true, resend_id: resendData?.id }),
+      JSON.stringify({ ok: true, ses_message_id: messageId }),
       {
         headers: { ...corsHeaders, "Content-Type": "application/json" },
         status: 200,
