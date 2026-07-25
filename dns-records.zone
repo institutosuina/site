@@ -1,0 +1,17 @@
+; Amazon SES DNS records for institutosuina.org
+; Converted from dns-records.csv — BIND zone-file format
+; TTL 3600 (1h); adjust if your DNS host requires a different value
+
+; --- DKIM (domain verification / signing) ---
+4mooel6ne5gtp2rd5ijtujnadijnse5z._domainkey.institutosuina.org. 3600 IN CNAME 4mooel6ne5gtp2rd5ijtujnadijnse5z.dkim.amazonses.com.
+7u3w2anz3l2x3bxblcam2fzl6sgyzj6l._domainkey.institutosuina.org. 3600 IN CNAME 7u3w2anz3l2x3bxblcam2fzl6sgyzj6l.dkim.amazonses.com.
+wjiieaykqkghlc6zey2zpm2wgjxro2e2._domainkey.institutosuina.org. 3600 IN CNAME wjiieaykqkghlc6zey2zpm2wgjxro2e2.dkim.amazonses.com.
+
+; --- MX (custom MAIL FROM domain: noreply.institutosuina.org) ---
+noreply.institutosuina.org. 3600 IN MX 10 feedback-smtp.us-east-2.amazonses.com.
+
+; --- SPF for the MAIL FROM domain ---
+noreply.institutosuina.org. 3600 IN TXT "v=spf1 include:amazonses.com ~all"
+
+; --- DMARC ---
+_dmarc.institutosuina.org. 3600 IN TXT "v=DMARC1; p=none;"
