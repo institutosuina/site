@@ -1,11 +1,11 @@
 import { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import { supabase } from "@/integrations/supabase/client";
-import { Send, Mail, Trash2, Upload, Plus, X, Save, FolderOpen } from "lucide-react";
+import { Send, Mail, Trash2, Users, ArrowLeft, ArrowRight, Check } from "lucide-react";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Skeleton } from "@/components/ui/skeleton";
-import { Textarea } from "@/components/ui/textarea";
 import { toast } from "@/hooks/use-toast";
 import {
   Table, TableBody, TableCell, TableHead, TableHeader, TableRow,
@@ -13,15 +13,13 @@ import {
 import {
   Dialog, DialogContent, DialogHeader, DialogTitle, DialogFooter, DialogDescription,
 } from "@/components/ui/dialog";
-import {
-  Select, SelectContent, SelectItem, SelectTrigger, SelectValue,
-} from "@/components/ui/select";
 import type { Tables } from "@/integrations/supabase/types";
 import EmailBuilder from "@/components/admin/email-builder/EmailBuilder";
 import { renderEmailHtml } from "@/lib/email/render";
 import type { EmailDoc } from "@/lib/email/types";
 
 type EmailSent = Tables<"emails_enviados">;
+type Publico = { id: string; name: string; emails: string[]; created_at: string };
 const s = { fontFamily: "'Inter', sans-serif" } as const;
 
 const DOX_DEFAULTS_KEY = "dox-email-defaults";
@@ -40,15 +38,10 @@ const emptyDoc = (): EmailDoc => ({ blocks: [], showViewInBrowser: false, ...loa
 
 const AdminEmailMarketing = () => {
   const [composeOpen, setComposeOpen] = useState(false);
+  const [step, setStep] = useState<1 | 2>(1);
   const [subject, setSubject] = useState("");
   const [doc, setDoc] = useState<EmailDoc>(emptyDoc);
-  const [audience, setAudience] = useState("");
-  const [customAudience, setCustomAudience] = useState("");
-  const [recipients, setRecipients] = useState<string[]>([]);
-  const [recipientInput, setRecipientInput] = useState("");
-  const [selectedListId, setSelectedListId] = useState<string>("");
-  const [saveListName, setSaveListName] = useState("");
-  const [saveListOpen, setSaveListOpen] = useState(false);
+  const [selectedPublicoId, setSelectedPublicoId] = useState("");
   const queryClient = useQueryClient();
 
   const { data: emails, isLoading } = useQuery({
@@ -60,23 +53,26 @@ const AdminEmailMarketing = () => {
     },
   });
 
-  // Saved recipient lists
-  const { data: savedLists, isLoading: listsLoading } = useQuery({
+  // Públicos cadastrados (listas de destinatários) — geridos em /admin/email-marketing/publicos.
+  const { data: publicos, isLoading: publicosLoading } = useQuery({
     queryKey: ["admin-recipient-lists"],
     queryFn: async () => {
       const { data, error } = await supabase.from("listas_destinatarios").select("*").order("created_at", { ascending: false });
       if (error) throw error;
-      return data as { id: string; name: string; emails: string[]; created_at: string }[];
+      return data as Publico[];
     },
   });
 
   const audiences = Array.from(new Set(emails?.map((e) => e.target_audience) || []));
 
+  const selectedPublico = publicos?.find((p) => p.id === selectedPublicoId);
+  const recipients = selectedPublico?.emails ?? [];
+  const finalAudience = selectedPublico?.name ?? "";
+
   const sendMutation = useMutation({
     mutationFn: async () => {
-      const finalAudience = audience === "__custom" ? customAudience.trim() : audience;
       if (!subject.trim() || !doc.blocks.length || !finalAudience) throw new Error("Preencha todos os campos");
-      if (!recipients.length) throw new Error("Adicione ao menos um destinatário");
+      if (!recipients.length) throw new Error("O público selecionado não tem destinatários");
 
       const html = renderEmailHtml(doc);
 
@@ -110,7 +106,7 @@ const AdminEmailMarketing = () => {
     onSuccess: (data) => {
       queryClient.invalidateQueries({ queryKey: ["admin-emails-sent"] });
       const count = data?.count ?? recipients.length;
-      toast({ title: `✅ E-mail enviado para ${count} destinatário(s)!` });
+      toast({ title: `✅ Campanha enviada para ${count} destinatário(s)!` });
       closeCompose();
     },
     onError: (err: any) => toast({
@@ -131,87 +127,16 @@ const AdminEmailMarketing = () => {
     },
   });
 
-  const saveListMutation = useMutation({
-    mutationFn: async () => {
-      if (!saveListName.trim()) throw new Error("Nome obrigatório");
-      if (!recipients.length) throw new Error("Lista vazia");
-      const { error } = await supabase.from("listas_destinatarios").insert({
-        name: saveListName.trim(),
-        emails: recipients,
-      });
-      if (error) throw error;
-    },
-    onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ["admin-recipient-lists"] });
-      toast({ title: "✅ Lista salva com sucesso!" });
-      setSaveListOpen(false);
-      setSaveListName("");
-    },
-    onError: (err: Error) => toast({ title: err.message || "Erro ao salvar lista", variant: "destructive" }),
-  });
-
-  const deleteListMutation = useMutation({
-    mutationFn: async (id: string) => {
-      const { error } = await supabase.from("listas_destinatarios").delete().eq("id", id);
-      if (error) throw error;
-    },
-    onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ["admin-recipient-lists"] });
-      toast({ title: "✅ Lista excluída." });
-    },
-  });
-
   const closeCompose = () => {
     setComposeOpen(false);
+    setStep(1);
     setSubject("");
     setDoc(emptyDoc());
-    setAudience("");
-    setCustomAudience("");
-    setRecipients([]);
-    setRecipientInput("");
-    setSelectedListId("");
+    setSelectedPublicoId("");
   };
 
-  const addRecipient = () => {
-    const email = recipientInput.trim().toLowerCase();
-    if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
-      toast({ title: "E-mail inválido", variant: "destructive" });
-      return;
-    }
-    if (recipients.includes(email)) return;
-    setRecipients([...recipients, email]);
-    setRecipientInput("");
-    setSelectedListId("");
-  };
-
-  const loadSavedList = (listId: string) => {
-    const list = savedLists?.find((l) => l.id === listId);
-    if (!list) return;
-    const unique = Array.from(new Set(list.emails.map((em) => em.toLowerCase())));
-    setRecipients(unique);
-    setSelectedListId(listId);
-    toast({ title: `✅ Lista "${list.name}" carregada (${unique.length} e-mails)` });
-  };
-
-  const handleImportCSV = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const file = e.target.files?.[0];
-    if (!file) return;
-    const reader = new FileReader();
-    reader.onload = (event) => {
-      const text = event.target?.result as string;
-      const emailRegex = /[^\s@,;]+@[^\s@,;]+\.[^\s@,;]+/g;
-      const found = text.match(emailRegex) || [];
-      const unique = Array.from(new Set([...recipients, ...found.map((em) => em.toLowerCase())]));
-      setRecipients(unique);
-      setSelectedListId("");
-      toast({ title: `✅ ${found.length} e-mail(s) importado(s)` });
-    };
-    reader.readAsText(file);
-    e.target.value = "";
-  };
-
-  const finalAudience = audience === "__custom" ? customAudience.trim() : audience;
-  const canSend = subject.trim() && doc.blocks.length > 0 && finalAudience;
+  const step1Valid = Boolean(subject.trim() && selectedPublicoId && recipients.length > 0);
+  const canSend = step1Valid && doc.blocks.length > 0;
 
   // Reaproveita as configurações do molde DOX (rodapé, descadastro, "ver no
   // navegador") na próxima campanha, sem precisar reconfigurar tudo.
@@ -229,18 +154,25 @@ const AdminEmailMarketing = () => {
       <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
         <div>
           <h2 className="font-bold text-zinc-800" style={{ ...s, fontSize: "1.5rem" }}>E-mail Marketing</h2>
-          <p style={{ ...s, fontSize: "0.875rem" }} className="text-zinc-500 mt-1">Crie campanhas, defina nichos e importe listas</p>
+          <p style={{ ...s, fontSize: "0.875rem" }} className="text-zinc-500 mt-1">Crie campanhas e envie para seus públicos</p>
         </div>
-        <Button onClick={() => setComposeOpen(true)} className="bg-emerald-500 hover:bg-emerald-600 text-white !text-sm">
-          <Send className="h-4 w-4 mr-2" /> Nova Campanha
-        </Button>
+        <div className="flex items-center gap-2">
+          <Link to="/admin/email-marketing/publicos">
+            <Button variant="outline" className="!text-sm">
+              <Users className="h-4 w-4 mr-2" /> Públicos
+            </Button>
+          </Link>
+          <Button onClick={() => { setStep(1); setComposeOpen(true); }} className="bg-emerald-500 hover:bg-emerald-600 text-white !text-sm">
+            <Send className="h-4 w-4 mr-2" /> Nova Campanha
+          </Button>
+        </div>
       </div>
 
       {/* Stats */}
       <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
         {[
           { label: "Total enviados", value: emails?.length || 0 },
-          { label: "Listas salvas", value: savedLists?.length || 0 },
+          { label: "Públicos", value: publicos?.length || 0 },
           ...audiences.slice(0, 2).map((a) => ({
             label: a,
             value: emails?.filter((e) => e.target_audience === a).length || 0,
@@ -255,40 +187,6 @@ const AdminEmailMarketing = () => {
             )}
           </div>
         ))}
-      </div>
-
-      {/* Saved Lists */}
-      <div className="bg-white rounded-xl border border-zinc-200 overflow-hidden">
-        <div className="px-6 py-4 border-b border-zinc-100 flex items-center justify-between">
-          <h3 className="font-bold text-zinc-800" style={{ ...s, fontSize: "0.9375rem" }}>
-            <FolderOpen className="h-4 w-4 inline mr-2 text-zinc-400" />
-            Listas de Destinatários Salvas
-          </h3>
-        </div>
-        {listsLoading ? (
-          <div className="p-6 space-y-3">{[1, 2].map((i) => <Skeleton key={i} className="h-10 w-full" />)}</div>
-        ) : !savedLists?.length ? (
-          <div className="text-center py-10">
-            <p style={{ ...s, fontSize: "0.875rem" }} className="text-zinc-400">Nenhuma lista salva ainda. Crie uma campanha e salve a lista de destinatários.</p>
-          </div>
-        ) : (
-          <div className="divide-y divide-zinc-100">
-            {savedLists.map((list) => (
-              <div key={list.id} className="px-6 py-3 flex items-center justify-between hover:bg-zinc-50">
-                <div>
-                  <p className="font-medium text-zinc-800" style={{ ...s, fontSize: "0.875rem" }}>{list.name}</p>
-                  <p className="text-zinc-400" style={{ ...s, fontSize: "0.75rem" }}>
-                    {list.emails.length} destinatário(s) · {new Date(list.created_at).toLocaleDateString("pt-BR")}
-                  </p>
-                </div>
-                <Button variant="ghost" size="icon" className="h-8 w-8 text-zinc-400 hover:text-red-600"
-                  onClick={() => deleteListMutation.mutate(list.id)}>
-                  <Trash2 className="h-4 w-4" />
-                </Button>
-              </div>
-            ))}
-          </div>
-        )}
       </div>
 
       {/* History */}
@@ -308,7 +206,7 @@ const AdminEmailMarketing = () => {
             <TableHeader>
               <TableRow className="bg-zinc-50">
                 <TableHead style={{ ...s, fontSize: "0.75rem" }} className="font-bold text-zinc-600">Assunto</TableHead>
-                <TableHead style={{ ...s, fontSize: "0.75rem" }} className="font-bold text-zinc-600">Nicho / Público</TableHead>
+                <TableHead style={{ ...s, fontSize: "0.75rem" }} className="font-bold text-zinc-600">Público</TableHead>
                 <TableHead style={{ ...s, fontSize: "0.75rem" }} className="font-bold text-zinc-600 hidden sm:table-cell">Data</TableHead>
                 <TableHead style={{ ...s, fontSize: "0.75rem" }} className="font-bold text-zinc-600 text-right">Ações</TableHead>
               </TableRow>
@@ -337,140 +235,115 @@ const AdminEmailMarketing = () => {
         )}
       </div>
 
-      {/* Compose Dialog */}
-      <Dialog open={composeOpen} onOpenChange={setComposeOpen}>
+      {/* Assistente de nova campanha */}
+      <Dialog open={composeOpen} onOpenChange={(o) => (o ? setComposeOpen(true) : closeCompose())}>
         <DialogContent className="admin-scope max-w-6xl max-h-[92vh] overflow-y-auto text-sm">
           <DialogHeader>
             <DialogTitle style={{ ...s, fontSize: "1.125rem" }}>Nova Campanha</DialogTitle>
             <DialogDescription style={{ ...s, fontSize: "0.8125rem" }}>
-              Defina o nicho, importe destinatários e redija seu e-mail.
+              {step === 1 ? "Etapa 1 de 2 · Nome e público" : "Etapa 2 de 2 · Monte o e-mail e envie"}
             </DialogDescription>
           </DialogHeader>
-          <div className="space-y-5 py-2">
-            {/* Audience */}
-            <div className="space-y-2">
-              <label style={{ ...s, fontSize: "0.8125rem" }} className="font-medium text-zinc-700">Nicho / Público-alvo</label>
-              <div className="flex flex-wrap gap-2">
-                {audiences.map((a) => (
-                  <button key={a} onClick={() => { setAudience(a); setCustomAudience(""); }}
-                    className={`px-3 py-1.5 rounded-full text-xs font-medium border transition-colors ${audience === a ? "bg-emerald-500 text-white border-emerald-500" : "bg-white text-zinc-600 border-zinc-200 hover:border-emerald-300"}`} style={s}>
-                    {a}
-                  </button>
-                ))}
-                <button onClick={() => setAudience("__custom")}
-                  className={`px-3 py-1.5 rounded-full text-xs font-medium border transition-colors ${audience === "__custom" ? "bg-emerald-500 text-white border-emerald-500" : "bg-white text-zinc-600 border-zinc-200 hover:border-emerald-300"}`} style={s}>
-                  <Plus className="h-3 w-3 inline mr-1" />Criar novo nicho
-                </button>
+
+          {/* Indicador de etapas */}
+          <div className="flex items-center gap-2 pb-1">
+            {[1, 2].map((n) => (
+              <div key={n} className="flex items-center gap-2">
+                <span className={`h-6 w-6 rounded-full flex items-center justify-center text-xs font-bold ${
+                  step >= n ? "bg-emerald-500 text-white" : "bg-zinc-200 text-zinc-500"
+                }`}>{step > n ? <Check className="h-3.5 w-3.5" /> : n}</span>
+                <span style={{ ...s, fontSize: "0.75rem" }} className={step >= n ? "text-zinc-800 font-medium" : "text-zinc-400"}>
+                  {n === 1 ? "Nome e público" : "Construtor"}
+                </span>
+                {n === 1 && <span className="w-8 h-px bg-zinc-200 mx-1" />}
               </div>
-              {audience === "__custom" && (
-                <Input value={customAudience} onChange={(e) => setCustomAudience(e.target.value)}
-                  placeholder="Ex: Parceiros Institucionais, Educadores..." className="!text-sm mt-2" autoFocus />
-              )}
-            </div>
+            ))}
+          </div>
 
-            {/* Recipients */}
-            <div className="space-y-2">
-              <label style={{ ...s, fontSize: "0.8125rem" }} className="font-medium text-zinc-700">Lista de destinatários</label>
+          {/* ETAPA 1 — Nome + Público */}
+          {step === 1 && (
+            <div className="space-y-5 py-2">
+              <div className="space-y-2">
+                <label style={{ ...s, fontSize: "0.8125rem" }} className="font-medium text-zinc-700">Nome da campanha (assunto do e-mail)</label>
+                <Input value={subject} onChange={(e) => setSubject(e.target.value)} placeholder="Ex: Informativo de Julho — Instituto Suinã" className="!text-sm" autoFocus />
+              </div>
 
-              {/* Load saved list */}
-              {savedLists && savedLists.length > 0 && (
-                <div className="flex items-center gap-2">
-                  <Select value={selectedListId} onValueChange={loadSavedList}>
-                    <SelectTrigger className="!text-sm flex-1">
-                      <SelectValue placeholder="Carregar lista salva..." />
-                    </SelectTrigger>
-                    <SelectContent className="admin-scope text-sm">
-                      {savedLists.map((list) => (
-                        <SelectItem key={list.id} value={list.id}>
-                          {list.name} ({list.emails.length} e-mails)
-                        </SelectItem>
-                      ))}
-                    </SelectContent>
-                  </Select>
+              <div className="space-y-2">
+                <div className="flex items-center justify-between">
+                  <label style={{ ...s, fontSize: "0.8125rem" }} className="font-medium text-zinc-700">Público (para quem enviar)</label>
+                  <Link to="/admin/email-marketing/publicos" className="text-emerald-600 hover:text-emerald-700 font-medium" style={{ ...s, fontSize: "0.75rem" }}>
+                    Gerenciar públicos →
+                  </Link>
                 </div>
-              )}
 
-              <div className="flex gap-2">
-                <Input value={recipientInput} onChange={(e) => setRecipientInput(e.target.value)}
-                  onKeyDown={(e) => e.key === "Enter" && (e.preventDefault(), addRecipient())}
-                  placeholder="Digite um e-mail e pressione Enter" className="!text-sm flex-1" />
-                <Button variant="outline" size="sm" onClick={addRecipient} className="!text-sm shrink-0">
-                  <Plus className="h-4 w-4" />
-                </Button>
-              </div>
-              <div className="flex items-center gap-2 flex-wrap">
-                <label className="cursor-pointer inline-flex items-center gap-2 px-3 py-1.5 rounded-lg border border-dashed border-zinc-300 text-zinc-500 hover:border-emerald-400 hover:text-emerald-600 transition-colors">
-                  <Upload className="h-4 w-4" />
-                  <span style={{ ...s, fontSize: "0.75rem" }}>Importar CSV / TXT</span>
-                  <input type="file" accept=".csv,.txt" className="hidden" onChange={handleImportCSV} />
-                </label>
-                {recipients.length > 0 && (
-                  <>
-                    <span style={{ ...s, fontSize: "0.75rem" }} className="text-zinc-400">
-                      {recipients.length} destinatário(s)
-                    </span>
-                    <Button variant="outline" size="sm" className="!text-xs gap-1" onClick={() => setSaveListOpen(true)}>
-                      <Save className="h-3 w-3" /> Salvar lista
-                    </Button>
-                  </>
+                {publicosLoading ? (
+                  <div className="space-y-2">{[1, 2].map((i) => <Skeleton key={i} className="h-14 w-full" />)}</div>
+                ) : !publicos?.length ? (
+                  <div className="text-center py-8 border border-dashed border-zinc-200 rounded-lg">
+                    <Users className="h-8 w-8 text-zinc-300 mx-auto mb-2" />
+                    <p style={{ ...s, fontSize: "0.8125rem" }} className="text-zinc-400">Nenhum público cadastrado.</p>
+                    <Link to="/admin/email-marketing/publicos">
+                      <Button variant="outline" className="!text-sm mt-3">Cadastrar um público</Button>
+                    </Link>
+                  </div>
+                ) : (
+                  <div className="grid sm:grid-cols-2 gap-2 max-h-64 overflow-y-auto">
+                    {publicos.map((p) => {
+                      const active = selectedPublicoId === p.id;
+                      return (
+                        <button key={p.id} onClick={() => setSelectedPublicoId(p.id)}
+                          className={`text-left px-4 py-3 rounded-lg border transition-colors ${
+                            active ? "border-emerald-500 bg-emerald-50 ring-1 ring-emerald-500" : "border-zinc-200 bg-white hover:border-emerald-300"
+                          }`}>
+                          <div className="flex items-center justify-between gap-2">
+                            <span className="font-medium text-zinc-800 truncate" style={{ ...s, fontSize: "0.875rem" }}>{p.name}</span>
+                            {active && <Check className="h-4 w-4 text-emerald-600 shrink-0" />}
+                          </div>
+                          <span className="text-zinc-400" style={{ ...s, fontSize: "0.75rem" }}>
+                            {(p.emails?.length || 0).toLocaleString("pt-BR")} destinatário(s)
+                          </span>
+                        </button>
+                      );
+                    })}
+                  </div>
                 )}
               </div>
-              {recipients.length > 0 && (
-                <div className="flex flex-wrap gap-1.5 max-h-24 overflow-y-auto p-2 bg-zinc-50 rounded-lg">
-                  {recipients.map((email) => (
-                    <span key={email} className="inline-flex items-center gap-1 px-2 py-0.5 bg-white border border-zinc-200 rounded-full text-zinc-600"
-                      style={{ ...s, fontSize: "0.6875rem" }}>
-                      {email}
-                      <button onClick={() => { setRecipients(recipients.filter((r) => r !== email)); setSelectedListId(""); }} className="text-zinc-400 hover:text-red-500">
-                        <X className="h-3 w-3" />
-                      </button>
-                    </span>
-                  ))}
+            </div>
+          )}
+
+          {/* ETAPA 2 — Construtor (molde DOX) */}
+          {step === 2 && (
+            <div className="space-y-4 py-2">
+              {/* Barra de ação no topo: finalizar e enviar */}
+              <div className="sticky top-0 z-10 -mx-6 px-6 py-3 bg-white/95 backdrop-blur border-b border-zinc-100 flex items-center justify-between gap-3">
+                <Button variant="ghost" onClick={() => setStep(1)} className="!text-sm text-zinc-600">
+                  <ArrowLeft className="h-4 w-4 mr-2" /> Voltar
+                </Button>
+                <div className="flex items-center gap-3">
+                  <span style={{ ...s, fontSize: "0.75rem" }} className="text-zinc-400 hidden sm:inline">
+                    {finalAudience} · {recipients.length.toLocaleString("pt-BR")} destinatário(s)
+                  </span>
+                  <Button onClick={() => sendMutation.mutate()} disabled={sendMutation.isPending || !canSend}
+                    className="bg-emerald-500 hover:bg-emerald-600 text-white !text-sm">
+                    <Send className="h-4 w-4 mr-2" /> {sendMutation.isPending ? "Enviando..." : "Finalizar e enviar campanha"}
+                  </Button>
                 </div>
-              )}
-            </div>
+              </div>
 
-            {/* Subject */}
-            <div className="space-y-2">
-              <label style={{ ...s, fontSize: "0.8125rem" }} className="font-medium text-zinc-700">Assunto</label>
-              <Input value={subject} onChange={(e) => setSubject(e.target.value)} placeholder="Assunto do e-mail" className="!text-sm" />
-            </div>
-
-            {/* Body — construtor de blocos (molde DOX) */}
-            <div className="space-y-2">
-              <label style={{ ...s, fontSize: "0.8125rem" }} className="font-medium text-zinc-700">Conteúdo</label>
               <EmailBuilder doc={doc} onChange={setDoc} />
             </div>
-          </div>
-          <DialogFooter>
-            <Button variant="outline" onClick={closeCompose} className="!text-sm">Cancelar</Button>
-            <Button onClick={() => sendMutation.mutate()} disabled={sendMutation.isPending || !canSend}
-              className="bg-emerald-500 hover:bg-emerald-600 text-white !text-sm">
-              <Send className="h-4 w-4 mr-2" /> {sendMutation.isPending ? "Enviando..." : "Enviar Campanha"}
-            </Button>
-          </DialogFooter>
-        </DialogContent>
-      </Dialog>
+          )}
 
-      {/* Save List Dialog */}
-      <Dialog open={saveListOpen} onOpenChange={setSaveListOpen}>
-        <DialogContent className="admin-scope max-w-md text-sm">
-          <DialogHeader>
-            <DialogTitle style={{ ...s, fontSize: "1.125rem" }}>Salvar Lista de Destinatários</DialogTitle>
-            <DialogDescription style={{ ...s, fontSize: "0.8125rem" }}>
-              Dê um nome para esta lista com {recipients.length} e-mail(s) para reutilizá-la em futuras campanhas.
-            </DialogDescription>
-          </DialogHeader>
-          <Input value={saveListName} onChange={(e) => setSaveListName(e.target.value)}
-            placeholder="Ex: Doadores 2026, Educadores SP..." className="!text-sm"
-            onKeyDown={(e) => e.key === "Enter" && saveListMutation.mutate()} />
-          <DialogFooter>
-            <Button variant="outline" onClick={() => setSaveListOpen(false)} className="!text-sm">Cancelar</Button>
-            <Button onClick={() => saveListMutation.mutate()} disabled={saveListMutation.isPending || !saveListName.trim()}
-              className="bg-emerald-500 hover:bg-emerald-600 text-white !text-sm">
-              <Save className="h-4 w-4 mr-2" /> {saveListMutation.isPending ? "Salvando..." : "Salvar"}
-            </Button>
-          </DialogFooter>
+          {/* Rodapé só na etapa 1 (a etapa 2 tem a ação no topo) */}
+          {step === 1 && (
+            <DialogFooter>
+              <Button variant="outline" onClick={closeCompose} className="!text-sm">Cancelar</Button>
+              <Button onClick={() => setStep(2)} disabled={!step1Valid}
+                className="bg-emerald-500 hover:bg-emerald-600 text-white !text-sm">
+                Continuar <ArrowRight className="h-4 w-4 ml-2" />
+              </Button>
+            </DialogFooter>
+          )}
         </DialogContent>
       </Dialog>
     </div>

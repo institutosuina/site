@@ -35,7 +35,14 @@ const navItems = [
   { label: "Transparência", icon: Shield, path: "/admin/transparency" },
   { label: "Newsletter", icon: Mail, path: "/admin/newsletter" },
   { label: "Contatos", icon: MessageSquare, path: "/admin/contatos" },
-  { label: "E-mail Marketing", icon: Send, path: "/admin/email-marketing" },
+  {
+    label: "E-mail Marketing",
+    icon: Send,
+    path: "/admin/email-marketing",
+    children: [
+      { label: "Públicos", icon: Users, path: "/admin/email-marketing/publicos" },
+    ],
+  },
   { label: "Parceiros", icon: Users, path: "/admin/partners" },
 ];
 
@@ -52,8 +59,8 @@ const AdminLayout = ({ children }: { children: ReactNode }) => {
     navigate("/admin/login");
   };
 
-  const isActive = (path: string) => {
-    if (path === "/admin") return location.pathname === "/admin";
+  const isActive = (path: string, exact = false) => {
+    if (path === "/admin" || exact) return location.pathname === path;
     return location.pathname.startsWith(path);
   };
 
