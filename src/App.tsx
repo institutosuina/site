@@ -23,6 +23,7 @@ import MaterialTecnicoDetail from "./pages/MaterialTecnicoDetail";
 import InformativosAno from "./pages/InformativosAno";
 import NotFound from "./pages/NotFound";
 import QrCodePage, { QR_CODE_NAMES } from "./pages/QrCodePage";
+import Campanha from "./pages/Campanha";
 
 // Admin pages (lazy loaded)
 const AdminLogin = lazy(() => import("./pages/admin/AdminLogin"));
@@ -92,6 +93,8 @@ const App = () => (
               <Route path="/participe" element={<Participe />} />
               <Route path="/contato" element={<Contato />} />
               <Route path="/informativos/:ano" element={<InformativosAno />} />
+              {/* Versão web das campanhas de e-mail ("Veja no navegador") */}
+              <Route path="/campanha/:id" element={<Campanha />} />
 
               {/* Admin routes */}
               <Route path="/admin/login" element={<AdminLogin />} />

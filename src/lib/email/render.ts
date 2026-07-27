@@ -17,6 +17,21 @@ export const EMAIL_COLORS = {
 const CONTAINER_WIDTH = 600;
 const SIDE_PADDING = 32;
 
+/** Domínio público do site (usado no link "Veja no navegador"). */
+export const SITE_URL = "https://institutosuina.org";
+
+/** URL pública da versão web de uma campanha (rota /campanha/:id). */
+export const campaignUrl = (id: string) => `${SITE_URL}/campanha/${id}`;
+
+export type RenderOptions = {
+  /**
+   * Id da campanha em emails_enviados. Quando informado, o "Veja no navegador"
+   * vira um link real para /campanha/:id; sem ele (preview do admin) o texto
+   * aparece sem link, para não enviar âncora morta.
+   */
+  campaignId?: string;
+};
+
 const escapeHtml = (value: string) =>
   value
     .replace(/&/g, "&amp;")
@@ -106,9 +121,12 @@ function renderBlock(block: EmailBlock): string {
   }
 }
 
-function renderViewInBrowser(): string {
+function renderViewInBrowser(campaignId?: string): string {
+  const label = campaignId
+    ? `<a href="${escapeAttr(campaignUrl(campaignId))}" target="_blank" style="color:${EMAIL_COLORS.green};">Veja no navegador</a>`
+    : `<span style="color:${EMAIL_COLORS.green};">Veja no navegador</span>`;
   return `<tr><td style="padding:14px ${SIDE_PADDING}px 0;text-align:center;">
-    <span style="color:${EMAIL_COLORS.muted};font-family:Arial,Helvetica,sans-serif;font-size:12px;">Não consegue ver essa mensagem? <a href="#" style="color:${EMAIL_COLORS.green};">Veja no navegador</a></span>
+    <span style="color:${EMAIL_COLORS.muted};font-family:Arial,Helvetica,sans-serif;font-size:12px;">Não consegue ver essa mensagem? ${label}</span>
   </td></tr>`;
 }
 
@@ -136,7 +154,7 @@ function renderFooter(doc: EmailDoc): string {
 }
 
 /** Renderiza o e-mail completo (documento HTML) a partir do EmailDoc. */
-export function renderEmailHtml(doc: EmailDoc): string {
+export function renderEmailHtml(doc: EmailDoc, options: RenderOptions = {}): string {
   const preheader = doc.preheader
     ? `<div style="display:none;max-height:0;overflow:hidden;opacity:0;">${escapeHtml(doc.preheader)}</div>`
     : "";
@@ -172,7 +190,7 @@ ${preheader}
   <tr>
     <td align="center" style="padding:24px 12px;">
       <table role="presentation" width="${CONTAINER_WIDTH}" cellpadding="0" cellspacing="0" style="width:100%;max-width:${CONTAINER_WIDTH}px;background:${EMAIL_COLORS.card};border-radius:12px;overflow:hidden;">
-        ${doc.showViewInBrowser ? renderViewInBrowser() : ""}
+        ${doc.showViewInBrowser ? renderViewInBrowser(options.campaignId) : ""}
         ${body}
         ${renderFooter(doc)}
       </table>

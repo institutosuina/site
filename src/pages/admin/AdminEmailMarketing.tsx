@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import { supabase } from "@/integrations/supabase/client";
-import { Send, Mail, Trash2, Users, ArrowLeft, ArrowRight, Check } from "lucide-react";
+import { Send, Mail, Trash2, Users, ArrowLeft, ArrowRight, Check, ExternalLink } from "lucide-react";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Skeleton } from "@/components/ui/skeleton";
@@ -15,7 +15,7 @@ import {
 } from "@/components/ui/dialog";
 import type { Tables } from "@/integrations/supabase/types";
 import EmailBuilder from "@/components/admin/email-builder/EmailBuilder";
-import { renderEmailHtml } from "@/lib/email/render";
+import { campaignUrl, renderEmailHtml } from "@/lib/email/render";
 import type { EmailDoc } from "@/lib/email/types";
 
 type EmailSent = Tables<"emails_enviados">;
@@ -74,10 +74,14 @@ const AdminEmailMarketing = () => {
       if (!subject.trim() || !doc.blocks.length || !finalAudience) throw new Error("Preencha todos os campos");
       if (!recipients.length) throw new Error("O público selecionado não tem destinatários");
 
-      const html = renderEmailHtml(doc);
+      // O id é gerado aqui (e não no banco) porque o link "Veja no navegador"
+      // precisa estar dentro do HTML antes do envio — ver /campanha/:id.
+      const campaignId = crypto.randomUUID();
+      const html = renderEmailHtml(doc, { campaignId });
 
       const { data, error } = await supabase.functions.invoke("send-email", {
         body: {
+          id: campaignId,
           subject: subject.trim(),
           body: html,
           emails: recipients,
@@ -224,6 +228,11 @@ const AdminEmailMarketing = () => {
                     {new Date(email.sent_at).toLocaleString("pt-BR")}
                   </TableCell>
                   <TableCell className="text-right">
+                    <a href={campaignUrl(email.id)} target="_blank" rel="noreferrer" title="Abrir versão web da campanha">
+                      <Button variant="ghost" size="icon" className="h-8 w-8 text-zinc-400 hover:text-emerald-600">
+                        <ExternalLink className="h-4 w-4" />
+                      </Button>
+                    </a>
                     <Button variant="ghost" size="icon" className="h-8 w-8 text-zinc-400 hover:text-red-600" onClick={() => deleteMutation.mutate(email.id)}>
                       <Trash2 className="h-4 w-4" />
                     </Button>

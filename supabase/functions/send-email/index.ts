@@ -27,7 +27,12 @@ serve(async (req) => {
     assertSesConfigured();
 
     const payload = await req.json().catch(() => ({}));
-    const { subject, body, emails, target_audience } = payload;
+    const { id, subject, body, emails, target_audience } = payload;
+
+    // O admin gera o id antes de renderizar o HTML (link "Veja no navegador"
+    // aponta para /campanha/:id), então ele precisa ser preservado no insert.
+    const UUID_RE = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i;
+    const campaignId = typeof id === "string" && UUID_RE.test(id) ? id : undefined;
 
     if (!subject || typeof subject !== "string" || !subject.trim()) {
       throw new Error("Assunto obrigatório");
@@ -80,6 +85,7 @@ serve(async (req) => {
     if (SUPABASE_URL && SUPABASE_SERVICE_ROLE_KEY) {
       const supabase = createClient(SUPABASE_URL, SUPABASE_SERVICE_ROLE_KEY);
       const { error: insertError } = await supabase.from("emails_enviados").insert({
+        ...(campaignId ? { id: campaignId } : {}),
         subject: subject.trim(),
         body: body.trim(),
         target_audience:
