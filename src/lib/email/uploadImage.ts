@@ -1,7 +1,7 @@
-// Abre o seletor de arquivo e sobe a imagem para o Supabase Storage,
+// Abre o seletor de arquivo e sobe a imagem para o R2,
 // retornando a URL pública (usada pelos blocos do construtor de e-mail).
 
-import { supabase } from "@/integrations/supabase/client";
+import { subirParaR2 } from "@/lib/storage/upload";
 
 export async function pickAndUploadImage(bucket = "covers"): Promise<string | null> {
   return new Promise((resolve) => {
@@ -17,10 +17,7 @@ export async function pickAndUploadImage(bucket = "covers"): Promise<string | nu
       try {
         const safeName = file.name.replace(/[^\w.-]+/g, "_");
         const path = `email/${Date.now()}-${safeName}`;
-        const { error } = await supabase.storage.from(bucket).upload(path, file);
-        if (error) throw error;
-        const { data } = supabase.storage.from(bucket).getPublicUrl(path);
-        resolve(data.publicUrl);
+        resolve(await subirParaR2(bucket, path, file));
       } catch {
         resolve(null);
       }

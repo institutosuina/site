@@ -2,6 +2,7 @@ import { useState } from "react";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { Plus, Trash2, Save, Upload, X } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
+import { subirParaR2 } from "@/lib/storage/upload";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
@@ -121,10 +122,8 @@ const AdminWorkProjects = () => {
       for (const file of files) {
         const safeName = file.name.replace(/[^a-zA-Z0-9._-]/g, "_");
         const path = `projetos/${Date.now()}-${safeName}`;
-        const { error } = await supabase.storage.from("covers").upload(path, file);
-        if (error) throw error;
-        const { data } = supabase.storage.from("covers").getPublicUrl(path);
-        uploadedUrls.push(data.publicUrl);
+        const publicUrl = await subirParaR2("covers", path, file);
+        uploadedUrls.push(publicUrl);
       }
       setProjectImages(projectIndex, (current) => [...current, ...uploadedUrls]);
       toast({ title: `✅ ${uploadedUrls.length} imagem(ns) enviada(s)!` });

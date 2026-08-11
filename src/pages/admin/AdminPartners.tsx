@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import { supabase } from "@/integrations/supabase/client";
+import { subirParaR2 } from "@/lib/storage/upload";
 import { Plus, Trash2, Upload, X, GripVertical, Image as ImageIcon } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -101,10 +102,8 @@ const AdminPartners = () => {
     try {
       const safeName = file.name.replace(/[^a-zA-Z0-9._-]/g, '_');
       const path = `${Date.now()}-${safeName}`;
-      const { error } = await supabase.storage.from("parceiros").upload(path, file);
-      if (error) throw error;
-      const { data } = supabase.storage.from("parceiros").getPublicUrl(path);
-      setPendingLogo({ name: file.name, url: data.publicUrl });
+      const publicUrl = await subirParaR2("parceiros", path, file);
+      setPendingLogo({ name: file.name, url: publicUrl });
     } catch (err: any) {
       toast({ title: "❌ Erro ao enviar imagem", description: err.message, variant: "destructive" });
     } finally {

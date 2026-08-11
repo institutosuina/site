@@ -12,7 +12,7 @@ import {
   AlignLeft, AlignCenter, AlignRight, AlignJustify
 } from 'lucide-react'
 import { Button } from '@/components/ui/button'
-import { supabase } from '@/integrations/supabase/client'
+import { subirParaR2 } from '@/lib/storage/upload'
 import { toast } from '@/hooks/use-toast'
 import TextAlign from '@tiptap/extension-text-align'
 
@@ -34,10 +34,8 @@ const MenuBar = ({ editor, storageBucket = 'covers' }: { editor: any, storageBuc
       if (file) {
         try {
           const path = `editor/${Date.now()}-${file.name}`
-          const { error } = await supabase.storage.from(storageBucket).upload(path, file)
-          if (error) throw error
-          const { data } = supabase.storage.from(storageBucket).getPublicUrl(path)
-          editor.chain().focus().setImage({ src: data.publicUrl }).run()
+          const publicUrl = await subirParaR2(storageBucket, path, file)
+          editor.chain().focus().setImage({ src: publicUrl }).run()
         } catch (err: any) {
           toast({ title: 'Erro ao subir imagem', description: err.message, variant: 'destructive' })
         }
@@ -59,10 +57,8 @@ const MenuBar = ({ editor, storageBucket = 'covers' }: { editor: any, storageBuc
         }
         try {
           const path = `editor/${Date.now()}-${file.name}`
-          const { error } = await supabase.storage.from(storageBucket).upload(path, file)
-          if (error) throw error
-          const { data } = supabase.storage.from(storageBucket).getPublicUrl(path)
-          resolve({ file, url: data.publicUrl })
+          const publicUrl = await subirParaR2(storageBucket, path, file)
+          resolve({ file, url: publicUrl })
         } catch (err: any) {
           toast({ title: 'Erro ao subir arquivo', description: err.message, variant: 'destructive' })
           resolve(null)
