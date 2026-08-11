@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import { supabase } from "@/integrations/supabase/client";
+import { subirParaR2 } from "@/lib/storage/upload";
 import { ArrowLeft, Save, X, ImageIcon, Paperclip } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -117,10 +118,8 @@ const AdminContentEdit = () => {
     setUploadingCover(true);
     try {
       const path = `${activeTab}/${Date.now()}-${file.name}`;
-      const { error } = await supabase.storage.from("covers").upload(path, file);
-      if (error) throw error;
-      const { data } = supabase.storage.from("covers").getPublicUrl(path);
-      setForm((f) => ({ ...f, cover_image: data.publicUrl }));
+      const publicUrl = await subirParaR2("covers", path, file);
+      setForm((f) => ({ ...f, cover_image: publicUrl }));
       toast({ title: "✅ Imagem enviada!" });
     } catch (err: any) {
       toast({ title: "❌ Erro ao enviar imagem.", description: err.message, variant: "destructive" });

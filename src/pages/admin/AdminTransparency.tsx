@@ -1,6 +1,7 @@
 import { useState, useRef } from "react";
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import { supabase } from "@/integrations/supabase/client";
+import { subirParaR2 } from "@/lib/storage/upload";
 import { Upload, FileText, Trash2, Eye, Download, FolderOpen, Plus, ArrowLeft, Pencil, Check, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -243,12 +244,10 @@ const ProjectDetail = ({ projectId, onBack }: { projectId: string; onBack: () =>
       if (!file || !title.trim()) throw new Error("Preencha todos os campos");
       setUploading(true);
       const fileName = `${Date.now()}-${file.name}`;
-      const { error: uploadError } = await supabase.storage.from("reports").upload(fileName, file);
-      if (uploadError) throw uploadError;
-      const { data: urlData } = supabase.storage.from("reports").getPublicUrl(fileName);
+      const publicUrl = await subirParaR2("reports", fileName, file);
       const { error } = await supabase.from("relatorios").insert({
         title: title.trim(),
-        file_url: urlData.publicUrl,
+        file_url: publicUrl,
         description: description.trim() || null,
         project_id: projectId,
       });
@@ -542,11 +541,9 @@ const InstitutionalDocs = () => {
     try {
       const safeName = file.name.replace(/[^a-zA-Z0-9._-]/g, "_");
       const path = `transparencia/${key}-${Date.now()}-${safeName}`;
-      const { error: uploadError } = await supabase.storage.from("reports").upload(path, file);
-      if (uploadError) throw uploadError;
-      const { data: urlData } = supabase.storage.from("reports").getPublicUrl(path);
+      const publicUrl = await subirParaR2("reports", path, file);
 
-      const nextContent = { ...(overrides ?? {}), [key]: urlData.publicUrl };
+      const nextContent = { ...(overrides ?? {}), [key]: publicUrl };
       const { error } = await supabase.from("site_page_content").upsert(
         { page_key: "transparencia_docs", content: nextContent, updated_at: new Date().toISOString() },
         { onConflict: "page_key" },
@@ -688,14 +685,12 @@ const TransparenciaListas = () => {
     try {
       const safeName = file.name.replace(/[^a-zA-Z0-9._-]/g, "_");
       const path = `transparencia-listas/${activeCategory}/${Date.now()}-${safeName}`;
-      const { error: uploadError } = await supabase.storage.from("reports").upload(path, file);
-      if (uploadError) throw uploadError;
-      const { data: urlData } = supabase.storage.from("reports").getPublicUrl(path);
+      const publicUrl = await subirParaR2("reports", path, file);
 
       const newDoc: ListDoc = {
         id: crypto.randomUUID(),
         title: newTitle.trim(),
-        file_url: urlData.publicUrl,
+        file_url: publicUrl,
         created_at: new Date().toISOString(),
       };
       const nextList = [newDoc, ...currentList];

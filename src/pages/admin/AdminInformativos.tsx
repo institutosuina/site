@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import { supabase } from "@/integrations/supabase/client";
+import { subirParaR2 } from "@/lib/storage/upload";
 import { Plus, Trash2, Upload, File, X, ChevronRight, ArrowLeft } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -119,10 +120,8 @@ const AdminInformativos = () => {
     try {
       const safeName = file.name.replace(/[^a-zA-Z0-9._-]/g, '_');
       const path = `informativos/${Date.now()}-${safeName}`;
-      const { error } = await supabase.storage.from("covers").upload(path, file);
-      if (error) throw error;
-      const { data } = supabase.storage.from("covers").getPublicUrl(path);
-      setPendingFile({ name: file.name, url: data.publicUrl });
+      const publicUrl = await subirParaR2("covers", path, file);
+      setPendingFile({ name: file.name, url: publicUrl });
     } catch (err: any) {
       toast({ title: "❌ Erro ao enviar arquivo.", description: err.message, variant: "destructive" });
     } finally {

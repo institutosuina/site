@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import { supabase } from "@/integrations/supabase/client";
+import { subirParaR2 } from "@/lib/storage/upload";
 import { Plus, Trash2, Upload, GripVertical, Pencil, Check, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -93,18 +94,13 @@ const EditalAnexosManager = ({ editalId, editalTitle, open, onOpenChange }: Prop
     setUploading(true);
     try {
       const filePath = `${editalId}/${Date.now()}-${file.name}`;
-      const { error: uploadError } = await supabase.storage
-        .from("editais")
-        .upload(filePath, file);
-      if (uploadError) throw uploadError;
-
-      const { data: urlData } = supabase.storage.from("editais").getPublicUrl(filePath);
+      const publicUrl = await subirParaR2("editais", filePath, file);
 
       const nextOrder = (anexos?.length || 0) + 1;
       const { error: insertError } = await supabase.from("edital_anexos").insert({
         edital_id: editalId,
         title: newTitle.trim(),
-        file_url: urlData.publicUrl,
+        file_url: publicUrl,
         sort_order: nextOrder,
       });
       if (insertError) throw insertError;
