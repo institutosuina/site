@@ -245,7 +245,7 @@ const AdminEmailMarketing = () => {
       </div>
 
       {/* Assistente de nova campanha */}
-      <Dialog open={composeOpen} onOpenChange={(o) => (o ? setComposeOpen(true) : closeCompose())}>
+      <Dialog open={composeOpen} onOpenChange={(o) => (o ? setComposeOpen(true) : closeCompose())} modal={false}>
         <DialogContent className="admin-scope max-w-6xl max-h-[92vh] overflow-y-auto text-sm">
           <DialogHeader>
             <DialogTitle style={{ ...s, fontSize: "1.125rem" }}>Nova Campanha</DialogTitle>
