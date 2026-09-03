@@ -132,6 +132,11 @@ const AdminEmailMarketing = () => {
   });
 
   const closeCompose = () => {
+    if (doc.blocks.length > 0 || subject) {
+      if (!window.confirm("Deseja realmente sair? Todo o progresso do e-mail será perdido.")) {
+        return;
+      }
+    }
     setComposeOpen(false);
     setStep(1);
     setSubject("");
@@ -152,6 +157,121 @@ const AdminEmailMarketing = () => {
     );
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [doc.footerImageUrl, doc.footerImageHref, doc.unsubscribeUrl, doc.showViewInBrowser]);
+
+  if (composeOpen) {
+    return (
+      <div className="admin-scope space-y-6 font-['Inter',sans-serif] text-sm">
+        <div className="flex flex-col gap-1 border-b border-zinc-200 pb-4">
+          <div className="flex items-center gap-2">
+            <Button variant="ghost" size="icon" onClick={closeCompose} className="h-8 w-8 text-zinc-500 hover:text-zinc-800">
+               <ArrowLeft className="h-4 w-4" />
+            </Button>
+            <h2 className="font-bold text-zinc-800" style={{ ...s, fontSize: "1.5rem" }}>Nova Campanha</h2>
+          </div>
+          <p style={{ ...s, fontSize: "0.875rem" }} className="text-zinc-500 ml-10">
+            {step === 1 ? "Etapa 1 de 2 · Nome e público" : "Etapa 2 de 2 · Monte o e-mail e envie"}
+          </p>
+        </div>
+
+        {/* Indicador de etapas */}
+        <div className="flex items-center gap-2 pb-1">
+          {[1, 2].map((n) => (
+            <div key={n} className="flex items-center gap-2">
+              <span className={`h-6 w-6 rounded-full flex items-center justify-center text-xs font-bold ${
+                step >= n ? "bg-emerald-500 text-white" : "bg-zinc-200 text-zinc-500"
+              }`}>{step > n ? <Check className="h-3.5 w-3.5" /> : n}</span>
+              <span style={{ ...s, fontSize: "0.75rem" }} className={step >= n ? "text-zinc-800 font-medium" : "text-zinc-400"}>
+                {n === 1 ? "Nome e público" : "Construtor"}
+              </span>
+              {n === 1 && <span className="w-8 h-px bg-zinc-200 mx-1" />}
+            </div>
+          ))}
+        </div>
+
+        {/* ETAPA 1 — Nome + Público */}
+        {step === 1 && (
+          <div className="space-y-5 py-2 max-w-4xl">
+            <div className="space-y-2">
+              <label style={{ ...s, fontSize: "0.8125rem" }} className="font-medium text-zinc-700">Nome da campanha (assunto do e-mail)</label>
+              <Input value={subject} onChange={(e) => setSubject(e.target.value)} placeholder="Ex: Informativo de Julho — Instituto Suinã" className="!text-sm" autoFocus />
+            </div>
+
+            <div className="space-y-2">
+              <div className="flex items-center justify-between">
+                <label style={{ ...s, fontSize: "0.8125rem" }} className="font-medium text-zinc-700">Público (para quem enviar)</label>
+                <Link to="/admin/email-marketing/publicos" className="text-emerald-600 hover:text-emerald-700 font-medium" style={{ ...s, fontSize: "0.75rem" }}>
+                  Gerenciar públicos →
+                </Link>
+              </div>
+
+              {publicosLoading ? (
+                <div className="space-y-2">{[1, 2].map((i) => <Skeleton key={i} className="h-14 w-full" />)}</div>
+              ) : !publicos?.length ? (
+                <div className="text-center py-8 border border-dashed border-zinc-200 rounded-lg">
+                  <Users className="h-8 w-8 text-zinc-300 mx-auto mb-2" />
+                  <p style={{ ...s, fontSize: "0.8125rem" }} className="text-zinc-400">Nenhum público cadastrado.</p>
+                  <Link to="/admin/email-marketing/publicos">
+                    <Button variant="outline" className="!text-sm mt-3">Cadastrar um público</Button>
+                  </Link>
+                </div>
+              ) : (
+                <div className="grid sm:grid-cols-2 gap-2 max-h-64 overflow-y-auto">
+                  {publicos.map((p) => {
+                    const active = selectedPublicoId === p.id;
+                    return (
+                      <button key={p.id} onClick={() => setSelectedPublicoId(p.id)}
+                        className={`text-left px-4 py-3 rounded-lg border transition-colors ${
+                          active ? "border-emerald-500 bg-emerald-50 ring-1 ring-emerald-500" : "border-zinc-200 bg-white hover:border-emerald-300"
+                        }`}>
+                        <div className="flex items-center justify-between gap-2">
+                          <span className="font-medium text-zinc-800 truncate" style={{ ...s, fontSize: "0.875rem" }}>{p.name}</span>
+                          {active && <Check className="h-4 w-4 text-emerald-600 shrink-0" />}
+                        </div>
+                        <span className="text-zinc-400" style={{ ...s, fontSize: "0.75rem" }}>
+                          {(p.emails?.length || 0).toLocaleString("pt-BR")} destinatário(s)
+                        </span>
+                      </button>
+                    );
+                  })}
+                </div>
+              )}
+            </div>
+
+            <div className="flex items-center justify-end gap-3 pt-4 border-t border-zinc-100">
+              <Button variant="outline" onClick={closeCompose} className="!text-sm">Cancelar</Button>
+              <Button onClick={() => setStep(2)} disabled={!step1Valid}
+                className="bg-emerald-500 hover:bg-emerald-600 text-white !text-sm">
+                Continuar <ArrowRight className="h-4 w-4 ml-2" />
+              </Button>
+            </div>
+          </div>
+        )}
+
+        {/* ETAPA 2 — Construtor (molde DOX) */}
+        {step === 2 && (
+          <div className="space-y-4 py-2">
+            {/* Barra de ação no topo: finalizar e enviar */}
+            <div className="sticky top-0 z-10 -mx-6 px-6 py-3 bg-white/95 backdrop-blur border-b border-zinc-100 flex items-center justify-between gap-3">
+              <Button variant="ghost" onClick={() => setStep(1)} className="!text-sm text-zinc-600">
+                <ArrowLeft className="h-4 w-4 mr-2" /> Voltar
+              </Button>
+              <div className="flex items-center gap-3">
+                <span style={{ ...s, fontSize: "0.75rem" }} className="text-zinc-400 hidden sm:inline">
+                  {finalAudience} · {recipients.length.toLocaleString("pt-BR")} destinatário(s)
+                </span>
+                <Button onClick={() => sendMutation.mutate()} disabled={sendMutation.isPending || !canSend}
+                  className="bg-emerald-500 hover:bg-emerald-600 text-white !text-sm">
+                  <Send className="h-4 w-4 mr-2" /> {sendMutation.isPending ? "Enviando..." : "Finalizar e enviar campanha"}
+                </Button>
+              </div>
+            </div>
+
+            <EmailBuilder doc={doc} onChange={setDoc} />
+          </div>
+        )}
+      </div>
+    );
+  }
 
   return (
     <div className="admin-scope space-y-6 font-['Inter',sans-serif] text-sm">
@@ -243,118 +363,6 @@ const AdminEmailMarketing = () => {
           </Table>
         )}
       </div>
-
-      {/* Assistente de nova campanha */}
-      <Dialog open={composeOpen} onOpenChange={(o) => (o ? setComposeOpen(true) : closeCompose())} modal={false}>
-        <DialogContent className="admin-scope max-w-6xl max-h-[92vh] overflow-y-auto text-sm">
-          <DialogHeader>
-            <DialogTitle style={{ ...s, fontSize: "1.125rem" }}>Nova Campanha</DialogTitle>
-            <DialogDescription style={{ ...s, fontSize: "0.8125rem" }}>
-              {step === 1 ? "Etapa 1 de 2 · Nome e público" : "Etapa 2 de 2 · Monte o e-mail e envie"}
-            </DialogDescription>
-          </DialogHeader>
-
-          {/* Indicador de etapas */}
-          <div className="flex items-center gap-2 pb-1">
-            {[1, 2].map((n) => (
-              <div key={n} className="flex items-center gap-2">
-                <span className={`h-6 w-6 rounded-full flex items-center justify-center text-xs font-bold ${
-                  step >= n ? "bg-emerald-500 text-white" : "bg-zinc-200 text-zinc-500"
-                }`}>{step > n ? <Check className="h-3.5 w-3.5" /> : n}</span>
-                <span style={{ ...s, fontSize: "0.75rem" }} className={step >= n ? "text-zinc-800 font-medium" : "text-zinc-400"}>
-                  {n === 1 ? "Nome e público" : "Construtor"}
-                </span>
-                {n === 1 && <span className="w-8 h-px bg-zinc-200 mx-1" />}
-              </div>
-            ))}
-          </div>
-
-          {/* ETAPA 1 — Nome + Público */}
-          {step === 1 && (
-            <div className="space-y-5 py-2">
-              <div className="space-y-2">
-                <label style={{ ...s, fontSize: "0.8125rem" }} className="font-medium text-zinc-700">Nome da campanha (assunto do e-mail)</label>
-                <Input value={subject} onChange={(e) => setSubject(e.target.value)} placeholder="Ex: Informativo de Julho — Instituto Suinã" className="!text-sm" autoFocus />
-              </div>
-
-              <div className="space-y-2">
-                <div className="flex items-center justify-between">
-                  <label style={{ ...s, fontSize: "0.8125rem" }} className="font-medium text-zinc-700">Público (para quem enviar)</label>
-                  <Link to="/admin/email-marketing/publicos" className="text-emerald-600 hover:text-emerald-700 font-medium" style={{ ...s, fontSize: "0.75rem" }}>
-                    Gerenciar públicos →
-                  </Link>
-                </div>
-
-                {publicosLoading ? (
-                  <div className="space-y-2">{[1, 2].map((i) => <Skeleton key={i} className="h-14 w-full" />)}</div>
-                ) : !publicos?.length ? (
-                  <div className="text-center py-8 border border-dashed border-zinc-200 rounded-lg">
-                    <Users className="h-8 w-8 text-zinc-300 mx-auto mb-2" />
-                    <p style={{ ...s, fontSize: "0.8125rem" }} className="text-zinc-400">Nenhum público cadastrado.</p>
-                    <Link to="/admin/email-marketing/publicos">
-                      <Button variant="outline" className="!text-sm mt-3">Cadastrar um público</Button>
-                    </Link>
-                  </div>
-                ) : (
-                  <div className="grid sm:grid-cols-2 gap-2 max-h-64 overflow-y-auto">
-                    {publicos.map((p) => {
-                      const active = selectedPublicoId === p.id;
-                      return (
-                        <button key={p.id} onClick={() => setSelectedPublicoId(p.id)}
-                          className={`text-left px-4 py-3 rounded-lg border transition-colors ${
-                            active ? "border-emerald-500 bg-emerald-50 ring-1 ring-emerald-500" : "border-zinc-200 bg-white hover:border-emerald-300"
-                          }`}>
-                          <div className="flex items-center justify-between gap-2">
-                            <span className="font-medium text-zinc-800 truncate" style={{ ...s, fontSize: "0.875rem" }}>{p.name}</span>
-                            {active && <Check className="h-4 w-4 text-emerald-600 shrink-0" />}
-                          </div>
-                          <span className="text-zinc-400" style={{ ...s, fontSize: "0.75rem" }}>
-                            {(p.emails?.length || 0).toLocaleString("pt-BR")} destinatário(s)
-                          </span>
-                        </button>
-                      );
-                    })}
-                  </div>
-                )}
-              </div>
-            </div>
-          )}
-
-          {/* ETAPA 2 — Construtor (molde DOX) */}
-          {step === 2 && (
-            <div className="space-y-4 py-2">
-              {/* Barra de ação no topo: finalizar e enviar */}
-              <div className="sticky top-0 z-10 -mx-6 px-6 py-3 bg-white/95 backdrop-blur border-b border-zinc-100 flex items-center justify-between gap-3">
-                <Button variant="ghost" onClick={() => setStep(1)} className="!text-sm text-zinc-600">
-                  <ArrowLeft className="h-4 w-4 mr-2" /> Voltar
-                </Button>
-                <div className="flex items-center gap-3">
-                  <span style={{ ...s, fontSize: "0.75rem" }} className="text-zinc-400 hidden sm:inline">
-                    {finalAudience} · {recipients.length.toLocaleString("pt-BR")} destinatário(s)
-                  </span>
-                  <Button onClick={() => sendMutation.mutate()} disabled={sendMutation.isPending || !canSend}
-                    className="bg-emerald-500 hover:bg-emerald-600 text-white !text-sm">
-                    <Send className="h-4 w-4 mr-2" /> {sendMutation.isPending ? "Enviando..." : "Finalizar e enviar campanha"}
-                  </Button>
-                </div>
-              </div>
-
-              <EmailBuilder doc={doc} onChange={setDoc} />
-            </div>
-          )}
-
-          {/* Rodapé só na etapa 1 (a etapa 2 tem a ação no topo) */}
-          {step === 1 && (
-            <DialogFooter>
-              <Button variant="outline" onClick={closeCompose} className="!text-sm">Cancelar</Button>
-              <Button onClick={() => setStep(2)} disabled={!step1Valid}
-                className="bg-emerald-500 hover:bg-emerald-600 text-white !text-sm">
-                Continuar <ArrowRight className="h-4 w-4 ml-2" />
-              </Button>
-            </DialogFooter>
-          )}
-        </DialogContent>
-      </Dialog>
     </div>
   );
 };
