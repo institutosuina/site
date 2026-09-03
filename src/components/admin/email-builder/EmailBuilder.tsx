@@ -277,12 +277,17 @@ function SettingsPanel({ doc, onChange }: { doc: EmailDoc; onChange: (doc: Email
           placeholder="https://institutosuina.org/preferencias" className="!text-sm" />
       </div>
 
-      <label className="flex items-center gap-2 text-xs text-zinc-600 cursor-pointer">
-        <input type="checkbox" checked={doc.showViewInBrowser ?? false}
-          onChange={(e) => onChange({ ...doc, showViewInBrowser: e.target.checked })}
-          className="accent-emerald-500" />
-        Mostrar "Não consegue ver? Veja no navegador"
-      </label>
+      <div className="space-y-1">
+        <label className="flex items-center gap-2 text-xs text-zinc-600 cursor-pointer">
+          <input type="checkbox" checked={doc.showViewInBrowser ?? false}
+            onChange={(e) => onChange({ ...doc, showViewInBrowser: e.target.checked })}
+            className="accent-emerald-500" />
+          Mostrar "Não consegue ver? Veja no navegador"
+        </label>
+        <p className="text-[11px] text-zinc-400 pl-6">
+          O link é gerado no envio (institutosuina.org/campanha/…); na pré-visualização ele aparece sem link.
+        </p>
+      </div>
     </div>
   );
 }
