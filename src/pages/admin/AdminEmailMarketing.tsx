@@ -111,7 +111,7 @@ const AdminEmailMarketing = () => {
       queryClient.invalidateQueries({ queryKey: ["admin-emails-sent"] });
       const count = data?.count ?? recipients.length;
       toast({ title: `✅ Campanha enviada para ${count} destinatário(s)!` });
-      closeCompose();
+      closeCompose(true);
     },
     onError: (err: any) => toast({
       title: "❌ Erro ao enviar e-mail.",
@@ -131,8 +131,9 @@ const AdminEmailMarketing = () => {
     },
   });
 
-  const closeCompose = () => {
-    if (doc.blocks.length > 0 || subject) {
+  const closeCompose = (force: boolean | any = false) => {
+    const isForced = force === true;
+    if (!isForced && (doc.blocks.length > 0 || subject)) {
       if (!window.confirm("Deseja realmente sair? Todo o progresso do e-mail será perdido.")) {
         return;
       }
