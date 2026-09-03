@@ -52,8 +52,16 @@ function renderBlock(block: EmailBlock): string {
     }
 
     case "text": {
+      let textHtml = block.html;
+      // Inlining manual das tags geradas pelo editor rich text
+      textHtml = textHtml.replace(/<p>/gi, `<p style="margin:0 0 14px;">`);
+      textHtml = textHtml.replace(/<a /gi, `<a style="color:${EMAIL_COLORS.green};text-decoration:underline;" `);
+      textHtml = textHtml.replace(/<img /gi, `<img style="max-width:100%;height:auto;border-radius:8px;" `);
+      textHtml = textHtml.replace(/class="suina-button-link"/gi, `style="display:inline-block;background-color:${EMAIL_COLORS.green};color:#ffffff !important;padding:12px 32px;border-radius:9999px;text-decoration:none;font-weight:bold;"`);
+      textHtml = textHtml.replace(/class="suina-doc-link"/gi, `style="display:inline-block;background-color:#f4f4f5;color:#18181b !important;padding:8px 16px;border-radius:9999px;text-decoration:none;font-weight:600;border:1px solid #e4e4e7;"`);
+
       return contentRow(
-        `<div class="dox-text" style="color:${EMAIL_COLORS.text};font-family:Arial,Helvetica,sans-serif;font-size:16px;line-height:1.7;text-align:justify;">${block.html}</div>`,
+        `<div class="dox-text" style="color:${EMAIL_COLORS.text};font-family:Arial,Helvetica,sans-serif;font-size:16px;line-height:1.7;text-align:justify;">${textHtml}</div>`,
       );
     }
 
@@ -171,11 +179,21 @@ ${preheader}
 <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="background:${EMAIL_COLORS.cream};">
   <tr>
     <td align="center" style="padding:24px 12px;">
+      <!--[if (gte mso 9)|(IE)]>
+      <table role="presentation" border="0" cellpadding="0" cellspacing="0" width="${CONTAINER_WIDTH}">
+        <tr>
+          <td>
+      <![endif]-->
       <table role="presentation" width="${CONTAINER_WIDTH}" cellpadding="0" cellspacing="0" style="width:100%;max-width:${CONTAINER_WIDTH}px;background:${EMAIL_COLORS.card};border-radius:12px;overflow:hidden;">
         ${doc.showViewInBrowser ? renderViewInBrowser() : ""}
         ${body}
         ${renderFooter(doc)}
       </table>
+      <!--[if (gte mso 9)|(IE)]>
+          </td>
+        </tr>
+      </table>
+      <![endif]-->
     </td>
   </tr>
 </table>
