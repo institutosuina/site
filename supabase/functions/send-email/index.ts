@@ -9,7 +9,7 @@ import { assertSesConfigured, sendEmailViaSes } from "../_shared/ses.ts";
 const SUPABASE_URL = Deno.env.get("SUPABASE_URL");
 const SUPABASE_SERVICE_ROLE_KEY = Deno.env.get("SUPABASE_SERVICE_ROLE_KEY");
 
-const FROM_ADDRESS = "Instituto Suinã <contato@institutosuina.org>";
+const FROM_ADDRESS = "\"Instituto Suinã\" <contato@institutosuina.org>";
 const ARCHIVE_TO = "contato@institutosuina.org";
 
 const corsHeaders = {
