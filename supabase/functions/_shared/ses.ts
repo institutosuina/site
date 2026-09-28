@@ -13,7 +13,7 @@ const ACCESS_KEY_ID = Deno.env.get("SES_ACCESS_KEY_ID");
 const SECRET_ACCESS_KEY = Deno.env.get("SES_SECRET_ACCESS_KEY");
 
 export interface SendEmailInput {
-  /** Ex.: "Instituto Suinã <contato@institutosuina.org>" (o domínio precisa estar verificado no SES). */
+  /** Ex.: "Instituto Suinã <comunicacao@institutosuina.org>" (o domínio precisa estar verificado no SES). */
   from: string;
   to: string[];
   bcc?: string[];

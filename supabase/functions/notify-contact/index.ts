@@ -5,7 +5,7 @@
 import { serve } from "https://deno.land/std@0.190.0/http/server.ts";
 import { assertSesConfigured, sendEmailViaSes } from "../_shared/ses.ts";
 
-const FROM_ADDRESS = "Instituto Suinã <contato@institutosuina.org>";
+const FROM_ADDRESS = "Instituto Suinã <comunicacao@institutosuina.org>";
 const NOTIFY_TO = "comunicacao@institutosuina.org";
 
 const corsHeaders = {
