@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useRef } from "react";
 import Layout from "@/components/Layout";
 import folha from "@/assets/folha.svg";
 import { supabase } from "@/integrations/supabase/client";
@@ -6,7 +6,9 @@ import { toast } from "@/hooks/use-toast";
 
 const Contato = () => {
   const [form, setForm] = useState({ nome: "", email: "", mensagem: "" });
+  const [website, setWebsite] = useState(""); // honeypot — campo invisível, só bot preenche
   const [submitting, setSubmitting] = useState(false);
+  const mountedAt = useRef(Date.now());
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -14,6 +16,15 @@ const Contato = () => {
       toast({ title: "Preencha todos os campos", variant: "destructive" });
       return;
     }
+
+    // Bot: preencheu o campo invisível ou enviou rápido demais pra ser humano.
+    // Finge sucesso pra não dar pista de que foi bloqueado.
+    if (website.trim() || Date.now() - mountedAt.current < 2000) {
+      toast({ title: "✅ Mensagem enviada!", description: "Entraremos em contato em breve." });
+      setForm({ nome: "", email: "", mensagem: "" });
+      return;
+    }
+
     setSubmitting(true);
     try {
       const { error } = await supabase.from("contatos").insert({
@@ -63,6 +74,17 @@ const Contato = () => {
 
           {/* Formulário */}
           <form onSubmit={handleSubmit} className="space-y-3">
+            {/* Honeypot anti-spam: invisível pra humano, bots preenchem todo input do form */}
+            <input
+              type="text"
+              name="website"
+              value={website}
+              onChange={(e) => setWebsite(e.target.value)}
+              tabIndex={-1}
+              autoComplete="off"
+              aria-hidden="true"
+              className="absolute left-[-9999px] w-px h-px opacity-0 pointer-events-none"
+            />
             <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
               <input type="text" placeholder="Nome" required className="input-cream" value={form.nome} onChange={(e) => setForm({ ...form, nome: e.target.value })} />
               <input type="email" placeholder="E-mail" required className="input-cream" value={form.email} onChange={(e) => setForm({ ...form, email: e.target.value })} />

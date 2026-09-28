@@ -29,7 +29,16 @@ serve(async (req) => {
     assertSesConfigured();
 
     const payload = await req.json().catch(() => ({}));
-    const { nome, email, mensagem } = payload;
+    const { nome, email, mensagem, website } = payload;
+
+    // Honeypot: campo invisível no form público, só bot preenche.
+    // Finge sucesso sem enviar e-mail pra não dar pista de que foi bloqueado.
+    if (typeof website === "string" && website.trim()) {
+      return new Response(
+        JSON.stringify({ ok: true }),
+        { headers: { ...corsHeaders, "Content-Type": "application/json" }, status: 200 },
+      );
+    }
 
     if (!nome || typeof nome !== "string" || !nome.trim()) {
       throw new Error("Nome obrigatório");
