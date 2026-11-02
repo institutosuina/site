@@ -1,4 +1,5 @@
 import Layout from "@/components/Layout";
+import PixDonation from "@/components/PixDonation";
 import { Heart, ShoppingBag, ArrowRight, CheckCircle2 } from "lucide-react";
 import heroForest from "@/assets/hero-forest.jpg";
 import paperTexture from "@/assets/paper-texture.png";
@@ -45,16 +46,7 @@ const ComoApoiar = () => {
             <div className="md:w-1/3 bg-suina-cream/30 p-8 rounded-3xl border border-suina-cream-dark">
               <Heart className="w-12 h-12 text-suina-red mb-4 mx-auto" />
               <h3 className="font-display text-xl md:text-2xl font-bold leading-snug text-center text-primary mb-6">Como Doar</h3>
-              <div className="space-y-4 font-body text-sm text-center opacity-90">
-                <p>Transferência Bancária ou PIX:</p>
-                <div className="bg-card p-4 rounded-xl shadow-sm">
-                  <p className="font-bold text-primary">CNPJ: 00.000.000/0001-00</p>
-                  <p className="opacity-70">Banco do Brasil</p>
-                </div>
-                <button className="w-full py-3 bg-suina-red text-primary-foreground rounded-xl font-display font-bold hover:opacity-90 transition-colors shadow-md">
-                  Copiar Chave PIX
-                </button>
-              </div>
+              <PixDonation />
             </div>
           </div>
         </div>

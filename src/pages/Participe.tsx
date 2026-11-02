@@ -2,6 +2,7 @@ import { useState, useEffect, useRef } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
 import Layout from "@/components/Layout";
+import PixDonation from "@/components/PixDonation";
 import { supabase } from "@/integrations/supabase/client";
 import { toast } from "@/hooks/use-toast";
 import { Heart, ChevronLeft, ChevronRight } from "lucide-react";
@@ -204,6 +205,14 @@ const Participe = () => {
               </button>
             </div>
           </form>
+
+          <div className="mt-12 mx-auto max-w-sm bg-suina-cream/30 p-8 rounded-3xl border border-suina-cream-dark">
+            <Heart className="w-10 h-10 text-suina-red mb-4 mx-auto" />
+            <h3 className="font-display text-xl md:text-2xl font-bold text-center text-primary mb-6">
+              Prefere doar por PIX?
+            </h3>
+            <PixDonation />
+          </div>
         </div>
       </section>
 

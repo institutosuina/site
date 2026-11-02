@@ -22,6 +22,8 @@ import EditalDetail from "./pages/EditalDetail";
 import MaterialTecnicoDetail from "./pages/MaterialTecnicoDetail";
 import InformativosAno from "./pages/InformativosAno";
 import NotFound from "./pages/NotFound";
+const Loja = lazy(() => import("./pages/Loja"));
+const PedidoLoja = lazy(() => import("./pages/PedidoLoja"));
 import QrCodePage, { QR_CODE_NAMES } from "./pages/QrCodePage";
 import Campanha from "./pages/Campanha";
 
@@ -40,6 +42,8 @@ const AdminPartners = lazy(() => import("./pages/admin/AdminPartners"));
 const AdminUsers = lazy(() => import("./pages/admin/AdminUsers"));
 const AdminPagesContent = lazy(() => import("./pages/admin/AdminPagesContent"));
 const AdminWorkProjects = lazy(() => import("./pages/admin/AdminWorkProjects"));
+const AdminProdutos = lazy(() => import("./pages/admin/AdminProdutos"));
+const AdminPedidos = lazy(() => import("./pages/admin/AdminPedidos"));
 
 
 import AdminLayout from "./components/admin/AdminLayout";
@@ -91,6 +95,8 @@ const App = () => (
               <Route path="/prestacao-de-contas" element={<PrestacaoContas />} />
               <Route path="/como-apoiar" element={<Participe />} />
               <Route path="/participe" element={<Participe />} />
+              <Route path="/loja" element={<Loja />} />
+              <Route path="/loja/pedido/:codigo" element={<PedidoLoja />} />
               <Route path="/contato" element={<Contato />} />
               <Route path="/informativos/:ano" element={<InformativosAno />} />
               {/* Versão web das campanhas de e-mail ("Veja no navegador") */}
@@ -116,6 +122,8 @@ const App = () => (
               <Route path="/admin/partners" element={<AdminPage><AdminPartners /></AdminPage>} />
               <Route path="/admin/pages" element={<AdminPage><AdminPagesContent /></AdminPage>} />
               <Route path="/admin/work-projects" element={<AdminPage><AdminWorkProjects /></AdminPage>} />
+              <Route path="/admin/produtos" element={<AdminPage><AdminProdutos /></AdminPage>} />
+              <Route path="/admin/pedidos" element={<AdminPage><AdminPedidos /></AdminPage>} />
               <Route path="/admin/users" element={<AdminPage><AdminUsers /></AdminPage>} />
 
 

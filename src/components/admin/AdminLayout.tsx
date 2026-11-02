@@ -22,6 +22,8 @@ import {
   Handshake,
   Layers,
   HeartHandshake,
+  ShoppingBag,
+  Package,
   ChevronDown,
   type LucideIcon,
 } from "lucide-react";
@@ -80,6 +82,14 @@ const navGroups: NavGroup[] = [
     children: [
       { label: "Newsletter", icon: Mail, path: "/admin/newsletter" },
       { label: "Contatos", icon: MessageSquare, path: "/admin/contatos" },
+    ],
+  },
+  {
+    label: "Loja",
+    icon: ShoppingBag,
+    children: [
+      { label: "Produtos", icon: Package, path: "/admin/produtos" },
+      { label: "Pedidos", icon: ClipboardList, path: "/admin/pedidos" },
     ],
   },
   {
