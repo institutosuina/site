@@ -24,6 +24,7 @@ import InformativosAno from "./pages/InformativosAno";
 import NotFound from "./pages/NotFound";
 const Loja = lazy(() => import("./pages/Loja"));
 const PedidoLoja = lazy(() => import("./pages/PedidoLoja"));
+const ProdutoLoja = lazy(() => import("./pages/ProdutoLoja"));
 import QrCodePage, { QR_CODE_NAMES } from "./pages/QrCodePage";
 import Campanha from "./pages/Campanha";
 
@@ -97,6 +98,7 @@ const App = () => (
               <Route path="/participe" element={<Participe />} />
               <Route path="/loja" element={<Loja />} />
               <Route path="/loja/pedido/:codigo" element={<PedidoLoja />} />
+              <Route path="/loja/:slug" element={<ProdutoLoja />} />
               <Route path="/contato" element={<Contato />} />
               <Route path="/informativos/:ano" element={<InformativosAno />} />
               {/* Versão web das campanhas de e-mail ("Veja no navegador") */}

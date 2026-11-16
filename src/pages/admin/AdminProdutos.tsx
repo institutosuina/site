@@ -23,10 +23,15 @@ interface Produto {
   preco: number;
   estoque: number;
   imagem_url: string | null;
+  imagens: string[] | null;
+  slug: string | null;
   ativo: boolean;
 }
 
-const empty = { nome: "", descricao: "", preco: "", estoque: "", imagem_url: "" as string | null, ativo: true };
+const empty = { nome: "", descricao: "", preco: "", estoque: "", imagem_url: "" as string | null, imagens: [] as string[], ativo: true };
+
+const slugify = (t: string) =>
+  t.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-+|-+$/g, "") || "produto";
 
 const AdminProdutos = () => {
   const queryClient = useQueryClient();
@@ -54,14 +59,22 @@ const AdminProdutos = () => {
         preco: Number(String(form.preco).replace(",", ".")),
         estoque: parseInt(String(form.estoque), 10),
         imagem_url: form.imagem_url || null,
+        imagens: form.imagens,
         ativo: form.ativo,
       };
       if (!payload.nome || !(payload.preco >= 0) || !(payload.estoque >= 0)) {
         throw new Error("Preencha nome, preço e quantidade.");
       }
+      let slug = (editing !== "new" && (editing as Produto).slug) || "";
+      if (!slug) {
+        // Endereço da página do produto: /loja/<slug>. Se já existir igual, acrescenta um sufixo.
+        slug = slugify(payload.nome);
+        const { data: dup } = await db.from("produtos").select("id").eq("slug", slug).maybeSingle();
+        if (dup) slug = `${slug}-${Math.random().toString(36).slice(2, 6)}`;
+      }
       const q = editing === "new"
-        ? db.from("produtos").insert(payload)
-        : db.from("produtos").update(payload).eq("id", (editing as Produto).id);
+        ? db.from("produtos").insert({ ...payload, slug })
+        : db.from("produtos").update({ ...payload, slug }).eq("id", (editing as Produto).id);
       const { error } = await q;
       if (error) throw error;
     },
@@ -88,8 +101,14 @@ const AdminProdutos = () => {
 
   const openNew = () => { setForm(empty); setEditing("new"); };
   const openEdit = (p: Produto) => {
-    setForm({ nome: p.nome, descricao: p.descricao, preco: String(p.preco), estoque: String(p.estoque), imagem_url: p.imagem_url, ativo: p.ativo });
+    setForm({ nome: p.nome, descricao: p.descricao, preco: String(p.preco), estoque: String(p.estoque), imagem_url: p.imagem_url, imagens: p.imagens ?? [], ativo: p.ativo });
     setEditing(p);
+  };
+
+  const enviar = async (file: File) => {
+    const safe = file.name.replace(/[^a-zA-Z0-9._-]/g, "_");
+    // Reaproveita o prefixo "covers" já liberado na função r2-upload-url.
+    return subirParaR2("covers", `loja/${Date.now()}-${Math.random().toString(36).slice(2, 6)}-${safe}`, file);
   };
 
   const upload = async (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -97,10 +116,24 @@ const AdminProdutos = () => {
     if (!file) return;
     setUploading(true);
     try {
-      const safe = file.name.replace(/[^a-zA-Z0-9._-]/g, "_");
-      // Reaproveita o prefixo "covers" já liberado na função r2-upload-url.
-      const url = await subirParaR2("covers", `loja/${Date.now()}-${safe}`, file);
+      const url = await enviar(file);
       setForm((f) => ({ ...f, imagem_url: url }));
+    } catch (err: any) {
+      toast({ title: "❌ Erro ao enviar imagem", description: err.message, variant: "destructive" });
+    } finally {
+      setUploading(false);
+      e.target.value = "";
+    }
+  };
+
+  const uploadSubfotos = async (e: React.ChangeEvent<HTMLInputElement>) => {
+    const files = Array.from(e.target.files ?? []);
+    if (!files.length) return;
+    setUploading(true);
+    try {
+      const urls: string[] = [];
+      for (const file of files) urls.push(await enviar(file));
+      setForm((f) => ({ ...f, imagens: [...f.imagens, ...urls] }));
     } catch (err: any) {
       toast({ title: "❌ Erro ao enviar imagem", description: err.message, variant: "destructive" });
     } finally {
@@ -154,7 +187,7 @@ const AdminProdutos = () => {
       </div>
 
       <Dialog open={!!editing} onOpenChange={(o) => !o && setEditing(null)}>
-        <DialogContent>
+        <DialogContent className="max-h-[90vh] overflow-y-auto">
           <DialogHeader>
             <DialogTitle style={{ ...s, fontSize: "1.125rem" }}>{editing === "new" ? "Novo Produto" : "Editar Produto"}</DialogTitle>
             <DialogDescription style={{ ...s, fontSize: "0.8125rem" }}>Aparece na loja se estiver visível e com estoque.</DialogDescription>
@@ -167,12 +200,32 @@ const AdminProdutos = () => {
               <div className="space-y-2">{label("Quantidade disponível")}<Input className="!text-sm" type="number" min={0} value={form.estoque} onChange={(e) => setForm({ ...form, estoque: e.target.value })} /></div>
             </div>
             <div className="space-y-2">
-              {label("Imagem")}
+              {label("Foto principal")}
               <div className="flex items-center gap-3">
                 {form.imagem_url && <img src={form.imagem_url} alt="" className="w-14 h-14 rounded-lg object-cover border border-zinc-200" />}
                 <label className="inline-flex items-center gap-2 px-3 py-2 rounded-lg border border-zinc-200 cursor-pointer text-sm hover:bg-zinc-50">
                   <Upload className="h-4 w-4" /> {uploading ? "Enviando..." : form.imagem_url ? "Trocar" : "Enviar imagem"}
                   <input type="file" accept="image/*" className="hidden" onChange={upload} disabled={uploading} />
+                </label>
+              </div>
+            </div>
+            <div className="space-y-2">
+              {label("Subfotos (aparecem na página do produto)")}
+              <div className="flex flex-wrap items-center gap-2">
+                {form.imagens.map((url) => (
+                  <div key={url} className="relative">
+                    <img src={url} alt="" className="w-14 h-14 rounded-lg object-cover border border-zinc-200" />
+                    <button
+                      type="button"
+                      aria-label="Remover foto"
+                      onClick={() => setForm((f) => ({ ...f, imagens: f.imagens.filter((u) => u !== url) }))}
+                      className="absolute -top-1.5 -right-1.5 w-5 h-5 rounded-full bg-red-500 text-white text-xs leading-none"
+                    >×</button>
+                  </div>
+                ))}
+                <label className="inline-flex items-center gap-2 px-3 py-2 rounded-lg border border-zinc-200 cursor-pointer text-sm hover:bg-zinc-50">
+                  <Plus className="h-4 w-4" /> {uploading ? "Enviando..." : "Adicionar fotos"}
+                  <input type="file" accept="image/*" multiple className="hidden" onChange={uploadSubfotos} disabled={uploading} />
                 </label>
               </div>
             </div>

@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
+import { useCart, cartStore } from "@/lib/cart";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { ShoppingBag, Plus, Minus, Trash2, CheckCircle2 } from "lucide-react";
 import Layout from "@/components/Layout";
@@ -17,6 +18,7 @@ interface Produto {
   preco: number;
   estoque: number;
   imagem_url: string | null;
+  slug: string | null;
 }
 
 const emptyForm = {
@@ -29,7 +31,7 @@ const inputClass =
 
 export const LojaSection = () => {
   const queryClient = useQueryClient();
-  const [cart, setCart] = useState<Record<string, number>>({});
+  const cart = useCart();
   const [checkout, setCheckout] = useState(false);
   const [form, setForm] = useState(emptyForm);
   const [submitting, setSubmitting] = useState(false);
@@ -40,7 +42,7 @@ export const LojaSection = () => {
     queryFn: async () => {
       const { data, error } = await db
         .from("produtos")
-        .select("id, nome, descricao, preco, estoque, imagem_url")
+        .select("id, nome, descricao, preco, estoque, imagem_url, slug")
         .order("created_at", { ascending: false });
       if (error) throw error;
       return data as Produto[];
@@ -54,7 +56,7 @@ export const LojaSection = () => {
 
   const setQty = (p: Produto, qty: number) => {
     const next = Math.max(0, Math.min(qty, p.estoque));
-    setCart((c) => ({ ...c, [p.id]: next }));
+    cartStore.set(p.id, next);
   };
 
   const set = (key: keyof typeof emptyForm) => (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) =>
@@ -90,7 +92,7 @@ export const LojaSection = () => {
       });
       if (error) throw error;
       setPedidoCodigo(data as string);
-      setCart({});
+      cartStore.clear();
       queryClient.invalidateQueries({ queryKey: ["loja-produtos"] });
     } catch (err: any) {
       toast({ title: "Não foi possível enviar o pedido", description: err.message, variant: "destructive" });
@@ -148,22 +150,20 @@ export const LojaSection = () => {
                   const esgotado = p.estoque <= 0;
                   return (
                     <article key={p.id} className="bg-card rounded-2xl border border-suina-cream-dark overflow-hidden flex flex-col">
-                      {p.imagem_url ? (
-                        <img src={p.imagem_url} alt={p.nome} className="w-full aspect-square object-cover" />
-                      ) : (
-                        <div className="w-full aspect-square bg-suina-cream/40 flex items-center justify-center">
-                          <ShoppingBag className="w-12 h-12 opacity-30" />
-                        </div>
-                      )}
+                      <Link to={p.slug ? `/loja/${p.slug}` : "/loja"} aria-label={p.nome}>
+                        {p.imagem_url ? (
+                          <img src={p.imagem_url} alt={p.nome} className="w-full aspect-square object-cover" />
+                        ) : (
+                          <div className="w-full aspect-square bg-suina-cream/40 flex items-center justify-center">
+                            <ShoppingBag className="w-12 h-12 opacity-30" />
+                          </div>
+                        )}
+                      </Link>
                       <div className="p-5 flex flex-col flex-1">
-                        <h2 className="font-display text-lg font-bold text-primary">{p.nome}</h2>
-                        <p className="font-body text-sm text-muted-foreground mt-1 mb-3 whitespace-pre-line flex-1">
-                          {p.descricao}
-                        </p>
-                        <p className="font-display text-xl font-bold mb-1">{formatBRL(p.preco)}</p>
-                        <p className="font-body text-xs text-muted-foreground mb-4">
-                          {esgotado ? "Esgotado" : `${p.estoque} disponível(is)`}
-                        </p>
+                        <h2 className="font-display text-lg font-bold text-primary flex-1">
+                          <Link to={p.slug ? `/loja/${p.slug}` : "/loja"} className="hover:underline">{p.nome}</Link>
+                        </h2>
+                        <p className="font-display text-xl font-bold mt-2 mb-4">{formatBRL(p.preco)}</p>
                         {qty === 0 ? (
                           <button
                             type="button"
@@ -171,7 +171,7 @@ export const LojaSection = () => {
                             onClick={() => setQty(p, 1)}
                             className="w-full py-2.5 bg-suina-red text-primary-foreground rounded-xl font-display font-bold disabled:opacity-40"
                           >
-                            Adicionar
+                            {esgotado ? "Esgotado" : "Adicionar ao carrinho"}
                           </button>
                         ) : (
                           <div className="flex items-center justify-center gap-4">

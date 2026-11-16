@@ -3,7 +3,6 @@ import { useLocation, useNavigate } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
 import Layout from "@/components/Layout";
 import PixDonation from "@/components/PixDonation";
-import { LojaSection } from "@/pages/Loja";
 import { supabase } from "@/integrations/supabase/client";
 import { toast } from "@/hooks/use-toast";
 import { Heart, ChevronLeft, ChevronRight } from "lucide-react";
@@ -233,9 +232,6 @@ const Participe = () => {
           </div>
         </div>
       </section>
-
-      {/* Loja (junto da doação) */}
-      <LojaSection />
 
       {/* Seção 2: Newsletter */}
       <section id="newsletter" className="py-16 md:py-24 px-4 bg-background">
