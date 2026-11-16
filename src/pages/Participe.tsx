@@ -3,6 +3,7 @@ import { useLocation, useNavigate } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
 import Layout from "@/components/Layout";
 import PixDonation from "@/components/PixDonation";
+import { LojaSection } from "@/pages/Loja";
 import { supabase } from "@/integrations/supabase/client";
 import { toast } from "@/hooks/use-toast";
 import { Heart, ChevronLeft, ChevronRight } from "lucide-react";
@@ -98,6 +99,9 @@ const Participe = () => {
   const navigate = useNavigate();
   const [donationData, setDonationData] = useState({ name: "", email: "" });
   const [agreed, setAgreed] = useState(false);
+  const pixRef = useRef<HTMLDivElement>(null);
+  const [website, setWebsite] = useState(""); // honeypot: campo invisível, só bot preenche
+  const mountedAt = useRef(Date.now());
   const [newsletterData, setNewsletterData] = useState({ name: "", email: "" });
 
   useEffect(() => {
@@ -112,6 +116,11 @@ const Participe = () => {
   const handleDonationSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     if (!agreed) return;
+    toast({
+      title: `Obrigado, ${donationData.name.split(" ")[0]}!`,
+      description: "Use o QR Code ou a chave PIX abaixo para concluir sua doação.",
+    });
+    pixRef.current?.scrollIntoView({ behavior: "smooth", block: "center" });
   };
 
   const [newsletterSubmitting, setNewsletterSubmitting] = useState(false);
@@ -142,6 +151,15 @@ const Participe = () => {
   const handleNewsletterSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!newsletterData.name.trim() || !newsletterData.email.trim()) return;
+
+    // Bot: preencheu o campo invisível ou enviou rápido demais pra ser humano.
+    // Finge sucesso pra não dar pista de que foi bloqueado.
+    if (website.trim() || Date.now() - mountedAt.current < 2000) {
+      toast({ title: "✅ Cadastro realizado!", description: "Você receberá nossas novidades em breve." });
+      setNewsletterData({ name: "", email: "" });
+      return;
+    }
+
     setNewsletterSubmitting(true);
     try {
       const { error } = await supabase.from("subscribers").insert({
@@ -206,7 +224,7 @@ const Participe = () => {
             </div>
           </form>
 
-          <div className="mt-12 mx-auto max-w-sm bg-suina-cream/30 p-8 rounded-3xl border border-suina-cream-dark">
+          <div ref={pixRef} className="mt-12 mx-auto max-w-sm bg-suina-cream/30 p-8 rounded-3xl border border-suina-cream-dark">
             <Heart className="w-10 h-10 text-suina-red mb-4 mx-auto" />
             <h3 className="font-display text-xl md:text-2xl font-bold text-center text-primary mb-6">
               Prefere doar por PIX?
@@ -215,6 +233,9 @@ const Participe = () => {
           </div>
         </div>
       </section>
+
+      {/* Loja (junto da doação) */}
+      <LojaSection />
 
       {/* Seção 2: Newsletter */}
       <section id="newsletter" className="py-16 md:py-24 px-4 bg-background">
@@ -232,6 +253,9 @@ const Participe = () => {
           </p>
 
           <form onSubmit={handleNewsletterSubmit} className="space-y-6">
+            <input type="text" name="website" value={website} onChange={(e) => setWebsite(e.target.value)}
+              tabIndex={-1} autoComplete="off" aria-hidden="true"
+              className="absolute left-[-9999px] w-px h-px opacity-0 pointer-events-none" />
             <div className="flex flex-col sm:flex-row gap-4">
               <input type="text" placeholder="Nome completo" required value={newsletterData.name}
                 onChange={(e) => setNewsletterData({ ...newsletterData, name: e.target.value })}

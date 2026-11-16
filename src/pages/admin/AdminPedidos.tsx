@@ -34,6 +34,7 @@ interface Pedido {
   frete: number | null;
   status: Status;
   codigo_rastreio: string | null;
+  endereco_confirmado: boolean;
   created_at: string;
 }
 
@@ -50,6 +51,7 @@ const AdminPedidos = () => {
   const [selected, setSelected] = useState<Pedido | null>(null);
   const [frete, setFrete] = useState("");
   const [rastreio, setRastreio] = useState("");
+  const [addr, setAddr] = useState({ cep: "", endereco: "", numero: "", complemento: "", bairro: "", cidade: "", uf: "" });
 
   const { data: pedidos, isLoading } = useQuery({
     queryKey: ["admin-pedidos"],
@@ -78,6 +80,18 @@ const AdminPedidos = () => {
     setSelected(p);
     setFrete(p.frete != null ? String(p.frete) : "");
     setRastreio(p.codigo_rastreio ?? "");
+    setAddr({ cep: p.cep, endereco: p.endereco, numero: p.numero, complemento: p.complemento ?? "", bairro: p.bairro, cidade: p.cidade, uf: p.uf });
+  };
+
+  const confirmarEndereco = () => {
+    if (!addr.cep.trim() || !addr.endereco.trim() || !addr.numero.trim() || !addr.bairro.trim() || !addr.cidade.trim() || addr.uf.trim().length !== 2) {
+      return toast({ title: "Preencha CEP, rua, número, bairro, cidade e UF", variant: "destructive" });
+    }
+    update.mutate({
+      cep: addr.cep.trim(), endereco: addr.endereco.trim(), numero: addr.numero.trim(),
+      complemento: addr.complemento.trim() || null, bairro: addr.bairro.trim(), cidade: addr.cidade.trim(),
+      uf: addr.uf.trim().toUpperCase(), endereco_confirmado: true, endereco_confirmado_em: new Date().toISOString(),
+    } as Partial<Pedido>);
   };
 
   const cancelar = async () => {
@@ -124,6 +138,9 @@ const AdminPedidos = () => {
                     {new Date(p.created_at).toLocaleDateString("pt-BR")} · {p.cidade}/{p.uf} · {formatBRL(p.subtotal)}
                   </p>
                 </div>
+                {p.status === "aguardando_frete" && !p.endereco_confirmado && (
+                  <span style={{ ...s, fontSize: "0.75rem" }} className="px-2 py-1 rounded-full bg-red-100 text-red-700">Confirmar endereço</span>
+                )}
                 <span style={{ ...s, fontSize: "0.75rem" }} className={`px-2 py-1 rounded-full ${p.status === "aguardando_frete" ? "bg-amber-100 text-amber-800" : "bg-zinc-100 text-zinc-700"}`}>
                   {statusLabel[p.status]}
                 </span>
@@ -148,10 +165,34 @@ const AdminPedidos = () => {
                   <p>{selected.nome}</p>
                   <p>{selected.email} · {selected.telefone}</p>
                 </div>
-                <div>
-                  <p className="font-semibold">Entrega</p>
-                  <p>{selected.endereco}, {selected.numero}{selected.complemento ? ` - ${selected.complemento}` : ""}</p>
-                  <p>{selected.bairro} · {selected.cidade}/{selected.uf} · CEP {selected.cep}</p>
+                <div className="space-y-2">
+                  <p className="font-semibold">
+                    Entrega{" "}
+                    {selected.endereco_confirmado
+                      ? <span className="text-emerald-600 font-normal">✓ endereço confirmado</span>
+                      : <span className="text-red-600 font-normal">· confirme o endereço antes de calcular o frete</span>}
+                  </p>
+                  {selected.status === "aguardando_frete" || selected.status === "aguardando_pagamento" ? (
+                    <>
+                      <div className="grid grid-cols-3 gap-2">
+                        <Input className="!text-sm" placeholder="CEP" value={addr.cep} onChange={(e) => setAddr({ ...addr, cep: e.target.value })} />
+                        <Input className="!text-sm col-span-2" placeholder="Rua / Avenida" value={addr.endereco} onChange={(e) => setAddr({ ...addr, endereco: e.target.value })} />
+                        <Input className="!text-sm" placeholder="Número" value={addr.numero} onChange={(e) => setAddr({ ...addr, numero: e.target.value })} />
+                        <Input className="!text-sm col-span-2" placeholder="Complemento" value={addr.complemento} onChange={(e) => setAddr({ ...addr, complemento: e.target.value })} />
+                        <Input className="!text-sm" placeholder="Bairro" value={addr.bairro} onChange={(e) => setAddr({ ...addr, bairro: e.target.value })} />
+                        <Input className="!text-sm" placeholder="Cidade" value={addr.cidade} onChange={(e) => setAddr({ ...addr, cidade: e.target.value })} />
+                        <Input className="!text-sm" maxLength={2} placeholder="UF" value={addr.uf} onChange={(e) => setAddr({ ...addr, uf: e.target.value })} />
+                      </div>
+                      <Button className="!text-sm" variant="outline" disabled={update.isPending} onClick={confirmarEndereco}>
+                        {selected.endereco_confirmado ? "Salvar alterações do endereço" : "Confirmar endereço"}
+                      </Button>
+                    </>
+                  ) : (
+                    <>
+                      <p>{selected.endereco}, {selected.numero}{selected.complemento ? ` - ${selected.complemento}` : ""}</p>
+                      <p>{selected.bairro} · {selected.cidade}/{selected.uf} · CEP {selected.cep}</p>
+                    </>
+                  )}
                   {selected.observacoes && <p className="italic mt-1">"{selected.observacoes}"</p>}
                 </div>
                 <div>
@@ -164,22 +205,28 @@ const AdminPedidos = () => {
 
                 {selected.status !== "cancelado" && (
                   <div className="space-y-2 border-t pt-4">
-                    <p className="font-semibold">Frete (R$)</p>
+                    <p className="font-semibold">Frete (R$) {selected.status === "aguardando_frete" && selected.frete != null && <span className="font-normal text-amber-700">· rascunho, o cliente ainda não vê</span>}</p>
                     <div className="flex gap-2">
                       <Input className="!text-sm" inputMode="decimal" placeholder="0,00" value={frete} onChange={(e) => setFrete(e.target.value)} />
                       <Button
                         className="bg-emerald-500 hover:bg-emerald-600 text-white !text-sm shrink-0"
-                        disabled={update.isPending || selected.status === "pago" || selected.status === "enviado"}
+                        disabled={update.isPending || !selected.endereco_confirmado || selected.status !== "aguardando_frete"}
                         onClick={() => {
                           const v = Number(frete.replace(",", "."));
                           if (!(v >= 0)) return toast({ title: "Valor de frete inválido", variant: "destructive" });
-                          update.mutate({ frete: v, status: "aguardando_pagamento" });
+                          update.mutate({ frete: v });
                         }}
                       >
                         Salvar frete
                       </Button>
                     </div>
-                    {selected.frete != null && (
+                    {selected.status === "aguardando_frete" && selected.frete != null && selected.endereco_confirmado && (
+                      <Button className="w-full !text-sm" onClick={() => update.mutate({ status: "aguardando_pagamento" })} disabled={update.isPending}>
+                        Confirmar frete e liberar Pix pro cliente
+                      </Button>
+                    )}
+                    {!selected.endereco_confirmado && <p className="text-xs text-red-600">Confirme o endereço acima para liberar o frete.</p>}
+                    {selected.frete != null && selected.status !== "aguardando_frete" && (
                       <div className="flex flex-wrap gap-2 items-center">
                         <a href={whatsapp} target="_blank" rel="noreferrer" className="text-emerald-600 underline">Enviar por WhatsApp</a>
                         <button className="underline" onClick={() => { navigator.clipboard.writeText(link); toast({ title: "Link copiado" }); }}>Copiar link de pagamento</button>

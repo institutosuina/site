@@ -34,6 +34,7 @@ const navItems = [
     href: "/participe",
     children: [
       { label: "Como apoiar", href: "/como-apoiar#como-apoiar" },
+      { label: "Loja", href: "/como-apoiar#loja" },
       { label: "Cadastre-se para receber nossa newsletter", href: "/como-apoiar#newsletter" },
       { label: "Conteúdos compartilhados", href: "/como-apoiar#conteudos" },
       { label: "Suinã nas Redes Sociais", href: "/como-apoiar#redes-sociais" },

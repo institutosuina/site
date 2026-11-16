@@ -27,7 +27,7 @@ const emptyForm = {
 const inputClass =
   "w-full px-5 py-3 rounded-full bg-input text-foreground placeholder:text-muted-foreground font-body text-base focus:outline-none focus:ring-2 focus:ring-ring/20";
 
-const Loja = () => {
+export const LojaSection = () => {
   const queryClient = useQueryClient();
   const [cart, setCart] = useState<Record<string, number>>({});
   const [checkout, setCheckout] = useState(false);
@@ -102,7 +102,7 @@ const Loja = () => {
 
   if (pedidoCodigo) {
     return (
-      <Layout>
+      <>
         <section className="py-20 px-4 bg-background">
           <div className="container mx-auto max-w-xl text-center">
             <CheckCircle2 className="w-14 h-14 text-suina-red mx-auto mb-6" />
@@ -122,15 +122,15 @@ const Loja = () => {
             </Link>
           </div>
         </section>
-      </Layout>
+      </>
     );
   }
 
   return (
-    <Layout>
-      <section className="py-16 px-4 bg-background">
+    <>
+      <section id="loja" className="py-16 px-4 bg-background">
         <div className="container mx-auto max-w-6xl">
-          <h1 className="section-title text-primary text-center mb-3">Loja Suinã</h1>
+          <h2 className="section-title text-primary text-center mb-3">Loja Suinã</h2>
           <p className="body-text text-muted-foreground text-center max-w-2xl mx-auto mb-12">
             Cada compra apoia os projetos socioambientais do Instituto. Pagamento via Pix; o frete é
             calculado depois do pedido, com base no seu endereço.
@@ -257,8 +257,14 @@ const Loja = () => {
           )}
         </div>
       </section>
-    </Layout>
+    </>
   );
 };
+
+const Loja = () => (
+  <Layout>
+    <LojaSection />
+  </Layout>
+);
 
 export default Loja;
