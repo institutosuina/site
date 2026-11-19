@@ -8,7 +8,8 @@
 
 import { AwsClient } from "https://esm.sh/aws4fetch@1.0.20";
 
-const REGION = Deno.env.get("SES_REGION") ?? "us-east-1";
+// As identidades do Instituto Suinã (domínio + comunicacao@) estão em Ohio (us-east-2).
+const REGION = Deno.env.get("SES_REGION") ?? "us-east-2";
 const ACCESS_KEY_ID = Deno.env.get("SES_ACCESS_KEY_ID");
 const SECRET_ACCESS_KEY = Deno.env.get("SES_SECRET_ACCESS_KEY");
 

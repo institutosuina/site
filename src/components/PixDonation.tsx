@@ -7,9 +7,11 @@ interface PixDonationProps {
   /** Valor fixo (loja). Sem valor, o doador escolhe quanto doar. */
   amount?: number;
   reference?: string;
+  /** Esconde a linha "Doe via PIX:" quando a página já tem um título com o mesmo texto. */
+  hideLabel?: boolean;
 }
 
-const PixDonation = ({ amount, reference }: PixDonationProps) => {
+const PixDonation = ({ amount, reference, hideLabel }: PixDonationProps) => {
   const [copied, setCopied] = useState<"key" | "code" | null>(null);
   const payload = useMemo(() => buildPixPayload(amount, reference), [amount, reference]);
 
@@ -25,7 +27,7 @@ const PixDonation = ({ amount, reference }: PixDonationProps) => {
 
   return (
     <div className="space-y-4 font-body text-sm text-center">
-      <p className="opacity-90">{amount ? `Pague ${formatBRL(amount)} via PIX:` : "Doe via PIX:"}</p>
+      {!hideLabel && <p className="opacity-90">{amount ? `Pague ${formatBRL(amount)} via PIX:` : "Doe via PIX:"}</p>}
 
       <div className="bg-white p-4 rounded-2xl shadow-sm inline-block border border-suina-cream-dark">
         <QRCodeSVG value={payload} size={176} level="M" marginSize={0} />

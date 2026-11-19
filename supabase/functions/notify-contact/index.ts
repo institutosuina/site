@@ -3,9 +3,66 @@
 // registro ser salvo na tabela "contatos". Envia um e-mail de aviso via Amazon SES.
 
 import { serve } from "https://deno.land/std@0.190.0/http/server.ts";
-import { assertSesConfigured, sendEmailViaSes } from "../_shared/ses.ts";
+import { AwsClient } from "https://esm.sh/aws4fetch@1.0.20";
 
-const FROM_ADDRESS = "Instituto Suinã <comunicacao@institutosuina.org>";
+// ---- Helper SES inline (o deploy pelo painel não inclui a pasta _shared) ----
+// Secrets: SES_REGION, SES_ACCESS_KEY_ID, SES_SECRET_ACCESS_KEY
+const REGION = Deno.env.get("SES_REGION") ?? "us-east-2";
+const ACCESS_KEY_ID = Deno.env.get("SES_ACCESS_KEY_ID");
+const SECRET_ACCESS_KEY = Deno.env.get("SES_SECRET_ACCESS_KEY");
+
+function assertSesConfigured() {
+  if (!ACCESS_KEY_ID || !SECRET_ACCESS_KEY) {
+    throw new Error(
+      "Credenciais do Amazon SES não configuradas (defina os secrets SES_ACCESS_KEY_ID e SES_SECRET_ACCESS_KEY)",
+    );
+  }
+}
+
+async function sendEmailViaSes(input: {
+  from: string;
+  to: string[];
+  bcc?: string[];
+  replyTo?: string[];
+  subject: string;
+  html: string;
+}): Promise<{ messageId?: string }> {
+  assertSesConfigured();
+  const aws = new AwsClient({
+    accessKeyId: ACCESS_KEY_ID!,
+    secretAccessKey: SECRET_ACCESS_KEY!,
+    region: REGION,
+    service: "ses",
+  });
+  const destination: Record<string, string[]> = { ToAddresses: input.to };
+  if (input.bcc?.length) destination.BccAddresses = input.bcc;
+  const requestBody: Record<string, unknown> = {
+    FromEmailAddress: input.from,
+    Destination: destination,
+    Content: {
+      Simple: {
+        Subject: { Data: input.subject, Charset: "UTF-8" },
+        Body: { Html: { Data: input.html, Charset: "UTF-8" } },
+      },
+    },
+  };
+  if (input.replyTo?.length) requestBody.ReplyToAddresses = input.replyTo;
+  const res = await aws.fetch(`https://email.${REGION}.amazonaws.com/v2/email/outbound-emails`, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(requestBody),
+  });
+  const data = await res.json().catch(() => ({}));
+  if (!res.ok) {
+    throw new Error(data?.message || data?.Message || data?.error || `Amazon SES retornou status ${res.status}`);
+  }
+  return { messageId: data?.MessageId };
+}
+// ---- fim do helper SES ----
+
+// Nome com acento vai codificado (RFC 2047) pra o SES não engasgar com o "ã".
+const FROM_NAME_B64 = btoa(String.fromCharCode(...new TextEncoder().encode("Instituto Suinã")));
+const FROM_ADDRESS = `=?UTF-8?B?${FROM_NAME_B64}?= <comunicacao@institutosuina.org>`;
 const NOTIFY_TO = "comunicacao@institutosuina.org";
 
 const corsHeaders = {

@@ -115,6 +115,15 @@ const Participe = () => {
   const handleDonationSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     if (!agreed) return;
+
+    // Avisa a comunicação por e-mail (não bloqueia o doador se falhar).
+    // Bot (campo invisível preenchido ou envio rápido demais) não dispara e-mail.
+    if (!website.trim() && Date.now() - mountedAt.current >= 2000) {
+      supabase.functions.invoke("notify-donation", {
+        body: { nome: donationData.name.trim(), email: donationData.email.trim() },
+      }).catch((err) => console.error("Falha ao avisar doação:", err));
+    }
+
     toast({
       title: `Obrigado, ${donationData.name.split(" ")[0]}!`,
       description: "Use o QR Code ou a chave PIX abaixo para concluir sua doação.",
@@ -226,9 +235,9 @@ const Participe = () => {
           <div ref={pixRef} className="mt-12 mx-auto max-w-sm bg-suina-cream/30 p-8 rounded-3xl border border-suina-cream-dark">
             <Heart className="w-10 h-10 text-suina-red mb-4 mx-auto" />
             <h3 className="font-display text-xl md:text-2xl font-bold text-center text-primary mb-6">
-              Prefere doar por PIX?
+              Doe via PIX
             </h3>
-            <PixDonation />
+            <PixDonation hideLabel />
           </div>
         </div>
       </section>
