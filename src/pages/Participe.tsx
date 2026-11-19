@@ -112,6 +112,11 @@ const Participe = () => {
     }
   }, [location.hash]);
 
+  const clearDonationForm = () => {
+    setDonationData({ name: "", email: "" });
+    setAgreed(false);
+  };
+
   const handleDonationSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     if (!agreed) return;
@@ -124,11 +129,15 @@ const Participe = () => {
       }).catch((err) => console.error("Falha ao avisar doação:", err));
     }
 
-    toast({
+    const aviso = toast({
       title: `Obrigado, ${donationData.name.split(" ")[0]}!`,
       description: "Use o QR Code ou a chave PIX abaixo para concluir sua doação.",
+      duration: 5000,
     });
+    // O timer do Radix pausa quando a janela perde o foco; o timeout garante que some.
+    setTimeout(aviso.dismiss, 5000);
     pixRef.current?.scrollIntoView({ behavior: "smooth", block: "center" });
+    clearDonationForm();
   };
 
   const [newsletterSubmitting, setNewsletterSubmitting] = useState(false);
@@ -237,7 +246,7 @@ const Participe = () => {
             <h3 className="font-display text-xl md:text-2xl font-bold text-center text-primary mb-6">
               Doe via PIX
             </h3>
-            <PixDonation hideLabel />
+            <PixDonation hideLabel onCopy={clearDonationForm} />
           </div>
         </div>
       </section>

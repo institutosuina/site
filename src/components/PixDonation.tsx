@@ -9,9 +9,11 @@ interface PixDonationProps {
   reference?: string;
   /** Esconde a linha "Doe via PIX:" quando a página já tem um título com o mesmo texto. */
   hideLabel?: boolean;
+  /** Chamado depois que a chave/código PIX é copiado com sucesso. */
+  onCopy?: () => void;
 }
 
-const PixDonation = ({ amount, reference, hideLabel }: PixDonationProps) => {
+const PixDonation = ({ amount, reference, hideLabel, onCopy }: PixDonationProps) => {
   const [copied, setCopied] = useState<"key" | "code" | null>(null);
   const payload = useMemo(() => buildPixPayload(amount, reference), [amount, reference]);
 
@@ -20,6 +22,7 @@ const PixDonation = ({ amount, reference, hideLabel }: PixDonationProps) => {
       await navigator.clipboard.writeText(text);
       setCopied(which);
       setTimeout(() => setCopied(null), 2500);
+      onCopy?.();
     } catch {
       window.prompt("Copie:", text);
     }
